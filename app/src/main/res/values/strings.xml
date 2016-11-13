@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Golden Quran</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="drawer_open">drawer open</string>
+    <string name="drawer_close">drawer close</string>
+</resources>

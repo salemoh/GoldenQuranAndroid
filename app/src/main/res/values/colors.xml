@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#c4a360</color>
+    <color name="colorPrimaryDark">#9c7626</color>
+    <color name="colorAccent">#ae8a41</color>
+    <color name="textColorPrimary">@android:color/white</color>
+    <color name="colorActionBarToggle">#a3843b</color>
+</resources>
