@@ -4,12 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <!-- The main content view -->
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
         <include layout="@layout/toolbar"/>
-    </FrameLayout>
+        <include layout="@layout/download_demo"/>
+    </LinearLayout>
     <!-- The navigation drawer -->
     <FrameLayout
         android:id="@+id/left_drawer"
