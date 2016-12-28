@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from sqlalchemy import Column, Date, Integer, String
+from sqlalchemy import Column, Integer
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -13,12 +13,20 @@ class AyahBox(Base):
 
     __tablename__ = "page"
 
+    # Maintain x,y,width,height
     x = Column(Integer)
     y = Column(Integer)
-    upper_left = Column(Integer)
-    upper_right = Column(Integer)
-    lower_right = Column(Integer)
-    lower_left = Column(Integer)
+    width = Column(Integer)
+    height = Column(Integer)
+
+    upper_left_x = Column(Integer)
+    upper_left_y = Column(Integer)
+    upper_right_x = Column(Integer)
+    upper_right_y = Column(Integer)
+    lower_right_x = Column(Integer)
+    lower_right_y = Column(Integer)
+    lower_left_x = Column(Integer)
+    lower_left_y = Column(Integer)
 
     ayah = Column(Integer)
     line = Column(Integer)
@@ -104,5 +112,14 @@ class AyahBox(Base):
         self.upper_right = [self.x + self.width, self.y]
         self.lower_right = [self.x + self.width, self.y + self.height]
         self.lower_left = [self.x, self.y + self.height]
+
+        self.upper_left_x = self.upper_left[0]
+        self.upper_left_y = self.upper_left[1]
+        self.upper_right_x = self.upper_right[0]
+        self.upper_right_y = self.upper_right[1]
+        self.lower_right_x = self.lower_right[0]
+        self.lower_right_y = self.lower_right[1]
+        self.lower_left_x = self.lower_left[0]
+        self.lower_left_y = self.lower_left[1]
 
         return

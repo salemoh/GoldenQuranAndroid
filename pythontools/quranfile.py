@@ -5,6 +5,7 @@ import re
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from ayahbox import *
+from ayahboxtransform import *
 
 
 class QuranFile(object):
@@ -35,7 +36,8 @@ class QuranFile(object):
         # In memory of pages
         self.pages = dict()
 
-    def initialize(self):
+    def initialize(self, ayahbox_tranform):
+        # type: (AyahboxTransform) -> None
 
         # Create the meta data for the DB
         Base.metadata.create_all(self.engine)
@@ -69,16 +71,19 @@ class QuranFile(object):
                 width = int(line.attrib['w'])
 
                 # generate an ayah box from the data
-                ayah_box = AyahBox(page_number,
+                ayahbox = AyahBox(page_number,
                                    surah,
                                    ayah, line_number,
                                    x, y, height, width)
 
+                # Transform the ayahbox
+                ayahbox_tranform.apply(ayahbox=ayahbox)
+
                 # Add to the DB session
-                self.session.add(ayah_box)
+                self.session.add(ayahbox)
 
                 # build a dictionary of the verse
-                ayah_boxes.append(ayah_box)
+                ayah_boxes.append(ayahbox)
 
             # Commit to the DB
             self.session.commit()
