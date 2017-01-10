@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:clickable="true"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/app_bar" />
+
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/alsuraAlHaleah"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="@color/playerBacground"
+                android:gravity="bottom"
+                android:text="@string/playerCurrentSura" />
+
+            <RelativeLayout
+                android:id="@+id/alSuraAlHaleahRelative"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@id/alsuraAlHaleah"
+                android:background="#FFFFFF">
+
+                <TextView
+                    android:id="@+id/playerSuraName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/playerSuraName"
+                    android:textSize="25sp" />
+
+                <ImageView
+                    android:id="@+id/playerLeftArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/left_arrow" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/akhtearAlAyat"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/alSuraAlHaleahRelative"
+                android:background="@color/playerBacground"
+                android:gravity="bottom"
+                android:text="@string/AyatSelection" />
+
+            <RelativeLayout
+                android:id="@+id/akhtearAlAyatRelative"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/akhtearAlAyat"
+                android:background="#FFFFFF">
+
+                <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                    android:id="@+id/rangeSeekbar1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    app:max_start_value="500"
+                    app:min_value="0"
+                    app:max_value="1000"
+                    app:left_thumb_color="@color/colorAccent"
+                    app:right_thumb_color="@color/colorAccent"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    app:bar_highlight_color="@color/colorAccent"
+                    app:bar_color="#7F000000"
+                    app:min_start_value="0" />
+
+                <TextView
+                    android:id="@+id/maxTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_above="@+id/rangeSeekbar1"
+                   />
+
+                <TextView
+                    android:id="@+id/minTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_above="@id/rangeSeekbar1"
+                    android:layout_alignParentStart="true"
+                     />
+
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/onFinish"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/akhtearAlAyatRelative"
+                android:background="@color/playerBacground"
+                android:gravity="bottom"
+
+                android:text="@string/onFinish" />
+
+            <RelativeLayout
+                android:id="@+id/onFinishRelative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/onFinish"
+                android:background="#FFFFFF"
+
+                >
+
+                <RadioGroup
+                    android:id="@+id/onFinishRAdioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:gravity="start"
+                        android:text="@string/playNext"
+                        android:textAlignment="textStart"
+                        android:textSize="20sp"
+
+
+                        />
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:gravity="start"
+                        android:text="@string/stopSuraPlaying"
+                        android:textAlignment="textStart"
+
+                        android:textSize="20sp"
+
+                        />
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:gravity="start"
+                        android:text="@string/repeatTheAyat"
+                        android:textAlignment="textStart"
+
+
+                        android:textSize="20sp"
+
+                        />
+
+                </RadioGroup>
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/optionsOfREadingText"
+                android:layout_width="match_parent"
+
+                android:layout_height="48dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/onFinishRelative"
+                android:background="@color/playerBacground"
+                android:gravity="bottom"
+                android:text="@string/readingOptions" />
+
+            <RelativeLayout
+                android:id="@+id/optionsOfREading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/optionsOfREadingText"
+                android:background="#FFFFFF"
+                android:padding="5dp">
+
+                <Switch
+                    android:id="@+id/moveToNextPageSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true" />
+
+                <TextView
+                    android:id="@+id/moveTONextPageText"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_alignBottom="@+id/moveToNextPageSwitch"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/moveToNextPageSwitch"
+                    android:layout_toStartOf="@+id/moveToNextPageSwitch"
+                    android:gravity="center_vertical"
+                    android:text="@string/moveToTheNextSura"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+                <Switch
+                    android:id="@+id/basmalahSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/moveToNextPageSwitch" />
+
+                <TextView
+                    android:id="@+id/basmalahText"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/moveTONextPageText"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/basmalahSwitch"
+                    android:layout_toStartOf="@+id/basmalahSwitch"
+                    android:gravity="center_vertical"
+                    android:text="@string/startTheBAsmalah"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+                <Switch
+                    android:id="@+id/saoutSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/basmalahSwitch" />
+
+                <TextView
+                    android:id="@+id/saoutText"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/basmalahText"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_toLeftOf="@+id/saoutSwitch"
+                    android:layout_toStartOf="@+id/saoutSwitch"
+                    android:gravity="center_vertical"
+                    android:text="@string/repeatAyat"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/playerShakeName"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/optionsOfREading"
+                android:background="@color/playerBacground"
+                android:gravity="bottom"
+                android:text="@string/pickTheShake" />
+
+            <RelativeLayout
+                android:id="@+id/playerShakeRelative"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@id/playerShakeName"
+                android:background="#FFFFFF">
+
+                <ImageView
+                    android:id="@+id/playerShakeImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/abdelbasetjpg"
+
+                    />
+
+                <TextView
+                    android:id="@+id/playerShakeNameText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/playerShakeImage"
+                    android:layout_toRightOf="@+id/playerShakeImage"
+                    android:gravity="start"
+                    android:text="@string/changeTheShake"
+                    android:textAlignment="textStart"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@id/playerShakeRelative"
+                android:background="#FFFFFF">
+
+
+                <ImageView
+                    android:id="@+id/playerDownloadImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/abdelbasetjpg" />
+
+                <TextView
+                    android:id="@+id/playerDownloadText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/playerDownloadImage"
+                    android:layout_toRightOf="@+id/playerDownloadImage"
+                    android:gravity="start"
+                    android:text="@string/downloadedSura"
+                    android:textAlignment="textStart"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

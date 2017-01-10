@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:background="#FFFFFF"
+    android:layout_marginBottom="1dp"
+    android:focusable="true"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+
+    >
+
+    <ImageView
+        android:id="@+id/mainListImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/bookmark"
+        android:layout_centerVertical="true"
+        />
+
+    <TextView
+        android:id="@+id/mainListText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/mainListImage"
+        android:layout_toRightOf="@+id/mainListImage"
+        android:text="العلامات المرجعية"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_centerVertical="true"
+
+        />
+
+</RelativeLayout>

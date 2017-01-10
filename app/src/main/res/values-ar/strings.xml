@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">القران الذهبي</string>
+
+    <string-array name="AlJuzoaArray">
+        <item>الجزء 1</item>
+        <item>الجزء 2</item>
+        <item>الجزء 3</item>
+        <item>الجزء 4</item>
+        <item>الجزء 5</item>
+        <item>الجزء 6</item>
+        <item>الجزء 7</item>
+        <item>الجزء 8</item>
+        <item>الجزء 9</item>
+        <item>الجزء 10</item>
+        <item>الجزء 11</item>
+        <item>الجزء 12</item>
+        <item>الجزء 13</item>
+        <item>الجزء 14</item>
+        <item>الجزء 15</item>
+        <item>الجزء 16</item>
+        <item>الجزء 17</item>
+        <item>الجزء 18</item>
+        <item>الجزء 19</item>
+        <item>الجزء 20</item>
+        <item>الجزء 21</item>
+        <item>الجزء 22</item>
+        <item>الجزء 23</item>
+        <item>الجزء 24</item>
+        <item>الجزء 25</item>
+        <item>الجزء 26</item>
+        <item>الجزء 27</item>
+        <item>الجزء 28</item>
+        <item>الجزء 29</item>
+        <item>الجزء 30</item>
+    </string-array>
+
+
+    <string name="doaKhatemAlquran">
+        اللهم إنا نحمدك، ونستعينك، ونستهديك، ونستغفرك، ونتوب إليك، ونؤمن بك، ونتوكل عليك، ونثني عليك الخير كله، نشكرك ولا نكفرك، ونخلع ونترك من يفجرك.
+
+اللهم إياك نعبد، ولك نصلي ونسجد، وإليك نسعى ونحفِد، نرجو رحمتك ونخشى عذابك، إن عذابك الجد بالكفار ملحق.
+
+اللهم لك الحمد كله، ولك الشكر كله، وإليك يرجع الأمر كله، علانيته وسره، فأهلٌ أنت أن تُحمد، وأهلٌ أنت أن تُعبد، وأنت على كل شيء قدير.
+
+لك الحمد بالإسلام، ولك الحمد بالقرآن، ولك الحمد بالمال والأهل والمعافاة، كبتَّ عدونا، وأظهرت أمننا، وجمعت فرقتنا، ومن كل ما سألناك ربنا أعطيتنا، فلك الحمد والشكر كثيراً كما تعطي كثيراً.
+
+اللهم لك الحمد حتى ترضى، ولك الحمد إذا رضيت، ولك الحمد بعد الرضا، ولك الحمد على كل حال.
+
+لك الحمد كالذي نقول، وخيراً مما نقول، ولك الحمد كالذي تقول.
+
+اللهم لك الحمد أنت نور السماوات والأرض ومن فيهن، ولك الحمد أنت قيوم السماوات والأرض ومن فيهن، ولك الحمد أنت الحق، ووعدك حق، ولقاؤك حق، والجنة حق، والنار حق، والنبيون حق، ومحمد صلى الله عليه وسلم حق، والساعةُ آتيه لا ريب فيها.</string>
+
+    <string name="playerCurrentSura">السورة الحالية</string>
+    <string name="playerSuraName">المطففين</string>
+    <string name="AyatSelection">اختيار الايات</string>
+    <string name="onFinish">عند الانتهاء</string>
+    <string name="playNext">تشغيل السورة التي تليها</string>
+    <string name="stopSuraPlaying">ايقاف الصوت</string>
+    <string name="repeatTheAyat">تكرار الايات التي تم اختيارها</string>
+    <string name="readingOptions">خيارات القراء</string>
+    <string name="moveToTheNextSura">الانتقال التلقائي الى الصفحة وتظليل الاية</string>
+    <string name="startTheBAsmalah">تشغيل البسمله عند بداية السورة</string>
+    <string name="repeatAyat">تكرار الايات التي تم اختيارها</string>
+    <string name="pickTheShake">اختيار القارء و تحميل الملفات الصوتية</string>
+    <string name="changeTheShake">تغيير القارئ</string>
+    <string name="flag1">لاستخدام اي تفسير يجب توفير اتصال مع الانترنت.</string>
+    <string name="downloadSuraForShake">تحميل السور بصوت القارئ مشاري العفاسي</string>
+    <string name="downloadAll">تحميل الكل</string>
+    <string name="athkarFromQuran">اذكار من القران</string>
+    <string name="nightReading">الورد اليلي</string>
+    <string name="downloadedSura">السور المحملة</string>
+    <string name="fridayReading">ورد يوم الجمعة</string>
+    <string name="ramadan_21_1437_ah">رمضان 21, 1437 AH</string>
+    <string name="dateMWithTime">2016 Jun 26 10:51 ص</string>
+    <string name="alFateha">لفاتحة</string>
+    <string name="numberOfSura">رقمها</string>
+    <string name="numberOfAyat">الايات</string>
+    <string name="ListOfSuar">قائمة السور</string>
+    <string name="suraName">الفاتحة</string>
+    <string name="downloadSura">1.الفاتحة</string>
+    <string name="bookmarkNumber">الاية ال 21</string>
+    <string name="bookmarckName">سورة البقرة</string>
+    <string name="tafseerName">التفسير الميسر</string>
+    <string name="tafseerDescription">القرطبي</string>
+    <bool name="is_right_to_left">false</bool>
+
+    <string name="drawer_open">drawer open</string>
+    <string name="drawer_close">drawer close</string>
+    <string name="start_download">بدئ التحميل</string>
+    <string name="szdDownload">download</string>
+    <string name="mojam">المعجم</string>
+    <string name="ayaSubject">موضوع الايات</string>
+    <string name="quranAyat">ايات القران</string>
+    <string name="search">البحث</string>
+    <string name="fahras">الفهرس</string>
+    <string name="bookmarksTitle">العلامات المرجعية</string>
+    <string name="playerSettings">اعدادات المشغل</string>
+    <string name="fridayNotificationTitle">تنبيه سورة الكهف يوم الجمعة</string>
+    <string name="frydayNotificationDescription">تنبيه يظهر يوم الجمعة للتذكير بقرائة سورة الكهف</string>
+    <string name="threeDaysNotificationTitle">تنبية لم تقراءالقران منذ مده</string>
+    <string name="threeDAyNotificationDescription">تنبيه يظهر اذا انقطعت عن قرائة القرءان اكثر من ثلاثة ايام</string>
+    <string name="dailyNotification">الاشعارات اليومية</string>
+    <string name="dailyNotificationDescription">تنببيهات يومية من الفضائل و الاقوال الدينية</string>
+    <string name="NotificationTitle">الاشعارات</string>
+    <string name="onFinishQuranTitle">On Finish Quran</string>
+    <string name="pickBackCover">اختيار لون الخلفية</string>
+    <string name="textSize">حجم الخط</string>
+    <string name="pickShake">اختيار القارئ</string>
+    <string name="downladSura">تحميل السور</string>
+    <string name="pickTafseer">اختيار التفسير</string>
+    <string name="notificationManaging">ادارة تنبيهات التطبيق</string>
+    <string name="downladedSuraManaging">ادارة السور المحملة</string>
+    <string name="ContactUs">تواصل معنا</string>
+    <string name="pickLanguage">اختيار لغة التطبيق</string>
+    <string name="Arabic">العربية</string>
+    <string name="english">الانجليزية</string>
+    <string name="atafseer">التفسير</string>
+    <string name="reasonsOfNosol">اسباب النزول</string>
+    <string name="wordMeanings">معاني الكلمات</string>
+    <string name="dictionari">المعجم</string>
+    <string name="alErab">الاعراب</string>
+    <string name="albalagha">البلاغة</string>
+    <string name="alsarf">الصرف</string>
+    <string name="ayatTopic">موضوع الايات</string>
+    <string name="translate">الترجمة</string>
+    <string name="Translate">الترجمة و التفسير</string>
+
+
+    <string-array name="titles">
+        <item>حسب الاجزاء</item>
+        <item>حسب السورة</item>
+    </string-array>
+
+    <string-array name="ahadethNames">
+        <item>الحديث الاول الاعمال بالنيات</item>
+        <item>الحديث الثاني مراتب الدين</item>
+        <item>الحديث الثالث اركان الاسلام</item>
+        <item>الحديث الرابع مراحل الخلق</item>
+    </string-array>
+
+    <string-array name="ajzaNames">
+        <item>الجزء 1</item>
+        <item>الجزء 2</item>
+        <item>الجزء 3</item>
+        <item>الجزء 4</item>
+        <item>الجزء 5</item>
+        <item>الجزء 6</item>
+        <item>الجزء 7</item>
+    </string-array>
+
+    <string-array name="ShakeNames">
+        <item>عبد الباسط</item>
+        <item>ناصر القاطامي</item>
+        <item>ياسر الدوسري</item>
+    </string-array>
+
+    <string-array name="MainList">
+        <item>اذكار من القران</item>
+        <item>الورد اليلي</item>
+        <item>ورد يوم الجمعة</item>
+        <item>العلامات المرجعية</item>
+        <item>قائمة السور</item>
+        <item>تظليل الايات حسب موضوعها</item>
+        <item>الترجمة و التجويد</item>
+        <item>البحث</item>
+        <item>مشغل الصوت</item>
+        <item>الاشعارات</item>
+        <item>اوقات الصلاة</item>
+        <item>دعاء ختم القران</item>
+        <item>الاربعون النووية</item>
+        <item>مشاركة الصفحة الحالية</item>
+        <item>الاعدادات</item>
+        <item>الاحصائيات</item>
+    </string-array>
+
+
+
+</resources>

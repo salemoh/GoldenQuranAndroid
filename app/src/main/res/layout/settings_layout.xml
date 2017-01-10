@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/settingsToolbar"
+        layout="@layout/app_bar" />
+
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:clickable="true">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/pickColorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:text="@string/pickBackCover"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/color1"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/pickColorText"
+                android:layout_margin="20dp"
+                android:padding="2dp"
+                android:src="@color/lightOrange" />
+
+
+            <ImageView
+                android:id="@+id/color2"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_below="@+id/pickColorText"
+                android:layout_margin="20dp"
+                android:layout_toEndOf="@+id/color1"
+                android:layout_toRightOf="@+id/color1"
+                android:padding="2dp"
+                android:src="@color/lightGreen" />
+
+            <ImageView
+                android:id="@+id/color3"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_below="@+id/pickColorText"
+                android:layout_margin="20dp"
+                android:layout_toEndOf="@id/color2"
+                android:layout_toRightOf="@+id/color2"
+                android:padding="2dp"
+                android:src="@color/lightBlue" />
+
+            <ImageView
+                android:id="@+id/color4"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_below="@+id/pickColorText"
+                android:layout_margin="20dp"
+                android:layout_toEndOf="@id/color3"
+                android:layout_toRightOf="@+id/color3"
+                android:padding="2dp"
+                android:src="@color/lightYellow" />
+
+            <ImageView
+                android:id="@+id/color5"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/color2"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:padding="2dp"
+                android:src="@color/lightPink" />
+
+            <ImageView
+                android:id="@+id/color6"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignLeft="@+id/color2"
+                android:layout_alignStart="@+id/color2"
+                android:layout_below="@+id/color2"
+                android:layout_toEndOf="@+id/color5"
+                android:layout_toRightOf="@+id/color5"
+                android:padding="2dp"
+                android:src="@color/Black" />
+
+            <View
+                android:id="@+id/devisor1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/color6"
+                android:layout_margin="5dp"
+                android:background="@color/playerBacground" />
+
+
+            <RelativeLayout
+                android:id="@+id/textSizeRelative"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/devisor1">
+
+                <ImageView
+                    android:id="@+id/minus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/minus" />
+
+                <ImageView
+                    android:id="@+id/plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/plus" />
+
+                <TextView
+                    android:id="@+id/textSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/textSize"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/devisor2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/textSizeRelative"
+                android:layout_margin="5dp"
+                android:background="@color/playerBacground" />
+
+            <RelativeLayout
+                android:id="@+id/pickShakeRelative"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:clickable="true"
+                android:background="?attr/selectableItemBackground"
+                android:layout_below="@+id/devisor2">
+
+                <ImageView
+                    android:id="@+id/pickShakeImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/speaker" />
+
+                <TextView
+                    android:id="@+id/pickShakeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/pickShakeImage"
+                    android:layout_toRightOf="@+id/pickShakeImage"
+                    android:text="@string/pickShake"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/devisor3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/pickShakeRelative"
+                android:layout_margin="5dp"
+                android:background="@color/playerBacground" />
+
+
+            <RelativeLayout
+                android:id="@+id/settingsDownloadsuraRelative"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:clickable="true"
+                android:background="?attr/selectableItemBackground"
+                android:layout_below="@+id/devisor3">
+
+                <ImageView
+                    android:id="@+id/settingsDownloadsuraImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/download" />
+
+                <TextView
+                    android:id="@+id/settingsDownloadsuraText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/settingsDownloadsuraImage"
+                    android:layout_toRightOf="@+id/settingsDownloadsuraImage"
+                    android:text="@string/downladSura"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/devisor4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/settingsDownloadsuraRelative"
+                android:layout_margin="5dp"
+                android:background="@color/playerBacground" />
+
+            <RelativeLayout
+                android:id="@+id/settingsPickTafseerRelative"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:clickable="true"
+                android:background="?attr/selectableItemBackground"
+                android:layout_below="@+id/devisor4">
+
+                <ImageView
+                    android:id="@+id/settingsPickTafseerImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/book" />
+
+                <TextView
+                    android:id="@+id/settingsPickTafseerText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/settingsPickTafseerImage"
+                    android:layout_toRightOf="@+id/settingsPickTafseerImage"
+                    android:text="@string/pickTafseer"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+
+
+            <View
+                android:id="@+id/devisor5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/settingsPickTafseerRelative"
+                android:layout_margin="5dp"
+                android:background="@color/playerBacground" />
+
+            <RelativeLayout
+                android:id="@+id/settingsNotificationRelative"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/devisor5"
+                android:clickable="true"
+                android:background="?attr/selectableItemBackground"
+                >
+
+                <ImageView
+                    android:id="@+id/settingsNotificationImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/bell" />
+
+                <TextView
+                    android:id="@+id/settingsNotificationText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/settingsNotificationImage"
+                    android:layout_toRightOf="@+id/settingsNotificationImage"
+                    android:text="@string/notificationManaging"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+
+
+            <View
+                android:id="@+id/devisor6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/settingsNotificationRelative"
+                android:layout_margin="5dp"
+                android:background="@color/playerBacground" />
+
+            <RelativeLayout
+                android:id="@+id/settingsDownloadedSuraRelative"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/devisor6"
+                android:clickable="true"
+                android:background="?attr/selectableItemBackground"
+                >
+
+                <ImageView
+                    android:id="@+id/settingsDownloadedSuraImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/download" />
+
+                <TextView
+                    android:id="@+id/settingsDownloadedSuraText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/settingsDownloadedSuraImage"
+                    android:layout_toRightOf="@+id/settingsDownloadedSuraImage"
+                    android:text="@string/downladedSuraManaging"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/devisor7"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/settingsPickLanguageRelative"
+                android:layout_margin="5dp"
+                android:background="@color/playerBacground" />
+
+            <RelativeLayout
+                android:id="@+id/settingsCallUsRelative"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/devisor7"
+                android:clickable="true"
+                android:background="?attr/selectableItemBackground"
+                >
+
+                <ImageView
+                    android:id="@+id/settingsCallUsImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/phone" />
+
+                <TextView
+                    android:id="@+id/settingsCallUsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/settingsCallUsImage"
+                    android:layout_toRightOf="@+id/settingsCallUsImage"
+                    android:text="@string/ContactUs"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/devisor8"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/settingsDownloadedSuraRelative"
+                android:layout_margin="5dp"
+                android:background="@color/playerBacground" />
+
+
+            <RelativeLayout
+                android:id="@+id/settingsPickLanguageRelative"
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
+                android:layout_below="@+id/devisor8"
+                android:clickable="true"
+                android:background="?attr/selectableItemBackground"
+                >
+
+                <TextView
+                    android:id="@+id/settingsPickLanguageText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/pickLanguage"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/settingsPickLanguageText">
+
+                    <RadioButton
+                        android:id="@+id/settingsArabicRadioButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layoutDirection="ltr"
+                        android:text="@string/Arabic"
+                        android:textAlignment="textStart"
+                        android:textSize="20sp" />
+
+                    <RadioButton
+                        android:id="@+id/settingsEnglishRadioButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layoutDirection="ltr"
+                        android:text="@string/english"
+                        android:textAlignment="textStart"
+                        android:textSize="20sp" />
+                </RadioGroup>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

@@ -22,9 +22,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blackstone.goldenquran.Fragments.MainListFragment;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.api.DownloadService;
-import com.blackstone.goldenquran.api.models.Download;
+import com.blackstone.goldenquran.models.Download;
 import com.blackstone.goldenquran.utilities.Utils;
 
 import butterknife.BindView;
@@ -62,8 +63,50 @@ public class MainActivity extends BaseActivity {
         setupDrawer();
 
         registerReceiver();
+    }
+
+    private void registerReceiver() {
+
+        LocalBroadcastManager bManager = LocalBroadcastManager.getInstance(this);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(MESSAGE_PROGRESS);
+        bManager.registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            if (intent.getAction().equals(MESSAGE_PROGRESS)) {
+
+                Download download = intent.getParcelableExtra(getString(com.blackstone.goldenquran.R.string.szdDownload));
+                mProgressBar.setProgress(download.getProgress());
+                if (download.getProgress() == 100) {
+
+
+                    mProgressText.setText(com.blackstone.goldenquran.R.string.zsdDonloaded);
+
+                } else {
+
+                    mProgressText.setText(String.format("Download (%d/%d) MB", download.getCurrentFileSize(), download.getTotalFileSize()));
+
+                }
+            }
+        }
+    };
+
+
+
+    private void startDownload() {
+
+        Intent intent = new Intent(this, DownloadService.class);
+        startService(intent);
 
     }
+
+
+
 
     private void setupDrawer() {
         //setup the size of the drawer to 2/3 of the screen size
@@ -88,7 +131,7 @@ public class MainActivity extends BaseActivity {
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         //add the left drawer content
-        getSupportFragmentManager().beginTransaction().replace(R.id.left_drawer, NavigationDrawerFragment.newInstance()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.left_drawer,new MainListFragment()).commit();
     }
 
     @Override
@@ -116,39 +159,11 @@ public class MainActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void registerReceiver(){
 
-        LocalBroadcastManager bManager = LocalBroadcastManager.getInstance(this);
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(MESSAGE_PROGRESS);
-        bManager.registerReceiver(broadcastReceiver, intentFilter);
-
-    }
-    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            if(intent.getAction().equals(MESSAGE_PROGRESS)){
-
-                Download download = intent.getParcelableExtra("download");
-                mProgressBar.setProgress(download.getProgress());
-                if(download.getProgress() == 100){
-
-                    mProgressText.setText("File Download Complete");
-
-                } else {
-
-                    mProgressText.setText(String.format("Downloaded (%d/%d) MB",download.getCurrentFileSize(),download.getTotalFileSize()));
-
-                }
-            }
-        }
-    };
-
-    private boolean checkPermission(){
+    private boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (result == PackageManager.PERMISSION_GRANTED){
+        if (result == PackageManager.PERMISSION_GRANTED) {
 
             return true;
 
@@ -158,9 +173,9 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void requestPermission(){
+    private void requestPermission() {
 
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},PERMISSION_REQUEST_CODE);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
 
     }
 
@@ -172,23 +187,16 @@ public class MainActivity extends BaseActivity {
 
                     startDownload();
                 } else {
-                    Toast.makeText(MainActivity.this,"Permission Denied, Please allow to proceed !",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Permission Denied, Please allow to proceed !", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
     }
 
-    private void startDownload(){
-
-        Intent intent = new Intent(this,DownloadService.class);
-        startService(intent);
-
-    }
-
     @OnClick(R.id.btn_download)
-    public void downloadFile(){
+    public void downloadFile() {
 
-        if(checkPermission()){
+        if (checkPermission()) {
             startDownload();
         } else {
             requestPermission();

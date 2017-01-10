@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 
 /**
  * Created by SamerGigaByte on 11/12/2016.
- *
  */
 
 public class SharedPreferencesManager {
@@ -41,8 +40,7 @@ public class SharedPreferencesManager {
 
     }
 
-    public static boolean getBoolean(Context context, String key,
-                                     boolean defaultValue) {
+    public static boolean getBoolean(Context context, String key, boolean defaultValue) {
         SharedPreferences settings = context
                 .getSharedPreferences(PREFS_NAME, 0);
 

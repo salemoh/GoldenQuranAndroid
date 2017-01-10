@@ -5,13 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 
 import timber.log.Timber;
 
-/**
- * Created by SamerGigaByte on 11/12/2016.
- */
 
 public class BaseActivity extends AppCompatActivity {
 

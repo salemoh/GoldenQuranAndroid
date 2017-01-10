@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:clickable="true"
+    >
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/altafseerRecycler"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/flagImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/flag" />
+
+        <TextView
+            android:id="@+id/anyTafseer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/flagImage"
+            android:gravity="start"
+            android:text="@string/flag1"
+            android:textAlignment="textStart"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/downloadTafseer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/anyTafseer"
+            android:layout_toRightOf="@+id/flagImage"
+            android:gravity="start"
+            android:text="@string/flag2"
+            android:textAlignment="textStart"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/altafseerRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header"
+        android:background="#ECEFF1" />
+
+</LinearLayout>

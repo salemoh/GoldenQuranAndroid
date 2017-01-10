@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:clickable="true"
+    >
+
+    <include layout="@layout/app_bar"></include>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:clickable="true"
+        android:padding="16dp">
+
+        <Switch
+            android:id="@+id/Switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/notificationType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@+id/Switch"
+            android:layout_toRightOf="@+id/Switch"
+            android:text="@string/fridayNotificationTitle"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/notificationType"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@+id/Switch"
+            android:layout_toRightOf="@+id/Switch"
+            android:text="@string/frydayNotificationDescription" />
+
+        <Switch
+            android:id="@+id/SwitchTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/description"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/notificationTypeTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/description"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_toEndOf="@+id/Switch"
+            android:layout_toRightOf="@+id/Switch"
+            android:text="@string/threeDaysNotificationTitle"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/descriptionTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/notificationTypeTwo"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@+id/Switch"
+            android:layout_toRightOf="@id/Switch"
+            android:text="@string/threeDAyNotificationDescription" />
+
+        <Switch
+            android:id="@+id/SwitchThree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/descriptionTwo"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/notificationTypeThree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/descriptionTwo"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_toEndOf="@+id/Switch"
+            android:layout_toRightOf="@+id/Switch"
+            android:text="@string/dailyNotification"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/descriptionThree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/notificationTypeThree"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@+id/Switch"
+            android:layout_toRightOf="@id/Switch"
+            android:text="@string/dailyNotificationDescription" />
+
+
+    </RelativeLayout>
+</LinearLayout>

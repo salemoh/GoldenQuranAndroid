@@ -10,7 +10,7 @@ import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
 import com.blackstone.goldenquran.R;
-import com.blackstone.goldenquran.api.models.Download;
+import com.blackstone.goldenquran.models.Download;
 import com.blackstone.goldenquran.ui.MainActivity;
 
 import java.io.BufferedInputStream;
@@ -25,6 +25,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 
 public class DownloadService extends IntentService {
+
     public DownloadService() {
         super("Download Service");
         setIntentRedelivery(true);
@@ -84,6 +85,7 @@ public class DownloadService extends IntentService {
         long total = 0;
         long startTime = System.currentTimeMillis();
         int timeCount = 1;
+
         while ((count = bis.read(data)) != -1) {
 
             total += count;

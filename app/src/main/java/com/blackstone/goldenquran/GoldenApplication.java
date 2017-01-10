@@ -1,14 +1,12 @@
 package com.blackstone.goldenquran;
 
-import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import timber.log.Timber;
 
-/**
- * Created by SamerGigaByte on 11/12/2016.
- */
 
-public class GoldenApplication extends Application {
+
+public class GoldenApplication extends MultiDexApplication {
 
     @Override
     public void onCreate() {

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ECEFF1"
+    android:clickable="true"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:background="@color/mainListGold"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/hijryDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="@string/ramadan_21_1437_ah"
+            android:layout_toEndOf="@+id/editImageView"
+            android:layout_toRightOf="@+id/editImageView"
+            android:textAlignment="textEnd"
+            android:gravity="end"
+            android:textColor="@color/mainListBrown"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/editImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/edit" />
+
+        <TextView
+            android:id="@+id/salahTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editImageView"
+            android:layout_marginTop="8dp"
+            android:text="-- : --"
+            android:textColor="#FF00FF"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/dateAndTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/salahTime"
+            android:layout_alignBottom="@+id/salahTime"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="@string/dateMWithTime"
+            android:textColor="@color/mainListBrown"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mainList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ECEFF1" />
+
+</LinearLayout>

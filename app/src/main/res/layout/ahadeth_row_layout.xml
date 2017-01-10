@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="1dp"
+    android:background="#FFFFFF"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/ahadethTitles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="الحديث الاول الاعمال بالنيات"
+        android:textAlignment="textStart"
+        android:gravity="start"
+        android:textSize="16sp" />
+
+</RelativeLayout>

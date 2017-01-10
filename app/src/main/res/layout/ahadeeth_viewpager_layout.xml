@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:clickable="true"
+    >
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:clickable="true"
+        >
+
+        <ImageView
+            android:id="@+id/ahadeethLeftArrow"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/left_arrowpng"
+            android:layout_alignParentLeft="true"
+            />
+
+        <TextView
+            android:id="@+id/ahadeethTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/ahadeethRightArrow"
+            android:layout_toRightOf="@+id/ahadeethLeftArrow"
+            android:layout_toStartOf="@+id/ahadeethRightArrow"
+            android:layout_toEndOf="@+id/ahadeethLeftArrow"
+            android:text="الحديث الاول الاعمال بالنيات"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:layout_margin="8dp"
+            />
+
+        <ImageView
+            android:id="@+id/ahadeethRightArrow"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/big_two_right_arrow" />
+    </RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        >
+
+        <TextView
+            android:id="@+id/ahadeethText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            android:text="@string/doaKhatemAlquran"
+            android:textSize="20sp" />
+
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

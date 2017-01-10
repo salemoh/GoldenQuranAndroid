@@ -1,8 +1,179 @@
 <resources>
     <string name="app_name">Golden Quran</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="AlJuzoaArray">
+        <item>joza 1</item>
+        <item>joza 2</item>
+        <item>joza 3</item>
+        <item>joza 4</item>
+        <item>joza 5</item>
+        <item>joza 6</item>
+        <item>joza 7</item>
+        <item>joza 8</item>
+        <item>joza 9</item>
+        <item>joza 10</item>
+        <item>joza 11</item>
+        <item>joza 12</item>
+        <item>joza 13</item>
+        <item>joza 14</item>
+        <item>joza 15</item>
+        <item>joza 16</item>
+        <item>joza 17</item>
+        <item>joza 18</item>
+        <item>joza 19</item>
+        <item>joza 20</item>
+        <item>joza 21</item>
+        <item>joza 22</item>
+        <item>joza 23</item>
+        <item>joza 24</item>
+        <item>joza 25</item>
+        <item>joza 26</item>
+        <item>joza 27</item>
+        <item>joza 28</item>
+        <item>joza 29</item>
+        <item>joza 30</item>
+    </string-array>
+
+    <string name="doaKhatemAlquran">
+        اللهم إنا نحمدك، ونستعينك، ونستهديك، ونستغفرك، ونتوب إليك، ونؤمن بك، ونتوكل عليك، ونثني عليك الخير كله، نشكرك ولا نكفرك، ونخلع ونترك من يفجرك.
+
+اللهم إياك نعبد، ولك نصلي ونسجد، وإليك نسعى ونحفِد، نرجو رحمتك ونخشى عذابك، إن عذابك الجد بالكفار ملحق.
+
+اللهم لك الحمد كله، ولك الشكر كله، وإليك يرجع الأمر كله، علانيته وسره، فأهلٌ أنت أن تُحمد، وأهلٌ أنت أن تُعبد، وأنت على كل شيء قدير.
+
+لك الحمد بالإسلام، ولك الحمد بالقرآن، ولك الحمد بالمال والأهل والمعافاة، كبتَّ عدونا، وأظهرت أمننا، وجمعت فرقتنا، ومن كل ما سألناك ربنا أعطيتنا، فلك الحمد والشكر كثيراً كما تعطي كثيراً.
+
+اللهم لك الحمد حتى ترضى، ولك الحمد إذا رضيت، ولك الحمد بعد الرضا، ولك الحمد على كل حال.
+
+لك الحمد كالذي نقول، وخيراً مما نقول، ولك الحمد كالذي تقول.
+
+اللهم لك الحمد أنت نور السماوات والأرض ومن فيهن، ولك الحمد أنت قيوم السماوات والأرض ومن فيهن، ولك الحمد أنت الحق، ووعدك حق، ولقاؤك حق، والجنة حق، والنار حق، والنبيون حق، ومحمد صلى الله عليه وسلم حق، والساعةُ آتيه لا ريب فيها.</string>
+
+    <string name="playerCurrentSura">Current Sura</string>
+    <string name="playerSuraName">ALmutafefeen</string>
+    <string name="AyatSelection">Select Ayat</string>
+    <string name="onFinish">On Finish</string>
+    <string name="playNext">Play next Sura</string>
+    <string name="stopSuraPlaying">Stpo Sura</string>
+    <string name="repeatTheAyat">Repeat the selected Ayat</string>
+    <string name="readingOptions">Reading options</string>
+    <string name="moveToTheNextSura">Move Automaticly to the next page and marck the next aya</string>
+    <string name="startTheBAsmalah">Play basmalah on start of sura</string>
+    <string name="repeatAyat">Repeat the sura</string>
+    <string name="pickTheShake">Choose the reader and download audio files</string>
+    <string name="changeTheShake">Changing reader</string>
+    <string name="downloadedSura">download Sura</string>
+    <string name="flag1">To use no explanation must be provided in contact with the Internet.</string>
+    <string name="flag2">Or upload it to be used without an Internet connection.</string>
+    <string name="downloadSuraForShake">Download fence reciter Mashary</string>
+    <string name="downloadAll">Download All</string>
+    <string name="athkarFromQuran">Citation from the Koran</string>
+    <string name="nightReading">Night reading</string>
+    <string name="fridayReading">Friday reading</string>
+    <string name="ramadan_21_1437_ah">Ramadan 21, 1437 AH</string>
+    <string name="dateMWithTime">2016 Jun 26 10:51 AM</string>
+    <string name="alFateha">Al-fateha</string>
+    <string name="numberOfSura">number</string>
+    <string name="numberOfAyat">ayat</string>
+    <string name="ListOfSuar">List Of Suar</string>
+    <string name="suraName">al Fateha</string>
+    <string name="downloadSura">1.Al Fateha</string>
+    <string name="bookmarkNumber">aya number 21</string>
+    <string name="bookmarckName">sura baqara</string>
+    <string name="tafseerName">Al Tafseer Muyasser</string>
+    <string name="tafseerDescription">Al Qurtopy</string>>
+    <bool name="is_right_to_left">true</bool>
+
     <string name="drawer_open">drawer open</string>
     <string name="drawer_close">drawer close</string>
+    <string name="start_download">Start Download</string>
+    <string name="szdDownload">download</string>
+    <string name="zsdDonloaded">File Download Complete</string>
+    <string name="mojam">Mojam</string>
+    <string name="ayaSubject">Aya Subject</string>
+    <string name="quranAyat">Quran Ayat</string>
+    <string name="search">Search</string>
+    <string name="fahras">Fahras</string>
+    <string name="bookmarksTitle">Bookmarks</string>
+    <string name="playerSettings">player Settings</string>
+    <string name="fridayNotificationTitle">Notification Fryday</string>
+    <string name="frydayNotificationDescription">Alert shows on Friday to remind the Cave to read</string>
+    <string name="threeDaysNotificationTitle">Attention has not read the Koran for some time</string>
+    <string name="threeDAyNotificationDescription">Alert appear if cut off from reading the Koran more than three days</string>
+    <string name="dailyNotification">Notices daily</string>
+    <string name="dailyNotificationDescription">Daily Tenbbhet virtues and religious sayings</string>
+    <string name="NotificationTitle">Notification</string>
+    <string name="onFinishQuranTitle">On Finish Quran</string>
+    <string name="pickBackCover">Pick background colo</string>
+    <string name="textSize">Text size</string>
+    <string name="pickShake">Pick the shake</string>
+    <string name="downladSura">Download sura</string>
+    <string name="pickTafseer">Pick tafseer</string>
+    <string name="notificationManaging">Notification managing</string>
+    <string name="downladedSuraManaging">Manage downloaded sura</string>
+    <string name="ContactUs">Contact us</string>
+    <string name="pickLanguage">Pick the language</string>
+    <string name="Arabic">Arabic</string>
+    <string name="english">English</string>
+    <string name="atafseer">Al Tafseer</string>
+    <string name="reasonsOfNosol">Reasons of nuzul</string>
+    <string name="wordMeanings">Word Meaning</string>
+    <string name="dictionari">Dictunari</string>
+    <string name="alErab">Al erab</string>
+    <string name="albalagha">Al balagha</string>
+    <string name="alsarf">Al sarf</string>
+    <string name="ayatTopic">Ayat Topic</string>
+    <string name="translate">Translate</string>
+    <string name="Translate">Translate</string>
+
+    <string-array name="ahadethNames">
+        <item>first hadeeth</item>
+        <item>second hadeeth</item>
+        <item>therd hadeeth</item>
+        <item>fourth hadeeth</item>
+    </string-array>
+
+    <string-array name="titles">
+        <item>by Juza</item>
+        <item>by sura</item>
+    </string-array>
+
+    <string-array name="ajzaNames">
+        <item>al juza 1</item>
+        <item>al juza 2</item>
+        <item>al juza 3</item>
+        <item>al juza 4</item>
+        <item>al juza 5</item>
+        <item>al juza 6</item>
+        <item>al juza 7</item>
+    </string-array>
+
+    <string-array name="ShakeNames">
+        <item>abdalbaset</item>
+        <item>naser al qatamy</item>
+        <item>yaser al dosary</item>
+    </string-array>
+
+    <string-array name="MainList">
+        <item>Al quran athkar</item>
+        <item>Night reading</item>
+        <item>Friday reading</item>
+        <item>Bookmarks</item>
+        <item>Fahras</item>
+        <item>Marck ayat</item>
+        <item>Transelation and tajweed</item>
+        <item>Search</item>
+        <item>Player</item>
+        <item>Notification</item>
+        <item>Prayer time</item>
+        <item>Doaa khatem quran</item>
+        <item>Fourty nawaweah</item>
+        <item>Share current page</item>
+        <item>Settings</item>
+        <item>Statistics</item>
+    </string-array>
+
+
 </resources>

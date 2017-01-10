@@ -5,4 +5,14 @@
     <color name="colorAccent">#ae8a41</color>
     <color name="textColorPrimary">@android:color/white</color>
     <color name="colorActionBarToggle">#a3843b</color>
+    <color name="mainListBrown">#A0522D</color>
+    <color name="playerBacground">#d7ccc8</color>
+    <color name="lightOrange">#fff3e0</color>
+    <color name="lightYellow">#fffde7</color>
+    <color name="lightGreen">#e8f5e9</color>
+    <color name="lightBlue">#e3f2fd</color>
+    <color name="lightPink">#fce4ec</color>
+    <color name="Black">#7F000000</color>
+    <color name="whuit">#FFFFFF</color>
+    <color name="mainListGold">#fffde7</color>
 </resources>

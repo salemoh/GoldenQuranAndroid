@@ -11,11 +11,10 @@ import com.blackstone.goldenquran.R;
 
 public class NavigationDrawerFragment extends Fragment {
 
-    public static NavigationDrawerFragment newInstance(){
-        NavigationDrawerFragment fragment=new NavigationDrawerFragment();
-
-        return fragment;
+    public static NavigationDrawerFragment newInstance() {
+        return new NavigationDrawerFragment();
     }
+
     public NavigationDrawerFragment() {
         // Required empty public constructor
     }
@@ -25,7 +24,7 @@ public class NavigationDrawerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_nav, container, false);
+        return inflater.inflate(R.layout.main_list_layout, container, false);
     }
 
 }
