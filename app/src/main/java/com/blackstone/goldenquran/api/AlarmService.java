@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v4.app.NotificationCompat;
 
-import com.blackstone.goldenquran.Fragments.PrayingTimeFragment;
+import com.blackstone.goldenquran.Fragments.PrayingTimeViewPagerFragment;
 import com.blackstone.goldenquran.R;
 
 
@@ -18,14 +18,13 @@ public class AlarmService extends IntentService {
 
     public AlarmService() {
         super("AlarmService");
-
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
         NotificationManager alarmNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, PrayingTimeFragment.class), 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, PrayingTimeViewPagerFragment.class), 0);
         mediaPlayer = MediaPlayer.create(this, R.raw.athan);
         if (!mediaPlayer.isPlaying()) {
             mediaPlayer.start();
@@ -34,7 +33,7 @@ public class AlarmService extends IntentService {
 
         NotificationCompat.Builder alarmNotificationBuilder = new NotificationCompat.Builder(this)
                 .setContentTitle("Alarm")
-                .setSmallIcon(R.drawable.clock)
+                .setSmallIcon(R.drawable.pray_time_clock)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText("Salah Time"))
                 .setContentText("Salah Time")
                 .setAutoCancel(true)

@@ -9,14 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blackstone.goldenquran.R;
-import com.blackstone.goldenquran.models.SalahModel;
+import com.blackstone.goldenquran.models.PrayModel;
 
 import java.util.List;
 
 
 public class RecyclerAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
-    List<SalahModel> list;
+    List<PrayModel> list;
     List counter;
     LayoutInflater layoutInflater;
     Context context;
@@ -27,7 +27,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<MyViewHolder> {
             R.drawable.isha
     };
 
-    public RecyclerAdapter(List<SalahModel> list, Context context, List counter) {
+    public RecyclerAdapter(List<PrayModel> list, Context context, List counter) {
         this.list = list;
         this.counter = counter;
         layoutInflater = LayoutInflater.from(context);

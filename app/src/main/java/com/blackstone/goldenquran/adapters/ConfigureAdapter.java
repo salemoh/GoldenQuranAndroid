@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blackstone.goldenquran.R;
-import com.blackstone.goldenquran.models.SalahModel;
+import com.blackstone.goldenquran.models.PrayModel;
 
 import java.util.List;
 
@@ -19,11 +19,11 @@ import static java.lang.Integer.parseInt;
 public class ConfigureAdapter extends RecyclerView.Adapter<MyConfigureViewHolder> {
     private LayoutInflater layoutInflater;
     private Context context;
-    private List<SalahModel> list;
+    private List<PrayModel> list;
     private SharedPreferences.Editor editor;
     private List counter;
 
-    public ConfigureAdapter(Context context, List<SalahModel> list, List countList) {
+    public ConfigureAdapter(Context context, List<PrayModel> list, List countList) {
         this.context = context;
         this.list = list;
         this.counter = countList;

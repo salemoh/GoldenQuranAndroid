@@ -17,27 +17,39 @@ import com.blackstone.goldenquran.models.AlsuraModel;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class AlSuraFragment extends Fragment {
 
+
+    @BindView(R.id.alSuraRecyclerView)
     RecyclerView alSuraRecyclerView;
 
     public AlSuraFragment() {
-        // Required empty public constructor
+
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getActivity().invalidateOptionsMenu();
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_al_sura, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_al_sura, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        alSuraRecyclerView = (RecyclerView) getView().findViewById(R.id.alSuraRecyclerView);
         alSuraRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         String[] ajzaNames = getResources().getStringArray(R.array.ajzaNames);
         ArrayList arrayList = new ArrayList();

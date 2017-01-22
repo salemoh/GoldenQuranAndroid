@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.blackstone.goldenquran.R;
-import com.blackstone.goldenquran.models.ALtafseerModel;
+import com.blackstone.goldenquran.models.TheExplanationModel;
 
 import java.util.List;
 
@@ -17,10 +17,10 @@ import java.util.List;
  */
 
 public class AltafseerAdapter extends RecyclerView.Adapter<AltafseerViewHolder> {
-    List<ALtafseerModel> list;
+    List<TheExplanationModel> list;
     LayoutInflater layoutInflater;
 
-    public AltafseerAdapter(Context context, List<ALtafseerModel> list) {
+    public AltafseerAdapter(Context context, List<TheExplanationModel> list) {
         this.list = list;
         layoutInflater = LayoutInflater.from(context);
     }

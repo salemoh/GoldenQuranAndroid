@@ -1,4 +1,4 @@
-package com.blackstone.goldenquran;
+package com.blackstone.goldenquran.Application;
 
 import android.support.multidex.MultiDexApplication;
 

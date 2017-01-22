@@ -1,13 +1,11 @@
 package com.blackstone.goldenquran.Fragments;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,35 +16,37 @@ import com.blackstone.goldenquran.models.BookmarkModel;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class BookmarkFragment extends Fragment {
 
+
+    @BindView(R.id.bookmarkRecycler)
     RecyclerView recyclerView;
-    Toolbar toolbar;
 
     public BookmarkFragment() {
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getActivity().invalidateOptionsMenu();
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.bookmark_layout, container, false);
+        View view = inflater.inflate(R.layout.bookmark_layout, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        recyclerView = (RecyclerView) getView().findViewById(R.id.bookmarkRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        toolbar = (Toolbar) getView().findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.bookmarksTitle);
-        toolbar.setTitleTextColor(Color.WHITE);
-
-
 
         ArrayList<BookmarkModel> arrayList = new ArrayList<>();
         arrayList.add(new BookmarkModel(getString(R.string.bookmarkNumber), getString(R.string.bookmarckName)));

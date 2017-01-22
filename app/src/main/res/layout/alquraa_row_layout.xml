@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:src="@drawable/abdelbasetjpg"
+        android:src="@drawable/reader_abdelbaset"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         />
@@ -22,12 +22,13 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@+id/cb"
-        android:layout_toEndOf="@+id/cb"
+        android:layout_toRightOf="@+id/PickShakeradioButton"
+        android:layout_toEndOf="@+id/PickShakeradioButton"
         android:text="عبد الباسط"
         android:layout_toStartOf="@+id/shakeImage"
         android:layout_toLeftOf="@+id/shakeImage"
         android:textAlignment="textStart"
+        android:gravity="start"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
         android:textSize="20sp"
@@ -37,7 +38,7 @@
 
 
     <RadioButton
-        android:id="@+id/cb"
+        android:id="@+id/PickShakeradioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"

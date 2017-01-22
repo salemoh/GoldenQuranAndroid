@@ -6,20 +6,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.blackstone.goldenquran.R;
-import com.blackstone.goldenquran.models.AlquraaModel;
+import com.blackstone.goldenquran.models.ReadersModel;
 
 import java.util.List;
 
-public class AlquraaAdapter extends RecyclerView.Adapter<AlquraaViewHolder> {
+public class AlquraaAdapter extends RecyclerView.Adapter<AlquraaAdapter.AlquraaViewHolder> {
 
-    List<AlquraaModel> list;
+    List<ReadersModel> list;
     LayoutInflater layoutInflater;
-    int pos = -1;
+    int mSelectedItem = -1;
 
-    public AlquraaAdapter(Context context, List<AlquraaModel> list) {
+    public AlquraaAdapter(Context context, List<ReadersModel> list) {
         this.list = list;
         layoutInflater = LayoutInflater.from(context);
     }
@@ -33,25 +34,39 @@ public class AlquraaAdapter extends RecyclerView.Adapter<AlquraaViewHolder> {
     public void onBindViewHolder(AlquraaViewHolder holder, final int position) {
         holder.shakeName.setText(list.get(position).shakeName);
         holder.shakeImage.setImageResource(list.get(position).shakeImage);
-
+        holder.mRadio.setChecked(position == mSelectedItem);
     }
 
     @Override
     public int getItemCount() {
         return list.size();
     }
-}
 
-class AlquraaViewHolder extends RecyclerView.ViewHolder {
-    ImageView shakeImage;
-    TextView shakeName;
+    class AlquraaViewHolder extends RecyclerView.ViewHolder {
+        ImageView shakeImage;
+        TextView shakeName;
+        RadioButton mRadio;
 
-    public AlquraaViewHolder(View itemView) {
-        super(itemView);
+         AlquraaViewHolder(View itemView) {
+            super(itemView);
 
-        shakeImage = (ImageView) itemView.findViewById(R.id.shakeImage);
-        shakeName = (TextView) itemView.findViewById(R.id.shakeName);
+            shakeImage = (ImageView) itemView.findViewById(R.id.shakeImage);
+            shakeName = (TextView) itemView.findViewById(R.id.shakeName);
+            mRadio = (RadioButton) itemView.findViewById(R.id.PickShakeradioButton);
+
+            View.OnClickListener clickListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mSelectedItem = getAdapterPosition();
+                    notifyItemRangeChanged(0, list.size());
+                }
+            };
+
+            shakeName.setOnClickListener(clickListener);
+            mRadio.setOnClickListener(clickListener);
 
 
+        }
     }
+
 }

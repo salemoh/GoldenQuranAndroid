@@ -3,17 +3,14 @@ package com.blackstone.goldenquran.Fragments;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,13 +19,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.blackstone.goldenquran.R;
+import com.blackstone.goldenquran.ui.DrawerCloser;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class SearchFragment extends Fragment {
 
-    ViewPager viewPager;
+    @BindView(R.id.tabLayout)
     TabLayout tabLayout;
-    Toolbar toolbar;
-    AppBarLayout appBarLayout;
+    @BindView(R.id.searchViewPager)
+    ViewPager viewPager;
+//    @BindView(R.id.appBarLayout)
+//    AppBarLayout appBarLayout;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -38,41 +41,42 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.search_layout, container, false);
+        View view = inflater.inflate(R.layout.search_layout, container, false);
+        ButterKnife.bind(this, view);
+        return view;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getActivity().invalidateOptionsMenu();
+        setHasOptionsMenu(true);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        View v = getView();
+
         setHasOptionsMenu(true);
         getActivity().invalidateOptionsMenu();
-
-        viewPager = (ViewPager) v.findViewById(R.id.searchViewPager);
-        tabLayout = (TabLayout) v.findViewById(R.id.tabLayout);
-        appBarLayout = (AppBarLayout) v.findViewById(R.id.appBarLayout);
-
-        toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.search);
-        toolbar.setTitleTextColor(Color.WHITE);
-
 
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setLayoutDirection(TabLayout.LAYOUT_DIRECTION_LTR);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-                appBarLayout.setExpanded(true, true);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
 
+                ((DrawerCloser) getActivity()).moveToolbarDown();
             }
 
             @Override
@@ -97,10 +101,8 @@ public class SearchFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_search:
-                //handel the search quire
 
                 return true;
             default:

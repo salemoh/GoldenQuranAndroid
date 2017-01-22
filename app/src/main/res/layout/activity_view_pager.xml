@@ -3,11 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="3"
     android:clickable="true"
-    >
-
+    android:orientation="vertical"
+    android:weightSum="3">
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/top"
@@ -20,21 +18,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <include
-                android:id="@+id/toolbar"
-                layout="@layout/app_bar" />
-
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
-                app:tabMaxWidth="0dp"
                 app:tabGravity="fill"
+                app:tabMaxWidth="0dp"
                 app:tabMode="fixed"
                 app:tabSelectedTextColor="@android:color/white"
-                app:tabTextColor="@android:color/white"
-                />
+                app:tabTextColor="@android:color/white" />
 
         </android.support.design.widget.AppBarLayout>
 
@@ -61,7 +54,7 @@
             android:id="@+id/pusaleh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/busaleh" />
+            android:src="@drawable/pray_time_busaleh" />
     </android.support.v7.widget.CardView>
 
 </LinearLayout>

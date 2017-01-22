@@ -52,7 +52,8 @@ public class BaseActivity extends AppCompatActivity {
         super.onRestart();
         Timber.d("onRestart");
     }
-    protected void setupSupportActionBar(Toolbar toolbar,boolean isUpEnabled,boolean isHomeAsUp ) {
+
+    public void setupSupportActionBar(Toolbar toolbar, boolean isUpEnabled, boolean isHomeAsUp) {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;

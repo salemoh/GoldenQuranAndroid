@@ -30,7 +30,7 @@ import com.blackstone.goldenquran.GetTimeClasses.TimeZoneUtil;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.RecyclerAdapter;
 import com.blackstone.goldenquran.api.Alarm;
-import com.blackstone.goldenquran.models.SalahModel;
+import com.blackstone.goldenquran.models.PrayModel;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -39,38 +39,50 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static android.content.Context.MODE_PRIVATE;
 
-public class SalahTimeFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class PrayTimeFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
 
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
     double mLatitudeADouble, mLongitudeADouble;
-    RecyclerView recyclerView;
     String fajr, dhuour, aser, maghrib, isha;
-    ArrayList<SalahModel> arrayList;
+    ArrayList<PrayModel> arrayList;
     Intent intent;
     Calendar calfager, calduhor, calaser, calmagreb, calisha;
+    @BindView(R.id.salahTimeList)
+    RecyclerView recyclerView;
+    @BindView(R.id.textOnFaill)
     TextView textView;
 
-    public SalahTimeFragment() {
+    public PrayTimeFragment() {
 
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getActivity().invalidateOptionsMenu();
+        setHasOptionsMenu(true);
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_time_configuration, container, false);
+        View view = inflater.inflate(R.layout.fragment_time_configuration, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        View view = getView();
-        recyclerView = (RecyclerView) view.findViewById(R.id.salahTimeList);
-        textView = (TextView) view.findViewById(R.id.textOnFaill);
+
 
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)
@@ -145,11 +157,11 @@ public class SalahTimeFragment extends Fragment implements GoogleApiClient.Conne
 
             Log.d("tag", "have the times" + fajr);
 
-            arrayList.add(new SalahModel("fajr", fajr));
-            arrayList.add(new SalahModel("dohur", dhuour));
-            arrayList.add(new SalahModel("aser", aser));
-            arrayList.add(new SalahModel("maghrib", maghrib));
-            arrayList.add(new SalahModel("isha", isha));
+            arrayList.add(new PrayModel("fajr", fajr));
+            arrayList.add(new PrayModel("dohur", dhuour));
+            arrayList.add(new PrayModel("aser", aser));
+            arrayList.add(new PrayModel("maghrib", maghrib));
+            arrayList.add(new PrayModel("isha", isha));
 
             ArrayList counter = new ArrayList();
             SharedPreferences count = getActivity().getSharedPreferences("counter", Context.MODE_PRIVATE);

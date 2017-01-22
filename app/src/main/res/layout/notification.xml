@@ -7,7 +7,6 @@
     android:clickable="true"
     >
 
-    <include layout="@layout/app_bar"></include>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"

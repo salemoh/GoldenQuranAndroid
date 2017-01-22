@@ -14,5 +14,6 @@
     <color name="lightPink">#fce4ec</color>
     <color name="Black">#7F000000</color>
     <color name="whuit">#FFFFFF</color>
+    <color name="noti_text">#000000</color>
     <color name="mainListGold">#fffde7</color>
 </resources>

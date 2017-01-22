@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/big_two_right_arrow" />
+            android:src="@drawable/ahadeth_viewpager_big_two_right_arrow" />
     </RelativeLayout>
 
     <android.support.v4.widget.NestedScrollView

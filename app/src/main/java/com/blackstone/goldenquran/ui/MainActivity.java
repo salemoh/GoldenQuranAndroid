@@ -8,16 +8,18 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,36 +28,65 @@ import com.blackstone.goldenquran.Fragments.MainListFragment;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.api.DownloadService;
 import com.blackstone.goldenquran.models.Download;
+import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
 import com.blackstone.goldenquran.utilities.Utils;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements DrawerCloser {
     public static final String MESSAGE_PROGRESS = "message_progress";
     private static final int PERMISSION_REQUEST_CODE = 1;
-    @BindView(R.id.content_frame)
-    LinearLayout mContentFrame;
+
     @BindView(R.id.left_drawer)
     FrameLayout mLeftDrawer;
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-
     @BindView(R.id.progress)
     ProgressBar mProgressBar;
     @BindView(R.id.progress_text)
     TextView mProgressText;
-
+    String[] mainlist;
+    @BindView(R.id.SurAppBarLayout)
+    AppBarLayout mAppBarLayout;
+    @BindView(R.id.btn_download)
+    AppCompatButton btnDownload;
+    @BindView(R.id.contener2)
+    FrameLayout contener2;
     private ActionBarDrawerToggle mDrawerToggle;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        if(SharedPreferencesManager.getBoolean(this, "isArabic", true)) {
+            String languageToLoad = "ar";
+            Locale locale = new Locale(languageToLoad);
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            config.locale = locale;
+            this.getResources().updateConfiguration(config, this.getResources().getDisplayMetrics());
+        }else {
+
+            String languageToLoad = "en";
+            Locale locale = new Locale(languageToLoad);
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            config.locale = locale;
+            this.getResources().updateConfiguration(config, this.getResources().getDisplayMetrics());
+        }
+
+        mainlist = getResources().getStringArray(R.array.MainList);
+
         setContentView(R.layout.activity_main);
+        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         ButterKnife.bind(this);
 
         setupSupportActionBar(mToolbar, true, true);
@@ -80,12 +111,11 @@ public class MainActivity extends BaseActivity {
 
             if (intent.getAction().equals(MESSAGE_PROGRESS)) {
 
-                Download download = intent.getParcelableExtra(getString(com.blackstone.goldenquran.R.string.szdDownload));
+                Download download = intent.getParcelableExtra(getString(R.string.szdDownload));
                 mProgressBar.setProgress(download.getProgress());
                 if (download.getProgress() == 100) {
 
-
-                    mProgressText.setText(com.blackstone.goldenquran.R.string.zsdDonloaded);
+                    mProgressText.setText(R.string.zsdDonloaded);
 
                 } else {
 
@@ -97,16 +127,12 @@ public class MainActivity extends BaseActivity {
     };
 
 
-
     private void startDownload() {
 
         Intent intent = new Intent(this, DownloadService.class);
         startService(intent);
 
     }
-
-
-
 
     private void setupDrawer() {
         //setup the size of the drawer to 2/3 of the screen size
@@ -129,9 +155,12 @@ public class MainActivity extends BaseActivity {
         };
 
         // Set the drawer toggle as the DrawerListener
+        mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.addDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
         //add the left drawer content
-        getSupportFragmentManager().beginTransaction().replace(R.id.left_drawer,new MainListFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.left_drawer, new MainListFragment()).commit();
+
     }
 
     @Override
@@ -203,4 +232,24 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void close(boolean isDrawerLocked) {
+        if (isDrawerLocked) {
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        } else {
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        }
+    }
+
+
+    @Override
+    public void title(int pos) {
+        mToolbar.setTitle(mainlist[pos + 1]);
+        mAppBarLayout.setExpanded(true, true);
+    }
+
+    @Override
+    public void moveToolbarDown() {
+        mAppBarLayout.setExpanded(true, true);
+    }
 }

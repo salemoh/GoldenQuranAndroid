@@ -1,4 +1,4 @@
-package com.blackstone.goldenquran.api.models;
+package com.blackstone.goldenquran.models.models;
 
 /**
  * Created by SamerGigaByte on 11/18/2016.
@@ -7,9 +7,9 @@ package com.blackstone.goldenquran.api.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Download  implements Parcelable{
+public class Download implements Parcelable {
 
-    public Download(){
+    public Download() {
 
     }
 

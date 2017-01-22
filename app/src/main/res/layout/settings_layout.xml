@@ -5,10 +5,6 @@
     android:clickable="true"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/settingsToolbar"
-        layout="@layout/app_bar" />
-
     <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -121,9 +117,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:clickable="true"
-                    android:background="?attr/selectableItemBackground"
                     android:layout_centerVertical="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
                     android:src="@drawable/minus" />
 
                 <ImageView
@@ -131,10 +127,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:clickable="true"
-                    android:background="?attr/selectableItemBackground"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
                     android:src="@drawable/plus" />
 
                 <TextView
@@ -159,9 +155,9 @@
                 android:id="@+id/pickShakeRelative"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:clickable="true"
+                android:layout_below="@+id/devisor2"
                 android:background="?attr/selectableItemBackground"
-                android:layout_below="@+id/devisor2">
+                android:clickable="true">
 
                 <ImageView
                     android:id="@+id/pickShakeImage"
@@ -200,9 +196,9 @@
                 android:id="@+id/settingsDownloadsuraRelative"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:clickable="true"
+                android:layout_below="@+id/devisor3"
                 android:background="?attr/selectableItemBackground"
-                android:layout_below="@+id/devisor3">
+                android:clickable="true">
 
                 <ImageView
                     android:id="@+id/settingsDownloadsuraImage"
@@ -211,7 +207,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/download" />
+                    android:src="@drawable/reader_download" />
 
                 <TextView
                     android:id="@+id/settingsDownloadsuraText"
@@ -240,9 +236,9 @@
                 android:id="@+id/settingsPickTafseerRelative"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:clickable="true"
+                android:layout_below="@+id/devisor4"
                 android:background="?attr/selectableItemBackground"
-                android:layout_below="@+id/devisor4">
+                android:clickable="true">
 
                 <ImageView
                     android:id="@+id/settingsPickTafseerImage"
@@ -251,7 +247,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/book" />
+                    android:src="@drawable/main_list_book" />
 
                 <TextView
                     android:id="@+id/settingsPickTafseerText"
@@ -282,9 +278,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_below="@+id/devisor5"
-                android:clickable="true"
                 android:background="?attr/selectableItemBackground"
-                >
+                android:clickable="true">
 
                 <ImageView
                     android:id="@+id/settingsNotificationImage"
@@ -293,7 +288,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/bell" />
+                    android:src="@drawable/main_list_bell" />
 
                 <TextView
                     android:id="@+id/settingsNotificationText"
@@ -324,9 +319,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_below="@+id/devisor6"
-                android:clickable="true"
                 android:background="?attr/selectableItemBackground"
-                >
+                android:clickable="true">
 
                 <ImageView
                     android:id="@+id/settingsDownloadedSuraImage"
@@ -335,7 +329,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/download" />
+                    android:src="@drawable/reader_download" />
 
                 <TextView
                     android:id="@+id/settingsDownloadedSuraText"
@@ -365,9 +359,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_below="@+id/devisor7"
-                android:clickable="true"
                 android:background="?attr/selectableItemBackground"
-                >
+                android:clickable="true">
 
                 <ImageView
                     android:id="@+id/settingsCallUsImage"
@@ -407,9 +400,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="96dp"
                 android:layout_below="@+id/devisor8"
-                android:clickable="true"
                 android:background="?attr/selectableItemBackground"
-                >
+                android:clickable="true">
 
                 <TextView
                     android:id="@+id/settingsPickLanguageText"
@@ -444,6 +436,75 @@
                         android:layout_gravity="start"
                         android:layoutDirection="ltr"
                         android:text="@string/english"
+                        android:textAlignment="textStart"
+                        android:textSize="20sp" />
+                </RadioGroup>
+
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/devisor9"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/settingsCallUsRelative"
+                android:layout_margin="5dp"
+                android:background="@color/playerBacground" />
+
+
+            <RelativeLayout
+                android:id="@+id/pageStatusRelative"
+                android:layout_width="wrap_content"
+                android:layout_height="96dp"
+                android:layout_below="@+id/devisor9"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true">
+
+                <ImageView
+                    android:id="@+id/pageStateImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:src="@drawable/main_list_book" />
+
+                <TextView
+                    android:id="@+id/pageStateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/pageStateImage"
+                    android:layout_toRightOf="@+id/pageStateImage"
+                    android:text="@string/page_of_quran_landscape"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pageStateText"
+                    android:layout_margin="5dp"
+                    android:layout_alignStart="@+id/pageStateText"
+                    android:layout_alignLeft="@+id/pageStateText"
+                    >
+
+                    <RadioButton
+                        android:id="@+id/settingsOnePageRadioButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layoutDirection="ltr"
+                        android:text="@string/one_page_at_a_time"
+                        android:textAlignment="textStart"
+                        android:textSize="20sp" />
+
+                    <RadioButton
+                        android:id="@+id/settingsTwoPagesRadioButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layoutDirection="ltr"
+                        android:text="@string/two_page_at_a_time"
                         android:textAlignment="textStart"
                         android:textSize="20sp" />
                 </RadioGroup>

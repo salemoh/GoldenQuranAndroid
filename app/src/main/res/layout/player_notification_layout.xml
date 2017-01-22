@@ -1,0 +1,56 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingRight="16dp"
+    android:paddingLeft="16dp">
+
+    <ImageView
+        android:id="@+id/notipause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/pb_progress"
+        android:src="@drawable/noti_pause" />
+
+    <ImageView
+        android:id="@+id/notiplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pb_progress"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/noti_play_arrow" />
+
+    <ImageView
+        android:id="@+id/notistop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pb_progress"
+        android:src="@drawable/noti_stop" />
+
+    <ProgressBar
+        android:id="@+id/pb_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/notiSora" />
+
+    <TextView
+        android:id="@+id/notiSora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="sora name"
+        android:textColor="@color/noti_text"
+        />
+
+    <TextView
+        android:id="@+id/notishake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="shake name"
+        android:textColor="@color/noti_text"
+        />
+
+</RelativeLayout>

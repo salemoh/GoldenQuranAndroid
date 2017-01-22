@@ -14,47 +14,58 @@ import android.view.ViewGroup;
 
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.ConfigureAdapter;
-import com.blackstone.goldenquran.models.SalahModel;
+import com.blackstone.goldenquran.models.PrayModel;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class TimeConfigerFragment extends Fragment {
 
+public class PrayTimeConfigerFragment extends Fragment {
+
+    @BindView(R.id.configRecyclerView)
     RecyclerView recyclerView;
 
-    public TimeConfigerFragment() {
-        // Required empty public constructor
+    public PrayTimeConfigerFragment() {
+
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getActivity().invalidateOptionsMenu();
+        setHasOptionsMenu(true);
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blank, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_blank, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        View view = getView();
-        recyclerView = (RecyclerView) view.findViewById(R.id.configRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         SharedPreferences prefs = getActivity().getSharedPreferences("salah", Context.MODE_PRIVATE);
 
-        ArrayList<SalahModel> arrayList = new ArrayList<>();
-        arrayList.add(new SalahModel("fajr", prefs.getString("fajr", "00:00")));
-        arrayList.add(new SalahModel("duhor", prefs.getString("duhour", "00:00")));
-        arrayList.add(new SalahModel("aser", prefs.getString("aser", "00:00")));
-        arrayList.add(new SalahModel("maghrib", prefs.getString("maghrib", "00:00")));
-        arrayList.add(new SalahModel("isha", prefs.getString("isha", "00:00")));
+        ArrayList<PrayModel> arrayList = new ArrayList<>();
+        arrayList.add(new PrayModel("fajr", prefs.getString("fajr", "00:00")));
+        arrayList.add(new PrayModel("duhor", prefs.getString("duhour", "00:00")));
+        arrayList.add(new PrayModel("aser", prefs.getString("aser", "00:00")));
+        arrayList.add(new PrayModel("maghrib", prefs.getString("maghrib", "00:00")));
+        arrayList.add(new PrayModel("isha", prefs.getString("isha", "00:00")));
 
         ArrayList counter = new ArrayList();
         SharedPreferences count = getActivity().getSharedPreferences("counter", Context.MODE_PRIVATE);
-        for (int i = 0; i < 5; i++){
-            counter.add(count.getString(i +"", "0"));
+        for (int i = 0; i < 5; i++) {
+            counter.add(count.getString(i + "", "0"));
         }
 
 

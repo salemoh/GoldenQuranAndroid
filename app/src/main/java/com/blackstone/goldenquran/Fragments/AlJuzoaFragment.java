@@ -16,20 +16,32 @@ import com.blackstone.goldenquran.models.AljuzaModel;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class AlJuzoaFragment extends Fragment {
 
+    @BindView(R.id.juzoaRecyclerView)
     RecyclerView juzoaRecyclerView;
 
     public AlJuzoaFragment() {
-        // Required empty public constructor
+
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getActivity().invalidateOptionsMenu();
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.al_juzoa_layout, container, false);
+
+        View view = inflater.inflate(R.layout.al_juzoa_layout, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
@@ -41,7 +53,6 @@ public class AlJuzoaFragment extends Fragment {
         for (int i = 0; i < 30; i++) {
             arrayList.add(new AljuzaModel(array[i]));
         }
-        juzoaRecyclerView = (RecyclerView) getView().findViewById(R.id.juzoaRecyclerView);
         juzoaRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         juzoaRecyclerView.setAdapter(new AlJuzoaAdapter(getActivity(), arrayList));
 

@@ -1,6 +1,7 @@
 package com.blackstone.goldenquran.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,22 +15,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blackstone.goldenquran.Fragments.AhadethFragment;
-import com.blackstone.goldenquran.Fragments.AlTarjamehAlTAjweedFragment;
 import com.blackstone.goldenquran.Fragments.BookmarkFragment;
-import com.blackstone.goldenquran.Fragments.DoaaKhatemAlquranFragment;
 import com.blackstone.goldenquran.Fragments.FahrasFragment;
-import com.blackstone.goldenquran.Fragments.FridayREadingFragment;
-import com.blackstone.goldenquran.Fragments.NightREadingFragment;
+import com.blackstone.goldenquran.Fragments.FridayReadingFragment;
+import com.blackstone.goldenquran.Fragments.IntonationTranslatorFragment;
+import com.blackstone.goldenquran.Fragments.NightReadingFragment;
 import com.blackstone.goldenquran.Fragments.NotificationFragment;
-import com.blackstone.goldenquran.Fragments.PlayerFragment;
-import com.blackstone.goldenquran.Fragments.PrayingTimeFragment;
+import com.blackstone.goldenquran.Fragments.OnFinishOfQuranPrayFragment;
+import com.blackstone.goldenquran.Fragments.PlayeSettingsFragment;
+import com.blackstone.goldenquran.Fragments.PlayerServicesFragment;
+import com.blackstone.goldenquran.Fragments.PrayingTimeViewPagerFragment;
 import com.blackstone.goldenquran.Fragments.SearchFragment;
 import com.blackstone.goldenquran.Fragments.SettingsFragment;
-import com.blackstone.goldenquran.Fragments.ShareTheCurrentPageFragment;
 import com.blackstone.goldenquran.Fragments.StatisticsFragment;
 import com.blackstone.goldenquran.R;
-import com.blackstone.goldenquran.models.MainListFirstModel;
+import com.blackstone.goldenquran.models.MainListFirstItemModel;
 import com.blackstone.goldenquran.models.MainListModel;
+import com.blackstone.goldenquran.ui.DrawerCloser;
 
 import java.util.List;
 
@@ -39,6 +41,7 @@ public class MainListAdapter extends RecyclerView.Adapter {
     Context context;
     LayoutInflater layoutInflater;
     private ActionBarDrawerToggle mDrawerToggle;
+    int count;
 
 
     public MainListAdapter(Context context, List<Object> list) {
@@ -60,11 +63,11 @@ public class MainListAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 0) {
             MainListFirstViewHolder viewHolder = (MainListFirstViewHolder) holder;
-            MainListFirstModel mainListFirstModel = (MainListFirstModel) list.get(position);
-            viewHolder.image.setImageResource(mainListFirstModel.image);
-            viewHolder.jumaa.setText(mainListFirstModel.jumaa);
-            viewHolder.night.setText(mainListFirstModel.night);
-            viewHolder.athkar.setText(mainListFirstModel.athkar);
+            MainListFirstItemModel mainListFirstItemModel = (MainListFirstItemModel) list.get(position);
+            viewHolder.image.setImageResource(mainListFirstItemModel.image);
+            viewHolder.jumaa.setText(mainListFirstItemModel.jumaa);
+            viewHolder.night.setText(mainListFirstItemModel.night);
+            viewHolder.athkar.setText(mainListFirstItemModel.athkar);
             if (context.getResources().getBoolean(R.bool.is_right_to_left)) {
                 viewHolder.downArrow.setImageResource(R.drawable.small_two_right_arrow);
                 viewHolder.topArrow.setImageResource(R.drawable.small_two_right_arrow);
@@ -76,14 +79,22 @@ public class MainListAdapter extends RecyclerView.Adapter {
             ((MainListFirstViewHolder) holder).first.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.contener2, new NightREadingFragment()).commit();
+                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.contener2, new NightReadingFragment()).addToBackStack(null).commit();
+                    ((DrawerCloser) context).close(true);
+                    ((DrawerCloser) context).close(false);
+                    ((DrawerCloser) context).title(0);
+
                 }
             });
 
             ((MainListFirstViewHolder) holder).second.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.contener2, new FridayREadingFragment()).commit();
+                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.contener2, new FridayReadingFragment()).addToBackStack(null).commit();
+                    ((DrawerCloser) context).close(true);
+                    ((DrawerCloser) context).close(false);
+                    ((DrawerCloser) context).title(1);
+
                 }
             });
 
@@ -97,7 +108,7 @@ public class MainListAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        if (MainListFirstModel.class.isInstance(list.get(position)))
+        if (MainListFirstItemModel.class.isInstance(list.get(position)))
             return 0;
         else if (MainListModel.class.isInstance(list.get(position)))
             return 1;
@@ -143,50 +154,79 @@ public class MainListAdapter extends RecyclerView.Adapter {
         @Override
         public void onClick(View v) {
             Fragment fragment = null;
+            int pos = 0;
             switch (getPosition()) {
                 case 1:
                     fragment = new BookmarkFragment();
+                    pos = 2;
                     break;
                 case 2:
                     fragment = new FahrasFragment();
+                    pos = 3;
+                    break;
+                case 3:
+                    fragment = new PlayerServicesFragment();
+                    pos = 4;
                     break;
                 case 4:
-                    fragment = new AlTarjamehAlTAjweedFragment();
+                    fragment = new IntonationTranslatorFragment();
+                    pos = 5;
                     break;
                 case 5:
                     fragment = new SearchFragment();
+                    pos = 6;
                     break;
                 case 6:
-                    fragment = new PlayerFragment();
+                    fragment = new PlayeSettingsFragment();
+                    pos = 7;
                     break;
                 case 7:
                     fragment = new NotificationFragment();
+                    pos = 8;
                     break;
                 case 8:
-                    fragment = new PrayingTimeFragment();
+                    fragment = new PrayingTimeViewPagerFragment();
+                    pos = 9;
                     break;
                 case 9:
-                    fragment = new DoaaKhatemAlquranFragment();
+                    fragment = new OnFinishOfQuranPrayFragment();
+                    pos = 10;
                     break;
                 case 10:
                     fragment = new AhadethFragment();
+                    pos = 11;
                     break;
-                case 11:
-                    fragment = new ShareTheCurrentPageFragment();
+                case 11: {
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, "Hi Obadah");
+                    sendIntent.setType("text/plain");
+                    context.startActivity(sendIntent);
+                    pos = 12;
                     break;
+                }
                 case 12:
                     fragment = new SettingsFragment();
+                    pos = 13;
                     break;
                 case 13:
                     fragment = new StatisticsFragment();
+                    pos = 14;
                     break;
                 default:
                     Toast.makeText(context, getPosition() + "", Toast.LENGTH_SHORT).show();
             }
 
             if (fragment != null) {
-                ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.contener2, fragment).commit();
-
+                if (count == 0) {
+                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.contener2, fragment).addToBackStack(null).commit();
+                    count++;
+                } else {
+                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.contener2, fragment).addToBackStack(null).commit();
+                }
+                ((DrawerCloser) context).close(true);
+                ((DrawerCloser) context).close(false);
+                ((DrawerCloser) context).title(pos);
             }
         }
     }

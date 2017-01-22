@@ -1,52 +1,63 @@
 package com.blackstone.goldenquran.Fragments;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.blackstone.goldenquran.R;
+import com.blackstone.goldenquran.ui.DrawerCloser;
 
-public class AlTarjamehAlTAjweedFragment extends Fragment {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class IntonationTranslatorFragment extends Fragment {
 
 
-    ViewPager viewPager;
-    Toolbar toolbar;
+    @BindView(R.id.tabLayout)
     TabLayout tabLayout;
+    @BindView(R.id.appBarLayout)
+    AppBarLayout appBarLayout;
+    @BindView(R.id.tafseerViewPager)
+    ViewPager viewPager;
+    @BindView(R.id.activity_al_tafseer)
+    RelativeLayout activityAlTafseer;
 
 
-    public AlTarjamehAlTAjweedFragment() {
-        // Required empty public constructor
+    public IntonationTranslatorFragment() {
+
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getActivity().invalidateOptionsMenu();
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_al_tarjameh_al_tajweed, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_al_tarjameh_al_tajweed, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        View view = getView();
-        viewPager = (ViewPager) view.findViewById(R.id.tafseerViewPager);
+
         viewPager.setAdapter(new TafseerViewPAgerAdapter(getChildFragmentManager()));
-        toolbar = (Toolbar) view.findViewById(R.id.tarjamehToolbar);
-        tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
-
-        toolbar.setTitle(R.string.Translate);
-        toolbar.setTitleTextColor(Color.WHITE);
 
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.addTab(tabLayout.newTab());
@@ -57,8 +68,25 @@ public class AlTarjamehAlTAjweedFragment extends Fragment {
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.addTab(tabLayout.newTab());
+        tabLayout.setLayoutDirection(TabLayout.LAYOUT_DIRECTION_LTR);
 
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                ((DrawerCloser) getActivity()).moveToolbarDown();
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
     }
 

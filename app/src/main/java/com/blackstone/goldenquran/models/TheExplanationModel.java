@@ -1,9 +1,9 @@
 package com.blackstone.goldenquran.models;
 
-public class ALtafseerModel {
+public class TheExplanationModel {
     public String tafseerName, tafseerDescribtion;
 
-    public ALtafseerModel(String tafseerName, String tafseerDescribtion) {
+    public TheExplanationModel(String tafseerName, String tafseerDescribtion) {
         this.tafseerName = tafseerName;
         this.tafseerDescribtion = tafseerDescribtion;
     }

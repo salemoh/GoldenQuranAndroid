@@ -5,12 +5,12 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.widget.Toast;
 
 import com.blackstone.goldenquran.R;
-import com.blackstone.goldenquran.models.Download;
+import com.blackstone.goldenquran.models.models.Download;
 import com.blackstone.goldenquran.ui.MainActivity;
 
 import java.io.BufferedInputStream;

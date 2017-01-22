@@ -5,14 +5,12 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,53 +19,59 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.blackstone.goldenquran.R;
+import com.blackstone.goldenquran.ui.DrawerCloser;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class FahrasFragment extends Fragment {
 
-    Toolbar toolbar;
-    ViewPager viewPager;
+    @BindView(R.id.tabLayout)
     TabLayout tabLayout;
-    AppBarLayout appBarLayout;
+    //    @BindView(R.id.SurAppBarLayout)
+//    AppBarLayout appBarLayout;
+    @BindView(R.id.suraJuzoaViewPager)
+    ViewPager viewPager;
 
     public FahrasFragment() {
-        // Required empty public constructor
+
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getActivity().invalidateOptionsMenu();
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.sura_juzoa_layout, container, false);
+        View view = inflater.inflate(R.layout.sura_juzoa_layout, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        View v = getView();
-
-        toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.ListOfSuar);
-
-        appBarLayout = (AppBarLayout) v.findViewById(R.id.SurAppBarLayout);
-        viewPager = (ViewPager) v.findViewById(R.id.suraJuzoaViewPager);
-        tabLayout = (TabLayout) v.findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.setupWithViewPager(viewPager);
-
+        tabLayout.setLayoutDirection(TabLayout.LAYOUT_DIRECTION_LTR);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-                appBarLayout.setExpanded(true, true);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                appBarLayout.setExpanded(false, true);
+                ((DrawerCloser) getActivity()).moveToolbarDown();
+
             }
 
             @Override
@@ -90,7 +94,6 @@ public class FahrasFragment extends Fragment {
     }
 
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -100,6 +103,7 @@ public class FahrasFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
     class AlsuraJuzoaViewPagerAdapter extends FragmentPagerAdapter {
         String[] titles = getResources().getStringArray(R.array.titles);
@@ -111,9 +115,10 @@ public class FahrasFragment extends Fragment {
         @Override
         public Fragment getItem(int position) {
             if (position == 0)
-                return new AlJuzoaFragment();
-            else
                 return new AlSuraFragment();
+            else
+                return new AlJuzoaFragment();
+
         }
 
         @Override
