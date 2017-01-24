@@ -13,10 +13,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <android.support.design.widget.AppBarLayout
                 android:id="@+id/SurAppBarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:elevation="10dp"
                 app:elevation="0dp">
 
                 <include layout="@layout/app_bar" />

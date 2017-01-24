@@ -1,6 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#FFFFFF"
     android:clickable="true"
     >
@@ -9,11 +9,11 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/salahTimeList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:visibility="gone"
         android:id="@+id/textOnFaill"
         android:text="Sorry we cannot get to you'r location"

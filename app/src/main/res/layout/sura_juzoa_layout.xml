@@ -10,22 +10,21 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
         app:tabGravity="fill"
         app:tabIndicatorColor="@android:color/white"
         app:tabIndicatorHeight="3dp"
         app:tabMaxWidth="0dp"
         app:tabMode="fixed"
-        app:tabSelectedTextColor="@android:color/white"
-        android:background="@color/colorPrimary"
-        />
+        app:tabSelectedTextColor="@android:color/white" />
 
 
     <android.support.v4.view.ViewPager
         android:id="@+id/suraJuzoaViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
         android:layout_below="@+id/tabLayout"
-        />
+        android:background="#FFFFFF" />
 
 </RelativeLayout>

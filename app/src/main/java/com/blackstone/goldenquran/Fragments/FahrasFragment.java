@@ -62,6 +62,7 @@ public class FahrasFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setLayoutDirection(TabLayout.LAYOUT_DIRECTION_LTR);
 
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -81,6 +82,9 @@ public class FahrasFragment extends Fragment {
         });
 
         viewPager.setAdapter(new AlsuraJuzoaViewPagerAdapter(getChildFragmentManager()));
+        if (!getActivity().getResources().getBoolean(R.bool.is_right_to_left)) {
+            viewPager.setCurrentItem(1);
+        }
     }
 
     @Override
@@ -108,17 +112,24 @@ public class FahrasFragment extends Fragment {
     class AlsuraJuzoaViewPagerAdapter extends FragmentPagerAdapter {
         String[] titles = getResources().getStringArray(R.array.titles);
 
-        public AlsuraJuzoaViewPagerAdapter(FragmentManager fm) {
+        AlsuraJuzoaViewPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
         public Fragment getItem(int position) {
-            if (position == 0)
-                return new AlSuraFragment();
-            else
-                return new AlJuzoaFragment();
+            if (getActivity().getResources().getBoolean(R.bool.is_right_to_left)) {
+                if (position == 0)
+                    return new AlSuraFragment();
+                else
+                    return new AlJuzoaFragment();
+            } else {
+                if (position == 0)
+                    return new AlJuzoaFragment();
 
+                else
+                    return new AlSuraFragment();
+            }
         }
 
         @Override

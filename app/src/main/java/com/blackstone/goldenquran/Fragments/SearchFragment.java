@@ -87,6 +87,10 @@ public class SearchFragment extends Fragment {
 
         viewPager.setAdapter(new SearchViewPagerAdapter(getChildFragmentManager()));
 
+        if (!getActivity().getResources().getBoolean(R.bool.is_right_to_left)) {
+            viewPager.setCurrentItem(2);
+        }
+
     }
 
 
@@ -112,20 +116,20 @@ public class SearchFragment extends Fragment {
 
     class SearchViewPagerAdapter extends FragmentPagerAdapter {
 
-        String[] titles = new String[]{getString(R.string.mojam), getString(R.string.ayaSubject), getString(R.string.quranAyat)};
+        String[] titles = getActivity().getResources().getStringArray(R.array.searchTabs);
 
-        public SearchViewPagerAdapter(FragmentManager fm) {
+        SearchViewPagerAdapter(FragmentManager fm) {
             super(fm);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return titles[position];
         }
 
         @Override
         public Fragment getItem(int position) {
             return new AlSuraFragment();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titles[position];
         }
 
         @Override

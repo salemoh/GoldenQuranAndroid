@@ -93,9 +93,6 @@
     <string name="drawer_close">drawer close</string>
     <string name="start_download">بدئ التحميل</string>
     <string name="szdDownload">download</string>
-    <string name="mojam">المعجم</string>
-    <string name="ayaSubject">موضوع الايات</string>
-    <string name="quranAyat">ايات القران</string>
     <string name="search">البحث</string>
     <string name="fahras">الفهرس</string>
     <string name="bookmarksTitle">العلامات المرجعية</string>
@@ -119,24 +116,33 @@
     <string name="pickLanguage">اختيار لغة التطبيق</string>
     <string name="Arabic">العربية</string>
     <string name="english">الانجليزية</string>
-    <string name="atafseer">التفسير</string>
-    <string name="reasonsOfNosol">اسباب النزول</string>
-    <string name="wordMeanings">معاني الكلمات</string>
-    <string name="dictionari">المعجم</string>
-    <string name="alErab">الاعراب</string>
-    <string name="albalagha">البلاغة</string>
-    <string name="alsarf">الصرف</string>
-    <string name="ayatTopic">موضوع الايات</string>
-    <string name="translate">الترجمة</string>
     <string name="Translate">الترجمة و التفسير</string>
     <string name="page_of_quran_landscape">عدد الصفحات في الوضع العرضي</string>
     <string name="one_page_at_a_time">صفحة في المرة الواحدة</string>
     <string name="two_page_at_a_time">صفحتان في نفس الوقت</string>
 
+    <string-array name="translateTabs">
+        <item name="translate">الترجمة</item>
+        <item name="ayatTopic">موضوع الايات</item>
+        <item name="alsarf">الصرف</item>
+        <item name="albalagha">البلاغة</item>
+        <item name="alErab">الاعراب</item>
+        <item name="dictionari">المعجم</item>
+        <item name="wordMeanings">معاني الكلمات</item>
+        <item name="reasonsOfNosol">اسباب النزول</item>
+        <item name="atafseer">التفسير</item>
+    </string-array>
+
+    <string-array name="searchTabs">
+        <item name="quranAyat">ايات القران</item>
+        <item name="ayaSubject">موضوع الايات</item>
+        <item name="mojam">المعجم</item>
+    </string-array>
+
 
     <string-array name="titles">
-        <item>حسب السورة</item>
         <item>حسب الاجزاء</item>
+        <item>حسب السورة</item>
     </string-array>
 
     <string-array name="ahadethNames">
@@ -180,7 +186,6 @@
         <item>الاعدادات</item>
         <item>الاحصائيات</item>
     </string-array>
-
 
 
 </resources>

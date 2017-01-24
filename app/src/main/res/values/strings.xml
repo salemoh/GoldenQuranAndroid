@@ -123,19 +123,28 @@
     <string name="pickLanguage">Pick the language</string>
     <string name="Arabic">Arabic</string>
     <string name="english">English</string>
-    <string name="atafseer">Al Tafseer</string>
-    <string name="reasonsOfNosol">Reasons of nuzul</string>
-    <string name="wordMeanings">Word Meaning</string>
-    <string name="dictionari">Dictunari</string>
-    <string name="alErab">Al erab</string>
-    <string name="albalagha">Al balagha</string>
-    <string name="alsarf">Al sarf</string>
-    <string name="ayatTopic">Ayat Topic</string>
-    <string name="translate">Translate</string>
     <string name="Translate">Translate</string>
     <string name="page_of_quran_landscape">Page Of Quran LandScape</string>
     <string name="one_page_at_a_time">One Page At A Time</string>
     <string name="two_page_at_a_time">Two Page At A Time</string>
+
+    <string-array name="translateTabs">
+        <item name="atafseer">Al Tafseer</item>
+        <item name="reasonsOfNosol">Reasons of nuzul</item>
+        <item name="wordMeanings">Word Meaning</item>
+        <item name="dictionari">Dictunari</item>
+        <item name="alErab">Al erab</item>
+        <item name="albalagha">Al balagha</item>
+        <item name="alsarf">Al sarf</item>
+        <item name="ayatTopic">Ayat Topic</item>
+        <item name="translate">Translate</item>
+    </string-array>
+
+    <string-array name="searchTabs">
+        <item name="mojam">Mojam</item>
+        <item name="ayaSubject">Aya Subject</item>
+        <item name="quranAyat">Quran Ayat</item>
+    </string-array>
 
     <string-array name="ahadethNames">
         <item>first hadeeth</item>
@@ -145,8 +154,8 @@
     </string-array>
 
     <string-array name="titles">
-        <item>by Juza</item>
         <item>by sura</item>
+        <item>by Juza</item>
     </string-array>
 
     <string-array name="ajzaNames">

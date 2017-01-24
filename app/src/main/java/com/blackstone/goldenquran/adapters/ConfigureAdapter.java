@@ -112,6 +112,7 @@ public class ConfigureAdapter extends RecyclerView.Adapter<MyConfigureViewHolder
 
                 String[] s = holder.time.getText().toString().replaceAll(" ", "").split(":");
 
+
                 int s1 = Integer.parseInt(s[1]);
                 s[1] = --s1 + "";
 

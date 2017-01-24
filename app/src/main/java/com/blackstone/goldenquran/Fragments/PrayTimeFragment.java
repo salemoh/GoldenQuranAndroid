@@ -83,7 +83,6 @@ public class PrayTimeFragment extends Fragment implements GoogleApiClient.Connec
         super.onActivityCreated(savedInstanceState);
 
 
-
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -130,6 +129,7 @@ public class PrayTimeFragment extends Fragment implements GoogleApiClient.Connec
             SharedPreferences.Editor editor = getActivity().getSharedPreferences("pref", MODE_PRIVATE).edit();
             editor.putString("Latitude", mLatitudeADouble + "");
             editor.putString("Longitude", mLongitudeADouble + "");
+            editor.apply();
 
         } else if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -142,7 +142,7 @@ public class PrayTimeFragment extends Fragment implements GoogleApiClient.Connec
             }
         }
 
-        if (mLongitudeADouble + mLatitudeADouble == 0) {
+        if (mLongitudeADouble == 0 && mLatitudeADouble == 0) {
             recyclerView.setVisibility(View.GONE);
             textView.setVisibility(View.VISIBLE);
             Log.d("tag", "+=0");
@@ -177,7 +177,7 @@ public class PrayTimeFragment extends Fragment implements GoogleApiClient.Connec
                 editor.putString("maghrib", maghrib);
                 editor.putString("aser", aser);
                 editor.putString("isha", isha);
-                editor.commit();
+                editor.apply();
                 Log.d("tag", "not null fajer");
             }
 

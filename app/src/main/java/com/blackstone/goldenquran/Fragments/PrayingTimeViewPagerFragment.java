@@ -3,7 +3,6 @@ package com.blackstone.goldenquran.Fragments;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -60,14 +59,15 @@ public class PrayingTimeViewPagerFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
 
-        Drawable wrappedDrawable = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            wrappedDrawable = DrawableCompat.wrap(getActivity().getDrawable(R.drawable.pray_time_clock));
+        if (getActivity().getResources().getBoolean(R.bool.is_right_to_left)) {
+            tab.addTab(tab.newTab().setIcon(R.drawable.pray_time_clock));
+            tab.addTab(tab.newTab().setIcon(R.drawable.settings));
+            tab.addTab(tab.newTab().setIcon(R.drawable.sliders));
+        } else {
+            tab.addTab(tab.newTab().setIcon(R.drawable.sliders));
+            tab.addTab(tab.newTab().setIcon(R.drawable.settings));
+            tab.addTab(tab.newTab().setIcon(R.drawable.pray_time_clock));
         }
-        DrawableCompat.setTint(wrappedDrawable, Color.WHITE);
-        tab.addTab(tab.newTab().setIcon(R.drawable.pray_time_clock));
-        tab.addTab(tab.newTab().setIcon(R.drawable.settings));
-        tab.addTab(tab.newTab().setIcon(R.drawable.sliders));
         tab.setSelectedTabIndicatorColor(Color.WHITE);
         tab.setLayoutDirection(TabLayout.LAYOUT_DIRECTION_LTR);
 
@@ -97,6 +97,9 @@ public class PrayingTimeViewPagerFragment extends Fragment {
 
         MyViewPagerAdapter myViewPagerAdapter = new MyViewPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(myViewPagerAdapter);
+        if (!getActivity().getResources().getBoolean(R.bool.is_right_to_left)) {
+            viewPager.setCurrentItem(2);
+        }
 
     }
 
@@ -109,12 +112,21 @@ public class PrayingTimeViewPagerFragment extends Fragment {
         @Override
         public Fragment getItem(int position) {
             Fragment fragment = null;
-            if (position == 0)
-                fragment = new PrayTimeFragment();
-            else if (position == 1)
-                fragment = new MainListFragment();
-            else if (position == 2)
-                fragment = new PrayTimeConfigerFragment();
+            if (getActivity().getResources().getBoolean(R.bool.is_right_to_left)) {
+                if (position == 0)
+                    fragment = new PrayTimeFragment();
+                else if (position == 1)
+                    fragment = new MainListFragment();
+                else if (position == 2)
+                    fragment = new PrayTimeConfigerFragment();
+            } else {
+                if (position == 0)
+                    fragment = new PrayTimeConfigerFragment();
+                else if (position == 1)
+                    fragment = new MainListFragment();
+                else if (position == 2)
+                    fragment = new PrayTimeFragment();
+            }
 
 
             return fragment;

@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_marginBottom="55dp"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#FFFFFF">
 
 
@@ -16,7 +13,9 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_toLeftOf="@+id/stop"
+        android:layout_toStartOf="@+id/stop"
         android:src="@drawable/player_backward" />
 
     <android.support.design.widget.FloatingActionButton
@@ -26,7 +25,9 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="32dp"
         android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_toRightOf="@+id/play"
+        android:layout_toEndOf="@+id/play"
         android:src="@drawable/pause" />
 
     <android.support.design.widget.FloatingActionButton
@@ -36,6 +37,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="32dp"
         android:layout_toLeftOf="@+id/play"
+        android:layout_toStartOf="@+id/play"
         android:src="@drawable/stop"
 
         />
@@ -47,6 +49,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="16dp"
         android:layout_toRightOf="@+id/notipause"
+        android:layout_toEndOf="@+id/notipause"
         android:src="@drawable/forward" />
 
     <android.support.design.widget.FloatingActionButton

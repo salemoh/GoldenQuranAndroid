@@ -3,7 +3,6 @@ package com.blackstone.goldenquran.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -25,8 +24,6 @@ public class IntonationTranslatorFragment extends Fragment {
 
     @BindView(R.id.tabLayout)
     TabLayout tabLayout;
-    @BindView(R.id.appBarLayout)
-    AppBarLayout appBarLayout;
     @BindView(R.id.tafseerViewPager)
     ViewPager viewPager;
     @BindView(R.id.activity_al_tafseer)
@@ -57,7 +54,6 @@ public class IntonationTranslatorFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        viewPager.setAdapter(new TafseerViewPAgerAdapter(getChildFragmentManager()));
 
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.addTab(tabLayout.newTab());
@@ -88,11 +84,16 @@ public class IntonationTranslatorFragment extends Fragment {
             }
         });
 
+        viewPager.setAdapter(new TafseerViewPAgerAdapter(getChildFragmentManager()));
+        if (!getActivity().getResources().getBoolean(R.bool.is_right_to_left)) {
+            viewPager.setCurrentItem(8);
+        }
+
     }
 
 
     class TafseerViewPAgerAdapter extends FragmentPagerAdapter {
-        String[] titles = new String[]{getString(R.string.atafseer), getString(R.string.reasonsOfNosol), getString(R.string.wordMeanings), getString(R.string.dictionari), getString(R.string.alErab), getString(R.string.albalagha), getString(R.string.alsarf), getString(R.string.ayatTopic), getString(R.string.translate)};
+        String[] titles = getActivity().getResources().getStringArray(R.array.translateTabs);
 
         public TafseerViewPAgerAdapter(FragmentManager fm) {
             super(fm);
