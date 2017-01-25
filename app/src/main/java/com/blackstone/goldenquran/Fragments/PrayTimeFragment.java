@@ -31,6 +31,7 @@ import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.RecyclerAdapter;
 import com.blackstone.goldenquran.api.Alarm;
 import com.blackstone.goldenquran.models.PrayModel;
+import com.blackstone.goldenquran.ui.DrawerCloser;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -81,7 +82,7 @@ public class PrayTimeFragment extends Fragment implements GoogleApiClient.Connec
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        ((DrawerCloser) getActivity()).moveToolbarDown();
 
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)

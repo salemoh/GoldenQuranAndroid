@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.blackstone.goldenquran.R;
+import com.blackstone.goldenquran.ui.DrawerCloser;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -41,7 +42,7 @@ public class StatisticsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        ((DrawerCloser) getActivity()).moveToolbarDown();
 
         BarData mBarData = new BarData(getXAxisValues(), getDataSet());
 

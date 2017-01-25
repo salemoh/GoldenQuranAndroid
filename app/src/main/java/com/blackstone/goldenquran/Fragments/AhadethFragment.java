@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.AhadethAdapter;
 import com.blackstone.goldenquran.models.AhadethModel;
+import com.blackstone.goldenquran.ui.DrawerCloser;
 
 import java.util.ArrayList;
 
@@ -51,7 +52,7 @@ public class AhadethFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        ((DrawerCloser) getActivity()).moveToolbarDown();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         String[] ahadeth = getResources().getStringArray(R.array.ahadethNames);
 

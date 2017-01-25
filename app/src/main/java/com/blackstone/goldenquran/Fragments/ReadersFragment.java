@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.AlquraaAdapter;
 import com.blackstone.goldenquran.models.ReadersModel;
+import com.blackstone.goldenquran.ui.DrawerCloser;
 
 import java.util.ArrayList;
 
@@ -46,6 +47,7 @@ public class ReadersFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        ((DrawerCloser) getActivity()).moveToolbarDown();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         String[] shakeNames = getResources().getStringArray(R.array.ShakeNames);

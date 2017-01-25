@@ -68,6 +68,7 @@ public class MainListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        ((DrawerCloser) getActivity()).moveToolbarDown();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 

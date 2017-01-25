@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.DownloadSuraAdapter;
 import com.blackstone.goldenquran.models.DownloadSuraModel;
+import com.blackstone.goldenquran.ui.DrawerCloser;
 
 import java.util.ArrayList;
 
@@ -60,6 +61,7 @@ public class DownloadSuraFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        ((DrawerCloser) getActivity()).moveToolbarDown();
 
         ArrayList<DownloadSuraModel> arrayList = new ArrayList<>();
         arrayList.add(new DownloadSuraModel(getString(R.string.downloadSura)));

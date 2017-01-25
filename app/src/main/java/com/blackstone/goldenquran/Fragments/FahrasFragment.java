@@ -28,8 +28,6 @@ public class FahrasFragment extends Fragment {
 
     @BindView(R.id.tabLayout)
     TabLayout tabLayout;
-    //    @BindView(R.id.SurAppBarLayout)
-//    AppBarLayout appBarLayout;
     @BindView(R.id.suraJuzoaViewPager)
     ViewPager viewPager;
 
@@ -56,6 +54,7 @@ public class FahrasFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        ((DrawerCloser) getActivity()).moveToolbarDown();
 
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.addTab(tabLayout.newTab());

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.blackstone.goldenquran.R;
+import com.blackstone.goldenquran.ui.DrawerCloser;
 
 import butterknife.ButterKnife;
 
@@ -36,7 +37,7 @@ public class ShareTheCurrentPageFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        ((DrawerCloser) getActivity()).moveToolbarDown();
 
     }
 }

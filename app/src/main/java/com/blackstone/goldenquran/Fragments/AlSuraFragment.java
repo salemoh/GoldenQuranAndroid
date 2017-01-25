@@ -14,6 +14,7 @@ import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.AlsuraAdapter;
 import com.blackstone.goldenquran.models.AljuzaModel;
 import com.blackstone.goldenquran.models.AlsuraModel;
+import com.blackstone.goldenquran.ui.DrawerCloser;
 
 import java.util.ArrayList;
 
@@ -49,6 +50,7 @@ public class AlSuraFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        ((DrawerCloser) getActivity()).moveToolbarDown();
 
         alSuraRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         String[] ajzaNames = getResources().getStringArray(R.array.ajzaNames);

@@ -16,16 +16,13 @@ import android.widget.TextView;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.AltafseerAdapter;
 import com.blackstone.goldenquran.models.TheExplanationModel;
+import com.blackstone.goldenquran.ui.DrawerCloser;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ExplanationFragment extends Fragment {
 
     RecyclerView recyclerView;
@@ -63,6 +60,7 @@ public class ExplanationFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        ((DrawerCloser) getActivity()).moveToolbarDown();
 
         ArrayList<TheExplanationModel> arrayList = new ArrayList<>();
         arrayList.add(new TheExplanationModel(getString(R.string.tafseerName), getString(R.string.tafseerDescription)));

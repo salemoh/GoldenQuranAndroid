@@ -126,6 +126,7 @@ public class SettingsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        ((DrawerCloser) getActivity()).moveToolbarDown();
         settingsArabicRadioButton.setChecked(SharedPreferencesManager.getBoolean(getActivity(), "isArabic", true));
         settingsArabicRadioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

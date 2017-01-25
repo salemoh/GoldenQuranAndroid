@@ -19,12 +19,10 @@ import android.widget.SeekBar;
 
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.api.PlayerService;
+import com.blackstone.goldenquran.ui.DrawerCloser;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-
-
 
 
 public class PlayerServicesFragment extends Fragment {
@@ -68,7 +66,7 @@ public class PlayerServicesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        ((DrawerCloser) getActivity()).moveToolbarDown();
         seekBar.setProgress(0);
 
         Intent intent = new Intent(getActivity(), PlayerService.class);

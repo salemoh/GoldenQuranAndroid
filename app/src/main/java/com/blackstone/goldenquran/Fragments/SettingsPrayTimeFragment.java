@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.blackstone.goldenquran.R;
+import com.blackstone.goldenquran.ui.DrawerCloser;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,4 +57,9 @@ public class SettingsPrayTimeFragment extends Fragment {
 
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ((DrawerCloser) getActivity()).moveToolbarDown();
+    }
 }

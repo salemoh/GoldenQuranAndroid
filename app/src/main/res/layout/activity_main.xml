@@ -5,43 +5,37 @@
     android:layout_height="match_parent">
 
 
-    <RelativeLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.CoordinatorLayout
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/SurAppBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            app:elevation="0dp">
 
+            <include layout="@layout/app_bar" />
 
-            <android.support.design.widget.AppBarLayout
-                android:id="@+id/SurAppBarLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="10dp"
-                app:elevation="0dp">
+        </android.support.design.widget.AppBarLayout>
 
-                <include layout="@layout/app_bar" />
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/contener2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            android:fitsSystemWindows="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
 
-            </android.support.design.widget.AppBarLayout>
+            <include layout="@layout/download_demo" />
 
-            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/contener2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF"
-                android:fitsSystemWindows="true"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        </FrameLayout>
 
-                <include layout="@layout/download_demo" />
-
-            </FrameLayout>
-
-        </android.support.design.widget.CoordinatorLayout>
-
-    </RelativeLayout>
-
+    </android.support.design.widget.CoordinatorLayout>
 
     <!-- The navigation drawer -->
     <FrameLayout

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.BookmarkAdapter;
 import com.blackstone.goldenquran.models.BookmarkModel;
+import com.blackstone.goldenquran.ui.DrawerCloser;
 
 import java.util.ArrayList;
 
@@ -47,6 +48,7 @@ public class BookmarkFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        ((DrawerCloser) getActivity()).moveToolbarDown();
 
         ArrayList<BookmarkModel> arrayList = new ArrayList<>();
         arrayList.add(new BookmarkModel(getString(R.string.bookmarkNumber), getString(R.string.bookmarckName)));

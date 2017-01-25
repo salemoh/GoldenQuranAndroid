@@ -57,7 +57,7 @@ public class PrayingTimeViewPagerFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        ((DrawerCloser) getActivity()).moveToolbarDown();
 
         if (getActivity().getResources().getBoolean(R.bool.is_right_to_left)) {
             tab.addTab(tab.newTab().setIcon(R.drawable.pray_time_clock));

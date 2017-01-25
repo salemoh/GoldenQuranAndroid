@@ -30,11 +30,8 @@ public class SearchFragment extends Fragment {
     TabLayout tabLayout;
     @BindView(R.id.searchViewPager)
     ViewPager viewPager;
-//    @BindView(R.id.appBarLayout)
-//    AppBarLayout appBarLayout;
 
     public SearchFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -57,6 +54,7 @@ public class SearchFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        ((DrawerCloser) getActivity()).moveToolbarDown();
         setHasOptionsMenu(true);
         getActivity().invalidateOptionsMenu();
 

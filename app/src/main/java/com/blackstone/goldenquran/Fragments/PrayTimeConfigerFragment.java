@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.ConfigureAdapter;
 import com.blackstone.goldenquran.models.PrayModel;
+import com.blackstone.goldenquran.ui.DrawerCloser;
 
 import java.util.ArrayList;
 
@@ -52,6 +53,7 @@ public class PrayTimeConfigerFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        ((DrawerCloser) getActivity()).moveToolbarDown();
 
         SharedPreferences prefs = getActivity().getSharedPreferences("salah", Context.MODE_PRIVATE);
 

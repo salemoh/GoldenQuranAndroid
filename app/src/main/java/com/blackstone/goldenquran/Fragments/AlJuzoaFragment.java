@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.AlJuzoaAdapter;
 import com.blackstone.goldenquran.models.AljuzaModel;
+import com.blackstone.goldenquran.ui.DrawerCloser;
 
 import java.util.ArrayList;
 
@@ -47,7 +48,7 @@ public class AlJuzoaFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        ((DrawerCloser) getActivity()).moveToolbarDown();
         String[] array = getActivity().getResources().getStringArray(R.array.AlJuzoaArray);
         ArrayList<AljuzaModel> arrayList = new ArrayList<>();
         for (int i = 0; i < 30; i++) {

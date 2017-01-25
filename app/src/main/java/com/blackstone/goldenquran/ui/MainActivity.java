@@ -18,7 +18,6 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -66,14 +65,14 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
         super.onCreate(savedInstanceState);
 
 
-        if(SharedPreferencesManager.getBoolean(this, "isArabic", true)) {
+        if (SharedPreferencesManager.getBoolean(this, "isArabic", true)) {
             String languageToLoad = "ar";
             Locale locale = new Locale(languageToLoad);
             Locale.setDefault(locale);
             Configuration config = new Configuration();
             config.locale = locale;
             this.getResources().updateConfiguration(config, this.getResources().getDisplayMetrics());
-        }else {
+        } else {
 
             String languageToLoad = "en";
             Locale locale = new Locale(languageToLoad);
@@ -86,10 +85,11 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
         mainlist = getResources().getStringArray(R.array.MainList);
 
         setContentView(R.layout.activity_main);
-        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         ButterKnife.bind(this);
 
         setupSupportActionBar(mToolbar, true, true);
+
+        moveToolbarDown();
 
         setupDrawer();
 
