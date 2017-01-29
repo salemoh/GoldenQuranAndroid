@@ -39,7 +39,7 @@ public class DownloadSuraAdapter extends RecyclerView.Adapter<DownloadSuraViewHo
 
 class DownloadSuraViewHolder extends RecyclerView.ViewHolder {
     TextView suraName;
-    public DownloadSuraViewHolder(View itemView) {
+     DownloadSuraViewHolder(View itemView) {
         super(itemView);
         suraName = (TextView) itemView.findViewById(R.id.downloadSuraName);
     }

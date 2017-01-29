@@ -7,14 +7,14 @@
 
     <ImageView
         android:id="@+id/mainListFirstImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignParentLeft="true"
+        android:layout_marginTop="5dp"
         android:layout_alignParentStart="true"
-        android:src="@drawable/star"
-        android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        />
+        android:layout_marginStart="8dp"
+        android:src="@drawable/main_list_star" />
 
     <TextView
         android:id="@+id/mainListFirstText"
@@ -43,10 +43,10 @@
 
         <ImageView
             android:id="@+id/firstTwoLiftArrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginTop="16dp"
-            android:src="@drawable/small_two_right_arrow" />
+            android:src="@drawable/main_list_first_item_right_arrow" />
 
         <TextView
             android:id="@+id/nightWerd"
@@ -78,11 +78,10 @@
 
         <ImageView
             android:id="@+id/twoLiftArrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginTop="16dp"
-
-            android:src="@drawable/small_two_right_arrow" />
+            android:src="@drawable/main_list_first_item_right_arrow" />
 
         <TextView
             android:id="@+id/jumaaWerd"

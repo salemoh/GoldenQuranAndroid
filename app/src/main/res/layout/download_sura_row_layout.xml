@@ -4,18 +4,18 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="1dp"
     android:background="#FFFFFF"
-    android:foreground="?selectableItemBackground"
     android:clickable="true"
+    android:foreground="?selectableItemBackground"
     android:padding="8dp">
 
     <ImageView
         android:id="@+id/downloadSuraImageRow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/reader_download" />
+        android:src="@drawable/settings_mainaging_downloaded" />
 
     <TextView
         android:id="@+id/downloadSuraName"

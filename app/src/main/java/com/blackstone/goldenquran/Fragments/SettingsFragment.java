@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -162,6 +161,14 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        settingsPickTafseerRelative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.contener2, new SettingsPickTafseerFragment()).addToBackStack(null).commit();
+                ((DrawerCloser) getActivity()).moveToolbarDown();
+            }
+        });
+
         settingsNotificationRelative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,7 +198,6 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 float currentTextSize = textSize.getTextSize();
-                Log.d("bayan", currentTextSize + "");
                 textSize.setTextSize(TypedValue.COMPLEX_UNIT_PX, currentTextSize + 5f);
             }
         });

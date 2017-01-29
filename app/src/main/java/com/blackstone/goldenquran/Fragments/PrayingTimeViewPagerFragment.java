@@ -9,6 +9,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
@@ -59,6 +60,15 @@ public class PrayingTimeViewPagerFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         ((DrawerCloser) getActivity()).moveToolbarDown();
 
+        Drawable wrappedDrawable = DrawableCompat.wrap(ContextCompat.getDrawable(getActivity(), R.drawable.pray_time_clock));
+        DrawableCompat.setTint(wrappedDrawable, Color.WHITE);
+
+        Drawable wrappedDrawable1 = DrawableCompat.wrap(ContextCompat.getDrawable(getActivity(), R.drawable.sliders));
+        DrawableCompat.setTint(wrappedDrawable1, Color.BLACK);
+
+        Drawable wrappedDrawable2 = DrawableCompat.wrap(ContextCompat.getDrawable(getActivity(), R.drawable.settings));
+        DrawableCompat.setTint(wrappedDrawable2, Color.BLACK);
+
         if (getActivity().getResources().getBoolean(R.bool.is_right_to_left)) {
             tab.addTab(tab.newTab().setIcon(R.drawable.pray_time_clock));
             tab.addTab(tab.newTab().setIcon(R.drawable.settings));
@@ -68,10 +78,11 @@ public class PrayingTimeViewPagerFragment extends Fragment {
             tab.addTab(tab.newTab().setIcon(R.drawable.settings));
             tab.addTab(tab.newTab().setIcon(R.drawable.pray_time_clock));
         }
+
         tab.setSelectedTabIndicatorColor(Color.WHITE);
         tab.setLayoutDirection(TabLayout.LAYOUT_DIRECTION_LTR);
-
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tab));
+
         tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

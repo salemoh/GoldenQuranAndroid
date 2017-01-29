@@ -74,20 +74,20 @@ public class MainListFragment extends Fragment {
 
         String[] mainlist = getResources().getStringArray(R.array.MainList);
         ArrayList arrayList = new ArrayList();
-        arrayList.add(new MainListFirstItemModel(R.drawable.star, mainlist[0], mainlist[1], mainlist[2]));
-        arrayList.add(new MainListModel(R.drawable.main_list_bookmark, mainlist[3]));
-        arrayList.add(new MainListModel(R.drawable.menupng, mainlist[4]));
+        arrayList.add(new MainListFirstItemModel(R.drawable.main_list_star, mainlist[0], mainlist[1], mainlist[2]));
+        arrayList.add(new MainListModel(R.drawable.main_list_book_mark, mainlist[3]));
+        arrayList.add(new MainListModel(R.drawable.main_list_fahras, mainlist[4]));
         arrayList.add(new MainListModel(R.drawable.green_circle, mainlist[5]));
-        arrayList.add(new MainListModel(R.drawable.main_list_book, mainlist[6]));
-        arrayList.add(new MainListModel(R.drawable.search, mainlist[7]));
-        arrayList.add(new MainListModel(R.drawable.play_button, mainlist[8]));
-        arrayList.add(new MainListModel(R.drawable.main_list_bell, mainlist[9]));
-        arrayList.add(new MainListModel(R.drawable.mosque, mainlist[10]));
-        arrayList.add(new MainListModel(R.drawable.main_list_colord_book_end, mainlist[11]));
-        arrayList.add(new MainListModel(R.drawable.number40, mainlist[12]));
-        arrayList.add(new MainListModel(R.drawable.share, mainlist[13]));
-        arrayList.add(new MainListModel(R.drawable.settings, mainlist[14]));
-        arrayList.add(new MainListModel(R.drawable.statistics, mainlist[15]));
+        arrayList.add(new MainListModel(R.drawable.main_list_tarjameh_tajweed, mainlist[6]));
+        arrayList.add(new MainListModel(R.drawable.main_list_search, mainlist[7]));
+        arrayList.add(new MainListModel(R.drawable.main_list_play_button, mainlist[8]));
+        arrayList.add(new MainListModel(R.drawable.main_list_notification, mainlist[9]));
+        arrayList.add(new MainListModel(R.drawable.main_list_mosque, mainlist[10]));
+        arrayList.add(new MainListModel(R.drawable.main_list_doaa, mainlist[11]));
+        arrayList.add(new MainListModel(R.drawable.main_list_40, mainlist[12]));
+        arrayList.add(new MainListModel(R.drawable.main_list_share, mainlist[13]));
+        arrayList.add(new MainListModel(R.drawable.main_list_settings_icon, mainlist[14]));
+        arrayList.add(new MainListModel(R.drawable.main_list_statistic_icon, mainlist[15]));
 
         MainListAdapter mainListAdapter = new MainListAdapter(getActivity(), arrayList);
         recyclerView.setAdapter(mainListAdapter);

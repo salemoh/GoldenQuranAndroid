@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:clickable="true">
+    android:background="#ECEFF1"
+    android:clickable="true"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/altafseerRecycler"
+        android:background="#FFFFFF"
         android:padding="8dp">
 
         <ImageView
             android:id="@+id/flagImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:src="@drawable/flag" />
 
@@ -27,6 +29,7 @@
             android:id="@+id/anyTafseer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/flagImage"
             android:layout_toRightOf="@+id/flagImage"
             android:gravity="start"
             android:text="@string/flag1"
@@ -39,6 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/anyTafseer"
+            android:layout_toEndOf="@+id/flagImage"
             android:layout_toRightOf="@+id/flagImage"
             android:gravity="start"
             android:text="@string/flag2"
@@ -51,9 +55,8 @@
         android:id="@+id/altafseerRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/header"
+        android:layout_marginTop="2dp"
         android:background="#ECEFF1"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </LinearLayout>

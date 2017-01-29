@@ -241,7 +241,6 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
         }
     }
 
-
     @Override
     public void title(int pos) {
         mToolbar.setTitle(mainlist[pos + 1]);

@@ -12,11 +12,7 @@ import com.blackstone.goldenquran.models.BookmarkModel;
 
 import java.util.List;
 
-/**
- * Created by Abdullah on 12/29/2016.
- */
-
-public class BookmarkAdapter extends RecyclerView.Adapter <BookmarkViewHolder>{
+public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkViewHolder> {
 
     List<BookmarkModel> list;
     LayoutInflater layoutInflater;
@@ -45,7 +41,8 @@ public class BookmarkAdapter extends RecyclerView.Adapter <BookmarkViewHolder>{
 
 class BookmarkViewHolder extends RecyclerView.ViewHolder {
     TextView ayaNumber, suraName;
-    public BookmarkViewHolder(View itemView) {
+
+    BookmarkViewHolder(View itemView) {
         super(itemView);
         ayaNumber = (TextView) itemView.findViewById(R.id.bookmarkAayaNumber);
         suraName = (TextView) itemView.findViewById(R.id.bookmarkSuraName);

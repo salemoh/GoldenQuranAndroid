@@ -69,17 +69,18 @@ public class MainListAdapter extends RecyclerView.Adapter {
             viewHolder.night.setText(mainListFirstItemModel.night);
             viewHolder.athkar.setText(mainListFirstItemModel.athkar);
             if (context.getResources().getBoolean(R.bool.is_right_to_left)) {
-                viewHolder.downArrow.setImageResource(R.drawable.small_two_right_arrow);
-                viewHolder.topArrow.setImageResource(R.drawable.small_two_right_arrow);
+                viewHolder.downArrow.setImageResource(R.drawable.main_list_first_item_right_arrow);
+                viewHolder.topArrow.setImageResource(R.drawable.main_list_first_item_right_arrow);
             } else {
-                viewHolder.downArrow.setImageResource(R.drawable.two_left_arrow);
-                viewHolder.topArrow.setImageResource(R.drawable.two_left_arrow);
+                viewHolder.downArrow.setImageResource(R.drawable.main_list_first_item_left_arrow);
+                viewHolder.topArrow.setImageResource(R.drawable.main_list_first_item_left_arrow);
             }
 
             ((MainListFirstViewHolder) holder).first.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.contener2, new NightReadingFragment()).addToBackStack(null).commit();
+                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.contener2, new NightReadingFragment())
+                            .commit();
                     ((DrawerCloser) context).close(true);
                     ((DrawerCloser) context).close(false);
                     ((DrawerCloser) context).title(0);
@@ -201,7 +202,7 @@ public class MainListAdapter extends RecyclerView.Adapter {
                     sendIntent.setAction(Intent.ACTION_SEND);
                     sendIntent.putExtra(Intent.EXTRA_TEXT, "Hi Obadah");
                     sendIntent.setType("text/plain");
-                    context.startActivity(sendIntent);
+                    context.startActivity(Intent.createChooser(sendIntent, "Where To Send"));
                     pos = 12;
                     break;
                 }

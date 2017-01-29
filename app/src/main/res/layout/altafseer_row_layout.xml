@@ -8,11 +8,12 @@
 
     <ImageView
         android:id="@+id/downloadImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_centerVertical="true"
-        android:src="@drawable/reader_download"
+        android:src="@drawable/download_all_btn"
         android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         />
@@ -22,8 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/cb"
-        android:layout_toEndOf="@+id/cb"
+        android:layout_toRightOf="@+id/tafseerRadioButton"
+        android:layout_toEndOf="@+id/tafseerRadioButton"
         android:layout_toStartOf="@+id/downloadImage"
         android:layout_toLeftOf="@+id/downloadImage"
         android:layout_marginEnd="5dp"
@@ -39,12 +40,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/altafseerName"
         android:layout_marginTop="16dp"
-        android:layout_toRightOf="@+id/cb"
+        android:layout_toRightOf="@+id/tafseerRadioButton"
         android:layout_toStartOf="@+id/downloadImage"
         android:layout_toLeftOf="@+id/downloadImage"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
-        android:layout_toEndOf="@+id/cb"
+        android:layout_toEndOf="@+id/tafseerRadioButton"
         android:textAlignment="textStart"
         android:text="القرطبي"
         android:textColor="@color/mainListBrown"
@@ -52,13 +53,14 @@
         />
 
     <RadioButton
-        android:id="@+id/cb"
+        android:id="@+id/tafseerRadioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
+        android:layout_marginStart="5sp"
         />
 
 </RelativeLayout>

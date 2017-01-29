@@ -16,9 +16,9 @@ import java.util.List;
 
 public class AlquraaAdapter extends RecyclerView.Adapter<AlquraaAdapter.AlquraaViewHolder> {
 
-    List<ReadersModel> list;
-    LayoutInflater layoutInflater;
-    int mSelectedItem = -1;
+    private List<ReadersModel> list;
+    private LayoutInflater layoutInflater;
+    private int mSelectedItem = -1;
 
     public AlquraaAdapter(Context context, List<ReadersModel> list) {
         this.list = list;
@@ -47,7 +47,7 @@ public class AlquraaAdapter extends RecyclerView.Adapter<AlquraaAdapter.AlquraaV
         TextView shakeName;
         RadioButton mRadio;
 
-         AlquraaViewHolder(View itemView) {
+        AlquraaViewHolder(View itemView) {
             super(itemView);
 
             shakeImage = (ImageView) itemView.findViewById(R.id.shakeImage);

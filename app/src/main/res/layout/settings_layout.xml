@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
     android:orientation="vertical">
 
-    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF"
@@ -35,8 +36,10 @@
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/pickColorText"
                 android:layout_margin="20dp"
+                android:elevation="5dp"
                 android:padding="2dp"
-                android:src="@color/lightOrange" />
+                android:src="@color/lightOrange"
+                app:elevation="5dp" />
 
 
             <ImageView
@@ -161,12 +164,12 @@
 
                 <ImageView
                     android:id="@+id/pickShakeImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/speaker" />
+                    android:src="@drawable/select_reader_icon" />
 
                 <TextView
                     android:id="@+id/pickShakeText"
@@ -202,12 +205,12 @@
 
                 <ImageView
                     android:id="@+id/settingsDownloadsuraImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/reader_download" />
+                    android:src="@drawable/download_all_btn" />
 
                 <TextView
                     android:id="@+id/settingsDownloadsuraText"
@@ -242,12 +245,12 @@
 
                 <ImageView
                     android:id="@+id/settingsPickTafseerImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/main_list_book" />
+                    android:src="@drawable/word_meaning_icon" />
 
                 <TextView
                     android:id="@+id/settingsPickTafseerText"
@@ -283,12 +286,12 @@
 
                 <ImageView
                     android:id="@+id/settingsNotificationImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/main_list_bell" />
+                    android:src="@drawable/push_notification_icon" />
 
                 <TextView
                     android:id="@+id/settingsNotificationText"
@@ -324,12 +327,12 @@
 
                 <ImageView
                     android:id="@+id/settingsDownloadedSuraImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/reader_download" />
+                    android:src="@drawable/settings_mainaging_downloaded" />
 
                 <TextView
                     android:id="@+id/settingsDownloadedSuraText"
@@ -364,12 +367,12 @@
 
                 <ImageView
                     android:id="@+id/settingsCallUsImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/phone" />
+                    android:src="@drawable/contact_us" />
 
                 <TextView
                     android:id="@+id/settingsCallUsText"
@@ -461,11 +464,11 @@
 
                 <ImageView
                     android:id="@+id/pageStateImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:src="@drawable/main_list_book" />
+                    android:src="@drawable/word_meaning_icon" />
 
                 <TextView
                     android:id="@+id/pageStateText"
@@ -482,11 +485,10 @@
                 <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/pageStateText"
-                    android:layout_margin="5dp"
-                    android:layout_alignStart="@+id/pageStateText"
                     android:layout_alignLeft="@+id/pageStateText"
-                    >
+                    android:layout_alignStart="@+id/pageStateText"
+                    android:layout_below="@+id/pageStateText"
+                    android:layout_margin="5dp">
 
                     <RadioButton
                         android:id="@+id/settingsOnePageRadioButton"

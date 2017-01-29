@@ -39,7 +39,7 @@
             android:id="@+id/pusaleh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/pray_time_busaleh" />
+            android:src="@drawable/compass" />
     </android.support.v7.widget.CardView>
 </LinearLayout>
 
