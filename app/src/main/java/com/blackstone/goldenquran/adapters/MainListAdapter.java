@@ -155,7 +155,9 @@ public class MainListAdapter extends RecyclerView.Adapter {
         @Override
         public void onClick(View v) {
             Fragment fragment = null;
+
             int pos = 0;
+
             switch (getPosition()) {
                 case 1:
                     fragment = new BookmarkFragment();
@@ -200,7 +202,7 @@ public class MainListAdapter extends RecyclerView.Adapter {
                 case 11: {
                     Intent sendIntent = new Intent();
                     sendIntent.setAction(Intent.ACTION_SEND);
-                    sendIntent.putExtra(Intent.EXTRA_TEXT, "Hi Obadah");
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, "Hi");
                     sendIntent.setType("text/plain");
                     context.startActivity(Intent.createChooser(sendIntent, "Where To Send"));
                     pos = 12;

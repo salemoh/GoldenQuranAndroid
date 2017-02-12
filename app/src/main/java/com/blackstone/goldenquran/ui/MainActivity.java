@@ -24,9 +24,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blackstone.goldenquran.Fragments.MainListFragment;
+import com.blackstone.goldenquran.Fragments.QuranImageFragment;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.api.DownloadService;
-import com.blackstone.goldenquran.models.Download;
+import com.blackstone.goldenquran.models.models.Download;
 import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
 import com.blackstone.goldenquran.utilities.Utils;
 
@@ -55,8 +56,6 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
     AppBarLayout mAppBarLayout;
     @BindView(R.id.btn_download)
     AppCompatButton btnDownload;
-    @BindView(R.id.contener2)
-    FrameLayout contener2;
     private ActionBarDrawerToggle mDrawerToggle;
 
 
@@ -86,6 +85,8 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.quranHolder, new QuranImageFragment()).commit();
 
         setupSupportActionBar(mToolbar, true, true);
 
@@ -251,4 +252,5 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
     public void moveToolbarDown() {
         mAppBarLayout.setExpanded(true, true);
     }
+
 }
