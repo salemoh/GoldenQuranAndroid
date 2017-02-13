@@ -148,7 +148,7 @@ public class SettingsFragment extends Fragment {
         settingsDownloadsuraRelative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.contener2, new DownloadSuraFragment()).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new DownloadSuraFragment()).addToBackStack(null).commit();
                 ((DrawerCloser) getActivity()).moveToolbarDown();
             }
         });
@@ -156,7 +156,7 @@ public class SettingsFragment extends Fragment {
         pickShakeRelative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.contener2, new ReadersFragment()).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ReadersFragment()).addToBackStack(null).commit();
                 ((DrawerCloser) getActivity()).moveToolbarDown();
             }
         });
@@ -164,7 +164,7 @@ public class SettingsFragment extends Fragment {
         settingsPickTafseerRelative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.contener2, new SettingsPickTafseerFragment()).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new SettingsPickTafseerFragment()).addToBackStack(null).commit();
                 ((DrawerCloser) getActivity()).moveToolbarDown();
             }
         });
@@ -172,7 +172,7 @@ public class SettingsFragment extends Fragment {
         settingsNotificationRelative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.contener2, new NotificationFragment()).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new NotificationFragment()).addToBackStack(null).commit();
                 ((DrawerCloser) getActivity()).moveToolbarDown();
             }
         });
@@ -180,7 +180,7 @@ public class SettingsFragment extends Fragment {
         settingsDownloadedSuraRelative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.contener2, new DownloadSuraFragment()).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new DownloadSuraFragment()).addToBackStack(null).commit();
                 ((DrawerCloser) getActivity()).moveToolbarDown();
             }
         });
@@ -188,7 +188,7 @@ public class SettingsFragment extends Fragment {
         settingsCallUsRelative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.contener2, new FridayReadingFragment()).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new FridayReadingFragment()).addToBackStack(null).commit();
                 ((DrawerCloser) getActivity()).moveToolbarDown();
             }
         });

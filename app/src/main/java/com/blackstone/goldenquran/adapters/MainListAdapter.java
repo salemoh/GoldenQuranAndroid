@@ -79,7 +79,7 @@ public class MainListAdapter extends RecyclerView.Adapter {
             ((MainListFirstViewHolder) holder).first.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.contener2, new NightReadingFragment())
+                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.container, new NightReadingFragment())
                             .commit();
                     ((DrawerCloser) context).close(true);
                     ((DrawerCloser) context).close(false);
@@ -91,7 +91,7 @@ public class MainListAdapter extends RecyclerView.Adapter {
             ((MainListFirstViewHolder) holder).second.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.contener2, new FridayReadingFragment()).addToBackStack(null).commit();
+                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.container, new FridayReadingFragment()).addToBackStack(null).commit();
                     ((DrawerCloser) context).close(true);
                     ((DrawerCloser) context).close(false);
                     ((DrawerCloser) context).title(1);
@@ -222,10 +222,10 @@ public class MainListAdapter extends RecyclerView.Adapter {
 
             if (fragment != null) {
                 if (count == 0) {
-                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.contener2, fragment).addToBackStack(null).commit();
+                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit();
                     count++;
                 } else {
-                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.contener2, fragment).addToBackStack(null).commit();
+                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit();
                 }
                 ((DrawerCloser) context).close(true);
                 ((DrawerCloser) context).close(false);

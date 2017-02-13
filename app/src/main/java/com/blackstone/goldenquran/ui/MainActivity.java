@@ -1,8 +1,6 @@
 package com.blackstone.goldenquran.ui;
 
 import android.Manifest;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -13,21 +11,18 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blackstone.goldenquran.Fragments.MainListFragment;
 import com.blackstone.goldenquran.Fragments.QuranImageFragment;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.api.DownloadService;
-import com.blackstone.goldenquran.models.models.Download;
 import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
 import com.blackstone.goldenquran.utilities.Utils;
 
@@ -35,7 +30,6 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements DrawerCloser {
     public static final String MESSAGE_PROGRESS = "message_progress";
@@ -47,15 +41,15 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
     DrawerLayout mDrawerLayout;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.progress)
-    ProgressBar mProgressBar;
-    @BindView(R.id.progress_text)
-    TextView mProgressText;
+//    @BindView(R.id.progress)
+//    ProgressBar mProgressBar;
+//    @BindView(R.id.progress_text)
+//    TextView mProgressText;
     String[] mainlist;
     @BindView(R.id.SurAppBarLayout)
     AppBarLayout mAppBarLayout;
-    @BindView(R.id.btn_download)
-    AppCompatButton btnDownload;
+//    @BindView(R.id.btn_download)
+//    AppCompatButton btnDownload;
     private ActionBarDrawerToggle mDrawerToggle;
 
 
@@ -86,9 +80,13 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.quranHolder, new QuranImageFragment()).commit();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, new QuranImageFragment()).commit();
 
         setupSupportActionBar(mToolbar, true, true);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         moveToolbarDown();
 
@@ -102,30 +100,30 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
         LocalBroadcastManager bManager = LocalBroadcastManager.getInstance(this);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(MESSAGE_PROGRESS);
-        bManager.registerReceiver(broadcastReceiver, intentFilter);
+     //   bManager.registerReceiver(broadcastReceiver, intentFilter);
     }
 
 
-    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            if (intent.getAction().equals(MESSAGE_PROGRESS)) {
-
-                Download download = intent.getParcelableExtra(getString(R.string.szdDownload));
-                mProgressBar.setProgress(download.getProgress());
-                if (download.getProgress() == 100) {
-
-                    mProgressText.setText(R.string.zsdDonloaded);
-
-                } else {
-
-                    mProgressText.setText(String.format("Download (%d/%d) MB", download.getCurrentFileSize(), download.getTotalFileSize()));
-
-                }
-            }
-        }
-    };
+//    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//
+//            if (intent.getAction().equals(MESSAGE_PROGRESS)) {
+//
+//                Download download = intent.getParcelableExtra(getString(R.string.szdDownload));
+//                mProgressBar.setProgress(download.getProgress());
+//                if (download.getProgress() == 100) {
+//
+//                    mProgressText.setText(R.string.zsdDonloaded);
+//
+//                } else {
+//
+//                    mProgressText.setText(String.format("Download (%d/%d) MB", download.getCurrentFileSize(), download.getTotalFileSize()));
+//
+//                }
+//            }
+//        }
+//    };
 
 
     private void startDownload() {
@@ -223,15 +221,15 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
         }
     }
 
-    @OnClick(R.id.btn_download)
-    public void downloadFile() {
-
-        if (checkPermission()) {
-            startDownload();
-        } else {
-            requestPermission();
-        }
-    }
+//    @OnClick(R.id.btn_download)
+//    public void downloadFile() {
+//
+//        if (checkPermission()) {
+//            startDownload();
+//        } else {
+//            requestPermission();
+//        }
+//    }
 
     @Override
     public void close(boolean isDrawerLocked) {
