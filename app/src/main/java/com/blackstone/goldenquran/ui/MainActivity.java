@@ -1,20 +1,24 @@
 package com.blackstone.goldenquran.ui;
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -34,6 +38,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends BaseActivity implements DrawerCloser {
     public static final String MESSAGE_PROGRESS = "message_progress";
     private static final int PERMISSION_REQUEST_CODE = 1;
+    private boolean isManuallyHideShownActionBar;
 
     @BindView(R.id.left_drawer)
     FrameLayout mLeftDrawer;
@@ -80,13 +85,22 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new QuranImageFragment()).commit();
 
         setupSupportActionBar(mToolbar, true, true);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+        //  hideToolbar();
+
+        final Handler handler = new Handler();
+
+        final Runnable r = new Runnable() {
+            public void run() {
+                hideActionBar();
+                handler.postDelayed(this, 5000);
+            }
+        };
+
+        handler.postDelayed(r, 5000);
 
         moveToolbarDown();
 
@@ -94,6 +108,82 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
 
         registerReceiver();
     }
+
+    int mToolbarHeight, mAnimDuration = 600/* milliseconds */;
+
+    ValueAnimator mVaActionBar;
+
+    void hideActionBar() {
+        // initialize `mToolbarHeight`
+        if (mToolbarHeight == 0) {
+            mToolbarHeight = mToolbar.getHeight();
+        }
+
+        if (mVaActionBar != null && mVaActionBar.isRunning()) {
+            // we are already animating a transition - block here
+            return;
+        }
+
+        // animate `Toolbar's` height to zero.
+        mVaActionBar = ValueAnimator.ofInt(mToolbarHeight, 0);
+        mVaActionBar.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                // update LayoutParams
+                ((AppBarLayout.LayoutParams) mToolbar.getLayoutParams()).height
+                        = (Integer) animation.getAnimatedValue();
+                mToolbar.requestLayout();
+            }
+        });
+
+        mVaActionBar.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+
+                if (getSupportActionBar() != null) { // sanity check
+                    getSupportActionBar().hide();
+                }
+            }
+        });
+
+        mVaActionBar.setDuration(mAnimDuration);
+        mVaActionBar.start();
+    }
+
+    void showActionBar() {
+        if (mVaActionBar != null && mVaActionBar.isRunning()) {
+            // we are already animating a transition - block here
+            return;
+        }
+
+        // restore `Toolbar's` height
+        mVaActionBar = ValueAnimator.ofInt(0, mToolbarHeight);
+        mVaActionBar.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                // update LayoutParams
+                ((AppBarLayout.LayoutParams) mToolbar.getLayoutParams()).height
+                        = (Integer) animation.getAnimatedValue();
+                mToolbar.requestLayout();
+            }
+        });
+
+        mVaActionBar.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+
+                if (getSupportActionBar() != null) { // sanity check
+                    getSupportActionBar().show();
+                }
+            }
+        });
+
+        mVaActionBar.setDuration(mAnimDuration);
+        mVaActionBar.start();
+    }
+
 
     private void registerReceiver() {
 
@@ -160,6 +250,17 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
         //add the left drawer content
         getSupportFragmentManager().beginTransaction().replace(R.id.left_drawer, new MainListFragment()).commit();
 
+    }
+
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        super.dispatchTouchEvent(ev);
+        if (!getSupportActionBar().isShowing()) {
+            showActionBar();
+        }
+
+        return true;
     }
 
     @Override
