@@ -10,18 +10,17 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.blackstone.goldenquran.R;
-import com.blackstone.goldenquran.models.ReadersModel;
+import com.blackstone.goldenquran.models.ReaderModel;
 
 import java.util.List;
 
 public class AlquraaAdapter extends RecyclerView.Adapter<AlquraaAdapter.AlquraaViewHolder> {
 
-    private List<ReadersModel> list;
+    private List<ReaderModel> models;
     private LayoutInflater layoutInflater;
-    private int mSelectedItem = -1;
 
-    public AlquraaAdapter(Context context, List<ReadersModel> list) {
-        this.list = list;
+    public AlquraaAdapter(Context context, List<ReaderModel> models) {
+        this.models = models;
         layoutInflater = LayoutInflater.from(context);
     }
 
@@ -31,15 +30,30 @@ public class AlquraaAdapter extends RecyclerView.Adapter<AlquraaAdapter.AlquraaV
     }
 
     @Override
-    public void onBindViewHolder(AlquraaViewHolder holder, final int position) {
-        holder.shakeName.setText(list.get(position).shakeName);
-        holder.shakeImage.setImageResource(list.get(position).shakeImage);
-        holder.mRadio.setChecked(position == mSelectedItem);
-    }
+    public void onBindViewHolder(final AlquraaViewHolder holder, final int position) {
+        holder.shakeName.setText(models.get(position).shakeName);
+        holder.shakeImage.setImageResource(models.get(position).shakeImage);
+        holder.mRadio.setChecked(models.get(position).isSelected());
+
+
+        holder.mRadio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                models.get(position).setSelected(holder.mRadio.isChecked());
+                for (int i = 0; i< models.size(); i++){
+                    if(i!=position){
+                        models.get(i).setSelected(false);
+
+                    }
+
+                }
+                notifyDataSetChanged();
+            }
+        }); }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return models.size();
     }
 
     class AlquraaViewHolder extends RecyclerView.ViewHolder {
@@ -53,18 +67,6 @@ public class AlquraaAdapter extends RecyclerView.Adapter<AlquraaAdapter.AlquraaV
             shakeImage = (ImageView) itemView.findViewById(R.id.shakeImage);
             shakeName = (TextView) itemView.findViewById(R.id.shakeName);
             mRadio = (RadioButton) itemView.findViewById(R.id.PickShakeradioButton);
-
-            View.OnClickListener clickListener = new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mSelectedItem = getAdapterPosition();
-                    notifyItemRangeChanged(0, list.size());
-                }
-            };
-
-            shakeName.setOnClickListener(clickListener);
-            mRadio.setOnClickListener(clickListener);
-
 
         }
     }

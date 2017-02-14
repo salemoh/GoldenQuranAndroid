@@ -40,6 +40,7 @@ public class MainListAdapter extends RecyclerView.Adapter {
     List<Object> list;
     Context context;
     LayoutInflater layoutInflater;
+    Fragment fragment = null;
     private ActionBarDrawerToggle mDrawerToggle;
     int count;
 
@@ -154,7 +155,6 @@ public class MainListAdapter extends RecyclerView.Adapter {
 
         @Override
         public void onClick(View v) {
-            Fragment fragment = null;
 
             int pos = 0;
 
@@ -221,18 +221,16 @@ public class MainListAdapter extends RecyclerView.Adapter {
             }
 
             if (fragment != null) {
-                if (count == 0) {
+                if (!fragment.isHidden())
                     ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit();
-                    count++;
-                } else {
-                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit();
-                }
-                ((DrawerCloser) context).close(true);
-                ((DrawerCloser) context).close(false);
-                ((DrawerCloser) context).title(pos);
             }
+            ((DrawerCloser) context).close(true);
+            ((DrawerCloser) context).close(false);
+            ((DrawerCloser) context).title(pos);
         }
+
     }
 }
+
 
 

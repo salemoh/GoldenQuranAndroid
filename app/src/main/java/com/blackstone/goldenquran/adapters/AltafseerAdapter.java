@@ -14,12 +14,11 @@ import com.blackstone.goldenquran.models.TheExplanationModel;
 import java.util.List;
 
 public class AltafseerAdapter extends RecyclerView.Adapter<AltafseerAdapter.AltafseerViewHolder> {
-    private List<TheExplanationModel> list;
+    private List<TheExplanationModel> models;
     private LayoutInflater layoutInflater;
-    private int mSelectedItem = -1;
 
     public AltafseerAdapter(Context context, List<TheExplanationModel> list) {
-        this.list = list;
+        this.models = list;
         layoutInflater = LayoutInflater.from(context);
     }
 
@@ -29,15 +28,28 @@ public class AltafseerAdapter extends RecyclerView.Adapter<AltafseerAdapter.Alta
     }
 
     @Override
-    public void onBindViewHolder(AltafseerViewHolder holder, int position) {
-        holder.tafseerDescribtion.setText(list.get(position).tafseerDescribtion);
-        holder.tafseerName.setText(list.get(position).tafseerName);
-        holder.mRadio.setChecked(position == mSelectedItem);
+    public void onBindViewHolder(final AltafseerViewHolder holder, final int position) {
+        holder.tafseerDescribtion.setText(models.get(position).tafseerDescribtion);
+        holder.tafseerName.setText(models.get(position).tafseerName);
+        holder.mRadio.setChecked(models.get(position).isSelected());
+
+        holder.mRadio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                models.get(position).setSelected(holder.mRadio.isChecked());
+                for (int i = 0; i < models.size(); i++) {
+                    if (i != position) {
+                        models.get(i).setSelected(false);
+                    }
+                }
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return models.size();
     }
 
 
@@ -50,18 +62,6 @@ public class AltafseerAdapter extends RecyclerView.Adapter<AltafseerAdapter.Alta
             tafseerName = (TextView) itemView.findViewById(R.id.altafseerName);
             tafseerDescribtion = (TextView) itemView.findViewById(R.id.describtionTafseer);
             mRadio = (RadioButton) itemView.findViewById(R.id.tafseerRadioButton);
-
-            View.OnClickListener clickListener = new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mSelectedItem = getAdapterPosition();
-                    notifyItemRangeChanged(0, list.size());
-                }
-            };
-
-            tafseerName.setOnClickListener(clickListener);
-            mRadio.setOnClickListener(clickListener);
-
         }
     }
 }

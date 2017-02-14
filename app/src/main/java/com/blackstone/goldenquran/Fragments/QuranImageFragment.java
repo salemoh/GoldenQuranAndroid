@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,11 +18,14 @@ import android.view.ViewGroup;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.TestAdapter;
 import com.blackstone.goldenquran.models.Ayah;
+import com.blackstone.goldenquran.ui.DrawerCloser;
 import com.blackstone.goldenquran.views.DrawView;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+
+import static com.blackstone.goldenquran.R.id.quranImage;
 
 public class QuranImageFragment extends Fragment {
 
@@ -32,6 +36,9 @@ public class QuranImageFragment extends Fragment {
     TestAdapter data;
     Cursor ayahPoints;
     ArrayList<Ayah> ayah;
+
+    Handler handler;
+    Runnable r;
 
     public QuranImageFragment() {
     }
@@ -49,21 +56,10 @@ public class QuranImageFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        imageView = (DrawView) getView().findViewById(R.id.quranImage);
+        imageView = (DrawView) getView().findViewById(quranImage);
 
         left = new ArrayList<>();
         top = new ArrayList<>();
@@ -76,9 +72,25 @@ public class QuranImageFragment extends Fragment {
         imageView.right = new ArrayList<>();
         imageView.bottom = new ArrayList<>();
 
-        setImageView("_0006.png");
+        setImageView("_0011.png");
 
         imageView.setOnTouchListener(imgSourceOnTouchListener);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        handler = new Handler();
+
+        r = new Runnable() {
+            public void run() {
+                ((DrawerCloser) getActivity()).moveToolbarUp();
+            }
+        };
+
+        handler.postDelayed(r, 2000);
 
     }
 
@@ -152,6 +164,17 @@ public class QuranImageFragment extends Fragment {
             return true;
         }
     };
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
 
     float map(float x, float in_min, float in_max, float out_min, float out_max) {
         return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;

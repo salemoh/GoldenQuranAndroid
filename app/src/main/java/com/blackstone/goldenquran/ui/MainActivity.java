@@ -18,13 +18,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.blackstone.goldenquran.Fragments.MainListFragment;
-import com.blackstone.goldenquran.Fragments.QuranImageFragment;
+import com.blackstone.goldenquran.Fragments.QuranViewPager;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.api.DownloadService;
 import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
@@ -38,7 +37,8 @@ import butterknife.ButterKnife;
 public class MainActivity extends BaseActivity implements DrawerCloser {
     public static final String MESSAGE_PROGRESS = "message_progress";
     private static final int PERMISSION_REQUEST_CODE = 1;
-    private boolean isManuallyHideShownActionBar;
+    int mToolbarHeight, mAnimDuration = 600;
+
 
     @BindView(R.id.left_drawer)
     FrameLayout mLeftDrawer;
@@ -46,16 +46,19 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
     DrawerLayout mDrawerLayout;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-//    @BindView(R.id.progress)
+    //    @BindView(R.id.progress)
 //    ProgressBar mProgressBar;
 //    @BindView(R.id.progress_text)
 //    TextView mProgressText;
     String[] mainlist;
     @BindView(R.id.SurAppBarLayout)
     AppBarLayout mAppBarLayout;
-//    @BindView(R.id.btn_download)
+    //    @BindView(R.id.btn_download)
 //    AppCompatButton btnDownload;
     private ActionBarDrawerToggle mDrawerToggle;
+    ValueAnimator mVaActionBar;
+    Handler handler;
+    Runnable r;
 
 
     @Override
@@ -85,22 +88,19 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, new QuranImageFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, new QuranViewPager()).commit();
 
         setupSupportActionBar(mToolbar, true, true);
 
-        //  hideToolbar();
+        handler = new Handler();
 
-        final Handler handler = new Handler();
-
-        final Runnable r = new Runnable() {
+        r = new Runnable() {
             public void run() {
                 hideActionBar();
-                handler.postDelayed(this, 5000);
             }
         };
 
-        handler.postDelayed(r, 5000);
+        handler.postDelayed(r, 3000);
 
         moveToolbarDown();
 
@@ -109,29 +109,21 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
         registerReceiver();
     }
 
-    int mToolbarHeight, mAnimDuration = 600/* milliseconds */;
-
-    ValueAnimator mVaActionBar;
 
     void hideActionBar() {
-        // initialize `mToolbarHeight`
         if (mToolbarHeight == 0) {
             mToolbarHeight = mToolbar.getHeight();
         }
 
         if (mVaActionBar != null && mVaActionBar.isRunning()) {
-            // we are already animating a transition - block here
             return;
         }
 
-        // animate `Toolbar's` height to zero.
         mVaActionBar = ValueAnimator.ofInt(mToolbarHeight, 0);
         mVaActionBar.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                // update LayoutParams
-                ((AppBarLayout.LayoutParams) mToolbar.getLayoutParams()).height
-                        = (Integer) animation.getAnimatedValue();
+                ((AppBarLayout.LayoutParams) mToolbar.getLayoutParams()).height = (Integer) animation.getAnimatedValue();
                 mToolbar.requestLayout();
             }
         });
@@ -141,7 +133,7 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
 
-                if (getSupportActionBar() != null) { // sanity check
+                if (getSupportActionBar() != null) {
                     getSupportActionBar().hide();
                 }
             }
@@ -153,16 +145,14 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
 
     void showActionBar() {
         if (mVaActionBar != null && mVaActionBar.isRunning()) {
-            // we are already animating a transition - block here
             return;
         }
 
-        // restore `Toolbar's` height
         mVaActionBar = ValueAnimator.ofInt(0, mToolbarHeight);
         mVaActionBar.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                // update LayoutParams
+
                 ((AppBarLayout.LayoutParams) mToolbar.getLayoutParams()).height
                         = (Integer) animation.getAnimatedValue();
                 mToolbar.requestLayout();
@@ -174,7 +164,7 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
             public void onAnimationStart(Animator animation) {
                 super.onAnimationStart(animation);
 
-                if (getSupportActionBar() != null) { // sanity check
+                if (getSupportActionBar() != null) {
                     getSupportActionBar().show();
                 }
             }
@@ -190,9 +180,8 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
         LocalBroadcastManager bManager = LocalBroadcastManager.getInstance(this);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(MESSAGE_PROGRESS);
-     //   bManager.registerReceiver(broadcastReceiver, intentFilter);
+        //   bManager.registerReceiver(broadcastReceiver, intentFilter);
     }
-
 
 //    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
 //        @Override
@@ -243,25 +232,23 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
             }
         };
 
-        // Set the drawer toggle as the DrawerListener
         mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
-        //add the left drawer content
+
         getSupportFragmentManager().beginTransaction().replace(R.id.left_drawer, new MainListFragment()).commit();
 
     }
 
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        super.dispatchTouchEvent(ev);
-        if (!getSupportActionBar().isShowing()) {
-            showActionBar();
-        }
-
-        return true;
-    }
+//    @Override
+//    public boolean dispatchTouchEvent(MotionEvent ev) {
+//        super.dispatchTouchEvent(ev);
+//        if (!getSupportActionBar().isShowing()) {
+//            showActionBar();
+//        }
+//
+//        return true;
+//    }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -349,7 +336,13 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
 
     @Override
     public void moveToolbarDown() {
-        mAppBarLayout.setExpanded(true, true);
+        if (!getSupportActionBar().isShowing())
+            showActionBar();
     }
 
+    @Override
+    public void moveToolbarUp() {
+        if (getSupportActionBar().isShowing())
+            hideActionBar();
+    }
 }

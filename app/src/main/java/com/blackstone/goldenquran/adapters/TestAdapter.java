@@ -51,7 +51,7 @@ public class TestAdapter {
 
     Cursor Select(float x, float y, int sura, int page_number) {
 
-        SQLiteDatabase mDb = mDbHelper.getWritableDatabase();
+        mDb = mDbHelper.getWritableDatabase();
         return mDb.query("page", new String[]{"ayah"}, "surah = ? and page_number = ? and "
                 + x + " > upper_left_x and "
                 + x + " < upper_right_x and "
@@ -61,11 +61,11 @@ public class TestAdapter {
     }
 
     Cursor getAyahLines(int sura, int page_number, float ayah) {
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
-        return db.query("page", null, "surah = ? and page_number = ? and ayah = ? and id > 10000", new String[]{"" + sura, "" + page_number, "" + ayah}, null, null, null);
+        mDb = mDbHelper.getWritableDatabase();
+        return mDb.query("page", null, "surah = ? and page_number = ? and ayah = ? and id > 10000", new String[]{"" + sura, "" + page_number, "" + ayah}, null, null, null);
     }
 
-    public Cursor getPagePoints(int pageNumber) {
+    public  Cursor getPagePoints(int pageNumber) {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
         return db.query("page", null, "page_number = ? and id > 10000", new String[]{String.valueOf(pageNumber)}, null, null, null);
     }

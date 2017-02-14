@@ -61,7 +61,6 @@ public class FahrasFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setLayoutDirection(TabLayout.LAYOUT_DIRECTION_LTR);
 
-
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -106,7 +105,6 @@ public class FahrasFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
     class AlsuraJuzoaViewPagerAdapter extends FragmentPagerAdapter {
         String[] titles = getResources().getStringArray(R.array.titles);

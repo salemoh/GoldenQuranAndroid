@@ -4,6 +4,7 @@ package com.blackstone.goldenquran.Fragments;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -35,6 +36,9 @@ public class PrayingTimeViewPagerFragment extends Fragment {
     @BindView(R.id.card_view)
     CardView cardView;
 
+    Handler handler;
+    Runnable r;
+
     public PrayingTimeViewPagerFragment() {
 
     }
@@ -45,7 +49,6 @@ public class PrayingTimeViewPagerFragment extends Fragment {
         getActivity().invalidateOptionsMenu();
         setHasOptionsMenu(true);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,6 +62,17 @@ public class PrayingTimeViewPagerFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ((DrawerCloser) getActivity()).moveToolbarDown();
+
+        handler = new Handler();
+
+        r = new Runnable() {
+            public void run() {
+                ((DrawerCloser) getActivity()).moveToolbarUp();
+            }
+        };
+
+        handler.postDelayed(r, 3000);
+
 
         Drawable wrappedDrawable = DrawableCompat.wrap(ContextCompat.getDrawable(getActivity(), R.drawable.pray_time_clock));
         DrawableCompat.setTint(wrappedDrawable, Color.WHITE);
