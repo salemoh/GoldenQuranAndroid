@@ -12,16 +12,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.api.PlayerService;
 import com.blackstone.goldenquran.ui.DrawerCloser;
+import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 
@@ -31,58 +32,26 @@ import butterknife.ButterKnife;
 
 public class PlayeSettingsFragment extends Fragment {
 
-    @BindView(R.id.alsuraAlHaleah)
-    TextView alsuraAlHaleah;
-    @BindView(R.id.playerSuraName)
-    TextView playerSuraName;
-    @BindView(R.id.playerLeftArrow)
-    ImageView imageView;
-    @BindView(R.id.alSuraAlHaleahRelative)
-    RelativeLayout alSuraAlHaleahRelative;
-    @BindView(R.id.akhtearAlAyat)
-    TextView akhtearAlAyat;
-    @BindView(R.id.rangeSeekbar1)
-    CrystalRangeSeekbar crystalRangeSeekbar;
     @BindView(R.id.maxTextView)
     TextView max;
     @BindView(R.id.minTextView)
     TextView min;
-    @BindView(R.id.akhtearAlAyatRelative)
-    RelativeLayout akhtearAlAyatRelative;
-    @BindView(R.id.onFinish)
-    TextView onFinish;
+    @BindView(R.id.playerLeftArrow)
+    ImageView imageView;
+    @BindView(R.id.rangeSeekbar1)
+    CrystalRangeSeekbar crystalRangeSeekbar;
     @BindView(R.id.onFinishRAdioGroup)
     RadioGroup onFinishRAdioGroup;
-    @BindView(R.id.onFinishRelative)
-    RelativeLayout onFinishRelative;
-    @BindView(R.id.optionsOfREadingText)
-    TextView optionsOfREadingText;
     @BindView(R.id.moveToNextPageSwitch)
     Switch moveToNextPageSwitch;
-    @BindView(R.id.moveTONextPageText)
-    TextView moveTONextPageText;
     @BindView(R.id.basmalahSwitch)
     Switch basmalahSwitch;
-    @BindView(R.id.basmalahText)
-    TextView basmalahText;
     @BindView(R.id.saoutSwitch)
-    Switch saoutSwitch;
-    @BindView(R.id.saoutText)
-    TextView saoutText;
-    @BindView(R.id.optionsOfREading)
-    RelativeLayout optionsOfREading;
-    @BindView(R.id.playerShakeName)
-    TextView playerShakeName;
-    @BindView(R.id.playerShakeImage)
-    ImageView playerShakeImage;
-    @BindView(R.id.playerShakeNameText)
-    TextView playerShakeNameText;
+    Switch voiceSwitch;
     @BindView(R.id.playerShakeRelative)
     RelativeLayout playerShakeRelative;
-    @BindView(R.id.playerDownloadImage)
-    ImageView playerDownloadImage;
-    @BindView(R.id.playerDownloadText)
-    TextView playerDownloadText;
+    @BindView(R.id.playerDownloadRelative)
+    RelativeLayout playerDownloadRelative;
 
     public PlayeSettingsFragment() {
     }
@@ -107,20 +76,76 @@ public class PlayeSettingsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         ((DrawerCloser) getActivity()).moveToolbarDown();
 
+        crystalRangeSeekbar.setMinStartValue(SharedPreferencesManager.getInteger(getActivity(), "minNumber", 0));
+        crystalRangeSeekbar.setMaxStartValue(SharedPreferencesManager.getInteger(getActivity(), "maxNumber", 100));
+
         crystalRangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
             @Override
             public void valueChanged(Number minValue, Number maxValue) {
-                min.setText(
-                        "" + minValue);
+                SharedPreferencesManager.putInteger(getActivity(), "minNumber", Integer.parseInt(minValue + ""));
+                SharedPreferencesManager.putInteger(getActivity(), "maxNumber", Integer.parseInt(maxValue + ""));
+                min.setText(minValue + "");
                 max.setText(maxValue + "");
             }
         });
-
 
         if (getResources().getBoolean(R.bool.is_right_to_left))
             imageView.setImageResource(R.drawable.left_arrow);
         else
             imageView.setImageResource(R.drawable.right_arrow);
+
+        moveToNextPageSwitch.setChecked(SharedPreferencesManager.getBoolean(getActivity(), "nextSuraStart", false));
+        basmalahSwitch.setChecked(SharedPreferencesManager.getBoolean(getActivity(), "basmalahSwitch", false));
+        voiceSwitch.setChecked(SharedPreferencesManager.getBoolean(getActivity(), "voiceSwitch", false));
+
+        moveToNextPageSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                SharedPreferencesManager.putBoolean(getActivity(), "nextSuraStart", b);
+            }
+        });
+
+        basmalahSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                SharedPreferencesManager.putBoolean(getActivity(), "basmalahSwitch", b);
+            }
+        });
+
+        voiceSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                SharedPreferencesManager.putBoolean(getActivity(), "voiceSwitch", b);
+            }
+        });
+
+        onFinishRAdioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                SharedPreferencesManager.putInteger(getActivity(), "radioGroup", radioGroup.getCheckedRadioButtonId());
+            }
+        });
+
+        int id = SharedPreferencesManager.getInteger(getActivity(), "radioGroup", -1);
+        onFinishRAdioGroup.check(id);
+
+        playerDownloadRelative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new DownloadSuraFragment()).addToBackStack(null).commit();
+                ((DrawerCloser) getActivity()).moveToolbarDown();
+            }
+        });
+
+        playerShakeRelative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ReadersFragment()).addToBackStack(null).commit();
+                ((DrawerCloser) getActivity()).moveToolbarDown();
+
+            }
+        });
+
     }
 
     @Override
@@ -135,7 +160,6 @@ public class PlayeSettingsFragment extends Fragment {
         if (item.getItemId() == R.id.menuPlayButton) {
             Intent intent = new Intent(getActivity(), PlayerService.class);
             getActivity().startService(intent);
-            Toast.makeText(getActivity(), "start", Toast.LENGTH_SHORT).show();
             sendMessage("start");
         }
         return false;

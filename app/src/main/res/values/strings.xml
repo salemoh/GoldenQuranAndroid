@@ -112,21 +112,21 @@
     <string name="dailyNotificationDescription">Daily Tenbbhet virtues and religious sayings</string>
     <string name="NotificationTitle">Notification</string>
     <string name="onFinishQuranTitle">On Finish Quran</string>
-    <string name="pickBackCover">Pick background colo</string>
-    <string name="textSize">Text size</string>
-    <string name="pickShake">Pick the shake</string>
-    <string name="downladSura">Download sura</string>
-    <string name="pickTafseer">Pick tafseer</string>
-    <string name="notificationManaging">Notification managing</string>
-    <string name="downladedSuraManaging">Manage downloaded sura</string>
+    <string name="pickBackCover">Page background colo</string>
+    <string name="textSize">Font size</string>
+    <string name="pickShake">Select Reader</string>
+    <string name="downladSura">Download suras</string>
+    <string name="pickTafseer">Select Explanation</string>
+    <string name="notificationManaging">Application Alerts management</string>
+    <string name="downladedSuraManaging">Suras loaded management</string>
     <string name="ContactUs">Contact us</string>
-    <string name="pickLanguage">Pick the language</string>
+    <string name="pickLanguage">Select Application language</string>
     <string name="Arabic">Arabic</string>
     <string name="english">English</string>
     <string name="Translate">Translate</string>
-    <string name="page_of_quran_landscape">Page Of Quran LandScape</string>
-    <string name="one_page_at_a_time">One Page At A Time</string>
-    <string name="two_page_at_a_time">Two Page At A Time</string>
+    <string name="page_of_quran_landscape">Preferred quran page on landScape</string>
+    <string name="one_page_at_a_time">One side with colored background image</string>
+    <string name="two_page_at_a_time">Double sides with colors only</string>
 
     <string-array name="translateTabs">
         <item name="atafseer">Al Tafseer</item>
@@ -175,19 +175,19 @@
     </string-array>
 
     <string-array name="MainList">
-        <item>Al quran athkar</item>
-        <item>Night reading</item>
-        <item>Friday reading</item>
+        <item>Quran Athkar</item>
+        <item>Night Reading</item>
+        <item>Friday Reading</item>
         <item>Bookmarks</item>
-        <item>Fahras</item>
-        <item>Marck ayat</item>
-        <item>Transelation and tajweed</item>
+        <item>Suras List</item>
+        <item>Highlight verses by topics</item>
+        <item>Translation and Tajweed</item>
         <item>Search</item>
-        <item>Player</item>
-        <item>Notification</item>
-        <item>Prayer time</item>
-        <item>Doaa khatem quran</item>
-        <item>Fourty nawaweah</item>
+        <item>Audio player</item>
+        <item>Notifications</item>
+        <item>Prayer Time</item>
+        <item>Finishing Quran Doaa</item>
+        <item>Forty Nowawya</item>
         <item>Share current page</item>
         <item>Settings</item>
         <item>Statistics</item>

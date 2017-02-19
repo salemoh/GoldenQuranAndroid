@@ -126,6 +126,43 @@ public class SettingsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         ((DrawerCloser) getActivity()).moveToolbarDown();
+
+        color1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferencesManager.putInteger(getActivity(), "color", R.color.lightOrange);
+            }
+        });
+
+        color2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferencesManager.putInteger(getActivity(), "color", R.color.lightGreen);
+            }
+        });
+
+        color3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferencesManager.putInteger(getActivity(), "color", R.color.lightBlue);
+            }
+        });
+
+        color4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferencesManager.putInteger(getActivity(), "color", R.color.lightYellow);
+            }
+        });
+
+        color5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferencesManager.putInteger(getActivity(), "color", R.color.lightPink);
+            }
+        });
+
+
         settingsArabicRadioButton.setChecked(SharedPreferencesManager.getBoolean(getActivity(), "isArabic", true));
         settingsArabicRadioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -144,6 +181,19 @@ public class SettingsFragment extends Fragment {
         });
         settingsEnglishRadioButton.setChecked(!SharedPreferencesManager.getBoolean(getActivity(), "isArabic", false));
 
+
+        settingsOnePageRadioButton.setChecked(SharedPreferencesManager.getBoolean(getActivity(), "pageStatus", true));
+        settingsOnePageRadioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    SharedPreferencesManager.putBoolean(getActivity(), "pageStatus", true);
+                } else {
+                    SharedPreferencesManager.putBoolean(getActivity(), "pageStatus", false);
+                }
+            }
+        });
+        settingsTwoPagesRadioButton.setChecked(!SharedPreferencesManager.getBoolean(getActivity(), "pageStatus", false));
 
         settingsDownloadsuraRelative.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -67,6 +67,7 @@ public class PrayingTimeViewPagerFragment extends Fragment {
 
         r = new Runnable() {
             public void run() {
+
                 ((DrawerCloser) getActivity()).moveToolbarUp();
             }
         };

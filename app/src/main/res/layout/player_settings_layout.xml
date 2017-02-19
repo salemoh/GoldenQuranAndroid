@@ -7,14 +7,12 @@
     android:background="#FFFFFF"
     android:clickable="true"
     android:orientation="vertical"
-    android:paddingBottom="5dp"
-    >
+    android:paddingBottom="5dp">
 
     <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
@@ -80,44 +78,40 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    app:max_start_value="500"
-                    app:min_value="0"
-                    app:max_value="1000"
-                    app:left_thumb_color="@color/colorAccent"
-                    app:right_thumb_color="@color/colorAccent"
-                    android:layout_marginRight="10dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
-                    app:bar_highlight_color="@color/colorAccent"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginStart="10dp"
                     app:bar_color="#7F000000"
-                    app:min_start_value="0" />
+                    app:bar_highlight_color="@color/colorAccent"
+                    app:left_thumb_color="@color/colorAccent"
+                    app:max_value="100"
+                    app:min_value="0"
+                    app:right_thumb_color="@color/colorAccent" />
 
                 <TextView
                     android:id="@+id/maxTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_alignParentRight="true"
                     android:layout_above="@+id/rangeSeekbar1"
-                   />
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginStart="10dp" />
 
                 <TextView
                     android:id="@+id/minTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_alignParentLeft="true"
                     android:layout_above="@id/rangeSeekbar1"
+                    android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                     />
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginStart="10dp" />
 
 
             </RelativeLayout>
@@ -150,38 +144,31 @@
                     android:layout_height="wrap_content">
 
                     <RadioButton
+                        android:id="@+id/radio_1"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:gravity="start"
                         android:text="@string/playNext"
                         android:textAlignment="textStart"
-                        android:textSize="20sp"
-
-
-                        />
+                        android:textSize="20sp" />
 
                     <RadioButton
+                        android:id="@+id/radio_2"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:gravity="start"
                         android:text="@string/stopSuraPlaying"
                         android:textAlignment="textStart"
-
-                        android:textSize="20sp"
-
-                        />
+                        android:textSize="20sp" />
 
                     <RadioButton
+                        android:id="@+id/radio_3"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:gravity="start"
                         android:text="@string/repeatTheAyat"
                         android:textAlignment="textStart"
-
-
-                        android:textSize="20sp"
-
-                        />
+                        android:textSize="20sp" />
 
                 </RadioGroup>
 
@@ -306,11 +293,11 @@
                     android:layout_height="50dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:src="@drawable/reader_abdelbaset"
-
                     android:layout_marginLeft="10dp"
+
                     android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/reader_abdelbaset" />
 
                 <TextView
                     android:id="@+id/playerShakeNameText"
@@ -327,6 +314,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/playerDownloadRelative"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_below="@id/playerShakeRelative"
@@ -339,10 +327,10 @@
                     android:layout_height="50dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/download_all_btn"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp" />
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/download_all_btn" />
 
                 <TextView
                     android:id="@+id/playerDownloadText"

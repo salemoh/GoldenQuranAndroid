@@ -1,6 +1,6 @@
 package com.blackstone.goldenquran.Fragments;
 
-import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,31 +14,42 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.blackstone.goldenquran.R;
-import com.blackstone.goldenquran.adapters.TestAdapter;
+import com.blackstone.goldenquran.adapters.DataBaseManager;
 import com.blackstone.goldenquran.models.Ayah;
 import com.blackstone.goldenquran.ui.DrawerCloser;
+import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
 import com.blackstone.goldenquran.views.DrawView;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import static com.blackstone.goldenquran.R.id.quranImage;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class QuranImageFragment extends Fragment {
 
-    DrawView imageView;
     float mapX, mapY;
     ArrayList<Float> left, top, right, bottom;
     int pageNumber;
-    TestAdapter data;
-    Cursor ayahPoints;
-    ArrayList<Ayah> ayah;
-
+    DataBaseManager data;
+    ArrayList<Ayah> ayahPoints;
     Handler handler;
     Runnable r;
+    int position;
+    @BindView(R.id.backgroundQuranImage)
+    ImageView backgroundQuranImage;
+    @BindView(R.id.quranImage)
+    DrawView imageView;
+    float alpha;
+
+    public void setPage(int possition) {
+        this.position = possition;
+    }
+
 
     public QuranImageFragment() {
     }
@@ -52,30 +63,76 @@ public class QuranImageFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_quran_image, container, false);
+        View view = inflater.inflate(R.layout.fragment_quran_image, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        imageView = (DrawView) getView().findViewById(quranImage);
+        String[] pages = new String[]{"_0012.png", "_0011.png", "_0010.png", "_0009.png", "_0008.png", "_0007.png", "_0006.png"};
 
         left = new ArrayList<>();
         top = new ArrayList<>();
         right = new ArrayList<>();
         bottom = new ArrayList<>();
 
-
         imageView.left = new ArrayList<>();
         imageView.top = new ArrayList<>();
         imageView.right = new ArrayList<>();
         imageView.bottom = new ArrayList<>();
 
-        setImageView("_0011.png");
+        switch (SharedPreferencesManager.getInteger(getActivity(), "color", Color.WHITE)) {
+            case R.color.lightBlue: {
+                if (position % 2 == 0)
+                    backgroundQuranImage.setImageResource(R.drawable.page_rightview_blue);
+                else
+                    backgroundQuranImage.setImageResource(R.drawable.page_leftview_blue);
+                break;
+            }
+            case R.color.lightGreen: {
+                if (position % 2 == 0)
+                    backgroundQuranImage.setImageResource(R.drawable.page_rightview_green);
+                else
+                    backgroundQuranImage.setImageResource(R.drawable.page_leftview_green);
+                break;
+            }
+            case R.color.lightOrange: {
+                if (position % 2 == 0)
+                    backgroundQuranImage.setImageResource(R.drawable.page_rightview_white);
+                else
+                    backgroundQuranImage.setImageResource(R.drawable.page_leftview_white);
+                break;
+            }
+            case R.color.lightPink: {
+                if (position % 2 == 0)
+                    backgroundQuranImage.setImageResource(R.drawable.page_rightview_red);
+                else
+                    backgroundQuranImage.setImageResource(R.drawable.page_leftview_red);
+                break;
+            }
+            case R.color.lightYellow: {
+                if (position % 2 == 0)
+                    backgroundQuranImage.setImageResource(R.drawable.page_rightview_white);
+                else
+                    backgroundQuranImage.setImageResource(R.drawable.page_leftview_white);
+                break;
+            }
+            default: {
+                if (position % 2 == 0)
+                    backgroundQuranImage.setImageResource(R.drawable.page_rightview_red);
+                else
+                    backgroundQuranImage.setImageResource(R.drawable.page_leftview_red);
+                break;
+            }
+
+        }
+
+        setImageView(pages[position]);
 
         imageView.setOnTouchListener(imgSourceOnTouchListener);
-
     }
 
     @Override
@@ -86,7 +143,8 @@ public class QuranImageFragment extends Fragment {
 
         r = new Runnable() {
             public void run() {
-                ((DrawerCloser) getActivity()).moveToolbarUp();
+                if (getActivity() != null)
+                    ((DrawerCloser) getActivity()).moveToolbarUp();
             }
         };
 
@@ -121,12 +179,12 @@ public class QuranImageFragment extends Fragment {
             mapX = map(eventX, 0, imageView.getWidth(), 0, 432);
             mapY = map(eventY, 0, imageView.getHeight(), 0, 694);
 
-            if (!ayah.isEmpty()) {
+            if (!ayahPoints.isEmpty()) {
 
                 float ayahNumber = 0;
-                for (int i = 0; i < ayah.size(); i++) {
-                    if (mapX > ayah.get(i).upperLeftX && mapX < ayah.get(i).upperRightX && mapY > ayah.get(i).upperRightY && mapY < ayah.get(i).lowerLeftY) {
-                        ayahNumber = ayah.get(i).ayah;
+                for (int i = 0; i < ayahPoints.size(); i++) {
+                    if (mapX > ayahPoints.get(i).upperLeftX && mapX < ayahPoints.get(i).upperRightX && mapY > ayahPoints.get(i).upperRightY && mapY < ayahPoints.get(i).lowerLeftY) {
+                        ayahNumber = ayahPoints.get(i).ayah;
                     }
                 }
 
@@ -135,12 +193,12 @@ public class QuranImageFragment extends Fragment {
                 right.clear();
                 bottom.clear();
 
-                for (int i = 0; i < ayah.size(); i++) {
-                    if (ayahNumber == ayah.get(i).ayah) {
-                        left.add(ayah.get(i).upperLeftX);
-                        top.add(ayah.get(i).upperLeftY);
-                        right.add(ayah.get(i).upperRightX);
-                        bottom.add(ayah.get(i).lowerLeftY);
+                for (int i = 0; i < ayahPoints.size(); i++) {
+                    if (ayahNumber == ayahPoints.get(i).ayah) {
+                        left.add(ayahPoints.get(i).upperLeftX);
+                        top.add(ayahPoints.get(i).upperLeftY);
+                        right.add(ayahPoints.get(i).upperRightX);
+                        bottom.add(ayahPoints.get(i).lowerLeftY);
                     }
                 }
 
@@ -168,7 +226,6 @@ public class QuranImageFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-
     }
 
     @Override
@@ -180,43 +237,17 @@ public class QuranImageFragment extends Fragment {
         return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
     }
 
-    private class getPagePoints extends AsyncTask<Integer, Void, Cursor> {
+    private class getPagePoints extends AsyncTask<Integer, Void, ArrayList<Ayah>> {
 
         @Override
-        protected Cursor doInBackground(Integer... integers) {
-            data = new TestAdapter(getActivity()).createDatabase();
-            data.open();
-            ayahPoints = data.getPagePoints(pageNumber);
-            return ayahPoints;
-        }
-
-        @Override
-        protected void onPostExecute(Cursor cursor) {
-            super.onPostExecute(cursor);
-
-            ayah = new ArrayList<>();
-
-            while (cursor.moveToNext()) {
-                ayah.add(new Ayah(
-                        cursor.getFloat(cursor.getColumnIndex("x")),
-                        cursor.getFloat(cursor.getColumnIndex("y")),
-                        cursor.getFloat(cursor.getColumnIndex("width")),
-                        cursor.getFloat(cursor.getColumnIndex("height")),
-                        cursor.getFloat(cursor.getColumnIndex("upper_left_x")),
-                        cursor.getFloat(cursor.getColumnIndex("upper_left_y")),
-                        cursor.getFloat(cursor.getColumnIndex("upper_right_x")),
-                        cursor.getFloat(cursor.getColumnIndex("upper_right_y")),
-                        cursor.getFloat(cursor.getColumnIndex("lower_right_x")),
-                        cursor.getFloat(cursor.getColumnIndex("lower_right_y")),
-                        cursor.getFloat(cursor.getColumnIndex("lower_left_x")),
-                        cursor.getFloat(cursor.getColumnIndex("lower_left_y")),
-                        cursor.getFloat(cursor.getColumnIndex("ayah")),
-                        cursor.getFloat(cursor.getColumnIndex("line")),
-                        cursor.getFloat(cursor.getColumnIndex("surah")),
-                        cursor.getFloat(cursor.getColumnIndex("page_number")),
-                        cursor.getFloat(cursor.getColumnIndex("id"))
-                ));
+        protected ArrayList<Ayah> doInBackground(Integer... integers) {
+            if (getActivity() != null) {
+                data = new DataBaseManager(getActivity()).createDatabase();
+                data.open();
+                ayahPoints = data.getPagePoints(pageNumber);
+                return ayahPoints;
             }
+            return null;
         }
     }
 }

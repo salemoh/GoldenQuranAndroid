@@ -84,7 +84,7 @@ public class IntonationTranslatorFragment extends Fragment {
             }
         });
 
-        viewPager.setAdapter(new TafseerViewPAgerAdapter(getChildFragmentManager()));
+        viewPager.setAdapter(new TafseerViewPagerAdapter(getChildFragmentManager()));
         if (!getActivity().getResources().getBoolean(R.bool.is_right_to_left)) {
             viewPager.setCurrentItem(8);
         }
@@ -92,10 +92,10 @@ public class IntonationTranslatorFragment extends Fragment {
     }
 
 
-    class TafseerViewPAgerAdapter extends FragmentPagerAdapter {
+    class TafseerViewPagerAdapter extends FragmentPagerAdapter {
         String[] titles = getActivity().getResources().getStringArray(R.array.translateTabs);
 
-        public TafseerViewPAgerAdapter(FragmentManager fm) {
+        TafseerViewPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 

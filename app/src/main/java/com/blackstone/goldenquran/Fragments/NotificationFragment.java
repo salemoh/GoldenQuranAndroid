@@ -7,34 +7,24 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.ui.DrawerCloser;
+import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NotificationFragment extends Fragment {
-
     @BindView(R.id.Switch)
-    android.widget.Switch Switch;
-    @BindView(R.id.notificationType)
-    TextView notificationType;
-    @BindView(R.id.description)
-    TextView description;
+    Switch mSwitch;
     @BindView(R.id.SwitchTwo)
-    android.widget.Switch SwitchTwo;
-    @BindView(R.id.notificationTypeTwo)
-    TextView notificationTypeTwo;
-    @BindView(R.id.descriptionTwo)
-    TextView descriptionTwo;
+    Switch mSwitchTwo;
     @BindView(R.id.SwitchThree)
-    android.widget.Switch SwitchThree;
-    @BindView(R.id.notificationTypeThree)
-    TextView notificationTypeThree;
-    @BindView(R.id.descriptionThree)
-    TextView descriptionThree;
+    Switch mSwitchThree;
+
 
     public NotificationFragment() {
 
@@ -60,5 +50,29 @@ public class NotificationFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         ((DrawerCloser) getActivity()).moveToolbarDown();
 
+        mSwitch.setChecked(SharedPreferencesManager.getBoolean(getActivity(), "firstSwitch", false));
+        mSwitchTwo.setChecked(SharedPreferencesManager.getBoolean(getActivity(), "secondSwitch", false));
+        mSwitchThree.setChecked(SharedPreferencesManager.getBoolean(getActivity(), "ThirdSwitch", false));
+
+        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                SharedPreferencesManager.putBoolean(getActivity(), "firstSwitch", b);
+            }
+        });
+
+        mSwitchThree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                SharedPreferencesManager.putBoolean(getActivity(), "ThirdSwitch", b);
+            }
+        });
+
+        mSwitchTwo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                SharedPreferencesManager.putBoolean(getActivity(), "secondSwitch", b);
+            }
+        });
     }
 }

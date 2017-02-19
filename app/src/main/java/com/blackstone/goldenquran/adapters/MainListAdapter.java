@@ -221,8 +221,9 @@ public class MainListAdapter extends RecyclerView.Adapter {
             }
 
             if (fragment != null) {
-                if (!fragment.isHidden())
-                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit();
+                Fragment currentFragment = ((FragmentActivity) context).getSupportFragmentManager().findFragmentById(R.id.container);
+                if (!currentFragment.getClass().equals(fragment.getClass()))
+                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).addToBackStack(pos + "").commit();
             }
             ((DrawerCloser) context).close(true);
             ((DrawerCloser) context).close(false);

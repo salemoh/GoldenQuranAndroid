@@ -2,7 +2,6 @@ package com.blackstone.goldenquran.Fragments;
 
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -21,8 +20,6 @@ public class QuranViewPager extends Fragment {
 
     @BindView(R.id.quranViewPager)
     ViewPager quranViewPager;
-    Handler handler;
-    Runnable r;
 
 
     public QuranViewPager() {
@@ -40,7 +37,10 @@ public class QuranViewPager extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        quranViewPager.setAdapter(new QuranViewPagerAdapter(getActivity().getSupportFragmentManager()));
+        quranViewPager.setAdapter(new QuranViewPagerAdapter(getChildFragmentManager()));
+//        int px = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()));
+//        quranViewPager.setPageMargin(px);
+//        quranViewPager.setPageMarginDrawable(R.drawable.book_binder2);
     }
 
     class QuranViewPagerAdapter extends FragmentPagerAdapter {
@@ -51,12 +51,14 @@ public class QuranViewPager extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            return new QuranImageFragment();
+            QuranImageFragment fragment = new QuranImageFragment();
+            fragment.setPage(position);
+            return fragment;
         }
 
         @Override
         public int getCount() {
-            return 250;
+            return 7;
         }
     }
 
