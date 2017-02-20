@@ -26,20 +26,15 @@
         android:layout_weight="0.5"
         android:background="#FFFFFF" />
 
-    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    <RelativeLayout
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="5dp"
         android:layout_weight="0.5"
-        android:background="#FFFFFF"
-        card_view:cardCornerRadius="8dp">
+        android:background="#FFFFFF">
 
-        <ImageView
-            android:id="@+id/pusaleh"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/compass" />
-    </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
 </LinearLayout>
 

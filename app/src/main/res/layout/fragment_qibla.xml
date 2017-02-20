@@ -1,0 +1,19 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="55dp">
+
+    <com.blackstone.goldenquran.qibla.RotatableImageView
+        android:id="@+id/qibla_compass_imv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/compass" />
+
+    <com.blackstone.goldenquran.qibla.RotatableImageView
+        android:id="@+id/qibla_compass_arrow_imv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/compass_arrow" />
+</RelativeLayout>

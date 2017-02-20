@@ -26,7 +26,7 @@
 
         <service
             android:name=".api.DownloadService"
-            android:exported="false"/>
+            android:exported="false" />
         <service
             android:name=".api.PlayerService"
             android:exported="false" />

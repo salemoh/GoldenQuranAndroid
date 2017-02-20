@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,9 +39,9 @@ public class QuranViewPager extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         quranViewPager.setAdapter(new QuranViewPagerAdapter(getChildFragmentManager()));
-//        int px = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()));
-//        quranViewPager.setPageMargin(px);
-//        quranViewPager.setPageMarginDrawable(R.drawable.book_binder2);
+        int px = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()));
+        quranViewPager.setPageMargin(px);
+        quranViewPager.setPageMarginDrawable(R.drawable.book_binder2);
     }
 
     class QuranViewPagerAdapter extends FragmentPagerAdapter {

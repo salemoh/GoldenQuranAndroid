@@ -4,7 +4,6 @@ package com.blackstone.goldenquran.Fragments;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -13,11 +12,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.ui.DrawerCloser;
@@ -31,13 +28,6 @@ public class PrayingTimeViewPagerFragment extends Fragment {
     TabLayout tab;
     @BindView(R.id.myViewPager)
     ViewPager viewPager;
-    @BindView(R.id.pusaleh)
-    ImageView pusaleh;
-    @BindView(R.id.card_view)
-    CardView cardView;
-
-    Handler handler;
-    Runnable r;
 
     public PrayingTimeViewPagerFragment() {
 
@@ -63,17 +53,7 @@ public class PrayingTimeViewPagerFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         ((DrawerCloser) getActivity()).moveToolbarDown();
 
-        handler = new Handler();
-
-        r = new Runnable() {
-            public void run() {
-
-                ((DrawerCloser) getActivity()).moveToolbarUp();
-            }
-        };
-
-        handler.postDelayed(r, 3000);
-
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.card_view, new QiblaFragment()).commit();
 
         Drawable wrappedDrawable = DrawableCompat.wrap(ContextCompat.getDrawable(getActivity(), R.drawable.pray_time_clock));
         DrawableCompat.setTint(wrappedDrawable, Color.WHITE);

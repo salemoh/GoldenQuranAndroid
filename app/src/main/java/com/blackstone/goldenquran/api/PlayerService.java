@@ -17,6 +17,7 @@ import android.support.v7.app.NotificationCompat;
 import android.widget.RemoteViews;
 
 import com.blackstone.goldenquran.R;
+import com.blackstone.goldenquran.ui.MainActivity;
 
 
 public class PlayerService extends Service {
@@ -36,6 +37,7 @@ public class PlayerService extends Service {
     public void onCreate() {
         mediaPlayer = MediaPlayer.create(this, R.raw.athan);
         x = (int) (mediaPlayer.getDuration() * 0.15);
+
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("Service"));
 
 
@@ -66,6 +68,10 @@ public class PlayerService extends Service {
         notificationView.setOnClickPendingIntent(R.id.notiplay, playIntent);
         notificationView.setOnClickPendingIntent(R.id.notistop, stopIntent);
         notificationView.setOnClickPendingIntent(R.id.notipause, pauseIntent);
+
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+                new Intent(this, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(contentIntent);
 
         Notification n = builder.build();
 

@@ -5,7 +5,6 @@ import android.support.multidex.MultiDexApplication;
 import timber.log.Timber;
 
 
-
 public class GoldenApplication extends MultiDexApplication {
 
     @Override

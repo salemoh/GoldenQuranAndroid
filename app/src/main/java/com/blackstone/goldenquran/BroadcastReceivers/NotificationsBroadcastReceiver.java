@@ -10,7 +10,6 @@ public class NotificationsBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-
         Intent toService = new Intent("Service");
 
         String action = intent.getAction();
