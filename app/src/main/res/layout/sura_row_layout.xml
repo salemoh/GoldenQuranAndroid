@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#FFFFFF"
@@ -21,9 +22,9 @@
         android:layout_toLeftOf="@+id/imageLiftArrow"
         android:layout_toRightOf="@+id/contentPanel"
         android:layout_toStartOf="@+id/imageLiftArrow"
+        android:gravity="start"
         android:text="@string/alFateha"
         android:textAlignment="textStart"
-        android:gravity="start"
         android:textSize="25sp" />
 
     <LinearLayout
@@ -49,20 +50,19 @@
                 android:id="@+id/numberOfSura"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
-                android:textColor="#F4A460"
                 android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp" />
+                android:layout_marginStart="5dp"
+                android:text="1"
+                android:textColor="#F4A460" />
 
             <TextView
                 android:id="@+id/raqmha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/numberOfSura"
-                android:textColor="#F4A460"
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
-                />
+                android:text="@string/numberOfSura"
+                android:textColor="#F4A460" />
 
         </LinearLayout>
 

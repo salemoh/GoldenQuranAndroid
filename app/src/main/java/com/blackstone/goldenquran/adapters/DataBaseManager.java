@@ -74,4 +74,11 @@ public class DataBaseManager {
         }
         return ayah;
     }
+
+    int getPageNumber(String surahNumber) {
+
+        Cursor cursor = mDb.query("page", null, "surah = ? and id > 10000", new String[]{surahNumber}, null, null, "ayah ASC");
+        cursor.moveToNext();
+        return cursor.getInt(cursor.getColumnIndex("page_number"));
+    }
 }

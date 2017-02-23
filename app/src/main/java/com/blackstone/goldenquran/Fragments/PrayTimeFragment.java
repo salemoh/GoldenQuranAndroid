@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,9 +30,10 @@ import com.blackstone.goldenquran.GetTimeClasses.AthanTimeCalculator;
 import com.blackstone.goldenquran.GetTimeClasses.TimeZoneUtil;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.RecyclerAdapter;
-import com.blackstone.goldenquran.api.Alarm;
+import com.blackstone.goldenquran.api.AlarmService;
 import com.blackstone.goldenquran.models.PrayModel;
 import com.blackstone.goldenquran.ui.DrawerCloser;
+import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -91,7 +93,7 @@ public class PrayTimeFragment extends Fragment implements GoogleApiClient.Connec
                 .build();
 
         arrayList = new ArrayList<>();
-        intent = new Intent(getActivity(), Alarm.class);
+        intent = new Intent(getActivity(), AlarmService.class);
     }
 
     public void onStart() {
@@ -122,23 +124,20 @@ public class PrayTimeFragment extends Fragment implements GoogleApiClient.Connec
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void setmLastLocation() {
         if (mLastLocation != null) {
             mLatitudeADouble = mLastLocation.getLatitude();
             mLongitudeADouble = mLastLocation.getLongitude();
             Log.d("tag", "not null");
-            SharedPreferences.Editor editor = getActivity().getSharedPreferences("pref", MODE_PRIVATE).edit();
-            editor.putString("Latitude", mLatitudeADouble + "");
-            editor.putString("Longitude", mLongitudeADouble + "");
-            editor.apply();
-
+            SharedPreferencesManager.putString(getActivity(), "Latitude", mLatitudeADouble + "");
+            SharedPreferencesManager.putString(getActivity(), "Longitude", mLongitudeADouble + "");
         } else if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 Log.d("tag", "null have permission");
 
-                SharedPreferences prefs = getActivity().getSharedPreferences("pref", MODE_PRIVATE);
-                mLatitudeADouble = Double.parseDouble(prefs.getString("Latitude", "0"));
-                mLongitudeADouble = Double.parseDouble(prefs.getString("Longitude", "0"));
+                mLatitudeADouble = Double.parseDouble(SharedPreferencesManager.getString(getActivity(), "Latitude", "0"));
+                mLongitudeADouble = Double.parseDouble(SharedPreferencesManager.getString(getActivity(), "Longitude", "0"));
 
             }
         }
@@ -156,7 +155,7 @@ public class PrayTimeFragment extends Fragment implements GoogleApiClient.Connec
             maghrib = athanTime.getMaghrib().getHour() + ":" + athanTime.getMaghrib().getMinute();
             isha = athanTime.getIsha().getHour() + ":" + athanTime.getIsha().getMinute();
 
-            Log.d("tag", "have the times" + fajr);
+            Log.d("tag", "have the times" + aser);
 
             arrayList.add(new PrayModel("fajr", fajr));
             arrayList.add(new PrayModel("dohur", dhuour));
@@ -164,11 +163,6 @@ public class PrayTimeFragment extends Fragment implements GoogleApiClient.Connec
             arrayList.add(new PrayModel("maghrib", maghrib));
             arrayList.add(new PrayModel("isha", isha));
 
-            ArrayList counter = new ArrayList();
-            SharedPreferences count = getActivity().getSharedPreferences("counter", Context.MODE_PRIVATE);
-            for (int i = 0; i < 5; i++) {
-                counter.add(count.getString(i + "", "0"));
-            }
 
             if (fajr != null) {
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences("salah", MODE_PRIVATE).edit();
@@ -180,6 +174,12 @@ public class PrayTimeFragment extends Fragment implements GoogleApiClient.Connec
                 editor.putString("isha", isha);
                 editor.apply();
                 Log.d("tag", "not null fajer");
+            }
+
+            ArrayList counter = new ArrayList();
+            SharedPreferences count = getActivity().getSharedPreferences("counter", Context.MODE_PRIVATE);
+            for (int i = 0; i < 5; i++) {
+                counter.add(count.getString(i + "", "0"));
             }
 
             SharedPreferences pref = getActivity().getSharedPreferences("salah", Context.MODE_PRIVATE);
@@ -196,8 +196,8 @@ public class PrayTimeFragment extends Fragment implements GoogleApiClient.Connec
 
             String[] aAser = pref.getString("aser", "").split(":");
             calaser = Calendar.getInstance();
-            calaser.set(Calendar.HOUR_OF_DAY, Integer.parseInt(aAser[0].replaceAll(" ", "")));
-            calaser.set(Calendar.MINUTE, Integer.parseInt(aAser[1].replaceAll(" ", "")));
+            calaser.set(Calendar.HOUR_OF_DAY, 15);
+            calaser.set(Calendar.MINUTE, 46);
 
             String[] aMaghrib = pref.getString("maghrib", "").split(":");
             calmagreb = Calendar.getInstance();
@@ -211,13 +211,14 @@ public class PrayTimeFragment extends Fragment implements GoogleApiClient.Connec
 
 
             AlarmManager am = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
+            PendingIntent pendingIntent = PendingIntent.getService(getActivity(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            am.setRepeating(AlarmManager.RTC_WAKEUP, calfager.getTimeInMillis(), 0, pendingIntent);
-            am.set(AlarmManager.RTC, calduhor.getTimeInMillis(), pendingIntent);
-            am.set(AlarmManager.RTC, calaser.getTimeInMillis(), pendingIntent);
-            am.set(AlarmManager.RTC, calmagreb.getTimeInMillis(), pendingIntent);
-            am.set(AlarmManager.RTC, calisha.getTimeInMillis(), pendingIntent);
+            am.setExact(AlarmManager.RTC_WAKEUP, calfager.getTimeInMillis(), pendingIntent);
+            am.setExact(AlarmManager.RTC_WAKEUP, calduhor.getTimeInMillis(), pendingIntent);
+            am.setExact(AlarmManager.RTC_WAKEUP, calaser.getTimeInMillis(), pendingIntent);
+            Toast.makeText(getActivity(), calaser.getTime() + "", Toast.LENGTH_SHORT).show();
+            am.setExact(AlarmManager.RTC_WAKEUP, calmagreb.getTimeInMillis(), pendingIntent);
+            am.setExact(AlarmManager.RTC_WAKEUP, calisha.getTimeInMillis(), pendingIntent);
 
             if (arrayList.size() <= 5) {
                 Log.d("tag", "if (arrayList.size() <= 5)");
@@ -229,6 +230,7 @@ public class PrayTimeFragment extends Fragment implements GoogleApiClient.Connec
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {

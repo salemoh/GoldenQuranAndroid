@@ -1,25 +1,36 @@
 package com.blackstone.goldenquran.adapters;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.blackstone.goldenquran.Fragments.QuranImageFragment;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.models.AljuzaModel;
 import com.blackstone.goldenquran.models.AlsuraModel;
 
 import java.util.List;
 
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class AlsuraAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     List<Object> list;
     LayoutInflater layoutInflater;
     Context context;
+    DataBaseManager data;
+    int pageNumber;
+
 
     public AlsuraAdapter(Context context, List<Object> list) {
         this.list = list;
@@ -38,17 +49,31 @@ public class AlsuraAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
         if (holder.getItemViewType() == 1) {
             AlJuzaViewHolder viewHolder = (AlJuzaViewHolder) holder;
             AljuzaModel aljuzaModel = (AljuzaModel) list.get(position);
             viewHolder.juzoa.setText(aljuzaModel.name);
         } else if (holder.getItemViewType() == 0) {
             AlsurahViewHolder viewHolder = (AlsurahViewHolder) holder;
-            AlsuraModel alsuraModel = (AlsuraModel) list.get(position);
+            final AlsuraModel alsuraModel = (AlsuraModel) list.get(position);
             viewHolder.ayat.setText(alsuraModel.numberOfAya);
             viewHolder.name.setText(alsuraModel.suraName);
             viewHolder.number.setText(alsuraModel.number);
-            if(context.getResources().getBoolean(R.bool.is_right_to_left))
+            viewHolder.contentPanel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new getPageNumber().execute(Integer.parseInt(alsuraModel.number));
+                    if (pageNumber > 0) {
+                        Fragment fragment = new QuranImageFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("pageNumber", pageNumber);
+                        fragment.setArguments(bundle);
+                        ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+                    }
+                }
+            });
+            if (context.getResources().getBoolean(R.bool.is_right_to_left))
                 viewHolder.arrow.setImageResource(R.drawable.right_arrow);
             else
                 viewHolder.arrow.setImageResource(R.drawable.left_arrow);
@@ -70,28 +95,52 @@ public class AlsuraAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
 
-}
+    class AlsurahViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.imageLiftArrow)
+        ImageView arrow;
+        @BindView(R.id.suraName)
+        TextView name;
+        @BindView(R.id.numberOfSura)
+        TextView number;
+        @BindView(R.id.numberOfAyat)
+        TextView ayat;
+        @BindView(R.id.row)
+        RelativeLayout contentPanel;
 
-class AlsurahViewHolder extends RecyclerView.ViewHolder {
+        AlsurahViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
 
-    TextView name, number, ayat;
-    ImageView arrow;
-
-    public AlsurahViewHolder(View itemView) {
-        super(itemView);
-        name = (TextView) itemView.findViewById(R.id.suraName);
-        number = (TextView) itemView.findViewById(R.id.numberOfSura);
-        ayat = (TextView) itemView.findViewById(R.id.numberOfAyat);
-        arrow = (ImageView) itemView.findViewById(R.id.imageLiftArrow);
+        }
     }
+
+
+    class getPageNumber extends AsyncTask<Integer, Void, Integer> {
+
+        @Override
+        protected Integer doInBackground(Integer... integers) {
+            data = new DataBaseManager(context).createDatabase();
+            data.open();
+            return data.getPageNumber(integers[0] + "");
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+            pageNumber = integer;
+        }
+    }
+
 
 }
 
 class AlJuzaViewHolder extends RecyclerView.ViewHolder {
+
+    @BindView(R.id.juzoaNumber)
     TextView juzoa;
 
-    public AlJuzaViewHolder(View itemView) {
+    AlJuzaViewHolder(View itemView) {
         super(itemView);
-        juzoa = (TextView) itemView.findViewById(R.id.juzoaNumber);
+        ButterKnife.bind(this, itemView);
     }
 }

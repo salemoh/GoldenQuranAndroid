@@ -44,7 +44,7 @@ public class QuranImageFragment extends Fragment {
     ImageView backgroundQuranImage;
     @BindView(R.id.quranImage)
     DrawView imageView;
-    float alpha;
+
 
     public void setPage(int possition) {
         this.position = possition;
@@ -71,8 +71,6 @@ public class QuranImageFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        String[] pages = new String[]{"_0012.png", "_0011.png", "_0010.png", "_0009.png", "_0008.png", "_0007.png", "_0006.png"};
 
         left = new ArrayList<>();
         top = new ArrayList<>();
@@ -130,7 +128,11 @@ public class QuranImageFragment extends Fragment {
 
         }
 
-        setImageView(pages[position]);
+        if (getArguments() != null && !getArguments().isEmpty()) {
+            pageNumber = getArguments().getInt("pageNumber");
+        }
+
+        setImageView(pageNumber);
 
         imageView.setOnTouchListener(imgSourceOnTouchListener);
     }
@@ -152,16 +154,22 @@ public class QuranImageFragment extends Fragment {
 
     }
 
-    public void setImageView(String sPageNumber) {
+    public void setImageView(int sPageNumber) {
         InputStream ims;
         try {
-            ims = getActivity().getAssets().open(sPageNumber);
+            String s = String.valueOf(sPageNumber);
+            if (s.length() == 3)
+                s = "_0" + sPageNumber + ".png";
+            else if (s.length() == 2)
+                s = "_00" + sPageNumber + ".png";
+            else
+                s = "_000" + sPageNumber + ".png";
+
+            ims = getActivity().getAssets().open(s);
             Drawable d = Drawable.createFromStream(ims, null);
             imageView.setImageDrawable(d);
 
-            pageNumber = Integer.parseInt(sPageNumber.substring(1, 5));
-
-            new getPagePoints().execute(pageNumber);
+            new getPagePoints().execute(sPageNumber);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -179,12 +187,14 @@ public class QuranImageFragment extends Fragment {
             mapX = map(eventX, 0, imageView.getWidth(), 0, 432);
             mapY = map(eventY, 0, imageView.getHeight(), 0, 694);
 
-            if (!ayahPoints.isEmpty()) {
+            if (ayahPoints != null && !ayahPoints.isEmpty()) {
 
                 float ayahNumber = 0;
+                float suraNumber = 0;
                 for (int i = 0; i < ayahPoints.size(); i++) {
                     if (mapX > ayahPoints.get(i).upperLeftX && mapX < ayahPoints.get(i).upperRightX && mapY > ayahPoints.get(i).upperRightY && mapY < ayahPoints.get(i).lowerLeftY) {
                         ayahNumber = ayahPoints.get(i).ayah;
+                        suraNumber = ayahPoints.get(i).surah;
                     }
                 }
 
@@ -194,7 +204,7 @@ public class QuranImageFragment extends Fragment {
                 bottom.clear();
 
                 for (int i = 0; i < ayahPoints.size(); i++) {
-                    if (ayahNumber == ayahPoints.get(i).ayah) {
+                    if (ayahNumber == ayahPoints.get(i).ayah && suraNumber == ayahPoints.get(i).surah) {
                         left.add(ayahPoints.get(i).upperLeftX);
                         top.add(ayahPoints.get(i).upperLeftY);
                         right.add(ayahPoints.get(i).upperRightX);
@@ -244,7 +254,7 @@ public class QuranImageFragment extends Fragment {
             if (getActivity() != null) {
                 data = new DataBaseManager(getActivity()).createDatabase();
                 data.open();
-                ayahPoints = data.getPagePoints(pageNumber);
+                ayahPoints = data.getPagePoints(pageNumber - 3);
                 return ayahPoints;
             }
             return null;

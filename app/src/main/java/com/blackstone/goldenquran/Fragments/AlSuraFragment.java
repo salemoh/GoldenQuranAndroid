@@ -56,20 +56,19 @@ public class AlSuraFragment extends Fragment {
         String[] ajzaNames = getResources().getStringArray(R.array.ajzaNames);
         ArrayList arrayList = new ArrayList();
         arrayList.add(new AljuzaModel(ajzaNames[0]));
-        arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));
-        arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));
-
+        arrayList.add(new AlsuraModel("9", "7", getString(R.string.suraName)));
+        arrayList.add(new AlsuraModel("6", "7", getString(R.string.suraName)));
         arrayList.add(new AljuzaModel(ajzaNames[1]));
         arrayList.add(new AljuzaModel(ajzaNames[2]));
-        arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));
+        arrayList.add(new AlsuraModel("8", "7", getString(R.string.suraName)));
         arrayList.add(new AljuzaModel(ajzaNames[3]));
-        arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));
+        arrayList.add(new AlsuraModel("93", "7", getString(R.string.suraName)));
         arrayList.add(new AljuzaModel(ajzaNames[4]));
-        arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));
-        arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));
+        arrayList.add(new AlsuraModel("87", "7", getString(R.string.suraName)));
+        arrayList.add(new AlsuraModel("90", "7", getString(R.string.suraName)));
         arrayList.add(new AljuzaModel(ajzaNames[5]));
-        arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));
-        arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));
+        arrayList.add(new AlsuraModel("11", "7", getString(R.string.suraName)));
+        arrayList.add(new AlsuraModel("12", "7", getString(R.string.suraName)));
         arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));
         arrayList.add(new AljuzaModel(ajzaNames[6]));
         arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));

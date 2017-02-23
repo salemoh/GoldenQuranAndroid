@@ -21,6 +21,7 @@ public class QuranViewPager extends Fragment {
 
     @BindView(R.id.quranViewPager)
     ViewPager quranViewPager;
+    int y;
 
 
     public QuranViewPager() {
@@ -42,6 +43,10 @@ public class QuranViewPager extends Fragment {
         int px = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()));
         quranViewPager.setPageMargin(px);
         quranViewPager.setPageMarginDrawable(R.drawable.book_binder2);
+//        if (getArguments() != null && !getArguments().isEmpty()) {
+//            y = getArguments().getInt("pageNumber");
+//            quranViewPager.setCurrentItem(y);
+//        }
     }
 
     class QuranViewPagerAdapter extends FragmentPagerAdapter {
@@ -59,7 +64,7 @@ public class QuranViewPager extends Fragment {
 
         @Override
         public int getCount() {
-            return 7;
+            return 624;
         }
     }
 

@@ -30,10 +30,19 @@
         <service
             android:name=".api.PlayerService"
             android:exported="false" />
+        <service
+            android:name=".api.AlarmService"
+            android:exported="false" />
 
         <receiver android:name=".BroadcastReceivers.NotificationsBroadcastReceiver">
             <intent-filter>
                 <action android:name="playPauseStop" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".BroadcastReceivers.AlarmBroadCastReceiver">
+            <intent-filter>
+                <action android:name="alarm" />
             </intent-filter>
         </receiver>
 
