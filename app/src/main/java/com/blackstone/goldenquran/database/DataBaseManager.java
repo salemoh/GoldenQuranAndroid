@@ -1,4 +1,4 @@
-package com.blackstone.goldenquran.adapters;
+package com.blackstone.goldenquran.database;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -6,7 +6,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.blackstone.goldenquran.database.Medina1OpenHelper;
 import com.blackstone.goldenquran.models.Ayah;
 
 import java.io.IOException;
@@ -75,7 +74,7 @@ public class DataBaseManager {
         return ayah;
     }
 
-    int getPageNumber(String surahNumber) {
+    public int getPageNumber(String surahNumber) {
 
         Cursor cursor = mDb.query("page", null, "surah = ? and id > 10000", new String[]{surahNumber}, null, null, "ayah ASC");
         cursor.moveToNext();

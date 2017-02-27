@@ -122,14 +122,14 @@ public class PrayingTimeViewPagerFragment extends Fragment {
                 if (position == 0)
                     fragment = new PrayTimeFragment();
                 else if (position == 1)
-                    fragment = new MainListFragment();
+                    fragment = new PrayTimeSettingsFragment();
                 else if (position == 2)
                     fragment = new PrayTimeConfigerFragment();
             } else {
                 if (position == 0)
                     fragment = new PrayTimeConfigerFragment();
                 else if (position == 1)
-                    fragment = new MainListFragment();
+                    fragment = new PrayTimeSettingsFragment();
                 else if (position == 2)
                     fragment = new PrayTimeFragment();
             }

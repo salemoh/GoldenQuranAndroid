@@ -32,7 +32,8 @@
             android:exported="false" />
         <service
             android:name=".api.AlarmService"
-            android:exported="false" />
+            android:enabled="true"
+            android:exported="true" />
 
         <receiver android:name=".BroadcastReceivers.NotificationsBroadcastReceiver">
             <intent-filter>

@@ -32,12 +32,16 @@ public class AlarmService extends Service {
     public void onCreate() {
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, new IntentFilter("AlarmService"));
 
-        NotificationManager alarmNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-        PendingIntent contentIntent = PendingIntent.getBroadcast(this, 0, new Intent("alarm"), PendingIntent.FLAG_UPDATE_CURRENT);
-
         mediaPlayer = MediaPlayer.create(this, R.raw.athan);
         if (!mediaPlayer.isPlaying())
             mediaPlayer.start();
+
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        NotificationManager alarmNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+        PendingIntent contentIntent = PendingIntent.getBroadcast(this, 0, new Intent("alarm"), PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder alarmNotificationBuilder = new NotificationCompat.Builder(this)
                 .setContentTitle("Alarm")
@@ -48,6 +52,7 @@ public class AlarmService extends Service {
                 .setContentIntent(contentIntent);
 
         alarmNotificationManager.notify(153163264, alarmNotificationBuilder.build());
+        return START_STICKY;
 
     }
 

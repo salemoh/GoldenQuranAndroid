@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 
 import com.blackstone.goldenquran.R;
 
+import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -22,6 +24,8 @@ public class QuranViewPager extends Fragment {
     @BindView(R.id.quranViewPager)
     ViewPager quranViewPager;
     int y;
+    @BindView(R.id.seek_bar_quran)
+    DiscreteSeekBar seekBarQuran;
 
 
     public QuranViewPager() {
@@ -39,14 +43,48 @@ public class QuranViewPager extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        seekBarQuran.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
+            @Override
+            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
+                quranViewPager.setCurrentItem(value,true);
+            }
+
+            @Override
+            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
+
+            }
+        });
+
         quranViewPager.setAdapter(new QuranViewPagerAdapter(getChildFragmentManager()));
         int px = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()));
         quranViewPager.setPageMargin(px);
+        quranViewPager.setRotationY(180);
+        quranViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                seekBarQuran.setProgress(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
         quranViewPager.setPageMarginDrawable(R.drawable.book_binder2);
-//        if (getArguments() != null && !getArguments().isEmpty()) {
-//            y = getArguments().getInt("pageNumber");
-//            quranViewPager.setCurrentItem(y);
-//        }
+        if (getArguments() != null && !getArguments().isEmpty()) {
+            quranViewPager.setCurrentItem(getArguments().getInt("pageNumber"));
+            seekBarQuran.setProgress(getArguments().getInt("pageNumber"));
+        }
     }
 
     class QuranViewPagerAdapter extends FragmentPagerAdapter {

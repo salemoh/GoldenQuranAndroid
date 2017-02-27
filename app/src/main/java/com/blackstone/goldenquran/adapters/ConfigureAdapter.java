@@ -46,23 +46,23 @@ public class ConfigureAdapter extends RecyclerView.Adapter<MyConfigureViewHolder
 
 
         editor = context.getSharedPreferences("counter", Context.MODE_PRIVATE).edit();
-
-
-        String[] s = list.get(position).time.replaceAll(" ", "").split(":");
-
-
-        int minutes = Integer.parseInt(counter.get(position) + "") + Integer.parseInt(s[0] + "") * 60 + Integer.parseInt(s[1]);
-        int hours = minutes / 60;
-        if (hours >= 24) {
-            hours = hours % 24;
-        }
-        minutes = minutes % 60;
-
-        s[0] = hours + "";
-        s[1] = minutes + "";
-        if (s[0].length() == 1)
-            s[0] = "0" + s[0];
-        holder.time.setText((Integer.parseInt(s[1]) >= 10) ? s[0] + ":" + s[1] : s[0] + ":" + "0" + s[1]);
+//
+//
+//        String[] s = list.get(position).time.replaceAll(" ", "").split(":");
+//
+//
+//        int minutes = Integer.parseInt(counter.get(position) + "") + Integer.parseInt(s[0] + "") * 60 + Integer.parseInt(s[1]);
+//        int hours = minutes / 60;
+//        if (hours >= 24) {
+//            hours = hours % 24;
+//        }
+//        minutes = minutes % 60;
+//
+//        s[0] = hours + "";
+//        s[1] = minutes + "";
+//        if (s[0].length() == 1)
+//            s[0] = "0" + s[0];
+        holder.time.setText(/*(Integer.parseInt(s[1]) >= 10) ? s[0] + ":" + s[1] : s[0] + ":" + "0" + s[1]*/list.get(position).time);
 
         
 

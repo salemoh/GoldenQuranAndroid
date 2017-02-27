@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.blackstone.goldenquran.R;
-import com.blackstone.goldenquran.adapters.DataBaseManager;
+import com.blackstone.goldenquran.database.DataBaseManager;
 import com.blackstone.goldenquran.models.Ayah;
 import com.blackstone.goldenquran.ui.DrawerCloser;
 import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
@@ -34,7 +34,6 @@ public class QuranImageFragment extends Fragment {
 
     float mapX, mapY;
     ArrayList<Float> left, top, right, bottom;
-    int pageNumber;
     DataBaseManager data;
     ArrayList<Ayah> ayahPoints;
     Handler handler;
@@ -128,13 +127,9 @@ public class QuranImageFragment extends Fragment {
 
         }
 
-        if (getArguments() != null && !getArguments().isEmpty()) {
-            pageNumber = getArguments().getInt("pageNumber");
-        }
-
-        setImageView(pageNumber);
-
+        setImageView(position);
         imageView.setOnTouchListener(imgSourceOnTouchListener);
+
     }
 
     @Override
@@ -223,7 +218,6 @@ public class QuranImageFragment extends Fragment {
                     imageView.right.add(map(right.get(i).longValue(), 0, 432, 0, imageView.getWidth()));
                     imageView.bottom.add(map(bottom.get(i).longValue(), 0, 694, 0, imageView.getHeight()));
                 }
-
             }
 
             imageView.touched = true;
@@ -254,7 +248,7 @@ public class QuranImageFragment extends Fragment {
             if (getActivity() != null) {
                 data = new DataBaseManager(getActivity()).createDatabase();
                 data.open();
-                ayahPoints = data.getPagePoints(pageNumber - 3);
+                ayahPoints = data.getPagePoints(position);
                 return ayahPoints;
             }
             return null;

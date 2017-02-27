@@ -40,7 +40,6 @@ public class PlayerService extends Service {
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("Service"));
 
-
         Intent pause = new Intent("playPauseStop");
         pause.putExtra("message", "pause");
         PendingIntent pauseIntent = PendingIntent.getBroadcast(this, 1, pause, 0);
@@ -69,8 +68,7 @@ public class PlayerService extends Service {
         notificationView.setOnClickPendingIntent(R.id.notistop, stopIntent);
         notificationView.setOnClickPendingIntent(R.id.notipause, pauseIntent);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(contentIntent);
 
         Notification n = builder.build();
@@ -87,6 +85,7 @@ public class PlayerService extends Service {
         final int delay = 300;
         h.postDelayed(new Runnable() {
             public void run() {
+
                 if (mediaPlayer != null && mediaPlayer.isPlaying()) {
                     sendProgress(mediaPlayer.getCurrentPosition());
                     notificationView.setProgressBar(R.id.pb_progress, mediaPlayer.getDuration(), mediaPlayer.getCurrentPosition(), false);
@@ -98,6 +97,13 @@ public class PlayerService extends Service {
 
             }
         }, delay);
+
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                mediaPlayer.start();
+            }
+        });
 
         return START_STICKY;
     }

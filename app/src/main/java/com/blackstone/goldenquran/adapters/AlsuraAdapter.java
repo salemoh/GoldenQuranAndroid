@@ -13,8 +13,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.blackstone.goldenquran.Fragments.QuranImageFragment;
+import com.blackstone.goldenquran.Fragments.QuranViewPager;
 import com.blackstone.goldenquran.R;
+import com.blackstone.goldenquran.database.DataBaseManager;
 import com.blackstone.goldenquran.models.AljuzaModel;
 import com.blackstone.goldenquran.models.AlsuraModel;
 
@@ -65,7 +66,7 @@ public class AlsuraAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 public void onClick(View view) {
                     new getPageNumber().execute(Integer.parseInt(alsuraModel.number));
                     if (pageNumber > 0) {
-                        Fragment fragment = new QuranImageFragment();
+                        Fragment fragment = new QuranViewPager();
                         Bundle bundle = new Bundle();
                         bundle.putInt("pageNumber", pageNumber);
                         fragment.setArguments(bundle);
