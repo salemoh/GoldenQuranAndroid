@@ -105,7 +105,7 @@
                 android:layout_height="1dp"
                 android:layout_below="@+id/color6"
                 android:layout_margin="5dp"
-                android:background="@color/playerBacground" />
+                android:background="@color/playerBackground" />
 
 
             <RelativeLayout
@@ -152,7 +152,7 @@
                 android:layout_height="1dp"
                 android:layout_below="@+id/textSizeRelative"
                 android:layout_margin="5dp"
-                android:background="@color/playerBacground" />
+                android:background="@color/playerBackground" />
 
             <RelativeLayout
                 android:id="@+id/pickShakeRelative"
@@ -192,7 +192,7 @@
                 android:layout_height="1dp"
                 android:layout_below="@+id/pickShakeRelative"
                 android:layout_margin="5dp"
-                android:background="@color/playerBacground" />
+                android:background="@color/playerBackground" />
 
 
             <RelativeLayout
@@ -233,7 +233,7 @@
                 android:layout_height="1dp"
                 android:layout_below="@+id/settingsDownloadsuraRelative"
                 android:layout_margin="5dp"
-                android:background="@color/playerBacground" />
+                android:background="@color/playerBackground" />
 
             <RelativeLayout
                 android:id="@+id/settingsPickTafseerRelative"
@@ -274,7 +274,7 @@
                 android:layout_height="1dp"
                 android:layout_below="@+id/settingsPickTafseerRelative"
                 android:layout_margin="5dp"
-                android:background="@color/playerBacground" />
+                android:background="@color/playerBackground" />
 
             <RelativeLayout
                 android:id="@+id/settingsNotificationRelative"
@@ -315,7 +315,7 @@
                 android:layout_height="1dp"
                 android:layout_below="@+id/settingsNotificationRelative"
                 android:layout_margin="5dp"
-                android:background="@color/playerBacground" />
+                android:background="@color/playerBackground" />
 
             <RelativeLayout
                 android:id="@+id/settingsDownloadedSuraRelative"
@@ -355,7 +355,7 @@
                 android:layout_height="1dp"
                 android:layout_below="@+id/settingsPickLanguageRelative"
                 android:layout_margin="5dp"
-                android:background="@color/playerBacground" />
+                android:background="@color/playerBackground" />
 
             <RelativeLayout
                 android:id="@+id/settingsCallUsRelative"
@@ -395,7 +395,7 @@
                 android:layout_height="1dp"
                 android:layout_below="@+id/settingsDownloadedSuraRelative"
                 android:layout_margin="5dp"
-                android:background="@color/playerBacground" />
+                android:background="@color/playerBackground" />
 
 
             <RelativeLayout
@@ -451,7 +451,7 @@
                 android:layout_height="1dp"
                 android:layout_below="@+id/settingsCallUsRelative"
                 android:layout_margin="5dp"
-                android:background="@color/playerBacground" />
+                android:background="@color/playerBackground" />
 
 
             <RelativeLayout

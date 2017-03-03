@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:text="sora name"
-        android:textColor="@color/noti_text"
+        android:textColor="@color/notification_text"
         />
 
     <TextView
@@ -50,7 +50,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="shake name"
-        android:textColor="@color/noti_text"
+        android:textColor="@color/notification_text"
         />
 
 </RelativeLayout>

@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.blackstone.goldenquran.Fragments.AhadethFragment;
+import com.blackstone.goldenquran.Fragments.AhadethRecyclerFragment;
 import com.blackstone.goldenquran.Fragments.BookmarkFragment;
 import com.blackstone.goldenquran.Fragments.FahrasFragment;
 import com.blackstone.goldenquran.Fragments.FridayReadingFragment;
@@ -196,7 +196,7 @@ public class MainListAdapter extends RecyclerView.Adapter {
                     pos = 10;
                     break;
                 case 10:
-                    fragment = new AhadethFragment();
+                    fragment = new AhadethRecyclerFragment();
                     pos = 11;
                     break;
                 case 11: {

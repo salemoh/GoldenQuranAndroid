@@ -24,7 +24,7 @@
                 android:layout_height="48dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:background="@color/playerBacground"
+                android:background="@color/playerBackground"
                 android:gravity="bottom"
                 android:text="@string/playerCurrentSura" />
 
@@ -62,7 +62,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/alSuraAlHaleahRelative"
-                android:background="@color/playerBacground"
+                android:background="@color/playerBackground"
                 android:gravity="bottom"
                 android:text="@string/AyatSelection" />
 
@@ -124,7 +124,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/akhtearAlAyatRelative"
-                android:background="@color/playerBacground"
+                android:background="@color/playerBackground"
                 android:gravity="bottom"
 
                 android:text="@string/onFinish" />
@@ -183,7 +183,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/onFinishRelative"
-                android:background="@color/playerBacground"
+                android:background="@color/playerBackground"
                 android:gravity="bottom"
                 android:text="@string/readingOptions" />
 
@@ -276,7 +276,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/optionsOfREading"
-                android:background="@color/playerBacground"
+                android:background="@color/playerBackground"
                 android:gravity="bottom"
                 android:text="@string/pickTheShake" />
 

@@ -1,26 +1,37 @@
 package com.blackstone.goldenquran.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blackstone.goldenquran.Fragments.AhadeethViewPagerFragment;
 import com.blackstone.goldenquran.R;
-import com.blackstone.goldenquran.models.AhadethModel;
+import com.blackstone.goldenquran.models.AhadeethModel;
 
+import java.io.Serializable;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class AhadethAdapter extends RecyclerView.Adapter<AhadethViewHolder> {
 
-    List<AhadethModel> list;
+    List<AhadeethModel> list;
     LayoutInflater layoutInflater;
+    Context mContext;
 
-    public AhadethAdapter(Context context, List<AhadethModel> list) {
+    public AhadethAdapter(Context context, List<AhadeethModel> list) {
         this.list = list;
         layoutInflater = LayoutInflater.from(context);
+        mContext = context;
     }
 
     @Override
@@ -29,8 +40,22 @@ public class AhadethAdapter extends RecyclerView.Adapter<AhadethViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(AhadethViewHolder holder, int position) {
-        holder.titlels.setText(list.get(position).titles);
+    public void onBindViewHolder(AhadethViewHolder holder, final int position) {
+        holder.ahadethTitles.setText(list.get(position).title);
+        holder.ahadeethRelative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Fragment fragment = new AhadeethViewPagerFragment();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("data", (Serializable) list);
+                bundle.putInt("pos", position);
+                fragment.setArguments(bundle);
+
+                ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit();
+            }
+        });
+
     }
 
     @Override
@@ -40,9 +65,13 @@ public class AhadethAdapter extends RecyclerView.Adapter<AhadethViewHolder> {
 }
 
 class AhadethViewHolder extends RecyclerView.ViewHolder {
-    TextView titlels;
-    public AhadethViewHolder(View itemView) {
+    @BindView(R.id.ahadethTitles)
+    TextView ahadethTitles;
+    @BindView(R.id.ahadeethRelative)
+    RelativeLayout ahadeethRelative;
+
+    AhadethViewHolder(View itemView) {
         super(itemView);
-        titlels = (TextView) itemView.findViewById(R.id.ahadethTitles);
+        ButterKnife.bind(this, itemView);
     }
 }

@@ -1,6 +1,7 @@
 package com.blackstone.goldenquran.Fragments;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,7 +15,8 @@ import android.widget.Toast;
 
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.AhadethAdapter;
-import com.blackstone.goldenquran.models.AhadethModel;
+import com.blackstone.goldenquran.database.DataBaseManager;
+import com.blackstone.goldenquran.models.AhadeethModel;
 import com.blackstone.goldenquran.ui.DrawerCloser;
 
 import java.util.ArrayList;
@@ -22,13 +24,16 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AhadethFragment extends Fragment {
+public class AhadethRecyclerFragment extends Fragment {
 
 
     @BindView(R.id.ahadethRecycler)
     RecyclerView recyclerView;
+    int position;
+    DataBaseManager data;
+    ArrayList<AhadeethModel> arrayList;
 
-    public AhadethFragment() {
+    public AhadethRecyclerFragment() {
 
     }
 
@@ -53,14 +58,8 @@ public class AhadethFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         ((DrawerCloser) getActivity()).moveToolbarDown();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        String[] ahadeth = getResources().getStringArray(R.array.ahadethNames);
+        new GetAhadith().execute();
 
-        ArrayList<AhadethModel> arrayList = new ArrayList<>();
-        for (int i = 0; i < 40; i++) {
-            arrayList.add(new AhadethModel(ahadeth[i % 4]));
-        }
-
-        recyclerView.setAdapter(new AhadethAdapter(getActivity(), arrayList));
     }
 
     @Override
@@ -73,6 +72,27 @@ public class AhadethFragment extends Fragment {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    private class GetAhadith extends AsyncTask<Void, Void, ArrayList<AhadeethModel>> {
+
+        @Override
+        protected ArrayList<AhadeethModel> doInBackground(Void... voids) {
+            if (getActivity() != null) {
+                data = new DataBaseManager(getActivity()).createDatabase();
+                data.open();
+                arrayList = data.getAhadith();
+                return arrayList;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<AhadeethModel> ahadeethModels) {
+            super.onPostExecute(ahadeethModels);
+            arrayList = ahadeethModels;
+            recyclerView.setAdapter(new AhadethAdapter(getActivity(), arrayList));
+
+        }
     }
 
 }

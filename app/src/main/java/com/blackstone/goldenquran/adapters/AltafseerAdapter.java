@@ -32,8 +32,8 @@ public class AltafseerAdapter extends RecyclerView.Adapter<AltafseerAdapter.Alta
 
     @Override
     public void onBindViewHolder(final AltafseerViewHolder holder, final int position) {
-        for (int i = 0; i < models.size() ; i++) {
-            if(i == SharedPreferencesManager.getInteger(mContext, "selectedTafseer", 20))
+        for (int i = 0; i < models.size(); i++) {
+            if (i == SharedPreferencesManager.getInteger(mContext, "selectedTafseer", 20))
                 models.get(i).setSelected(true);
         }
         holder.tafseerDescribtion.setText(models.get(position).tafseerDescribtion);

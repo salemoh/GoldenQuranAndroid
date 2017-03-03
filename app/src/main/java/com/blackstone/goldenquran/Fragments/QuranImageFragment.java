@@ -244,7 +244,7 @@ public class QuranImageFragment extends Fragment {
     private class getPagePoints extends AsyncTask<Integer, Void, ArrayList<Ayah>> {
 
         @Override
-        protected ArrayList<Ayah> doInBackground(Integer... integers) {
+            protected ArrayList<Ayah> doInBackground(Integer... integers) {
             if (getActivity() != null) {
                 data = new DataBaseManager(getActivity()).createDatabase();
                 data.open();

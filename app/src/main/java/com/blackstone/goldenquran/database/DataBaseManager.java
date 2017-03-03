@@ -6,6 +6,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.blackstone.goldenquran.models.AhadeethModel;
 import com.blackstone.goldenquran.models.Ayah;
 
 import java.io.IOException;
@@ -15,16 +16,20 @@ public class DataBaseManager {
 
     private static final String TAG = "DataAdapter";
     private Medina1OpenHelper mDbHelper;
+    private AhadithHelper mAhadithHelper;
     private SQLiteDatabase mDb;
+    private SQLiteDatabase mDbAhadith;
 
 
     public DataBaseManager(Context context) {
         mDbHelper = new Medina1OpenHelper(context);
+        mAhadithHelper = new AhadithHelper(context);
     }
 
     public DataBaseManager createDatabase() throws SQLException {
         try {
             mDbHelper.createDataBase();
+            mAhadithHelper.createDataBase();
         } catch (IOException mIOException) {
             Log.e(TAG, mIOException.toString() + "  UnableToCreateDatabase");
             throw new Error("UnableToCreateDatabase");
@@ -37,6 +42,10 @@ public class DataBaseManager {
             mDbHelper.openDataBase();
             mDbHelper.close();
             mDb = mDbHelper.getReadableDatabase();
+            mAhadithHelper.openDataBase();
+            mAhadithHelper.close();
+            mDbAhadith = mAhadithHelper.getReadableDatabase();
+
         } catch (SQLException mSQLException) {
             Log.e(TAG, "open >>" + mSQLException.toString());
             throw mSQLException;
@@ -80,4 +89,35 @@ public class DataBaseManager {
         cursor.moveToNext();
         return cursor.getInt(cursor.getColumnIndex("page_number"));
     }
+
+
+    public ArrayList<AhadeethModel> getAhadith() {
+
+        ArrayList<AhadeethModel> ahadith = new ArrayList<>();
+
+        Cursor cursor = mDbAhadith.query("HadithTable", null, "HadithGroupID = 0", null, null, null, null);
+
+        while (cursor.moveToNext()) {
+            ahadith.add(new AhadeethModel(
+                    cursor.getString(cursor.getColumnIndex("HadithSummary")),
+                    cursor.getString(cursor.getColumnIndex("HadithFullText"))
+            ));
+        }
+        return ahadith;
+    }
+
+    public String getOnFinishQuran() {
+
+
+        Cursor cursor = mDbAhadith.query("HadithTable", null, "HadithGroupID = 1", null, null, null, null);
+
+        String ahadith = "";
+
+        while (cursor.moveToNext()) {
+            ahadith = cursor.getString(cursor.getColumnIndex("HadithFullText"));
+        }
+        return ahadith;
+    }
+
+
 }

@@ -23,7 +23,6 @@ public class QuranViewPager extends Fragment {
 
     @BindView(R.id.quranViewPager)
     ViewPager quranViewPager;
-    int y;
     @BindView(R.id.seek_bar_quran)
     DiscreteSeekBar seekBarQuran;
 
@@ -46,7 +45,6 @@ public class QuranViewPager extends Fragment {
         seekBarQuran.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
             @Override
             public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
-                quranViewPager.setCurrentItem(value,true);
             }
 
             @Override
@@ -56,7 +54,7 @@ public class QuranViewPager extends Fragment {
 
             @Override
             public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
-
+                quranViewPager.setCurrentItem(seekBar.getProgress());
             }
         });
 
@@ -64,14 +62,15 @@ public class QuranViewPager extends Fragment {
         int px = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()));
         quranViewPager.setPageMargin(px);
         quranViewPager.setRotationY(180);
+
         quranViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                seekBarQuran.setProgress(position);
             }
 
             @Override
             public void onPageSelected(int position) {
-                seekBarQuran.setProgress(position);
             }
 
             @Override

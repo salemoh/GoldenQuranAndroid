@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ahadeethRelative"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="1dp"
@@ -10,9 +11,9 @@
         android:id="@+id/ahadethTitles"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="start"
         android:text="الحديث الاول الاعمال بالنيات"
         android:textAlignment="textStart"
-        android:gravity="start"
         android:textSize="16sp" />
 
 </RelativeLayout>
