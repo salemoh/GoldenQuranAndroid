@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.PrayTimeSettingsRecyclerAdapter;
 import com.blackstone.goldenquran.models.PrayTimeSettingsItemModel;
+import com.blackstone.goldenquran.models.PrayTimeSettingsItemThreeModel;
+import com.blackstone.goldenquran.models.PrayTimeSettingsItemTwoModel;
 import com.blackstone.goldenquran.models.PrayTimeSettingsTitleModel;
 
 import java.util.ArrayList;
@@ -54,15 +56,15 @@ public class PrayTimeSettingsFragment extends Fragment {
         arrayList.add(new PrayTimeSettingsItemModel("الهيئهة المصرية الجديدة"));
         arrayList.add(new PrayTimeSettingsItemModel("لجنه موقع رؤي"));
         arrayList.add(new PrayTimeSettingsTitleModel("المذهب"));
-        arrayList.add(new PrayTimeSettingsItemModel("شافعي,مالكي,حنبلي"));
-        arrayList.add(new PrayTimeSettingsItemModel("حنفي"));
+        arrayList.add(new PrayTimeSettingsItemTwoModel("شافعي,مالكي,حنبلي"));
+        arrayList.add(new PrayTimeSettingsItemTwoModel("حنفي"));
         arrayList.add(new PrayTimeSettingsTitleModel("صوت الاذان"));
-        arrayList.add(new PrayTimeSettingsItemModel("صوت1"));
-        arrayList.add(new PrayTimeSettingsItemModel("صوت2"));
-        arrayList.add(new PrayTimeSettingsItemModel("صوت3"));
-        arrayList.add(new PrayTimeSettingsItemModel("صوت4"));
-        arrayList.add(new PrayTimeSettingsItemModel("صوت5"));
-        arrayList.add(new PrayTimeSettingsItemModel("صوت6"));
+        arrayList.add(new PrayTimeSettingsItemThreeModel("صوت1"));
+        arrayList.add(new PrayTimeSettingsItemThreeModel("صوت2"));
+        arrayList.add(new PrayTimeSettingsItemThreeModel("صوت3"));
+        arrayList.add(new PrayTimeSettingsItemThreeModel("صوت4"));
+        arrayList.add(new PrayTimeSettingsItemThreeModel("صوت5"));
+        arrayList.add(new PrayTimeSettingsItemThreeModel("صوت6"));
 
 
         settingRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

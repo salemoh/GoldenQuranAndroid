@@ -15,7 +15,7 @@ import com.blackstone.goldenquran.Fragments.AhadeethViewPagerFragment;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.models.AhadeethModel;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -48,7 +48,7 @@ public class AhadethAdapter extends RecyclerView.Adapter<AhadethViewHolder> {
 
                 Fragment fragment = new AhadeethViewPagerFragment();
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("data", (Serializable) list);
+                bundle.putParcelableArrayList("data", (ArrayList) list);
                 bundle.putInt("pos", position);
                 fragment.setArguments(bundle);
 

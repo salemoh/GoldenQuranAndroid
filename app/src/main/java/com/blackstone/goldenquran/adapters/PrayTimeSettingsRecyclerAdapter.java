@@ -29,7 +29,7 @@ public class PrayTimeSettingsRecyclerAdapter extends RecyclerView.Adapter<Recycl
     private static final int ITEM_ONE = 1;
     private static final int ITEM_TWO = 2;
     private static final int ITEM_THREE = 3;
-    Context mContext;
+    private Context mContext;
 
     public PrayTimeSettingsRecyclerAdapter(Context context, List<Object> models) {
         this.models = models;
@@ -55,8 +55,11 @@ public class PrayTimeSettingsRecyclerAdapter extends RecyclerView.Adapter<Recycl
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 
         if (holder.getItemViewType() == TITLE) {
+
             ((PrayTimeSettingsTitleViewHolder) holder).title.setText(((PrayTimeSettingsTitleModel) models.get(position)).title);
+
         } else if (holder.getItemViewType() == ITEM_ONE) {
+
 
             for (int i = 1; i < 11; i++) {
                 if (i == SharedPreferencesManager.getInteger(mContext, "selected", 20))
@@ -90,11 +93,72 @@ public class PrayTimeSettingsRecyclerAdapter extends RecyclerView.Adapter<Recycl
                 }
             });
         } else if (holder.getItemViewType() == ITEM_TWO) {
-            ((PrayTimeSettingsItemTwoViewHolder) holder).ItemText.setText(((PrayTimeSettingsItemTwoModel) models.get(position)).itemText);
 
+            for (int i = 12; i < 14; i++) {
+                if (i == SharedPreferencesManager.getInteger(mContext, "madhab", 20))
+                    ((PrayTimeSettingsItemTwoModel) models.get(i)).setSelected(true);
+            }
+
+
+            final PrayTimeSettingsItemTwoViewHolder holder1 = (PrayTimeSettingsItemTwoViewHolder) holder;
+            final PrayTimeSettingsItemTwoModel thisModel = (PrayTimeSettingsItemTwoModel) models.get(position);
+
+
+            holder1.ItemText.setText(thisModel.itemText);
+
+            if (thisModel.isSelected()) {
+                holder1.selectedItem.setVisibility(View.VISIBLE);
+            } else {
+                holder1.selectedItem.setVisibility(View.GONE);
+            }
+
+            holder1.relativeContainer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    thisModel.setSelected(true);
+                    SharedPreferencesManager.putInteger(mContext, "madhab", position);
+                    for (int i = 12; i < 14; i++) {
+                        if (i != position) {
+                            ((PrayTimeSettingsItemTwoModel) models.get(i)).setSelected(false);
+                        }
+                    }
+                    notifyDataSetChanged();
+                }
+            });
 
         } else if (holder.getItemViewType() == ITEM_THREE) {
-            ((PrayTimeSettingsItemThreeViewHolder) holder).ItemText.setText(((PrayTimeSettingsItemThreeModel) models.get(position)).itemText);
+
+            for (int i = 15; i < models.size(); i++) {
+                if (i == SharedPreferencesManager.getInteger(mContext, "saut", 20))
+                    ((PrayTimeSettingsItemThreeModel) models.get(i)).setSelected(true);
+            }
+
+
+            final PrayTimeSettingsItemThreeViewHolder holder1 = (PrayTimeSettingsItemThreeViewHolder) holder;
+            final PrayTimeSettingsItemThreeModel thisModel = (PrayTimeSettingsItemThreeModel) models.get(position);
+
+
+            holder1.ItemText.setText(thisModel.itemText);
+
+            if (thisModel.isSelected()) {
+                holder1.selectedItem.setVisibility(View.VISIBLE);
+            } else {
+                holder1.selectedItem.setVisibility(View.GONE);
+            }
+
+            holder1.relativeContainer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    thisModel.setSelected(true);
+                    SharedPreferencesManager.putInteger(mContext, "saut", position);
+                    for (int i = 15; i < models.size(); i++) {
+                        if (i != position) {
+                            ((PrayTimeSettingsItemThreeModel) models.get(i)).setSelected(false);
+                        }
+                    }
+                    notifyDataSetChanged();
+                }
+            });
 
         }
 
@@ -138,7 +202,7 @@ class PrayTimeSettingsItemTwoViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.relativeContainer)
     RelativeLayout relativeContainer;
 
-    public PrayTimeSettingsItemTwoViewHolder(View itemView) {
+    PrayTimeSettingsItemTwoViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
 
@@ -153,7 +217,7 @@ class PrayTimeSettingsItemThreeViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.relativeContainer)
     RelativeLayout relativeContainer;
 
-    public PrayTimeSettingsItemThreeViewHolder(View itemView) {
+    PrayTimeSettingsItemThreeViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
 

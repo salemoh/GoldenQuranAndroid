@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.database.DataBaseManager;
@@ -43,7 +44,12 @@ public class QuranImageFragment extends Fragment {
     ImageView backgroundQuranImage;
     @BindView(R.id.quranImage)
     DrawView imageView;
+    int ayahNumber = 0;
+    int suraNumber = 0;
 
+    int CLICK_ACTION_THRESHHOLD = 200;
+    float startX;
+    float startY;
 
     public void setPage(int possition) {
         this.position = possition;
@@ -129,6 +135,13 @@ public class QuranImageFragment extends Fragment {
 
         setImageView(position);
         imageView.setOnTouchListener(imgSourceOnTouchListener);
+        imageView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Toast.makeText(getActivity(), "AyahNumber " + ayahNumber + "\nSuraNumber " + suraNumber, Toast.LENGTH_LONG).show();
+                return true;
+            }
+        });
 
     }
 
@@ -171,59 +184,84 @@ public class QuranImageFragment extends Fragment {
         }
     }
 
+    private boolean isAClick(float startX, float endX, float startY, float endY) {
+        float differenceX = Math.abs(startX - endX);
+        float differenceY = Math.abs(startY - endY);
+        if (differenceX > CLICK_ACTION_THRESHHOLD/* =5 */ || differenceY > CLICK_ACTION_THRESHHOLD) {
+            return false;
+        }
+        return true;
+    }
+
     View.OnTouchListener imgSourceOnTouchListener = new View.OnTouchListener() {
 
         @Override
         public boolean onTouch(View view, MotionEvent event) {
 
-            float eventX = event.getX();
-            float eventY = event.getY();
 
-            mapX = map(eventX, 0, imageView.getWidth(), 0, 432);
-            mapY = map(eventY, 0, imageView.getHeight(), 0, 694);
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    startX = event.getX();
+                    startY = event.getY();
+                    break;
+                case MotionEvent.ACTION_UP:
+                    float endX = event.getX();
+                    float endY = event.getY();
 
-            if (ayahPoints != null && !ayahPoints.isEmpty()) {
+                    if (isAClick(startX, endX, startY, endY)) {
+                        float eventX = event.getX();
+                        float eventY = event.getY();
 
-                float ayahNumber = 0;
-                float suraNumber = 0;
-                for (int i = 0; i < ayahPoints.size(); i++) {
-                    if (mapX > ayahPoints.get(i).upperLeftX && mapX < ayahPoints.get(i).upperRightX && mapY > ayahPoints.get(i).upperRightY && mapY < ayahPoints.get(i).lowerLeftY) {
-                        ayahNumber = ayahPoints.get(i).ayah;
-                        suraNumber = ayahPoints.get(i).surah;
+                        mapX = map(eventX, 0, imageView.getWidth(), 0, 432);
+                        mapY = map(eventY, 0, imageView.getHeight(), 0, 694);
+
+                        if (ayahPoints != null && !ayahPoints.isEmpty()) {
+
+                            for (int i = 0; i < ayahPoints.size(); i++) {
+                                if (mapX > ayahPoints.get(i).upperLeftX && mapX < ayahPoints.get(i).upperRightX && mapY > ayahPoints.get(i).upperRightY && mapY < ayahPoints.get(i).lowerLeftY) {
+                                    ayahNumber = (int) ayahPoints.get(i).ayah;
+                                    suraNumber = (int) ayahPoints.get(i).surah;
+                                }
+                            }
+
+                            left.clear();
+                            top.clear();
+                            right.clear();
+                            bottom.clear();
+
+                            for (int i = 0; i < ayahPoints.size(); i++) {
+                                if (ayahNumber == ayahPoints.get(i).ayah && suraNumber == ayahPoints.get(i).surah) {
+                                    left.add(ayahPoints.get(i).upperLeftX);
+                                    top.add(ayahPoints.get(i).upperLeftY);
+                                    right.add(ayahPoints.get(i).upperRightX);
+                                    bottom.add(ayahPoints.get(i).lowerLeftY);
+                                }
+                            }
+
+                            imageView.left.clear();
+                            imageView.top.clear();
+                            imageView.right.clear();
+                            imageView.bottom.clear();
+
+                            for (int i = 0; i < left.size(); i++) {
+                                imageView.left.add(map(left.get(i).longValue(), 0, 432, 0, imageView.getWidth()));
+                                imageView.top.add(map(top.get(i).longValue(), 0, 694, 0, imageView.getHeight()));
+                                imageView.right.add(map(right.get(i).longValue(), 0, 432, 0, imageView.getWidth()));
+                                imageView.bottom.add(map(bottom.get(i).longValue(), 0, 694, 0, imageView.getHeight()));
+                            }
+                        }
+
+                        imageView.touched = true;
+                        imageView.invalidate();
+                    } else {
+                        if (startY < endY)
+                            ((DrawerCloser) getActivity()).moveToolbarDown();
+                        else
+                            ((DrawerCloser) getActivity()).moveToolbarUp();
                     }
-                }
-
-                left.clear();
-                top.clear();
-                right.clear();
-                bottom.clear();
-
-                for (int i = 0; i < ayahPoints.size(); i++) {
-                    if (ayahNumber == ayahPoints.get(i).ayah && suraNumber == ayahPoints.get(i).surah) {
-                        left.add(ayahPoints.get(i).upperLeftX);
-                        top.add(ayahPoints.get(i).upperLeftY);
-                        right.add(ayahPoints.get(i).upperRightX);
-                        bottom.add(ayahPoints.get(i).lowerLeftY);
-                    }
-                }
-
-                imageView.left.clear();
-                imageView.top.clear();
-                imageView.right.clear();
-                imageView.bottom.clear();
-
-                for (int i = 0; i < left.size(); i++) {
-                    imageView.left.add(map(left.get(i).longValue(), 0, 432, 0, imageView.getWidth()));
-                    imageView.top.add(map(top.get(i).longValue(), 0, 694, 0, imageView.getHeight()));
-                    imageView.right.add(map(right.get(i).longValue(), 0, 432, 0, imageView.getWidth()));
-                    imageView.bottom.add(map(bottom.get(i).longValue(), 0, 694, 0, imageView.getHeight()));
-                }
+                    break;
             }
-
-            imageView.touched = true;
-            imageView.invalidate();
-
-            return true;
+            return false;
         }
     };
 
@@ -244,7 +282,7 @@ public class QuranImageFragment extends Fragment {
     private class getPagePoints extends AsyncTask<Integer, Void, ArrayList<Ayah>> {
 
         @Override
-            protected ArrayList<Ayah> doInBackground(Integer... integers) {
+        protected ArrayList<Ayah> doInBackground(Integer... integers) {
             if (getActivity() != null) {
                 data = new DataBaseManager(getActivity()).createDatabase();
                 data.open();

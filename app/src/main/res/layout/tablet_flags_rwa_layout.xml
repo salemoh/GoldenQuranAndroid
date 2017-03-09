@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/flagsRelative"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFF"
+    android:layout_marginBottom="2dp">
+
+    <ImageView
+        android:id="@+id/flagImage"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/sa" />
+
+    <TextView
+        android:id="@+id/flagText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp"
+        android:text="المملكه العربيه السعودية" />
+</RelativeLayout>

@@ -37,6 +37,7 @@ public class AhadeethViewPagerFragment extends Fragment {
 
         ahadeethViewPager.setAdapter(new AhadeethViewPagerAdapter(getFragmentManager()));
         ahadeethViewPager.setCurrentItem(getArguments().getInt("pos"));
+
     }
 
     class AhadeethViewPagerAdapter extends FragmentPagerAdapter {

@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
-public class DrawView extends ImageView {
+public class DrawView extends android.support.v7.widget.AppCompatImageView {
 
     public ArrayList<Float> top, bottom, left, right;
     private static final int red = new Color().argb(75, 220, 0, 0);

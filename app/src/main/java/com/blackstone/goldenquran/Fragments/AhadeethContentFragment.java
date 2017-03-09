@@ -46,7 +46,7 @@ public class AhadeethContentFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        arrayList = (ArrayList<AhadeethModel>) getArguments().getSerializable("data");
+        arrayList = getArguments().getParcelableArrayList("data");
         ahadeethText.setText(arrayList.get(position).body);
         ahadeethTitle.setText(arrayList.get(position).title);
     }

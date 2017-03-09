@@ -2,6 +2,7 @@ package com.blackstone.goldenquran.Fragments;
 
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -71,6 +72,15 @@ public class QuranViewPager extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
+                seekBarQuran.setVisibility(View.VISIBLE);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        seekBarQuran.setVisibility(View.INVISIBLE);
+                    }
+                }, 1000);
+
             }
 
             @Override

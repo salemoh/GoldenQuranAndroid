@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="#FFFFFF">
 
 
@@ -10,10 +10,10 @@
         android:id="@+id/backward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
         android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:layout_toLeftOf="@+id/stop"
         android:layout_toStartOf="@+id/stop"
         android:src="@drawable/player_backward" />
@@ -22,19 +22,19 @@
         android:id="@+id/notipause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
         android:layout_marginBottom="32dp"
-        android:layout_marginRight="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_toRightOf="@+id/play"
+        android:layout_marginRight="16dp"
         android:layout_toEndOf="@+id/play"
+        android:layout_toRightOf="@+id/play"
         android:src="@drawable/pause" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
         android:layout_marginBottom="32dp"
         android:layout_toLeftOf="@+id/play"
         android:layout_toStartOf="@+id/play"
@@ -46,19 +46,18 @@
         android:id="@+id/forward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
         android:layout_marginBottom="16dp"
-        android:layout_toRightOf="@+id/notipause"
         android:layout_toEndOf="@+id/notipause"
+        android:layout_toRightOf="@+id/notipause"
         android:src="@drawable/forward" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="45dp"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
@@ -69,7 +68,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/play"
-        android:layout_marginTop="16dp"
         android:visibility="visible" />
 
 </RelativeLayout>
