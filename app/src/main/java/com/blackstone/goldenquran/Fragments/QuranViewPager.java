@@ -12,6 +12,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.blackstone.goldenquran.R;
 
@@ -26,6 +27,8 @@ public class QuranViewPager extends Fragment {
     ViewPager quranViewPager;
     @BindView(R.id.seek_bar_quran)
     DiscreteSeekBar seekBarQuran;
+    @BindView(R.id.seekBarFrameLayout)
+    FrameLayout seekBarFrameLayout;
 
 
     public QuranViewPager() {
@@ -56,6 +59,13 @@ public class QuranViewPager extends Fragment {
             @Override
             public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
                 quranViewPager.setCurrentItem(seekBar.getProgress());
+            }
+        });
+
+        seekBarFrameLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                seekBarQuran.setVisibility(view.VISIBLE);
             }
         });
 

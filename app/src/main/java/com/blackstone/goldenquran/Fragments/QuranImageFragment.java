@@ -1,12 +1,17 @@
 package com.blackstone.goldenquran.Fragments;
 
+import android.Manifest;
+import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,12 +24,12 @@ import android.widget.Toast;
 
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.database.DataBaseManager;
+import com.blackstone.goldenquran.managers.PlayerManager;
 import com.blackstone.goldenquran.models.Ayah;
 import com.blackstone.goldenquran.ui.DrawerCloser;
 import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
 import com.blackstone.goldenquran.views.DrawView;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -71,6 +76,27 @@ public class QuranImageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_quran_image, container, false);
         ButterKnife.bind(this, view);
         return view;
+    }
+
+    private void requestStoragePermission() {
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            //If the user has denied the permission previously your code will come to this block
+            //Here you can explain why you need this permission
+            //Explain here why you need this permission
+        }
+
+        //And finally ask for the permission
+        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            //If the user has denied the permission previously your code will come to this block
+            //Here you can explain why you need this permission
+            //Explain here why you need this permission
+        }
+
+        //And finally ask for the permission
+        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
     }
 
     @Override
@@ -132,7 +158,7 @@ public class QuranImageFragment extends Fragment {
             }
 
         }
-
+        requestStoragePermission();
         setImageView(position);
         imageView.setOnTouchListener(imgSourceOnTouchListener);
         imageView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -142,46 +168,61 @@ public class QuranImageFragment extends Fragment {
                 return true;
             }
         });
+    }
 
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        handler = new Handler();
-
-        r = new Runnable() {
-            public void run() {
-                if (getActivity() != null)
-                    ((DrawerCloser) getActivity()).moveToolbarUp();
-            }
-        };
-
-        handler.postDelayed(r, 2000);
+//        handler = new Handler();
+//
+//        r = new Runnable() {
+//            public void run() {
+//                if (getActivity() != null)
+//                    ((DrawerCloser) getActivity()).moveToolbarUp();
+//            }
+//        };
+//
+//        handler.postDelayed(r, 2000);
 
     }
 
     public void setImageView(int sPageNumber) {
         InputStream ims;
-        try {
-            String s = String.valueOf(sPageNumber);
-            if (s.length() == 3)
-                s = "_0" + sPageNumber + ".png";
-            else if (s.length() == 2)
-                s = "_00" + sPageNumber + ".png";
-            else
-                s = "_000" + sPageNumber + ".png";
+        String s = String.valueOf(sPageNumber);
+        if (s.length() == 3)
+            s = "_0" + sPageNumber + ".png";
+        else if (s.length() == 2)
+            s = "_00" + sPageNumber + ".png";
+        else
+            s = "_000" + sPageNumber + ".png";
 
-            ims = getActivity().getAssets().open(s);
-            Drawable d = Drawable.createFromStream(ims, null);
-            imageView.setImageDrawable(d);
+        if (PlayerManager.isFilePresent(s)) {
+            imageView.setImageDrawable(PlayerManager.readImageFromInternalStorage(s));
 
-            new getPagePoints().execute(sPageNumber);
+        } else {
+            if (isOnline()) {
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            } else {
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("No Internet")
+                        .setMessage("Try to connect your phone to allow us to download the image for you")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
         }
+//            ims = getActivity().getAssets().open(s);
+//            Drawable d = Drawable.createFromStream(ims, null);
+//            imageView.setImageDrawable(d);
+
+        new getPagePoints().execute(sPageNumber);
+
     }
 
     private boolean isAClick(float startX, float endX, float startY, float endY) {
