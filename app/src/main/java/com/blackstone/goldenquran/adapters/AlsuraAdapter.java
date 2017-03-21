@@ -120,7 +120,7 @@ public class AlsuraAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         @Override
         protected Integer doInBackground(Integer... integers) {
-            data = new DataBaseManager(context).createDatabase();
+            data = new DataBaseManager(context, "KingFahad1.db", false).createDatabase();
             data.open();
             return data.getPageNumber(integers[0] + "");
         }

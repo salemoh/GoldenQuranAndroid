@@ -15,21 +15,23 @@ import java.util.ArrayList;
 public class DataBaseManager {
 
     private static final String TAG = "DataAdapter";
-    private Medina1OpenHelper mDbHelper;
-    private AhadithHelper mAhadithHelper;
-    private SQLiteDatabase mDb;
-    private SQLiteDatabase mDbAhadith;
+    private DBHelperFromAssets mDBHelperFromAssets;
+    private StorageDBHelper mStorageDBHelper;
+    private SQLiteDatabase mDbHelper;
 
 
-    public DataBaseManager(Context context) {
-        mDbHelper = new Medina1OpenHelper(context);
-        mAhadithHelper = new AhadithHelper(context);
+    public DataBaseManager(Context context, String DBName, boolean isFromAssets) {
+        if (!isFromAssets) {
+            mStorageDBHelper = new StorageDBHelper(context, DBName);
+        } else {
+            mDBHelperFromAssets = new DBHelperFromAssets(context, DBName);
+        }
     }
 
     public DataBaseManager createDatabase() throws SQLException {
         try {
-            mDbHelper.createDataBase();
-            mAhadithHelper.createDataBase();
+            if (mDBHelperFromAssets != null)
+                mDBHelperFromAssets.createDataBase();
         } catch (IOException mIOException) {
             Log.e(TAG, mIOException.toString() + "  UnableToCreateDatabase");
             throw new Error("UnableToCreateDatabase");
@@ -39,13 +41,13 @@ public class DataBaseManager {
 
     public DataBaseManager open() throws SQLException {
         try {
-            mDbHelper.openDataBase();
-            mDbHelper.close();
-            mDb = mDbHelper.getReadableDatabase();
-            mAhadithHelper.openDataBase();
-            mAhadithHelper.close();
-            mDbAhadith = mAhadithHelper.getReadableDatabase();
-
+            if (mDBHelperFromAssets != null) {
+                mDBHelperFromAssets.openDataBase();
+                mDBHelperFromAssets.close();
+                mDbHelper = mDBHelperFromAssets.getReadableDatabase();
+            } else {
+                mDbHelper = mStorageDBHelper.getReadableDatabase();
+            }
         } catch (SQLException mSQLException) {
             Log.e(TAG, "open >>" + mSQLException.toString());
             throw mSQLException;
@@ -55,7 +57,7 @@ public class DataBaseManager {
 
     public ArrayList<Ayah> getPagePoints(int pageNumber) {
 
-        Cursor cursor = mDb.query("page", null, "page_number = ? and id > 10000", new String[]{String.valueOf(pageNumber)}, null, null, null);
+        Cursor cursor = mDbHelper.query("page", null, "page_number = ?", new String[]{String.valueOf(pageNumber)}, null, null, null);
 
         ArrayList<Ayah> ayah = new ArrayList<>();
 
@@ -83,9 +85,27 @@ public class DataBaseManager {
         return ayah;
     }
 
+
+    public String getPageText(ArrayList<Ayah> ayahs) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i = 0; i < ayahs.size(); i++) {
+            Cursor cursor = mDbHelper.query("arabic_text", null, "sura =? and ayah =? ", new String[]{String.valueOf(ayahs.get(i).surah), String.valueOf(ayahs.get(i).ayah)}, null, null, null);
+            cursor.moveToNext();
+            if (!arrayList.contains(cursor.getString(cursor.getColumnIndex("text")))) {
+                arrayList.add(cursor.getString(cursor.getColumnIndex("text")));
+                stringBuilder.append(cursor.getString(cursor.getColumnIndex("text"))).append("\n");
+            }
+        }
+
+        return stringBuilder.toString();
+    }
+
+
     public int getPageNumber(String surahNumber) {
 
-        Cursor cursor = mDb.query("page", null, "surah = ? and id > 10000", new String[]{surahNumber}, null, null, "ayah ASC");
+        Cursor cursor = mDbHelper.query("page", null, "surah = ? and id > 10000", new String[]{surahNumber}, null, null, "ayah ASC");
         cursor.moveToNext();
         return cursor.getInt(cursor.getColumnIndex("page_number"));
     }
@@ -95,7 +115,7 @@ public class DataBaseManager {
 
         ArrayList<AhadeethModel> ahadith = new ArrayList<>();
 
-        Cursor cursor = mDbAhadith.query("HadithTable", null, "HadithGroupID = 0", null, null, null, null);
+        Cursor cursor = mDbHelper.query("HadithTable", null, "HadithGroupID = 0", null, null, null, null);
 
         while (cursor.moveToNext()) {
             ahadith.add(new AhadeethModel(
@@ -109,7 +129,7 @@ public class DataBaseManager {
     public String getOnFinishQuran() {
 
 
-        Cursor cursor = mDbAhadith.query("HadithTable", null, "HadithGroupID = 1", null, null, null, null);
+        Cursor cursor = mDbHelper.query("HadithTable", null, "HadithGroupID = 1", null, null, null, null);
 
         String ahadith = "";
 
@@ -119,5 +139,18 @@ public class DataBaseManager {
         return ahadith;
     }
 
+    public String getTr(int surah, int ayah) {
 
+        if (mDBHelperFromAssets != null) {
+            Cursor cursor = mDbHelper.query("tr", null, "sura =? and aya =?", new String[]{String.valueOf(surah), String.valueOf(ayah)}, null, null, null);
+
+            String ahadith = "";
+
+            while (cursor.moveToNext()) {
+                ahadith = cursor.getString(cursor.getColumnIndex("text"));
+            }
+            return ahadith;
+        }
+        return "";
+    }
 }

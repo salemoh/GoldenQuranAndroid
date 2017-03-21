@@ -19,7 +19,6 @@ import com.blackstone.goldenquran.Fragments.BookmarkFragment;
 import com.blackstone.goldenquran.Fragments.FahrasFragment;
 import com.blackstone.goldenquran.Fragments.FridayReadingFragment;
 import com.blackstone.goldenquran.Fragments.IntonationTranslatorFragment;
-import com.blackstone.goldenquran.Fragments.NightReadingFragment;
 import com.blackstone.goldenquran.Fragments.NotificationFragment;
 import com.blackstone.goldenquran.Fragments.OnFinishOfQuranPrayFragment;
 import com.blackstone.goldenquran.Fragments.PlayeSettingsFragment;
@@ -28,6 +27,7 @@ import com.blackstone.goldenquran.Fragments.PrayingTimeViewPagerFragment;
 import com.blackstone.goldenquran.Fragments.SearchFragment;
 import com.blackstone.goldenquran.Fragments.SettingsFragment;
 import com.blackstone.goldenquran.Fragments.StatisticsFragment;
+import com.blackstone.goldenquran.Fragments.TabletFlagsFragment;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.models.MainListFirstItemModel;
 import com.blackstone.goldenquran.models.MainListModel;
@@ -43,6 +43,7 @@ public class MainListAdapter extends RecyclerView.Adapter {
     Fragment fragment = null;
     private ActionBarDrawerToggle mDrawerToggle;
     int count;
+    String data;
 
 
     public MainListAdapter(Context context, List<Object> list) {
@@ -80,8 +81,7 @@ public class MainListAdapter extends RecyclerView.Adapter {
             ((MainListFirstViewHolder) holder).first.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.container, new NightReadingFragment())
-                            .commit();
+                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.container, new TabletFlagsFragment()).addToBackStack(null).commit();
                     ((DrawerCloser) context).close(true);
                     ((DrawerCloser) context).close(false);
                     ((DrawerCloser) context).title(0);
@@ -140,6 +140,10 @@ public class MainListAdapter extends RecyclerView.Adapter {
             second = (RelativeLayout) itemView.findViewById(R.id.secondRelative);
         }
 
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 
     private class MainListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -202,7 +206,7 @@ public class MainListAdapter extends RecyclerView.Adapter {
                 case 11: {
                     Intent sendIntent = new Intent();
                     sendIntent.setAction(Intent.ACTION_SEND);
-                    sendIntent.putExtra(Intent.EXTRA_TEXT, "Hi");
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, data);
                     sendIntent.setType("text/plain");
                     context.startActivity(Intent.createChooser(sendIntent, "Where To Send"));
                     pos = 12;

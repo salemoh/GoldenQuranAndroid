@@ -8,13 +8,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.blackstone.goldenquran.R;
+import com.blackstone.goldenquran.managers.PlayerManager;
 
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 
@@ -70,8 +70,8 @@ public class QuranViewPager extends Fragment {
         });
 
         quranViewPager.setAdapter(new QuranViewPagerAdapter(getChildFragmentManager()));
-        int px = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()));
-        quranViewPager.setPageMargin(px);
+//        int px = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()));
+//        quranViewPager.setPageMargin(px);
         quranViewPager.setRotationY(180);
 
         quranViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -121,7 +121,7 @@ public class QuranViewPager extends Fragment {
 
         @Override
         public int getCount() {
-            return 624;
+            return PlayerManager.getImagesCount() + 1;
         }
     }
 

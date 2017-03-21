@@ -29,7 +29,6 @@ public class IntonationTranslatorFragment extends Fragment {
     @BindView(R.id.activity_al_tafseer)
     RelativeLayout activityAlTafseer;
 
-
     public IntonationTranslatorFragment() {
 
     }
@@ -101,7 +100,14 @@ public class IntonationTranslatorFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            return new AlSuraFragment();
+            switch (position) {
+                case 8:
+                    TafseerFragment fragment = new TafseerFragment();
+                    fragment.setArguments(getArguments());
+                    return fragment;
+                default:
+                    return new AlSuraFragment();
+            }
         }
 
         @Override

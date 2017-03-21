@@ -20,8 +20,16 @@
         android:id="@+id/flagText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_toStartOf="@+id/selectedCountry"
         android:layout_centerVertical="true"
         android:layout_margin="5dp"
         android:text="المملكه العربيه السعودية" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/selectedCountry"
+        />
 </RelativeLayout>

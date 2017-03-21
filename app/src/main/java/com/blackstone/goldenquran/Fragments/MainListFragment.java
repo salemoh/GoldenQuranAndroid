@@ -39,12 +39,17 @@ public class MainListFragment extends Fragment {
     TextView dateAndTime;
     @BindView(R.id.mainList)
     RecyclerView recyclerView;
-
+    MainListAdapter mainListAdapter;
+    String data;
 
     public MainListFragment() {
 
     }
 
+    public void getData(String data) {
+        this.data = data;
+        mainListAdapter.setData(data);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -88,8 +93,8 @@ public class MainListFragment extends Fragment {
         arrayList.add(new MainListModel(R.drawable.main_list_share, mainlist[13]));
         arrayList.add(new MainListModel(R.drawable.main_list_settings_icon, mainlist[14]));
         arrayList.add(new MainListModel(R.drawable.main_list_statistic_icon, mainlist[15]));
+        mainListAdapter = new MainListAdapter(getActivity(), arrayList);
 
-        MainListAdapter mainListAdapter = new MainListAdapter(getActivity(), arrayList);
         recyclerView.setAdapter(mainListAdapter);
 
     }

@@ -147,7 +147,43 @@ public class PrayTimeFragment extends Fragment implements GoogleApiClient.Connec
             textView.setVisibility(View.VISIBLE);
             Log.d("tag", "+=0");
         } else {
-            AthanTime athanTime = new AthanTimeCalculator().getPrayerTimes(Calendar.getInstance(), mLatitudeADouble, mLongitudeADouble, TimeZoneUtil.getTimeZone(new Date()));
+            AthanTimeCalculator athanTimeCalculator = new AthanTimeCalculator();
+            athanTimeCalculator.setCalcMethod(0);
+            int calcMethod;
+            switch (SharedPreferencesManager.getInteger(getActivity(), "selected", 0)) {
+                case 0:
+                    calcMethod = 0;
+                    break;
+                case 1:
+                    calcMethod = 1;
+                    break;
+                case 2:
+                    calcMethod = 2;
+                    break;
+                case 3:
+                    calcMethod = 3;
+                    break;
+                case 4:
+                    calcMethod = 4;
+                    break;
+                case 5:
+                    calcMethod = 5;
+                    break;
+                case 6:
+                    calcMethod = 6;
+                    break;
+                case 7:
+                    calcMethod = 7;
+                    break;
+                case 8:
+                    calcMethod = 8;
+                    break;
+                default:
+                    calcMethod = 0;
+            }
+            athanTimeCalculator.setTimeFormat(calcMethod);
+            athanTimeCalculator.setAsrJuristic(SharedPreferencesManager.getInteger(getActivity(), "madhab", 0) - 12);
+            AthanTime athanTime = athanTimeCalculator.getPrayerTimes(Calendar.getInstance(), mLatitudeADouble, mLongitudeADouble, TimeZoneUtil.getTimeZone(new Date()));
 
             fajr = athanTime.getFajr().getHour() + ":" + athanTime.getFajr().getMinute();
             dhuour = athanTime.getDhuhr().getHour() + ":" + athanTime.getDhuhr().getMinute();
@@ -270,8 +306,6 @@ public class PrayTimeFragment extends Fragment implements GoogleApiClient.Connec
             AlarmManager am5 = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
             PendingIntent pendingIntent5 = PendingIntent.getService(getActivity(), 0, new Intent(getActivity(), AlarmService.class), PendingIntent.FLAG_UPDATE_CURRENT);
             am5.setExact(AlarmManager.RTC_WAKEUP, calisha.getTimeInMillis(), pendingIntent5);
-
-
 
             if (arrayList.size() <= 5) {
                 Log.d("tag", "if (arrayList.size() <= 5)");

@@ -65,7 +65,6 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         if (SharedPreferencesManager.getBoolean(this, "isArabic", true)) {
             String languageToLoad = "ar";
             Locale locale = new Locale(languageToLoad);
@@ -93,13 +92,11 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
         setupSupportActionBar(mToolbar, true, true);
 
         handler = new Handler();
-
         r = new Runnable() {
             public void run() {
                 hideActionBar();
             }
         };
-
         handler.postDelayed(r, 3000);
 
         moveToolbarDown();
@@ -236,7 +233,7 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.left_drawer, new MainListFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.left_drawer, new MainListFragment(), "mainList").commit();
 
     }
 
@@ -344,5 +341,11 @@ public class MainActivity extends BaseActivity implements DrawerCloser {
     public void moveToolbarUp() {
         if (getSupportActionBar().isShowing())
             hideActionBar();
+    }
+
+    @Override
+    public void respond(String data) {
+        MainListFragment fragment = (MainListFragment) getSupportFragmentManager().findFragmentByTag("mainList");
+        fragment.getData(data);
     }
 }

@@ -60,9 +60,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<MyViewHolder> {
 //        s[1] = minutes + "";
 //        if (s[0].length() == 1)
 //            s[0] = "0" + s[0];
-        Log.d("bayan", list.get(position).time);
         holder.time.setText(/*(Integer.parseInt(s[1]) >= 10) ? s[0] + ":" + s[1] : s[0] + ":" + "0" + s[1]*/list.get(position).time);
-
 
 
         holder.imageView.setImageResource(images[position]);

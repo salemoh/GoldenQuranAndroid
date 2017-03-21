@@ -78,7 +78,7 @@ public class AhadethRecyclerFragment extends Fragment {
         @Override
         protected ArrayList<AhadeethModel> doInBackground(Void... voids) {
             if (getActivity() != null) {
-                data = new DataBaseManager(getActivity()).createDatabase();
+                data = new DataBaseManager(getActivity(), "HadithContent.db", true).createDatabase();
                 data.open();
                 arrayList = data.getAhadith();
                 return arrayList;

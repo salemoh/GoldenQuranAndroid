@@ -56,7 +56,7 @@ public class OnFinishOfQuranPrayFragment extends Fragment {
         @Override
         protected String doInBackground(Void... voids) {
             if (getActivity() != null) {
-                data = new DataBaseManager(getActivity()).createDatabase();
+                data = new DataBaseManager(getActivity(), "HadithContent.db", true).createDatabase();
                 data.open();
                 String onFinishQuranDoaa = data.getOnFinishQuran();
                 return onFinishQuranDoaa;

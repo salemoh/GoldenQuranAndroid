@@ -6,12 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.models.TabletFlagModel;
+import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
 
 import java.util.List;
 
@@ -37,17 +38,31 @@ public class TabletFlagAdapter extends RecyclerView.Adapter<TabletFlagViewHolder
     }
 
     @Override
-    public void onBindViewHolder(TabletFlagViewHolder holder, final int position) {
+    public void onBindViewHolder(final TabletFlagViewHolder holder, final int position) {
+
+        for (int i = 0; i < models.size(); i++) {
+            if (i == SharedPreferencesManager.getInteger(mContext, "selectedCountry", 200))
+                models.get(i).setSelected(true);
+        }
 
         holder.flagImage.setImageResource(models.get(position).flagImage);
         holder.flagText.setText(models.get(position).countryName);
+        holder.selectedCountry.setChecked(models.get(position).isSelected());
+
         holder.flagsRelative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, models.get(position).countryName, Toast.LENGTH_LONG).show();
+                models.get(position).setSelected(holder.selectedCountry.isChecked());
+                SharedPreferencesManager.putInteger(mContext, "selectedCountry", position);
+                for (int i = 0; i < models.size(); i++) {
+                    if (i != position) {
+                        models.get(i).setSelected(false);
+                    }
+                }
+                notifyDataSetChanged();
             }
         });
-
+        holder.selectedCountry.setClickable(false);
     }
 
     @Override
@@ -63,6 +78,8 @@ class TabletFlagViewHolder extends RecyclerView.ViewHolder {
     ImageView flagImage;
     @BindView(R.id.flagText)
     TextView flagText;
+    @BindView(R.id.selectedCountry)
+    RadioButton selectedCountry;
 
     TabletFlagViewHolder(View itemView) {
         super(itemView);

@@ -35,6 +35,7 @@
       <w>downloadsura</w>
       <w>duhor</w>
       <w>duhour</w>
+      <w>fahad</w>
       <w>fahras</w>
       <w>fajer</w>
       <w>fajr</w>
@@ -42,12 +43,15 @@
       <w>hadeeth</w>
       <w>hadith</w>
       <w>hanafi</w>
+      <w>hijry</w>
       <w>isha</w>
       <w>isna</w>
       <w>itemone</w>
       <w>itemthree</w>
       <w>itemtwo</w>
       <w>ithna</w>
+      <w>jafari</w>
+      <w>jumaa</w>
       <w>juza</w>
       <w>juzoa</w>
       <w>khatem</w>
@@ -71,11 +75,13 @@
       <w>setm</w>
       <w>shafii</w>
       <w>soorat</w>
+      <w>sqlite</w>
       <w>sura</w>
       <w>surah</w>
       <w>suras</w>
       <w>tafseer</w>
       <w>tajweed</w>
+      <w>uyghur</w>
       <w>wvalues</w>
     </words>
   </dictionary>

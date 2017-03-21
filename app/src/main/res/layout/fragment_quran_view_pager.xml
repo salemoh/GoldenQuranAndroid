@@ -24,7 +24,7 @@
         app:dsb_indicatorColor="@color/colorPrimaryDark"
         app:dsb_indicatorElevation="0dp"
         app:dsb_indicatorPopupEnabled="true"
-        app:dsb_max="624"
+        app:dsb_max="605"
         app:dsb_min="1"
         app:dsb_progressColor="@color/colorPrimary"
         app:dsb_thumbSize="20dp"
