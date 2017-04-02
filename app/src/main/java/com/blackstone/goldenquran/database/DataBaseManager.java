@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.blackstone.goldenquran.models.AhadeethModel;
+import com.blackstone.goldenquran.models.AlsuraModel;
 import com.blackstone.goldenquran.models.Ayah;
 
 import java.io.IOException;
@@ -141,16 +142,76 @@ public class DataBaseManager {
 
     public String getTr(int surah, int ayah) {
 
-        if (mDBHelperFromAssets != null) {
-            Cursor cursor = mDbHelper.query("tr", null, "sura =? and aya =?", new String[]{String.valueOf(surah), String.valueOf(ayah)}, null, null, null);
+        Cursor cursor = mDbHelper.query("tr", null, "sura =? and aya =?", new String[]{String.valueOf(surah), String.valueOf(ayah)}, null, null, null);
 
-            String ahadith = "";
+        String ahadith = "";
 
-            while (cursor.moveToNext()) {
-                ahadith = cursor.getString(cursor.getColumnIndex("text"));
-            }
-            return ahadith;
+        while (cursor.moveToNext()) {
+            ahadith = cursor.getString(cursor.getColumnIndex("text"));
         }
-        return "";
+        return ahadith;
+    }
+
+    public String getNozoolReasons(int surah, int ayah) {
+
+        Cursor cursor = mDbHelper.query("NozoolReasons", null, "SoraNo =? and FromAyaNo <=? and ToAyaNo >=?", new String[]{String.valueOf(surah), String.valueOf(ayah), String.valueOf(ayah)}, null, null, null);
+
+        String nozoolReasons = "";
+
+        while (cursor.moveToNext()) {
+            nozoolReasons = cursor.getString(cursor.getColumnIndex("Sabab_AlNozool"));
+        }
+        return nozoolReasons;
+    }
+
+    public ArrayList<String> getDataForAyah(int surah, int ayah) {
+        ArrayList<String> ayahData = new ArrayList<>();
+
+        Cursor cursor = mDbHelper.query("QuranAdditions", null, "SoraNo =? and AyahNo=? ", new String[]{String.valueOf(surah), String.valueOf(ayah)}, null, null, null);
+
+        while (cursor.moveToNext()) {
+            ayahData.add(cursor.getString(cursor.getColumnIndex("E3rab")));
+            ayahData.add(cursor.getString(cursor.getColumnIndex("Sarf")));
+            ayahData.add(cursor.getString(cursor.getColumnIndex("Blaga")));
+            ayahData.add(cursor.getString(cursor.getColumnIndex("Value")));
+        }
+        return ayahData;
+    }
+
+    public String getMawdoo3OfAyah(int surah, int ayah) {
+
+        Cursor cursor = mDbHelper.query("data", null, "SoraNo =? and FromAyah <=? and ToAyah >=?", new String[]{String.valueOf(surah), String.valueOf(ayah), String.valueOf(ayah)}, null, null, null);
+
+        String data = "";
+
+        while (cursor.moveToNext()) {
+            data = cursor.getString(cursor.getColumnIndex("Description"));
+        }
+        return data;
+    }
+
+    public ArrayList<String> getWordMeaning(int sorah, int ayah) {
+        ArrayList<String> words = new ArrayList<>();
+        Cursor cursor = mDbHelper.query("WordsMeaning", null, "SoraNo =? and FromAyah <=? and ToAyah >=?", new String[]{"" + sorah, "" + ayah, "" + ayah}, null, null, null);
+        while (cursor.moveToNext()) {
+            words.add(cursor.getString(cursor.getColumnIndex("WordMeaning")));
+        }
+        return words;
+    }
+
+    public ArrayList<AlsuraModel> getFahrasData() {
+        ArrayList<AlsuraModel> alsuraModels = new ArrayList<>();
+        Cursor cursor = mDbHelper.query("fahras", null, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+            alsuraModels.add(new AlsuraModel(
+                    cursor.getColumnName(cursor.getColumnIndex("surah")),
+                    cursor.getColumnName(cursor.getColumnIndex("surahNo")),
+                    cursor.getColumnName(cursor.getColumnIndex("verses")),
+                    cursor.getColumnName(cursor.getColumnIndex("place")),
+                    cursor.getColumnName(cursor.getColumnIndex("juz")),
+                    Integer.parseInt(cursor.getColumnName(cursor.getColumnIndex("page")))
+            ));
+        }
+        return alsuraModels;
     }
 }

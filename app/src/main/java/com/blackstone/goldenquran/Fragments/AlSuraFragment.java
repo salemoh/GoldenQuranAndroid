@@ -1,6 +1,7 @@
 package com.blackstone.goldenquran.Fragments;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.AlsuraAdapter;
+import com.blackstone.goldenquran.database.DataBaseManager;
 import com.blackstone.goldenquran.models.AljuzaModel;
 import com.blackstone.goldenquran.models.AlsuraModel;
 import com.blackstone.goldenquran.ui.DrawerCloser;
@@ -84,7 +86,14 @@ public class AlSuraFragment extends Fragment {
 
 
         alSuraRecyclerView.setAdapter(new AlsuraAdapter(getActivity(), arrayList));
+    }
 
-
+    class getFahrasData extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            DataBaseManager dataBaseManager = new DataBaseManager(getActivity(), "fahras.db", true).createDatabase();
+            dataBaseManager.getFahrasData();
+            return null;
+        }
     }
 }

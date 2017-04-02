@@ -75,7 +75,6 @@ public class PlayerService extends Service {
 
         startForeground(1, n);
 
-        notificationManager.notify(1, builder.build());
     }
 
     @Override

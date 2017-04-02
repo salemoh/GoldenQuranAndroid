@@ -61,6 +61,7 @@ public class AlsuraAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             viewHolder.ayat.setText(alsuraModel.numberOfAya);
             viewHolder.name.setText(alsuraModel.suraName);
             viewHolder.number.setText(alsuraModel.number);
+
             viewHolder.contentPanel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

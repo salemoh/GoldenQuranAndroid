@@ -101,10 +101,35 @@ public class IntonationTranslatorFragment extends Fragment {
         @Override
         public Fragment getItem(int position) {
             switch (position) {
-                case 8:
+                case 0:
                     TafseerFragment fragment = new TafseerFragment();
                     fragment.setArguments(getArguments());
                     return fragment;
+                case 1:
+                    Mawdoo3Fragment mawdoo3Fragment = new Mawdoo3Fragment();
+                    mawdoo3Fragment.setArguments(getArguments());
+                    return mawdoo3Fragment;
+                case 2:
+                    SarfFragment sarfFragment = new SarfFragment();
+                    sarfFragment.setArguments(getArguments());
+                    return sarfFragment;
+                case 3:
+                    BalaghaFragment balaghaFragment = new BalaghaFragment();
+                    balaghaFragment.setArguments(getArguments());
+                    return balaghaFragment;
+                case 4:
+                    E3rabFragment e3rabFragment = new E3rabFragment();
+                    e3rabFragment.setArguments(getArguments());
+                    return e3rabFragment;
+                case 6:
+                case 7:
+                    NozoolReasons nozoolReasons = new NozoolReasons();
+                    nozoolReasons.setArguments(getArguments());
+                    return nozoolReasons;
+                case 8:
+                    ValueFragment valueFragment = new ValueFragment();
+                    valueFragment.setArguments(getArguments());
+                    return valueFragment;
                 default:
                     return new AlSuraFragment();
             }

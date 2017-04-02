@@ -32,8 +32,7 @@ public class DBHelperFromAssets extends SQLiteOpenHelper {
     }
 
     public void createDataBase() throws IOException {
-        boolean mDataBaseExist = checkDataBase();
-        if (!mDataBaseExist) {
+        if (!checkDataBase()) {
             this.getReadableDatabase();
             this.close();
             try {
@@ -63,7 +62,7 @@ public class DBHelperFromAssets extends SQLiteOpenHelper {
         mInput.close();
     }
 
-    public boolean openDataBase() throws SQLException {
+    boolean openDataBase() throws SQLException {
         String mPath = DB_PATH + DB_NAME;
         Log.v("mPath", mPath);
         mDataBase = SQLiteDatabase.openDatabase(mPath, null, SQLiteDatabase.CREATE_IF_NECESSARY);

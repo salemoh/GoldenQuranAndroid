@@ -37,5 +37,6 @@ public class TafseerFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         if (getArguments() != null)
             TranslateText.setText(getArguments().getString("TranslateText"));
+            
     }
 }

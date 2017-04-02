@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.blackstone.goldenquran.R;
-import com.blackstone.goldenquran.managers.PlayerManager;
 
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 
@@ -114,14 +113,13 @@ public class QuranViewPager extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            QuranImageFragment fragment = new QuranImageFragment();
-            fragment.setPage(position);
-            return fragment;
+
+            return QuranImageFragment.getNewInstance(position);
         }
 
         @Override
         public int getCount() {
-            return PlayerManager.getImagesCount() + 1;
+            return 605;
         }
     }
 
