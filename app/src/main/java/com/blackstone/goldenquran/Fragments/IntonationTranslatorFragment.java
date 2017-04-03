@@ -100,6 +100,11 @@ public class IntonationTranslatorFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
+            if (
+                    getActivity().getResources().getBoolean(R.bool.is_right_to_left)) {
+                position -= 8;
+                position = Math.abs(position);
+            }
             switch (position) {
                 case 0:
                     TafseerFragment fragment = new TafseerFragment();
@@ -121,7 +126,14 @@ public class IntonationTranslatorFragment extends Fragment {
                     E3rabFragment e3rabFragment = new E3rabFragment();
                     e3rabFragment.setArguments(getArguments());
                     return e3rabFragment;
+                case 5:
+                    Mo3JamFragment mo3JamFragment = new Mo3JamFragment();
+                    mo3JamFragment.setArguments(getArguments());
+                    return mo3JamFragment;
                 case 6:
+                    WordsMeaningsFragment wordsMeaningsFragment = new WordsMeaningsFragment();
+                    wordsMeaningsFragment.setArguments(getArguments());
+                    return wordsMeaningsFragment;
                 case 7:
                     NozoolReasons nozoolReasons = new NozoolReasons();
                     nozoolReasons.setArguments(getArguments());

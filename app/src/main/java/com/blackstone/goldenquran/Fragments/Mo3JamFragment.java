@@ -10,31 +10,31 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.blackstone.goldenquran.R;
-import com.blackstone.goldenquran.adapters.WordsMeaningAdapter;
-import com.blackstone.goldenquran.models.models.WordsMeaningModel;
+import com.blackstone.goldenquran.adapters.Mo3jamWordsAdapter;
+import com.blackstone.goldenquran.models.Mo3jamModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class WordsMeaningsFragment extends Fragment {
+public class Mo3JamFragment extends Fragment {
 
 
-    @BindView(R.id.wordsMeanings)
-    RecyclerView wordsMeanings;
+    @BindView(R.id.Mo3jamRecycler)
+    RecyclerView mo3jamRecycler;
     Unbinder unbinder;
 
-    public WordsMeaningsFragment() {
+    public Mo3JamFragment() {
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_words_meanings, container, false);
+        View view = inflater.inflate(R.layout.fragment_mo3_jam, container, false);
         unbinder = ButterKnife.bind(this, view);
-        wordsMeanings.setLayoutManager(new LinearLayoutManager(getActivity()));
-        wordsMeanings.setAdapter(new WordsMeaningAdapter(getActivity(), getArguments().<WordsMeaningModel>getParcelableArrayList("wordsMeaning")));
+        mo3jamRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mo3jamRecycler.setAdapter(new Mo3jamWordsAdapter(getActivity(), getArguments().<Mo3jamModel>getParcelableArrayList("mo3jamWords")));
         return view;
     }
 

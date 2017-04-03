@@ -9,6 +9,8 @@ import android.util.Log;
 import com.blackstone.goldenquran.models.AhadeethModel;
 import com.blackstone.goldenquran.models.AlsuraModel;
 import com.blackstone.goldenquran.models.Ayah;
+import com.blackstone.goldenquran.models.Mo3jamModel;
+import com.blackstone.goldenquran.models.models.WordsMeaningModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -190,11 +192,20 @@ public class DataBaseManager {
         return data;
     }
 
-    public ArrayList<String> getWordMeaning(int sorah, int ayah) {
-        ArrayList<String> words = new ArrayList<>();
+    public ArrayList<WordsMeaningModel> getWordMeaning(int sorah, int ayah) {
+        ArrayList<WordsMeaningModel> words = new ArrayList<>();
         Cursor cursor = mDbHelper.query("WordsMeaning", null, "SoraNo =? and FromAyah <=? and ToAyah >=?", new String[]{"" + sorah, "" + ayah, "" + ayah}, null, null, null);
         while (cursor.moveToNext()) {
-            words.add(cursor.getString(cursor.getColumnIndex("WordMeaning")));
+            words.add(new WordsMeaningModel(cursor.getString(cursor.getColumnIndex("WordMeaning")), cursor.getString(cursor.getColumnIndex("Word"))));
+        }
+        return words;
+    }
+
+    public ArrayList<Mo3jamModel> getMo3jamWords(int surah, int ayah) {
+        ArrayList<Mo3jamModel> words = new ArrayList<>();
+        Cursor cursor = mDbHelper.query("QuranMo3jm", null, "SoraNo =? and AyahNo <=?", new String[]{String.valueOf(surah), String.valueOf(ayah)}, null, null, null);
+        while (cursor.moveToNext()) {
+            words.add(new Mo3jamModel(cursor.getString(cursor.getColumnIndex("Root")), cursor.getString(cursor.getColumnIndex("Word"))));
         }
         return words;
     }

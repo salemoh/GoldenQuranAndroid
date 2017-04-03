@@ -28,7 +28,9 @@ import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.database.DataBaseManager;
 import com.blackstone.goldenquran.managers.PlayerManager;
 import com.blackstone.goldenquran.models.Ayah;
+import com.blackstone.goldenquran.models.Mo3jamModel;
 import com.blackstone.goldenquran.models.PreLoadImages;
+import com.blackstone.goldenquran.models.models.WordsMeaningModel;
 import com.blackstone.goldenquran.ui.DrawerCloser;
 import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
 import com.blackstone.goldenquran.views.DrawView;
@@ -70,8 +72,9 @@ public class QuranImageFragment extends Fragment {
     String balagha;
     String value;
     String mawdoo3;
+    ArrayList<Mo3jamModel> mo3jamWords;
     ArrayList<PreLoadImages> preLoadImages;
-    ArrayList<String> wordsMeaning;
+    ArrayList<WordsMeaningModel> wordsMeaning;
 
     int CLICK_ACTION_THRESH_HOLD = 200;
     float startX;
@@ -198,7 +201,8 @@ public class QuranImageFragment extends Fragment {
                     bundle.putString("balagha", balagha);
                     bundle.putString("value", value);
                     bundle.putString("mawdoo3", mawdoo3);
-                    bundle.putStringArrayList("wordsMeaning", wordsMeaning);
+                    bundle.putParcelableArrayList("wordsMeaning", wordsMeaning);
+                    bundle.putParcelableArrayList("mo3jamWords", mo3jamWords);
                     fragment.setArguments(bundle);
                     getActivity().getSupportFragmentManager().beginTransaction().replace(container, fragment).addToBackStack(null).commit();
                     ((DrawerCloser) getActivity()).respond(textOfAyah);
@@ -349,6 +353,8 @@ public class QuranImageFragment extends Fragment {
 
                             new getPageText().execute(ayahPoints);
 
+                            new getMo3jamWords().execute(suraNumber, ayahNumber);
+
                             for (int i = 0; i < ayahPoints.size(); i++) {
                                 if (ayahNumber == ayahPoints.get(i).ayah && suraNumber == ayahPoints.get(i).surah) {
                                     left.add(ayahPoints.get(i).upperLeftX);
@@ -431,10 +437,12 @@ public class QuranImageFragment extends Fragment {
     }
 
     void noConnection() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("No Internet Connection");
-        builder.setMessage("you'r phone has no internet Connection try to connect it to load content");
-        builder.create().show();
+        if (getActivity() != null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("No Internet Connection");
+            builder.setMessage("you'r phone has no internet Connection try to connect it to load content");
+            builder.create().show();
+        }
     }
 
     float map(float x, float in_min, float in_max, float out_min, float out_max) {
@@ -603,7 +611,7 @@ public class QuranImageFragment extends Fragment {
             data = new DataBaseManager(getActivity(), "QuranAdditions.db", true).createDatabase();
             data.open();
             ArrayList<String> Data = data.getDataForAyah(suraNumber, ayahNumber);
-            if (Data != null) {
+            if (Data != null && !Data.isEmpty()) {
                 e3rab = Data.get(0);
                 sarf = Data.get(1);
                 balagha = Data.get(2);
@@ -619,6 +627,16 @@ public class QuranImageFragment extends Fragment {
             data = new DataBaseManager(getActivity(), "QuranMawdoo3.db", true).createDatabase();
             data.open();
             mawdoo3 = data.getMawdoo3OfAyah(integers[0], integers[1]);
+            return null;
+        }
+    }
+
+    private class getMo3jamWords extends AsyncTask<Integer, Void, Void> {
+        @Override
+        protected Void doInBackground(Integer... integers) {
+            data = new DataBaseManager(getActivity(), "QuranMo3jm.db", true).createDatabase();
+            data.open();
+            mo3jamWords = data.getMo3jamWords(integers[0], integers[1]);
             return null;
         }
     }
