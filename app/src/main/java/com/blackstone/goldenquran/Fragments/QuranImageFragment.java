@@ -29,7 +29,7 @@ import com.blackstone.goldenquran.database.DataBaseManager;
 import com.blackstone.goldenquran.managers.PlayerManager;
 import com.blackstone.goldenquran.models.Ayah;
 import com.blackstone.goldenquran.models.Mo3jamModel;
-import com.blackstone.goldenquran.models.PreLoadImages;
+//import com.blackstone.goldenquran.models.PreLoadImages;
 import com.blackstone.goldenquran.models.models.WordsMeaningModel;
 import com.blackstone.goldenquran.ui.DrawerCloser;
 import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
@@ -73,7 +73,7 @@ public class QuranImageFragment extends Fragment {
     String value;
     String mawdoo3;
     ArrayList<Mo3jamModel> mo3jamWords;
-    ArrayList<PreLoadImages> preLoadImages;
+//    ArrayList<PreLoadImages> preLoadImages;
     ArrayList<WordsMeaningModel> wordsMeaning;
 
     int CLICK_ACTION_THRESH_HOLD = 200;
@@ -178,7 +178,7 @@ public class QuranImageFragment extends Fragment {
         }
         requestStoragePermission();
 
-        preLoadImages = new ArrayList<>();
+//        preLoadImages = new ArrayList<>();
         if (position > 0)
             loadToArray(position - 1);
         loadToArray(position);
@@ -230,12 +230,12 @@ public class QuranImageFragment extends Fragment {
 
             imageWidth = PlayerManager.getWidth(imageName);
             imageHeight = PlayerManager.getHeight(imageName);
-            if (preLoadImages.size() < 3)
-                preLoadImages.add(new PreLoadImages(drawable, position));
-            else {
-                preLoadImages.clear();
-                preLoadImages.add(new PreLoadImages(drawable, position));
-            }
+//            if (preLoadImages.size() < 3)
+//                preLoadImages.add(new PreLoadImages(drawable, position));
+//            else {
+//                preLoadImages.clear();
+//                preLoadImages.add(new PreLoadImages(drawable, position));
+//            }
 
 
         } /*try to download images*/ else {
@@ -259,10 +259,10 @@ public class QuranImageFragment extends Fragment {
 
     public void setImageView() {
 
-        if (preLoadImages.size() == 3)
-            imageView.setImageDrawable(preLoadImages.get(1).Image);
-        else if (!preLoadImages.isEmpty())
-            imageView.setImageDrawable(preLoadImages.get(0).Image);
+//        if (preLoadImages.size() == 3)
+//            imageView.setImageDrawable(preLoadImages.get(1).Image);
+//        else if (!preLoadImages.isEmpty())
+//            imageView.setImageDrawable(preLoadImages.get(0).Image);
 
 
         //check db

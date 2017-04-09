@@ -1,13 +1,14 @@
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                                            xmlns:tools="http://schemas.android.com/tools"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+
+                                            app:layout_behavior="@string/appbar_scrolling_view_behavior"
     >
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.example.abdullah.alarmmanager.Fragments.SettingsSalahTimeFragment">
@@ -21,9 +22,12 @@
 هذه السورة الكريمة مكية وآياتها سبعٌ بالإِجماع، وتسمى  لافتتاح الكتاب العزيز بها حيث إِنها أول القرآن في الترتيب لا في النزول، وهي - على قصرها ووجازتها - قد حوت معاني القرآن العظيم، واشتملت على مقاصده الأساسية بالإِجمال، فهي تتناول أصول الدين وفروعه، تتناول العقيدة، والعبادة، والتشريع، والاعتقاد باليوم الآخر، والإِيمان بصفات الله الحسنى، وإِفراده بالعبادة والاستعانة والدعاء، والتوجه إِليه جلَّ وعلا بطلب الهداية إِلى الدين الحق والصراط المستقيم، والتضرع إِليه بالتثبيت على الإِيمان ونهج سبيل الصالحين، وتجنب طريق المغضوب عليهم والضالين، وفيها الإخبار عن قصص الأمم السابقين، والاطلاع على معارج السعداء ومنازل الأشقياء، وفيها التعبد بأمر الله سبحانه ونهيه، إلى غير ما هنالك من مقاصد وأغراض وأهداف، فهي كالأم بالنسبة لبقية السور الكريمة ولهذا تسمّى
 
 هذه السورة الكريمة مكية وآياتها سبعٌ بالإِجماع، وتسمى  لافتتاح الكتاب العزيز بها حيث إِنها أول القرآن في الترتيب لا في النزول، وهي - على قصرها ووجازتها - قد حوت معاني القرآن العظيم، واشتملت على مقاصده الأساسية بالإِجمال، فهي تتناول أصول الدين وفروعه، تتناول العقيدة، والعبادة، والتشريع، والاعتقاد باليوم الآخر، والإِيمان بصفات الله الحسنى، وإِفراده بالعبادة والاستعانة والدعاء، والتوجه إِليه جلَّ وعلا بطلب الهداية إِلى الدين الحق والصراط المستقيم، والتضرع إِليه بالتثبيت على الإِيمان ونهج سبيل الصالحين، وتجنب طريق المغضوب عليهم والضالين، وفيها الإخبار عن قصص الأمم السابقين، والاطلاع على معارج السعداء ومنازل الأشقياء، وفيها التعبد بأمر الله سبحانه ونهيه، إلى غير ما هنالك من مقاصد وأغراض وأهداف، فهي كالأم بالنسبة لبقية السور الكريمة ولهذا تسمّى "
-            android:textColor="@color/cast_expanded_controller_background_color"
-            android:textSize="25sp" />
+
+            android:textSize="25sp"/>
+        <!--android:textColor=""-->
+        <!--@color/cast_expanded_controller_background_color-->
     </RelativeLayout>
+
 
 </android.support.v4.widget.NestedScrollView>
 
