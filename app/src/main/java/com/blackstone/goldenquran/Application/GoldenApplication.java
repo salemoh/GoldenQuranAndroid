@@ -14,5 +14,6 @@ public class GoldenApplication extends Application {
         super.onCreate();
         Timber.plant(new Timber.DebugTree());
         ThreadManager.initializeThreadManagerQueuedPool("getPagePoints");
+
     }
 }

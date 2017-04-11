@@ -248,11 +248,14 @@ public class DataBaseManager {
         values.add(String.valueOf(ayahEnd));
         values.add(String.valueOf(ayahStart));
         values.add(String.valueOf(ayahEnd));
+        values.add(String.valueOf(ayahStart));
+        values.add(String.valueOf(ayahEnd));
 
-        String [] a = new String [values.size()] ;
 
-        Cursor cursor = mDbHelper.query("data", null, "SoraNo in ( " + makePlaceholders(surah.size()) + " ) and ((FromAyah between ? and ?) OR (ToAyah between ? and ?))", values.toArray(a),
-        null, null, null);
+        String[] a = new String[values.size()];
+
+        Cursor cursor = mDbHelper.query("data", null, "SoraNo in ( " + makePlaceholders(surah.size() - 2) + " ) and ((FromAyah between ? and ?) OR (ToAyah between ? and ?))", values.toArray(a),
+                null, null, null);
 
         while (cursor.moveToNext()) {
             colors.add(new DataMawdo3ColorModel(

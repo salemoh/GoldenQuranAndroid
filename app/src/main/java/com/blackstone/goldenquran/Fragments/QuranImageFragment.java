@@ -280,6 +280,27 @@ public class QuranImageFragment extends Fragment {
             @Override
             public void onRunSuccess() {
 
+//                for (int i = 0; i < dataMawdo3ColorModels.size(); i++) {
+//                    if (dataMawdo3ColorModels.get(i).fromAyah <= dataMawdo3ColorModels.get(i).toAyah) {
+//                        for (int j = 0; j < ayahPoints.size(); j++) {
+//                            if (ayahPoints.get(j).ayah == dataMawdo3ColorModels.get(i).fromAyah) {
+//                                colors.add(dataMawdo3ColorModels.get(i).color);
+//                            }
+//                        }
+//                        dataMawdo3ColorModels.get(i).fromAyah += 1;
+//                        i--;
+//                    }
+//                }
+
+                for (int i = 0; i < dataMawdo3ColorModels.size(); i++) {
+                    colors.add(dataMawdo3ColorModels.get(i).color);
+                }
+
+                imageView.colors = colors;
+                imageView.imageWidth = imageWidth;
+                imageView.imageHeight = imageHeight;
+                imageView.invalidate();
+
             }
 
             @Override
@@ -291,9 +312,16 @@ public class QuranImageFragment extends Fragment {
             public void run() {
                 data = new DataBaseManager(getActivity(), "QuranMawdoo3.db", true).createDatabase();
                 data.open();
-                dataMawdo3ColorModels = data.getPageColors(suras, start, end);
+                final ArrayList<DataMawdo3ColorModel> mawdo3ColorModels = data.getPageColors(suras, start, end);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dataMawdo3ColorModels = mawdo3ColorModels;
+                    }
+                });
             }
         };
+        ThreadManager.addTaskToThreadManagerPool("getPagePoints", 0, task);
     }
 
     public void setImageView() {
@@ -309,7 +337,8 @@ public class QuranImageFragment extends Fragment {
         if (PlayerManager.isDBPresent("KingFahad1.db")) {
 //            new getPagePoints().execute("KingFahad1.db");
 
-            Task task = new Task() {
+
+            ThreadManager.addTaskToThreadManagerPool("getPagePoints", 1, new Task() {
                 @Override
                 public void onPreRun() {
 
@@ -322,6 +351,29 @@ public class QuranImageFragment extends Fragment {
 
                 @Override
                 public void onRunSuccess() {
+
+
+//                    new getColors().execute((int) ayahPoints.get(0).ayah, (int) ayahPoints.get(ayahPoints.size() - 1).ayah);
+
+                }
+
+                @Override
+                public void onRunFailure(Exception ex) {
+
+                }
+
+                @Override
+                public void run() {
+                    data = new DataBaseManager(getActivity(), "KingFahad1.db", false).createDatabase();
+                    data.open();
+                    final ArrayList<Ayah> ayahs = data.getPagePoints(position);
+
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ayahPoints = ayahs;
+                        }
+                    });
 
                     imageView.ayahs = ayahPoints;
 
@@ -336,24 +388,11 @@ public class QuranImageFragment extends Fragment {
                     }
                     if (ayahPoints != null && !ayahPoints.isEmpty())
                         getColor((int) ayahPoints.get(0).ayah, (int) ayahPoints.get(ayahPoints.size() - 1).ayah);
-//                    new getColors().execute((int) ayahPoints.get(0).ayah, (int) ayahPoints.get(ayahPoints.size() - 1).ayah);
+
 
                 }
+            });
 
-                @Override
-                public void onRunFailure(Exception ex) {
-
-                }
-
-                @Override
-                public void run() {
-                    data = new DataBaseManager(getActivity(), "KingFahad1.db", false).createDatabase();
-                    data.open();
-                    ayahPoints = data.getPagePoints(position);
-                }
-            };
-
-            ThreadManager.addTaskToThreadManagerPool("getPagePoints", 1, task);
 
         }/*try to download db files*/ else {
             if (isOnline()) {
@@ -504,23 +543,6 @@ public class QuranImageFragment extends Fragment {
         return false;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-//        handler = new Handler();
-//
-//        r = new Runnable() {
-//            public void run() {
-//                if (getActivity() != null)
-//                    ((DrawerCloser) getActivity()).moveToolbarUp();
-//            }
-//        };
-//
-//        handler.postDelayed(r, 2000);
-
-    }
-
     void noConnection() {
         if (getActivity() != null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -560,8 +582,8 @@ public class QuranImageFragment extends Fragment {
                     }
                 }
             }
-            if (ayahPoints != null && !ayahPoints.isEmpty())
-                new getColors().execute((int) ayahPoints.get(0).ayah, (int) ayahPoints.get(ayahPoints.size() - 1).ayah);
+//            if (ayahPoints != null && !ayahPoints.isEmpty())
+//                new getColors().execute((int) ayahPoints.get(0).ayah, (int) ayahPoints.get(ayahPoints.size() - 1).ayah);
         }
     }
 
