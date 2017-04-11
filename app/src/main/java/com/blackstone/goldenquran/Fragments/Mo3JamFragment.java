@@ -8,10 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.Mo3jamWordsAdapter;
 import com.blackstone.goldenquran.models.Mo3jamModel;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +26,8 @@ public class Mo3JamFragment extends Fragment {
     @BindView(R.id.Mo3jamRecycler)
     RecyclerView mo3jamRecycler;
     Unbinder unbinder;
+    @BindView(R.id.mo3jamIsEmptyText)
+    TextView mo3jamIsEmptyText;
 
     public Mo3JamFragment() {
     }
@@ -34,7 +39,11 @@ public class Mo3JamFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_mo3_jam, container, false);
         unbinder = ButterKnife.bind(this, view);
         mo3jamRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mo3jamRecycler.setAdapter(new Mo3jamWordsAdapter(getActivity(), getArguments().<Mo3jamModel>getParcelableArrayList("mo3jamWords")));
+        ArrayList<Mo3jamModel> mo3jamModels = getArguments().getParcelableArrayList("mo3jamWords");
+        if (mo3jamModels != null && mo3jamModels.isEmpty()) {
+            mo3jamIsEmptyText.setVisibility(View.VISIBLE);
+        } else if (mo3jamModels != null)
+            mo3jamRecycler.setAdapter(new Mo3jamWordsAdapter(getActivity(), mo3jamModels));
         return view;
     }
 

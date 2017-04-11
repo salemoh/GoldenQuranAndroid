@@ -8,12 +8,16 @@
         android:layout_height="match_parent"
         android:scaleType="fitXY" />
 
-
-    <com.blackstone.goldenquran.views.DrawView
-        android:id="@+id/quranImage"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:rotationY="180"
-        android:scaleType="fitXY" />
+        android:layout_height="match_parent">
+
+        <com.blackstone.goldenquran.views.DrawView
+            android:id="@+id/quranImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:rotationY="180" />
+    </ScrollView>
 
 </FrameLayout>

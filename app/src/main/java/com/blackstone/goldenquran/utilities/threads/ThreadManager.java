@@ -44,22 +44,40 @@ public class ThreadManager {
             throw new ThreadsManagerPoolAlreadyExistException();
         }
 
-        ThreadManagerPoolExecutor threadPoolExecutor = new ThreadManagerPoolExecutor(threadManagerConfiguration.getNumberOfCores(), threadManagerConfiguration.getNumberOfThreads(), KEEP_ALIVE_TIME, KEEP_ALIVE_TIME_UNIT, new PriorityBlockingQueue<Runnable>());
-        sThreadPoolExecutors.put(threadManagerConfiguration.getId(), threadPoolExecutor);
+        ThreadManagerPoolExecutor threadPoolExecutor = new ThreadManagerPoolExecutor(
+                threadManagerConfiguration.getNumberOfCores(),
+                threadManagerConfiguration.getNumberOfThreads(),
+                KEEP_ALIVE_TIME,
+                KEEP_ALIVE_TIME_UNIT,
+                new PriorityBlockingQueue<Runnable>()
+        );
+
+        sThreadPoolExecutors.put(
+                threadManagerConfiguration.getId(),
+                threadPoolExecutor
+        );
 
         return threadManagerConfiguration.getId();
     }
 
     public static String initializeThreadManagerQueuedPool(String threadContextWorkSpaceId) {
 
-        ThreadManagerConfiguration threadManagerConfiguration = new ThreadManagerConfiguration(threadContextWorkSpaceId, 1, 1);
+        ThreadManagerConfiguration threadManagerConfiguration = new ThreadManagerConfiguration(
+                threadContextWorkSpaceId,
+                1,
+                1
+        );
 
         return initializeThreadManagerPool(threadManagerConfiguration);
     }
 
     public static String initializeThreadManagerFullPowerPool(String threadManagerPoolSpaceId) {
 
-        ThreadManagerConfiguration threadManagerConfiguration = new ThreadManagerConfiguration(threadManagerPoolSpaceId, Runtime.getRuntime().availableProcessors(), Runtime.getRuntime().availableProcessors());
+        ThreadManagerConfiguration threadManagerConfiguration = new ThreadManagerConfiguration(
+                threadManagerPoolSpaceId,
+                Runtime.getRuntime().availableProcessors(),
+                Runtime.getRuntime().availableProcessors()
+        );
 
         return initializeThreadManagerPool(threadManagerConfiguration);
     }
@@ -74,11 +92,11 @@ public class ThreadManager {
         ThreadManagerPoolExecutor threadManagerPoolExecutor = sThreadPoolExecutors.get(threadManagerPoolId);
         threadContextRunnable.mPoolId = threadManagerPoolId;
         threadManagerPoolExecutor.mIsDebugMode = sIsDebugMode;
-        StackTraceElement[] stackTraceElements= Thread.currentThread().getStackTrace();
-        threadContextRunnable.stackTrace ="Beginning =>\n";
-        int stackTraceCounter=1;
-        for (StackTraceElement stackTraceElement:stackTraceElements) {
-            threadContextRunnable.stackTrace+=stackTraceCounter+") "+stackTraceElement.toString()+"\n";
+        StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+        threadContextRunnable.stackTrace = "Beginning =>\n";
+        int stackTraceCounter = 1;
+        for (StackTraceElement stackTraceElement : stackTraceElements) {
+            threadContextRunnable.stackTrace += stackTraceCounter + ") " + stackTraceElement.toString() + "\n";
             stackTraceCounter++;
         }
         threadManagerPoolExecutor.submit(threadContextRunnable, priority);

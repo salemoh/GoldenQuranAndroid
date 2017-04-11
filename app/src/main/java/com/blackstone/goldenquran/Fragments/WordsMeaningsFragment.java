@@ -8,10 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.WordsMeaningAdapter;
 import com.blackstone.goldenquran.models.models.WordsMeaningModel;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +26,8 @@ public class WordsMeaningsFragment extends Fragment {
     @BindView(R.id.wordsMeanings)
     RecyclerView wordsMeanings;
     Unbinder unbinder;
+    @BindView(R.id.noMeaningText)
+    TextView noMeaningText;
 
     public WordsMeaningsFragment() {
     }
@@ -34,7 +39,11 @@ public class WordsMeaningsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_words_meanings, container, false);
         unbinder = ButterKnife.bind(this, view);
         wordsMeanings.setLayoutManager(new LinearLayoutManager(getActivity()));
-        wordsMeanings.setAdapter(new WordsMeaningAdapter(getActivity(), getArguments().<WordsMeaningModel>getParcelableArrayList("wordsMeaning")));
+        ArrayList<WordsMeaningModel> words = getArguments().getParcelableArrayList("wordsMeaning");
+        if (words != null && words.isEmpty()) {
+            noMeaningText.setVisibility(View.VISIBLE);
+        } else if (words != null)
+            wordsMeanings.setAdapter(new WordsMeaningAdapter(getActivity(), words));
         return view;
     }
 

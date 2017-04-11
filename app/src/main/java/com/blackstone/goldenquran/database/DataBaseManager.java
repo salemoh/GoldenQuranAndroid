@@ -9,6 +9,7 @@ import android.util.Log;
 import com.blackstone.goldenquran.models.AhadeethModel;
 import com.blackstone.goldenquran.models.AlsuraModel;
 import com.blackstone.goldenquran.models.Ayah;
+import com.blackstone.goldenquran.models.DataMawdo3ColorModel;
 import com.blackstone.goldenquran.models.Mo3jamModel;
 import com.blackstone.goldenquran.models.models.WordsMeaningModel;
 
@@ -175,7 +176,6 @@ public class DataBaseManager {
             ayahData.add(cursor.getString(cursor.getColumnIndex("E3rab")));
             ayahData.add(cursor.getString(cursor.getColumnIndex("Sarf")));
             ayahData.add(cursor.getString(cursor.getColumnIndex("Blaga")));
-            ayahData.add(cursor.getString(cursor.getColumnIndex("Value")));
         }
         return ayahData;
     }
@@ -203,7 +203,7 @@ public class DataBaseManager {
 
     public ArrayList<Mo3jamModel> getMo3jamWords(int surah, int ayah) {
         ArrayList<Mo3jamModel> words = new ArrayList<>();
-        Cursor cursor = mDbHelper.query("QuranMo3jm", null, "SoraNo =? and AyahNo <=?", new String[]{String.valueOf(surah), String.valueOf(ayah)}, null, null, null);
+        Cursor cursor = mDbHelper.query("QuranMo3jm", null, "SoraNo =? and AyahNo =?", new String[]{String.valueOf(surah), String.valueOf(ayah)}, null, null, null);
         while (cursor.moveToNext()) {
             words.add(new Mo3jamModel(cursor.getString(cursor.getColumnIndex("Root")), cursor.getString(cursor.getColumnIndex("Word"))));
         }
@@ -224,5 +224,44 @@ public class DataBaseManager {
             ));
         }
         return alsuraModels;
+    }
+
+    String makePlaceholders(int len) {
+        if (len < 1) {
+            // It will lead to an invalid query anyway ..
+            throw new RuntimeException("No placeholders");
+        } else {
+            StringBuilder sb = new StringBuilder(len * 2 - 1);
+            sb.append("?");
+            for (int i = 1; i < len; i++) {
+                sb.append(",?");
+            }
+            return sb.toString();
+        }
+    }
+
+    public ArrayList<DataMawdo3ColorModel> getPageColors(ArrayList<String> surah, int ayahStart, int ayahEnd) {
+        ArrayList<DataMawdo3ColorModel> colors = new ArrayList<>();
+        ArrayList<String> values = surah;
+
+        values.add(String.valueOf(ayahStart));
+        values.add(String.valueOf(ayahEnd));
+        values.add(String.valueOf(ayahStart));
+        values.add(String.valueOf(ayahEnd));
+
+        String [] a = new String [values.size()] ;
+
+        Cursor cursor = mDbHelper.query("data", null, "SoraNo in ( " + makePlaceholders(surah.size()) + " ) and ((FromAyah between ? and ?) OR (ToAyah between ? and ?))", values.toArray(a),
+        null, null, null);
+
+        while (cursor.moveToNext()) {
+            colors.add(new DataMawdo3ColorModel(
+                    cursor.getInt(cursor.getColumnIndex("FromAyah")),
+                    cursor.getInt(cursor.getColumnIndex("ToAyah")),
+                    cursor.getInt(cursor.getColumnIndex("ColorIndex"))
+            ));
+        }
+
+        return colors;
     }
 }

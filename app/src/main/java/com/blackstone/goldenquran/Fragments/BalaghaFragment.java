@@ -30,7 +30,10 @@ public class BalaghaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_nozool_reasons, container, false);
         ButterKnife.bind(this, view);
         if (getArguments() != null)
-            nozoolReasonsText.setText(getArguments().getString("balagha"));
+            if (!getArguments().getString("balagha").equalsIgnoreCase("(null)"))
+                nozoolReasonsText.setText(getArguments().getString("balagha"));
+            else
+                nozoolReasonsText.setText("البلاغة غير متوفرة لهذه الاية الكريمه");
         return view;
     }
 

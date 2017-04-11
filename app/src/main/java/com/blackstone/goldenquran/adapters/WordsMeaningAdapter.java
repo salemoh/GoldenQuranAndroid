@@ -35,8 +35,8 @@ public class WordsMeaningAdapter extends RecyclerView.Adapter<WordsMeaningViewHo
 
     @Override
     public void onBindViewHolder(WordsMeaningViewHolder holder, int position) {
-        holder.meaning.setText(models.get(position).meaning);
-        holder.word.setText(models.get(position).word);
+        holder.meaning.setText(models.get(position).word);
+        holder.word.setText(models.get(position).meaning);
     }
 
     @Override

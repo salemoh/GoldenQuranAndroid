@@ -28,11 +28,14 @@ import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.database.DataBaseManager;
 import com.blackstone.goldenquran.managers.PlayerManager;
 import com.blackstone.goldenquran.models.Ayah;
+import com.blackstone.goldenquran.models.DataMawdo3ColorModel;
 import com.blackstone.goldenquran.models.Mo3jamModel;
-//import com.blackstone.goldenquran.models.PreLoadImages;
+import com.blackstone.goldenquran.models.PreLoadImages;
 import com.blackstone.goldenquran.models.models.WordsMeaningModel;
 import com.blackstone.goldenquran.ui.DrawerCloser;
 import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
+import com.blackstone.goldenquran.utilities.threads.Task;
+import com.blackstone.goldenquran.utilities.threads.ThreadManager;
 import com.blackstone.goldenquran.views.DrawView;
 
 import java.io.BufferedInputStream;
@@ -47,6 +50,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.blackstone.goldenquran.R.id.container;
+
+//import com.blackstone.goldenquran.models.PreLoadImages;
 
 public class QuranImageFragment extends Fragment {
 
@@ -70,11 +75,13 @@ public class QuranImageFragment extends Fragment {
     String e3rab;
     String sarf;
     String balagha;
-    String value;
     String mawdoo3;
+    ArrayList<String> suras;
+    ArrayList<DataMawdo3ColorModel> dataMawdo3ColorModels;
     ArrayList<Mo3jamModel> mo3jamWords;
-//    ArrayList<PreLoadImages> preLoadImages;
+    ArrayList<PreLoadImages> preLoadImages;
     ArrayList<WordsMeaningModel> wordsMeaning;
+    ArrayList<Integer> colors;
 
     int CLICK_ACTION_THRESH_HOLD = 200;
     float startX;
@@ -179,11 +186,12 @@ public class QuranImageFragment extends Fragment {
         requestStoragePermission();
 
 //        preLoadImages = new ArrayList<>();
-        if (position > 0)
-            loadToArray(position - 1);
-        loadToArray(position);
-        loadToArray(position + 1);
+//        if (position > 0)
+//            loadToArray(position - 1);
+        preLoadImages = new ArrayList<>();
+        colors = new ArrayList<>();
 
+        loadToArray(position);
         setImageView();
 
         imageView.setOnTouchListener(imgSourceOnTouchListener);
@@ -199,7 +207,6 @@ public class QuranImageFragment extends Fragment {
                     bundle.putString("e3rab", e3rab);
                     bundle.putString("sarf", sarf);
                     bundle.putString("balagha", balagha);
-                    bundle.putString("value", value);
                     bundle.putString("mawdoo3", mawdoo3);
                     bundle.putParcelableArrayList("wordsMeaning", wordsMeaning);
                     bundle.putParcelableArrayList("mo3jamWords", mo3jamWords);
@@ -230,8 +237,9 @@ public class QuranImageFragment extends Fragment {
 
             imageWidth = PlayerManager.getWidth(imageName);
             imageHeight = PlayerManager.getHeight(imageName);
+
 //            if (preLoadImages.size() < 3)
-//                preLoadImages.add(new PreLoadImages(drawable, position));
+            preLoadImages.add(new PreLoadImages(drawable, position));
 //            else {
 //                preLoadImages.clear();
 //                preLoadImages.add(new PreLoadImages(drawable, position));
@@ -257,17 +265,96 @@ public class QuranImageFragment extends Fragment {
     }
 
 
+    public void getColor(final int start, final int end) {
+        Task task = new Task() {
+            @Override
+            public void onPreRun() {
+
+            }
+
+            @Override
+            public void onPreRunFailure(Exception ex) {
+
+            }
+
+            @Override
+            public void onRunSuccess() {
+
+            }
+
+            @Override
+            public void onRunFailure(Exception ex) {
+
+            }
+
+            @Override
+            public void run() {
+                data = new DataBaseManager(getActivity(), "QuranMawdoo3.db", true).createDatabase();
+                data.open();
+                dataMawdo3ColorModels = data.getPageColors(suras, start, end);
+            }
+        };
+    }
+
     public void setImageView() {
 
 //        if (preLoadImages.size() == 3)
 //            imageView.setImageDrawable(preLoadImages.get(1).Image);
-//        else if (!preLoadImages.isEmpty())
-//            imageView.setImageDrawable(preLoadImages.get(0).Image);
+//        else
+        if (!preLoadImages.isEmpty())
+            imageView.setImageDrawable(preLoadImages.get(0).Image);
 
 
         //check db
         if (PlayerManager.isDBPresent("KingFahad1.db")) {
-            new getPagePoints().execute("KingFahad1.db");
+//            new getPagePoints().execute("KingFahad1.db");
+
+            Task task = new Task() {
+                @Override
+                public void onPreRun() {
+
+                }
+
+                @Override
+                public void onPreRunFailure(Exception ex) {
+
+                }
+
+                @Override
+                public void onRunSuccess() {
+
+                    imageView.ayahs = ayahPoints;
+
+                    suras = new ArrayList<>();
+                    if (ayahPoints != null && !ayahPoints.isEmpty()) {
+                        suras.add(ayahPoints.get(0).surah + "");
+                        for (int i = 0; i < ayahPoints.size(); i++) {
+                            if (ayahPoints.get(0).surah != ayahPoints.get(i).surah) {
+                                suras.add("" + ayahPoints.get(i).surah);
+                            }
+                        }
+                    }
+                    if (ayahPoints != null && !ayahPoints.isEmpty())
+                        getColor((int) ayahPoints.get(0).ayah, (int) ayahPoints.get(ayahPoints.size() - 1).ayah);
+//                    new getColors().execute((int) ayahPoints.get(0).ayah, (int) ayahPoints.get(ayahPoints.size() - 1).ayah);
+
+                }
+
+                @Override
+                public void onRunFailure(Exception ex) {
+
+                }
+
+                @Override
+                public void run() {
+                    data = new DataBaseManager(getActivity(), "KingFahad1.db", false).createDatabase();
+                    data.open();
+                    ayahPoints = data.getPagePoints(position);
+                }
+            };
+
+            ThreadManager.addTaskToThreadManagerPool("getPagePoints", 1, task);
+
         }/*try to download db files*/ else {
             if (isOnline()) {
                 try {
@@ -282,7 +369,6 @@ public class QuranImageFragment extends Fragment {
             }
         }
     }
-
 
     private void requestStoragePermission() {
 
@@ -322,7 +408,6 @@ public class QuranImageFragment extends Fragment {
                     if (isAClick(startX, endX, startY, endY)) {
                         float eventX = event.getX();
                         float eventY = event.getY();
-
 
                         mapX = map(eventX, 0, imageView.getWidth(), 0, imageWidth);
                         mapY = map(eventY, 0, imageView.getHeight(), 0, imageHeight);
@@ -445,20 +530,38 @@ public class QuranImageFragment extends Fragment {
         }
     }
 
-    float map(float x, float in_min, float in_max, float out_min, float out_max) {
+    public float map(float x, float in_min, float in_max, float out_min, float out_max) {
         return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
     }
 
-    private class getPagePoints extends AsyncTask<String, Void, Void> {
+    private class getPagePoints extends AsyncTask<String, Void, Boolean> {
 
         @Override
-        protected Void doInBackground(String... strings) {
+        protected Boolean doInBackground(String... strings) {
             if (getActivity() != null) {
                 data = new DataBaseManager(getActivity(), strings[0], false).createDatabase();
                 data.open();
                 ayahPoints = data.getPagePoints(position);
             }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aVoid) {
+            super.onPostExecute(aVoid);
+            imageView.ayahs = ayahPoints;
+
+            suras = new ArrayList<>();
+            if (ayahPoints != null && !ayahPoints.isEmpty()) {
+                suras.add(ayahPoints.get(0).surah + "");
+                for (int i = 0; i < ayahPoints.size(); i++) {
+                    if (ayahPoints.get(0).surah != ayahPoints.get(i).surah) {
+                        suras.add("" + ayahPoints.get(i).surah);
+                    }
+                }
+            }
+            if (ayahPoints != null && !ayahPoints.isEmpty())
+                new getColors().execute((int) ayahPoints.get(0).ayah, (int) ayahPoints.get(ayahPoints.size() - 1).ayah);
         }
     }
 
@@ -542,6 +645,40 @@ public class QuranImageFragment extends Fragment {
         }
     }
 
+    private class getColors extends AsyncTask<Integer, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Integer... integers) {
+            data = new DataBaseManager(getActivity(), "QuranMawdoo3.db", true).createDatabase();
+            data.open();
+            dataMawdo3ColorModels = data.getPageColors(suras, integers[0], integers[1]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            for (int i = 0; i < dataMawdo3ColorModels.size(); i++) {
+                if (dataMawdo3ColorModels.get(i).fromAyah <= dataMawdo3ColorModels.get(i).toAyah) {
+                    for (int j = 0; j < ayahPoints.size(); j++) {
+                        if (ayahPoints.get(j).ayah == dataMawdo3ColorModels.get(i).fromAyah) {
+                            colors.add(dataMawdo3ColorModels.get(i).color);
+                        }
+                    }
+                    dataMawdo3ColorModels.get(i).fromAyah += 1;
+                    i--;
+                }
+            }
+
+            imageView.colors = colors;
+            imageView.imageWidth = imageWidth;
+            imageView.imageHeight = imageHeight;
+            imageView.invalidate();
+
+        }
+    }
+
     private class getTranslation extends AsyncTask<Integer, Void, Void> {
         @Override
         protected Void doInBackground(Integer... integers) {
@@ -615,7 +752,6 @@ public class QuranImageFragment extends Fragment {
                 e3rab = Data.get(0);
                 sarf = Data.get(1);
                 balagha = Data.get(2);
-                value = Data.get(3);
             }
             return null;
         }

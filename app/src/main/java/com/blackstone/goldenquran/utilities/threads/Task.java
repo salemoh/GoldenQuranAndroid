@@ -2,7 +2,7 @@ package com.blackstone.goldenquran.utilities.threads;
 
 import java.util.UUID;
 
-abstract class Task implements TaskCallBack, Runnable {
+public abstract class Task implements TaskCallBack, Runnable {
 
     //region Variables
 

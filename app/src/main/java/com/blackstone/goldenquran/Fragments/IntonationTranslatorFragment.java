@@ -138,10 +138,6 @@ public class IntonationTranslatorFragment extends Fragment {
                     NozoolReasons nozoolReasons = new NozoolReasons();
                     nozoolReasons.setArguments(getArguments());
                     return nozoolReasons;
-                case 8:
-                    ValueFragment valueFragment = new ValueFragment();
-                    valueFragment.setArguments(getArguments());
-                    return valueFragment;
                 default:
                     return new AlSuraFragment();
             }

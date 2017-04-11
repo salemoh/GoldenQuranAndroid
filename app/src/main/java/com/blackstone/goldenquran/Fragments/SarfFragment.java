@@ -33,7 +33,10 @@ public class SarfFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_nozool_reasons, container, false);
         ButterKnife.bind(this, view);
         if (getArguments() != null)
-            nozoolReasonsText.setText(getArguments().getString("sarf"));
+            if (!getArguments().getString("sarf").equalsIgnoreCase("(null)"))
+                nozoolReasonsText.setText(getArguments().getString("sarf"));
+            else
+                nozoolReasonsText.setText("الصرف غير متوفر لهذه الاية الكريمه");
         return view;
 
     }
