@@ -33,10 +33,13 @@ public class E3rabFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_nozool_reasons, container, false);
         ButterKnife.bind(this, view);
         if (getArguments() != null)
-            if (!getArguments().getString("e3rab").equalsIgnoreCase("(null)"))
-                nozoolReasonsText.setText(getArguments().getString("e3rab"));
+            if (getArguments().getString("e3rab") != null)
+                if (!getArguments().getString("e3rab").equalsIgnoreCase("(null)"))
+                    nozoolReasonsText.setText(getArguments().getString("e3rab"));
+                else
+                    nozoolReasonsText.setText("الاعراب غير متوفر لهذه الاية الكريمة");
             else
-                nozoolReasonsText.setText("الاعراب غير متوفر لهذه الاية الكريمه");
+                nozoolReasonsText.setText("الاعراب غير متوفر لهذه الاية الكريمة");
         return view;
     }
 }

@@ -2,6 +2,7 @@ package com.blackstone.goldenquran.Fragments;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
@@ -26,18 +28,6 @@ public class SettingsFragment extends Fragment {
 
     @BindView(R.id.pickColorText)
     TextView pickColorText;
-    @BindView(R.id.color1)
-    ImageView color1;
-    @BindView(R.id.color2)
-    ImageView color2;
-    @BindView(R.id.color3)
-    ImageView color3;
-    @BindView(R.id.color4)
-    ImageView color4;
-    @BindView(R.id.color5)
-    ImageView color5;
-    @BindView(R.id.color6)
-    ImageView color6;
     @BindView(R.id.minus)
     ImageView minus;
     @BindView(R.id.plus)
@@ -58,24 +48,18 @@ public class SettingsFragment extends Fragment {
     TextView settingsDownloadsuraText;
     @BindView(R.id.settingsDownloadsuraRelative)
     RelativeLayout settingsDownloadsuraRelative;
-    @BindView(R.id.settingsPickTafseerImage)
-    ImageView settingsPickTafseerImage;
-    @BindView(R.id.settingsPickTafseerText)
-    TextView settingsPickTafseerText;
-    @BindView(R.id.settingsPickTafseerRelative)
-    RelativeLayout settingsPickTafseerRelative;
     @BindView(R.id.settingsNotificationImage)
     ImageView settingsNotificationImage;
     @BindView(R.id.settingsNotificationText)
     TextView settingsNotificationText;
     @BindView(R.id.settingsNotificationRelative)
     RelativeLayout settingsNotificationRelative;
-    @BindView(R.id.settingsDownloadedSuraImage)
-    ImageView settingsDownloadedSuraImage;
-    @BindView(R.id.settingsDownloadedSuraText)
-    TextView settingsDownloadedSuraText;
-    @BindView(R.id.settingsDownloadedSuraRelative)
-    RelativeLayout settingsDownloadedSuraRelative;
+    //    @BindView(R.id.settingsDownloadedSuraImage)
+//    ImageView settingsDownloadedSuraImage;
+//    @BindView(R.id.settingsDownloadedSuraText)
+//    TextView settingsDownloadedSuraText;
+//    @BindView(R.id.settingsDownloadedSuraRelative)
+//    RelativeLayout settingsDownloadedSuraRelative;
     @BindView(R.id.settingsCallUsImage)
     ImageView settingsCallUsImage;
     @BindView(R.id.settingsCallUsText)
@@ -90,16 +74,30 @@ public class SettingsFragment extends Fragment {
     RadioButton settingsEnglishRadioButton;
     @BindView(R.id.settingsPickLanguageRelative)
     RelativeLayout settingsPickLanguageRelative;
-    @BindView(R.id.pageStateImage)
-    ImageView pageStateImage;
-    @BindView(R.id.pageStateText)
-    TextView pageStateText;
-    @BindView(R.id.settingsOnePageRadioButton)
-    RadioButton settingsOnePageRadioButton;
-    @BindView(R.id.settingsTwoPagesRadioButton)
-    RadioButton settingsTwoPagesRadioButton;
-    @BindView(R.id.pageStatusRelative)
-    RelativeLayout pageStatusRelative;
+    @BindView(R.id.color1)
+    FrameLayout color1;
+    @BindView(R.id.color2)
+    FrameLayout color2;
+    @BindView(R.id.color3)
+    FrameLayout color3;
+    //    @BindView(R.id.color4)
+//    FrameLayout color4;
+    @BindView(R.id.color5)
+    FrameLayout color5;
+    //    @BindView(R.id.color6)
+//    FrameLayout color6;
+    @BindView(R.id.color1Selected)
+    ImageView color1Selected;
+    @BindView(R.id.color2Selected)
+    ImageView color2Selected;
+    @BindView(R.id.color3Selected)
+    ImageView color3Selected;
+    //    @BindView(R.id.color4Selected)
+//    ImageView color4Selected;
+    @BindView(R.id.color5Selected)
+    ImageView color5Selected;
+//    @BindView(R.id.color6Selected)
+//    ImageView color6Selected;
 
     public SettingsFragment() {
 
@@ -125,12 +123,68 @@ public class SettingsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        textSize.setTextSize(TypedValue.COMPLEX_UNIT_PX, SharedPreferencesManager.getInteger(getActivity(), SharedPreferencesManager.TEXT_SIZE, (int) textSize.getTextSize()));
+
         ((DrawerCloser) getActivity()).moveToolbarDown();
+
+        switch (SharedPreferencesManager.getInteger(getActivity(), "color", R.color.lightOrange)) {
+            case R.color.lightBlue: {
+                color1Selected.setVisibility(View.INVISIBLE);
+                color2Selected.setVisibility(View.INVISIBLE);
+                color3Selected.setVisibility(View.VISIBLE);
+//                color4Selected.setVisibility(View.INVISIBLE);
+                color5Selected.setVisibility(View.INVISIBLE);
+//                color6Selected.setVisibility(View.INVISIBLE);
+                break;
+            }
+            case R.color.lightGreen: {
+                color1Selected.setVisibility(View.INVISIBLE);
+                color2Selected.setVisibility(View.VISIBLE);
+                color3Selected.setVisibility(View.INVISIBLE);
+//                color4Selected.setVisibility(View.INVISIBLE);
+                color5Selected.setVisibility(View.INVISIBLE);
+//                color6Selected.setVisibility(View.INVISIBLE);
+                break;
+            }
+            case R.color.lightOrange: {
+                color1Selected.setVisibility(View.VISIBLE);
+                color2Selected.setVisibility(View.INVISIBLE);
+                color3Selected.setVisibility(View.INVISIBLE);
+//                color4Selected.setVisibility(View.INVISIBLE);
+                color5Selected.setVisibility(View.INVISIBLE);
+//                color6Selected.setVisibility(View.INVISIBLE);
+                break;
+            }
+            case R.color.lightPink: {
+                color1Selected.setVisibility(View.INVISIBLE);
+                color2Selected.setVisibility(View.INVISIBLE);
+                color3Selected.setVisibility(View.INVISIBLE);
+//                color4Selected.setVisibility(View.INVISIBLE);
+                color5Selected.setVisibility(View.VISIBLE);
+//                color6Selected.setVisibility(View.INVISIBLE);
+                break;
+            }
+            case R.color.lightYellow: {
+                color1Selected.setVisibility(View.INVISIBLE);
+                color2Selected.setVisibility(View.INVISIBLE);
+                color3Selected.setVisibility(View.INVISIBLE);
+//                color4Selected.setVisibility(View.VISIBLE);
+                color5Selected.setVisibility(View.INVISIBLE);
+//                color6Selected.setVisibility(View.INVISIBLE);
+                break;
+            }
+        }
 
         color1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SharedPreferencesManager.putInteger(getActivity(), "color", R.color.lightOrange);
+                color1Selected.setVisibility(View.VISIBLE);
+                color2Selected.setVisibility(View.INVISIBLE);
+                color3Selected.setVisibility(View.INVISIBLE);
+//                color4Selected.setVisibility(View.INVISIBLE);
+                color5Selected.setVisibility(View.INVISIBLE);
+//                color6Selected.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -138,6 +192,12 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 SharedPreferencesManager.putInteger(getActivity(), "color", R.color.lightGreen);
+                color1Selected.setVisibility(View.INVISIBLE);
+                color2Selected.setVisibility(View.VISIBLE);
+                color3Selected.setVisibility(View.INVISIBLE);
+//                color4Selected.setVisibility(View.INVISIBLE);
+                color5Selected.setVisibility(View.INVISIBLE);
+//                color6Selected.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -145,29 +205,45 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 SharedPreferencesManager.putInteger(getActivity(), "color", R.color.lightBlue);
+                color1Selected.setVisibility(View.INVISIBLE);
+                color2Selected.setVisibility(View.INVISIBLE);
+                color3Selected.setVisibility(View.VISIBLE);
+//                color4Selected.setVisibility(View.INVISIBLE);
+                color5Selected.setVisibility(View.INVISIBLE);
+//                color6Selected.setVisibility(View.INVISIBLE);
             }
         });
 
-        color4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferencesManager.putInteger(getActivity(), "color", R.color.lightYellow);
-            }
-        });
+//        color4.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                SharedPreferencesManager.putInteger(getActivity(), "color", R.color.lightYellow);
+//                color1Selected.setVisibility(View.INVISIBLE);
+//                color2Selected.setVisibility(View.INVISIBLE);
+//                color3Selected.setVisibility(View.INVISIBLE);
+//                color4Selected.setVisibility(View.VISIBLE);
+//                color5Selected.setVisibility(View.INVISIBLE);
+//                color6Selected.setVisibility(View.INVISIBLE);
+//            }
+//        });
 
         color5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SharedPreferencesManager.putInteger(getActivity(), "color", R.color.lightPink);
+                color1Selected.setVisibility(View.INVISIBLE);
+                color2Selected.setVisibility(View.INVISIBLE);
+                color3Selected.setVisibility(View.INVISIBLE);
+//                color4Selected.setVisibility(View.INVISIBLE);
+                color5Selected.setVisibility(View.VISIBLE);
+//                color6Selected.setVisibility(View.INVISIBLE);
             }
         });
-
 
         settingsArabicRadioButton.setChecked(SharedPreferencesManager.getBoolean(getActivity(), "isArabic", true));
         settingsArabicRadioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
 
                 if (isChecked)
                     SharedPreferencesManager.putBoolean(getActivity(), "isArabic", true);
@@ -182,18 +258,18 @@ public class SettingsFragment extends Fragment {
         settingsEnglishRadioButton.setChecked(!SharedPreferencesManager.getBoolean(getActivity(), "isArabic", false));
 
 
-        settingsOnePageRadioButton.setChecked(SharedPreferencesManager.getBoolean(getActivity(), "pageStatus", true));
-        settingsOnePageRadioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    SharedPreferencesManager.putBoolean(getActivity(), "pageStatus", true);
-                } else {
-                    SharedPreferencesManager.putBoolean(getActivity(), "pageStatus", false);
-                }
-            }
-        });
-        settingsTwoPagesRadioButton.setChecked(!SharedPreferencesManager.getBoolean(getActivity(), "pageStatus", false));
+//        settingsOnePageRadioButton.setChecked(SharedPreferencesManager.getBoolean(getActivity(), "pageStatus", true));
+//        settingsOnePageRadioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                if (b) {
+//                    SharedPreferencesManager.putBoolean(getActivity(), "pageStatus", true);
+//                } else {
+//                    SharedPreferencesManager.putBoolean(getActivity(), "pageStatus", false);
+//                }
+//            }
+//        });
+//        settingsTwoPagesRadioButton.setChecked(!SharedPreferencesManager.getBoolean(getActivity(), "pageStatus", false));
 
         settingsDownloadsuraRelative.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -211,13 +287,13 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        settingsPickTafseerRelative.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new SettingsPickTafseerFragment()).addToBackStack(null).commit();
-                ((DrawerCloser) getActivity()).moveToolbarDown();
-            }
-        });
+//        settingsPickTafseerRelative.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ExplanationFragment()).addToBackStack(null).commit();
+//                ((DrawerCloser) getActivity()).moveToolbarDown();
+//            }
+//        });
 
         settingsNotificationRelative.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -227,19 +303,18 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        settingsDownloadedSuraRelative.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new DownloadSuraFragment()).addToBackStack(null).commit();
-                ((DrawerCloser) getActivity()).moveToolbarDown();
-            }
-        });
+//        settingsDownloadedSuraRelative.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new DownloadSuraFragment()).addToBackStack(null).commit();
+//                ((DrawerCloser) getActivity()).moveToolbarDown();
+//            }
+//        });
 
         settingsCallUsRelative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new FridayReadingFragment()).addToBackStack(null).commit();
-                ((DrawerCloser) getActivity()).moveToolbarDown();
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "abdullaha@blackstoneeit.com")));
             }
         });
 
@@ -248,14 +323,21 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 float currentTextSize = textSize.getTextSize();
-                textSize.setTextSize(TypedValue.COMPLEX_UNIT_PX, currentTextSize + 5f);
+                if (currentTextSize <= 95) {
+                    textSize.setTextSize(TypedValue.COMPLEX_UNIT_PX, currentTextSize + 5f);
+                    SharedPreferencesManager.putInteger(getActivity(), SharedPreferencesManager.TEXT_SIZE, (int) currentTextSize + 5);
+                }
             }
         });
 
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textSize.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize.getTextSize() - 5f);
+                float currentTextSize = textSize.getTextSize();
+                if (currentTextSize >= 40) {
+                    textSize.setTextSize(TypedValue.COMPLEX_UNIT_PX, currentTextSize - 5f);
+                    SharedPreferencesManager.putInteger(getActivity(), SharedPreferencesManager.TEXT_SIZE, (int) currentTextSize - 5);
+                }
             }
         });
     }
@@ -269,6 +351,12 @@ public class SettingsFragment extends Fragment {
         } else if (settingsEnglishRadioButton.isChecked()) {
             SharedPreferencesManager.putBoolean(getActivity(), "isArabic", false);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((DrawerCloser) getActivity()).title(10);
     }
 }
 

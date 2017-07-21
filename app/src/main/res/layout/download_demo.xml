@@ -6,37 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:background="#FFFFFF"
     tools:context=".ui.MainActivity">
-
-    <!--<android.support.v7.widget.AppCompatButton-->
-    <!--android:id="@+id/btn_download"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_centerVertical="true"-->
-    <!--android:background="@color/colorPrimary"-->
-    <!--android:drawableLeft="@mipmap/ic_download"-->
-    <!--android:drawableStart="@mipmap/ic_download"-->
-    <!--android:paddingEnd="20dp"-->
-    <!--android:paddingLeft="20dp"-->
-    <!--android:paddingRight="20dp"-->
-    <!--android:paddingStart="20sp"-->
-    <!--android:text="@string/start_download"-->
-    <!--android:textColor="@android:color/white" />-->
-
-    <!--<ProgressBar-->
-    <!--android:id="@+id/progress"-->
-    <!--style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_below="@+id/btn_download"-->
-    <!--android:layout_marginTop="48dp" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/progress_text"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_below="@+id/progress"-->
-    <!--android:textAlignment="center" />-->
 
 </RelativeLayout>

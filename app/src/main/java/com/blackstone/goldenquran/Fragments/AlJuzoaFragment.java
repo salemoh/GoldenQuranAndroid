@@ -13,7 +13,12 @@ import android.view.ViewGroup;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.AlJuzoaAdapter;
 import com.blackstone.goldenquran.models.AljuzaModel;
+import com.blackstone.goldenquran.models.QueryMessage;
+import com.blackstone.goldenquran.models.TableOfContents;
 import com.blackstone.goldenquran.ui.DrawerCloser;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
@@ -25,8 +30,33 @@ public class AlJuzoaFragment extends Fragment {
     @BindView(R.id.juzoaRecyclerView)
     RecyclerView juzoaRecyclerView;
 
+    ArrayList<TableOfContents> data;
+
+
     public AlJuzoaFragment() {
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (!EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void query(QueryMessage queryMessage) {
+        ((AlJuzoaAdapter) juzoaRecyclerView.getAdapter()).query(queryMessage);
+    }
+
+    public void sendTOCData(ArrayList<TableOfContents> tableOfContentses) {
+        data = tableOfContentses;
     }
 
     @Override
@@ -49,13 +79,13 @@ public class AlJuzoaFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ((DrawerCloser) getActivity()).moveToolbarDown();
-        String[] array = getActivity().getResources().getStringArray(R.array.AlJuzoaArray);
+        String[] array = getActivity().getResources().getStringArray(R.array.fahrasAjzaa);
         ArrayList<AljuzaModel> arrayList = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-            arrayList.add(new AljuzaModel(array[i]));
+        for (int i = 0; i < array.length; i++) {
+            arrayList.add(new AljuzaModel(array[i], i));
         }
         juzoaRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        juzoaRecyclerView.setAdapter(new AlJuzoaAdapter(getActivity(), arrayList));
+        juzoaRecyclerView.setAdapter(new AlJuzoaAdapter(getActivity(), arrayList, data));
 
     }
 }

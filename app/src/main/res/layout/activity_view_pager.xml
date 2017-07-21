@@ -26,7 +26,7 @@
         android:layout_weight="0.5"
         android:background="#FFFFFF" />
 
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -36,6 +36,6 @@
         android:elevation="4dp">
 
 
-    </RelativeLayout>
+    </FrameLayout>
 </LinearLayout>
 

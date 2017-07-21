@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:layout_marginBottom="1dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/searchAyatAlquranSuraName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="baraa"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/searchAatAlQuran"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="some dmmy text here"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+</LinearLayout>

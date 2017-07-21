@@ -1,14 +1,196 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:background="#fff8e1">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
-        android:clickable="true">
+        android:orientation="vertical"
+        android:weightSum="1">
 
-    </RelativeLayout>
-</LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="5dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/reading_icon" />
+
+            <TextView
+                android:id="@+id/nightReadingTitleOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="البقرة"
+                android:textSize="30sp" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/nightReadingTextOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="25sp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="5dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/reading_icon" />
+
+            <TextView
+                android:id="@+id/nightReadingTitleTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="البقرة"
+                android:textSize="30sp" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/nightReadingTextTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="25sp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="5dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/reading_icon" />
+
+            <TextView
+                android:id="@+id/nightReadingTitleThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="البقرة"
+                android:textSize="30sp" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/nightReadingTextThree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="25sp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="5dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/reading_icon" />
+
+            <TextView
+                android:id="@+id/nightReadingTitleFour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="الملك"
+                android:textSize="30sp" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/nightReadingTextFour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="25sp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="5dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/reading_icon" />
+
+            <TextView
+                android:id="@+id/nightReadingTitleFive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="الاخلاص"
+                android:textSize="30sp" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/nightReadingTextFive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="25sp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="5dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/reading_icon" />
+
+            <TextView
+                android:id="@+id/nightReadingTitleSix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="الفلق"
+                android:textSize="30sp" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/nightReadingTextSix"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="25sp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="5dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/reading_icon" />
+
+            <TextView
+                android:id="@+id/nightReadingTitleSeven"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="الناس"
+                android:textSize="30sp" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/nightReadingTextSeven"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

@@ -25,7 +25,9 @@
         android:gravity="start"
         android:text="@string/alFateha"
         android:textAlignment="textStart"
-        android:textSize="25sp" />
+        android:textSize="20sp"
+        android:layout_centerVertical="true"
+        />
 
     <LinearLayout
         android:id="@+id/contentPanel"

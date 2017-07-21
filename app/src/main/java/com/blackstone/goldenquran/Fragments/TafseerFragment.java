@@ -32,11 +32,14 @@ public class TafseerFragment extends Fragment {
         return view;
     }
 
+
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (getArguments() != null)
-            TranslateText.setText(getArguments().getString("TranslateText"));
-            
+            TranslateText.setText(getArguments().getString("tafseer"));
     }
+
+
 }

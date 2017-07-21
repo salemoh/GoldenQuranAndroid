@@ -11,4 +11,6 @@ public interface DrawerCloser {
     void moveToolbarUp();
 
     void respond(String data);
+
 }
+

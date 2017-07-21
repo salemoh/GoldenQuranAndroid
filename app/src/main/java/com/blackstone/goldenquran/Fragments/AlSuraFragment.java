@@ -1,7 +1,6 @@
 package com.blackstone.goldenquran.Fragments;
 
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,10 +12,14 @@ import android.view.ViewGroup;
 
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.AlsuraAdapter;
-import com.blackstone.goldenquran.database.DataBaseManager;
 import com.blackstone.goldenquran.models.AljuzaModel;
 import com.blackstone.goldenquran.models.AlsuraModel;
+import com.blackstone.goldenquran.models.QueryMessage;
+import com.blackstone.goldenquran.models.TableOfContents;
 import com.blackstone.goldenquran.ui.DrawerCloser;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
@@ -29,8 +32,14 @@ public class AlSuraFragment extends Fragment {
     @BindView(R.id.alSuraRecyclerView)
     RecyclerView alSuraRecyclerView;
 
+    ArrayList<TableOfContents> data;
+
     public AlSuraFragment() {
 
+    }
+
+    public void sendTOCData(ArrayList<TableOfContents> tableOfContentses) {
+        data = tableOfContentses;
     }
 
     @Override
@@ -38,6 +47,24 @@ public class AlSuraFragment extends Fragment {
         super.onCreate(savedInstanceState);
         getActivity().invalidateOptionsMenu();
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (!EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void query(QueryMessage queryMessage) {
+        ((AlsuraAdapter) alSuraRecyclerView.getAdapter()).query(queryMessage);
     }
 
     @Override
@@ -55,45 +82,21 @@ public class AlSuraFragment extends Fragment {
         ((DrawerCloser) getActivity()).moveToolbarDown();
 
         alSuraRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        String[] ajzaNames = getResources().getStringArray(R.array.ajzaNames);
         ArrayList arrayList = new ArrayList();
-        arrayList.add(new AljuzaModel(ajzaNames[0]));
-        arrayList.add(new AlsuraModel("9", "7", getString(R.string.suraName)));
-        arrayList.add(new AlsuraModel("6", "7", getString(R.string.suraName)));
-        arrayList.add(new AljuzaModel(ajzaNames[1]));
-        arrayList.add(new AljuzaModel(ajzaNames[2]));
-        arrayList.add(new AlsuraModel("8", "7", getString(R.string.suraName)));
-        arrayList.add(new AljuzaModel(ajzaNames[3]));
-        arrayList.add(new AlsuraModel("93", "7", getString(R.string.suraName)));
-        arrayList.add(new AljuzaModel(ajzaNames[4]));
-        arrayList.add(new AlsuraModel("87", "7", getString(R.string.suraName)));
-        arrayList.add(new AlsuraModel("90", "7", getString(R.string.suraName)));
-        arrayList.add(new AljuzaModel(ajzaNames[5]));
-        arrayList.add(new AlsuraModel("11", "7", getString(R.string.suraName)));
-        arrayList.add(new AlsuraModel("12", "7", getString(R.string.suraName)));
-        arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));
-        arrayList.add(new AljuzaModel(ajzaNames[6]));
-        arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));
-        arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));
-        arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));
-        arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));
-        arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));
-        arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));
-        arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));
-        arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));
-        arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));
-        arrayList.add(new AlsuraModel("1", "7", getString(R.string.suraName)));
-
-
-        alSuraRecyclerView.setAdapter(new AlsuraAdapter(getActivity(), arrayList));
-    }
-
-    class getFahrasData extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... voids) {
-            DataBaseManager dataBaseManager = new DataBaseManager(getActivity(), "fahras.db", true).createDatabase();
-            dataBaseManager.getFahrasData();
-            return null;
+        String[] ajzaNames = getResources().getStringArray(R.array.fahrasAjzaa);
+        String[] suarNames = getResources().getStringArray(R.array.fahrasSuras);
+        arrayList.add(new AljuzaModel(ajzaNames[0], 0));
+        int juzNumber = 1;
+        for (int i = 0; i < data.size() - 1; i++) {
+            arrayList.add(new AlsuraModel(data.get(i).getSurah() + "", data.get(i).getVersesCount() + "", suarNames[data.get(i).getSurah() - 1]));
+            if (data.get(i).getJuz() != data.get(i + 1).getJuz()) {
+                for (int j = 0; j < (data.get(i + 1).getJuz() - data.get(i).getJuz()); j++) {
+                    arrayList.add(new AljuzaModel(ajzaNames[data.get(i).getJuz() + j], juzNumber++));
+                }
+            }
         }
+        arrayList.add(new AlsuraModel(data.get(data.size() - 1).getSurah() + "", data.get(data.size() - 1).getVersesCount() + "", suarNames[data.get(data.size() - 1).getSurah() - 1]));
+
+        alSuraRecyclerView.setAdapter(new AlsuraAdapter(getActivity(), arrayList, data));
     }
 }

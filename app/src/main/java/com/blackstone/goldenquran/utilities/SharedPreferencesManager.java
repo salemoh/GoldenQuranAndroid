@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 
 public class SharedPreferencesManager {
     private static final String PREFS_NAME = "UserPrefernces";
+    public static final String TEXT_SIZE = "textSize";
 
 
     public static void putInteger(Context context, String key, int val) {

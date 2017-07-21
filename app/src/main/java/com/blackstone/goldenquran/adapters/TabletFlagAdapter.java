@@ -41,7 +41,7 @@ public class TabletFlagAdapter extends RecyclerView.Adapter<TabletFlagViewHolder
     public void onBindViewHolder(final TabletFlagViewHolder holder, final int position) {
 
         for (int i = 0; i < models.size(); i++) {
-            if (i == SharedPreferencesManager.getInteger(mContext, "selectedCountry", 200))
+            if (i == SharedPreferencesManager.getInteger(mContext, "selectedCountry", 1))
                 models.get(i).setSelected(true);
         }
 

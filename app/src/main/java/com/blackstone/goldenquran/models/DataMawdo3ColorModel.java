@@ -5,13 +5,19 @@ package com.blackstone.goldenquran.models;
  */
 
 public class DataMawdo3ColorModel {
-   public int fromAyah, toAyah, color;
+    public int fromAyah;
+    public int toAyah;
+    public int color;
 
-    public DataMawdo3ColorModel(int fromAyah, int toAyah, int color) {
+    public DataMawdo3ColorModel(int fromAyah, int toAyah, int color, int soraNo) {
         this.fromAyah = fromAyah;
         this.toAyah = toAyah;
         this.color = color;
+        this.soraNo = soraNo;
     }
+
+    public int soraNo;
+
 
     public int getFromAyah() {
         return fromAyah;

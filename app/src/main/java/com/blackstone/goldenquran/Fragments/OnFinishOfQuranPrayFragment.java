@@ -1,10 +1,10 @@
 package com.blackstone.goldenquran.Fragments;
 
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.database.DataBaseManager;
 import com.blackstone.goldenquran.ui.DrawerCloser;
+import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +24,11 @@ public class OnFinishOfQuranPrayFragment extends Fragment {
     DataBaseManager data;
     @BindView(R.id.onFinishQuran)
     TextView onFinishQuran;
+    static String onFinish;
+
+    public static void getData(String doaa) {
+        onFinish = doaa;
+    }
 
     public OnFinishOfQuranPrayFragment() {
 
@@ -48,28 +54,13 @@ public class OnFinishOfQuranPrayFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         ((DrawerCloser) getActivity()).moveToolbarDown();
-        new GetDoaa().execute();
+        onFinishQuran.setTextSize(TypedValue.COMPLEX_UNIT_PX, SharedPreferencesManager.getInteger(getActivity(), SharedPreferencesManager.TEXT_SIZE, (int) onFinishQuran.getTextSize()));
+        onFinishQuran.setText(onFinish);
     }
 
-    private class GetDoaa extends AsyncTask<Void, Void, String> {
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            if (getActivity() != null) {
-                data = new DataBaseManager(getActivity(), "HadithContent.db", true).createDatabase();
-                data.open();
-                String onFinishQuranDoaa = data.getOnFinishQuran();
-                return onFinishQuranDoaa;
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-
-            onFinishQuran.setText(s);
-
-        }
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((DrawerCloser) getActivity()).title(7);
     }
 }

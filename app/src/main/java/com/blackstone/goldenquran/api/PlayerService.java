@@ -1,31 +1,35 @@
 package com.blackstone.goldenquran.api;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.NotificationCompat;
-import android.widget.RemoteViews;
 
-import com.blackstone.goldenquran.R;
-import com.blackstone.goldenquran.ui.MainActivity;
+import com.blackstone.goldenquran.managers.PlayerManager;
+import com.blackstone.goldenquran.models.AutoColorModel;
+import com.blackstone.goldenquran.models.ChangeDataEvent;
+import com.blackstone.goldenquran.models.ChangeIconEvent;
+import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.io.File;
 
 
 public class PlayerService extends Service {
-    static MediaPlayer mediaPlayer = null;
-    static int x;
-    RemoteViews notificationView;
-    NotificationCompat.Builder builder;
-    NotificationManager notificationManager;
+    public static MediaPlayer mediaPlayer = null;
+    Handler handler;
+    Runnable r;
+    public static int currentSurah;
+    public static int currentAyah;
 
     @Nullable
     @Override
@@ -35,151 +39,160 @@ public class PlayerService extends Service {
 
     @Override
     public void onCreate() {
-        mediaPlayer = MediaPlayer.create(this, R.raw.athan);
-        x = (int) (mediaPlayer.getDuration() * 0.15);
+
+        mediaPlayer = new MediaPlayer();
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("Service"));
-
-        Intent pause = new Intent("playPauseStop");
-        pause.putExtra("message", "pause");
-        PendingIntent pauseIntent = PendingIntent.getBroadcast(this, 1, pause, 0);
-
-        Intent stop = new Intent("playPauseStop");
-        stop.putExtra("message", "stop");
-        PendingIntent stopIntent = PendingIntent.getBroadcast(this, 2, stop, 0);
-
-        Intent play = new Intent("playPauseStop");
-        play.putExtra("message", "play");
-        PendingIntent playIntent = PendingIntent.getBroadcast(this, 0, play, 0);
-
-
-        notificationView = new RemoteViews(getPackageName(), R.layout.player_notification_layout);
-        notificationView.setProgressBar(R.id.pb_progress, mediaPlayer.getDuration(), mediaPlayer.getCurrentPosition(), false);
-
-        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        builder = (NotificationCompat.Builder) new NotificationCompat.Builder(this).
-                setSmallIcon(R.drawable.play).
-                setAutoCancel(true).
-                setTicker("Ticker Text").
-                setContent(notificationView);
-
-        notificationView.setOnClickPendingIntent(R.id.notiplay, playIntent);
-        notificationView.setOnClickPendingIntent(R.id.notistop, stopIntent);
-        notificationView.setOnClickPendingIntent(R.id.notipause, pauseIntent);
-
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.setContentIntent(contentIntent);
-
-        Notification n = builder.build();
-
-        startForeground(1, n);
-
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
-        final Handler h = new Handler();
-        final int delay = 300;
-        h.postDelayed(new Runnable() {
-            public void run() {
-
-                if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-                    sendProgress(mediaPlayer.getCurrentPosition());
-                    notificationView.setProgressBar(R.id.pb_progress, mediaPlayer.getDuration(), mediaPlayer.getCurrentPosition(), false);
-                    Notification n = builder.build();
-                    startForeground(1, n);
-                    notificationManager.notify(1, builder.build());
-                }
-                h.postDelayed(this, delay);
-
-            }
-        }, delay);
-
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                mediaPlayer.start();
-            }
-        });
 
         return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
         super.onDestroy();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
     }
 
+    public void play(String filePath) {
+        currentAyah = PlayerManager.getCurrentAya();
+        currentSurah = PlayerManager.getCurrentSurah();
 
-    public void play() {
-        mediaPlayer.start();
+        mediaPlayer = MediaPlayer.create(PlayerService.this, Uri.fromFile(new File(filePath)));
+        if (mediaPlayer != null)
+            mediaPlayer.start();
+        EventBus.getDefault().post(new ChangeDataEvent(currentSurah));
 
-    }
+        if (!SharedPreferencesManager.getBoolean(PlayerService.this, "voiceSwitch", true)) {
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    currentAyah++;
+                    if (currentAyah > PlayerManager.getsCurrentSurahMaxAyah()) {
+                        if (SharedPreferencesManager.getBoolean(PlayerService.this, "basmalahSwitch", true))
+                            currentAyah = 0;
+                        else
+                            currentAyah = 1;
 
-    public void pause() {
-        mediaPlayer.pause();
+                        if (currentSurah <= 113) {
+                            if ((SharedPreferencesManager.getInteger(PlayerService.this, "r", 0) == 0)) {
+                                currentSurah++;
+                                EventBus.getDefault().post(new ChangeDataEvent(currentSurah));
+                            } else if ((SharedPreferencesManager.getInteger(PlayerService.this, "r", 0) == 1)) {
+                                mediaPlayer.stop();
+                                EventBus.getDefault().post(new ChangeIconEvent());
+                                return;
+                            }
+                        }
+                    }
+                    if (SharedPreferencesManager.getBoolean(PlayerService.this, "nextSuraStart", true))
+                        EventBus.getDefault().post(new AutoColorModel(currentAyah, currentSurah));
+
+                    if (PlayerManager.isSoundPresent(SharedPreferencesManager.getString(PlayerService.this, "readerName", "Alafasy_128kbps"), String.valueOf(currentSurah), String.valueOf(currentAyah))) {
+                        String surah = String.valueOf(currentSurah);
+                        for (int i = surah.length(); i < 3; i++) {
+                            surah = "0" + surah;
+                        }
+                        String ayaa = String.valueOf(currentAyah);
+                        for (int i = ayaa.length(); i < 3; i++) {
+                            ayaa = "0" + ayaa;
+                        }
+                        String pathToSound = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + SharedPreferencesManager.getString(PlayerService.this, "readerName", "Alafasy_128kbps") + "/" + surah + ayaa + ".mp3";
+
+                        PlayerService.mediaPlayer = MediaPlayer.create(PlayerService.this, Uri.fromFile(new File(pathToSound)));
+                        PlayerService.mediaPlayer.start();
+                        PlayerService.mediaPlayer.setOnCompletionListener(this);
+                    } else {
+                        Intent mIntent = new Intent(PlayerService.this, DownloadService.class);
+                        mIntent.putExtra(DownloadService.SURAH_NUMBER, String.valueOf(currentSurah));
+                        mIntent.putExtra(DownloadService.AYAH_NUMBER, String.valueOf(currentAyah));
+                        startService(mIntent);
+                    }
+                }
+            });
+        } else {
+            handler = new Handler();
+
+            r = new Runnable() {
+                @Override
+                public void run() {
+                    currentAyah++;
+                    if (currentAyah > PlayerManager.getsCurrentSurahMaxAyah()) {
+                        if (SharedPreferencesManager.getBoolean(PlayerService.this, "basmalahSwitch", true))
+                            currentAyah = 0;
+                        else
+                            currentAyah = 1;
+
+                        if (currentSurah <= 113) {
+                            if ((SharedPreferencesManager.getInteger(PlayerService.this, "r", 0) == 0)) {
+                                currentSurah++;
+                                EventBus.getDefault().post(new ChangeDataEvent(currentSurah));
+                            } else if ((SharedPreferencesManager.getInteger(PlayerService.this, "r", 0) == 1)) {
+                                mediaPlayer.stop();
+                                EventBus.getDefault().post(new ChangeIconEvent());
+                                return;
+                            }
+                        }
+                    }
+                    if (SharedPreferencesManager.getBoolean(PlayerService.this, "nextSuraStart", true))
+                        EventBus.getDefault().post(new AutoColorModel(currentAyah, currentSurah));
+                    if (PlayerManager.isSoundPresent(SharedPreferencesManager.getString(PlayerService.this, "readerName", "Alafasy_128kbps"), String.valueOf(currentSurah), String.valueOf(currentAyah))) {
+                        String surah = String.valueOf(currentSurah);
+                        for (int i = surah.length(); i < 3; i++) {
+                            surah = "0" + surah;
+                        }
+                        String ayaa = String.valueOf(currentAyah);
+                        for (int i = ayaa.length(); i < 3; i++) {
+                            ayaa = "0" + ayaa;
+                        }
+                        String pathToSound = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + SharedPreferencesManager.getString(PlayerService.this, "readerName", "Alafasy_128kbps") + "/" + surah + ayaa + ".mp3";
+
+                        mediaPlayer = MediaPlayer.create(PlayerService.this, Uri.fromFile(new File(pathToSound)));
+                        if (mediaPlayer != null) {
+                            mediaPlayer.start();
+                            handler.postDelayed(this, mediaPlayer.getDuration() - 300);
+                        }
+
+                    } else {
+                        Intent mIntent = new Intent(PlayerService.this, DownloadService.class);
+                        mIntent.putExtra(DownloadService.SURAH_NUMBER, String.valueOf(currentSurah));
+                        mIntent.putExtra(DownloadService.AYAH_NUMBER, String.valueOf(currentAyah));
+                        startService(mIntent);
+                    }
+                }
+
+            };
+            if (mediaPlayer != null)
+                handler.postDelayed(r, mediaPlayer.getDuration() - 300);
+        }
     }
 
     public void stop() {
-        mediaPlayer.seekTo(0);
-        mediaPlayer.pause();
-        sendProgress(0);
-        notificationView.setProgressBar(R.id.pb_progress, mediaPlayer.getDuration(),0 , false);
-        notificationManager.notify(1, builder.build());
-    }
-
-    public void forward() {
-        mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + x);
-    }
-
-    public void backward() {
-        mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - x);
-    }
-
-    public void seek(int i) {
-        mediaPlayer.seekTo(i);
+        if (mediaPlayer != null) {
+            mediaPlayer.pause();
+            mediaPlayer.stop();
+        }
+        if (handler != null)
+            handler.removeCallbacks(r);
     }
 
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            String message = intent.getStringExtra("message");
-
-            switch (message) {
+            switch (intent.getStringExtra("message")) {
                 case "start":
-                    play();
-                    break;
-                case "pause":
-                    pause();
+                    play(intent.getStringExtra("path"));
                     break;
                 case "stop":
                     stop();
                     break;
-                case "forward":
-                    forward();
-                    break;
-                case "backward":
-                    backward();
-                    break;
-                case "music":
-                    seek(intent.getIntExtra("seek", 0));
-                    break;
             }
         }
     };
-
-    public void sendProgress(int progress) {
-        Intent intent = new Intent("Progress");
-        intent.putExtra("progress", progress);
-        intent.putExtra("duration", mediaPlayer.getDuration());
-        LocalBroadcastManager.getInstance(PlayerService.this).sendBroadcast(intent);
-
-    }
-
 }
 
 

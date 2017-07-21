@@ -1,7 +1,6 @@
 package com.blackstone.goldenquran.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,21 +17,23 @@ import com.blackstone.goldenquran.Fragments.AhadethRecyclerFragment;
 import com.blackstone.goldenquran.Fragments.BookmarkFragment;
 import com.blackstone.goldenquran.Fragments.FahrasFragment;
 import com.blackstone.goldenquran.Fragments.FridayReadingFragment;
-import com.blackstone.goldenquran.Fragments.IntonationTranslatorFragment;
-import com.blackstone.goldenquran.Fragments.NotificationFragment;
+import com.blackstone.goldenquran.Fragments.NightReadingFragment;
 import com.blackstone.goldenquran.Fragments.OnFinishOfQuranPrayFragment;
-import com.blackstone.goldenquran.Fragments.PlayeSettingsFragment;
-import com.blackstone.goldenquran.Fragments.PlayerServicesFragment;
+import com.blackstone.goldenquran.Fragments.PlayerSettingsFragment;
 import com.blackstone.goldenquran.Fragments.PrayingTimeViewPagerFragment;
 import com.blackstone.goldenquran.Fragments.SearchFragment;
 import com.blackstone.goldenquran.Fragments.SettingsFragment;
-import com.blackstone.goldenquran.Fragments.StatisticsFragment;
-import com.blackstone.goldenquran.Fragments.TabletFlagsFragment;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.models.MainListFirstItemModel;
 import com.blackstone.goldenquran.models.MainListModel;
+import com.blackstone.goldenquran.models.TableOfContents;
+import com.blackstone.goldenquran.models.models.ColorEvent;
 import com.blackstone.goldenquran.ui.DrawerCloser;
+import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainListAdapter extends RecyclerView.Adapter {
@@ -44,12 +45,26 @@ public class MainListAdapter extends RecyclerView.Adapter {
     private ActionBarDrawerToggle mDrawerToggle;
     int count;
     String data;
+    AdapterCallback mAdapterCallback;
+    ArrayList<TableOfContents> tableOfContentses;
 
 
     public MainListAdapter(Context context, List<Object> list) {
         this.list = list;
         layoutInflater = LayoutInflater.from(context);
         this.context = context;
+    }
+
+
+    public void tocData(ArrayList<TableOfContents> toc) {
+        tableOfContentses = toc;
+    }
+
+    public MainListAdapter(Context context, List<Object> list, AdapterCallback callBack) {
+        this.list = list;
+        layoutInflater = LayoutInflater.from(context);
+        this.context = context;
+        this.mAdapterCallback = callBack;
     }
 
     @Override
@@ -81,10 +96,10 @@ public class MainListAdapter extends RecyclerView.Adapter {
             ((MainListFirstViewHolder) holder).first.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.container, new TabletFlagsFragment()).addToBackStack(null).commit();
+                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.container, new NightReadingFragment()).addToBackStack(null).commit();
                     ((DrawerCloser) context).close(true);
                     ((DrawerCloser) context).close(false);
-                    ((DrawerCloser) context).title(0);
+                    ((DrawerCloser) context).title(-1);
 
                 }
             });
@@ -95,7 +110,7 @@ public class MainListAdapter extends RecyclerView.Adapter {
                     ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.container, new FridayReadingFragment()).addToBackStack(null).commit();
                     ((DrawerCloser) context).close(true);
                     ((DrawerCloser) context).close(false);
-                    ((DrawerCloser) context).title(1);
+                    ((DrawerCloser) context).title(0);
 
                 }
             });
@@ -122,7 +137,6 @@ public class MainListAdapter extends RecyclerView.Adapter {
         return list.size();
     }
 
-
     private class MainListFirstViewHolder extends RecyclerView.ViewHolder {
         TextView athkar, night, jumaa;
         ImageView image, topArrow, downArrow;
@@ -139,11 +153,10 @@ public class MainListAdapter extends RecyclerView.Adapter {
             first = (RelativeLayout) itemView.findViewById(R.id.firstRelative);
             second = (RelativeLayout) itemView.findViewById(R.id.secondRelative);
         }
-
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setData(String data1) {
+        data = data1;
     }
 
     private class MainListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -160,80 +173,86 @@ public class MainListAdapter extends RecyclerView.Adapter {
         @Override
         public void onClick(View v) {
 
-            int pos = 0;
+            int pos = -1;
 
             switch (getPosition()) {
                 case 1:
                     fragment = new BookmarkFragment();
-                    pos = 2;
+                    pos = 1;
                     break;
                 case 2:
                     fragment = new FahrasFragment();
-                    pos = 3;
+                    ((FahrasFragment) fragment).setTableOfContentses(tableOfContentses);
+                    pos = 2;
                     break;
                 case 3:
-                    fragment = new PlayerServicesFragment();
-                    pos = 4;
+                    if (SharedPreferencesManager.getBoolean(context, "isColorOn", false)) {
+                        SharedPreferencesManager.putBoolean(context, "isColorOn", false);
+                        EventBus.getDefault().post(new ColorEvent(false));
+                        pos = 3;
+                    } else {
+                        SharedPreferencesManager.putBoolean(context, "isColorOn", true);
+                        EventBus.getDefault().post(new ColorEvent(true));
+                        fragment = null;
+                        pos = 3;
+                    }
                     break;
                 case 4:
-                    fragment = new IntonationTranslatorFragment();
-                    pos = 5;
+                    fragment = new SearchFragment();
+                    pos = 4;
                     break;
                 case 5:
-                    fragment = new SearchFragment();
-                    pos = 6;
+                    fragment = new PlayerSettingsFragment();
+                    pos = 5;
                     break;
                 case 6:
-                    fragment = new PlayeSettingsFragment();
-                    pos = 7;
+                    fragment = new PrayingTimeViewPagerFragment();
+                    pos = 6;
                     break;
                 case 7:
-                    fragment = new NotificationFragment();
-                    pos = 8;
+                    fragment = new OnFinishOfQuranPrayFragment();
+                    pos = 7;
                     break;
                 case 8:
-                    fragment = new PrayingTimeViewPagerFragment();
+                    fragment = new AhadethRecyclerFragment();
+                    pos = 8;
+                    break;
+                case 9: {
+                    if (mAdapterCallback != null) {
+                        mAdapterCallback.onShareClick();
+                    }
                     pos = 9;
                     break;
-                case 9:
-                    fragment = new OnFinishOfQuranPrayFragment();
-                    pos = 10;
-                    break;
-                case 10:
-                    fragment = new AhadethRecyclerFragment();
-                    pos = 11;
-                    break;
-                case 11: {
-                    Intent sendIntent = new Intent();
-                    sendIntent.setAction(Intent.ACTION_SEND);
-                    sendIntent.putExtra(Intent.EXTRA_TEXT, data);
-                    sendIntent.setType("text/plain");
-                    context.startActivity(Intent.createChooser(sendIntent, "Where To Send"));
-                    pos = 12;
-                    break;
                 }
-                case 12:
+                case 10:
                     fragment = new SettingsFragment();
-                    pos = 13;
-                    break;
-                case 13:
-                    fragment = new StatisticsFragment();
-                    pos = 14;
+                    pos = 10;
                     break;
                 default:
                     Toast.makeText(context, getPosition() + "", Toast.LENGTH_SHORT).show();
             }
 
-            if (fragment != null) {
+            if (fragment != null && pos != 9 && pos != 3) {
                 Fragment currentFragment = ((FragmentActivity) context).getSupportFragmentManager().findFragmentById(R.id.container);
-                if (!currentFragment.getClass().equals(fragment.getClass()))
+                if (!currentFragment.getClass().equals(fragment.getClass())) {
                     ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).addToBackStack(pos + "").commit();
+                }
             }
             ((DrawerCloser) context).close(true);
             ((DrawerCloser) context).close(false);
-            ((DrawerCloser) context).title(pos);
+            if (pos != 3 && pos != 9)
+                ((DrawerCloser) context).title(pos);
         }
+    }
 
+    public interface AdapterCallback {
+        void onShareClick();
+    }
+
+    public interface GetColor {
+        boolean isColorOn();
+
+        void setColorOn(boolean colorOn);
     }
 }
 

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.AltafseerAdapter;
+import com.blackstone.goldenquran.api.RetrofitInterface;
 import com.blackstone.goldenquran.models.TheExplanationModel;
 import com.blackstone.goldenquran.ui.DrawerCloser;
 
@@ -22,10 +23,13 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class ExplanationFragment extends Fragment {
 
-    RecyclerView recyclerView;
     @BindView(R.id.flagImage)
     ImageView flagImage;
     @BindView(R.id.anyTafseer)
@@ -36,6 +40,7 @@ public class ExplanationFragment extends Fragment {
     RelativeLayout header;
     @BindView(R.id.altafseerRecycler)
     RecyclerView altafseerRecycler;
+    private ArrayList<TheExplanationModel> theExplanationModel;
 
     public ExplanationFragment() {
 
@@ -46,6 +51,32 @@ public class ExplanationFragment extends Fragment {
         super.onCreate(savedInstanceState);
         getActivity().invalidateOptionsMenu();
         setHasOptionsMenu(true);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://download.quranicaudio.com/")
+                .build();
+
+        RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
+
+        Call<ArrayList<TheExplanationModel>> request = retrofitInterface.getExplanationData();
+
+        request.enqueue(new Callback<ArrayList<TheExplanationModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<TheExplanationModel>> call, Response<ArrayList<TheExplanationModel>> response) {
+                theExplanationModel=response.body();
+                processData();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<TheExplanationModel>> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+    private void processData() {
+
     }
 
     @Override
@@ -59,7 +90,7 @@ public class ExplanationFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        altafseerRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         ((DrawerCloser) getActivity()).moveToolbarDown();
 
         ArrayList<TheExplanationModel> arrayList = new ArrayList<>();
@@ -73,6 +104,6 @@ public class ExplanationFragment extends Fragment {
         arrayList.add(new TheExplanationModel(getString(R.string.tafseerName), getString(R.string.tafseerDescription)));
 
 
-        recyclerView.setAdapter(new AltafseerAdapter(getActivity(), arrayList));
+        altafseerRecycler.setAdapter(new AltafseerAdapter(getActivity(), arrayList));
     }
 }

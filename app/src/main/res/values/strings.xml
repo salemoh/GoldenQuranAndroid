@@ -1,62 +1,5 @@
 <resources>
     <string name="app_name">Golden Quran</string>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <string-array name="AlJuzoaArray">
-        <item>joza 1</item>
-        <item>joza 2</item>
-        <item>joza 3</item>
-        <item>joza 4</item>
-        <item>joza 5</item>
-        <item>joza 6</item>
-        <item>joza 7</item>
-        <item>joza 8</item>
-        <item>joza 9</item>
-        <item>joza 10</item>
-        <item>joza 11</item>
-        <item>joza 12</item>
-        <item>joza 13</item>
-        <item>joza 14</item>
-        <item>joza 15</item>
-        <item>joza 16</item>
-        <item>joza 17</item>
-        <item>joza 18</item>
-        <item>joza 19</item>
-        <item>joza 20</item>
-        <item>joza 21</item>
-        <item>joza 22</item>
-        <item>joza 23</item>
-        <item>joza 24</item>
-        <item>joza 25</item>
-        <item>joza 26</item>
-        <item>joza 27</item>
-        <item>joza 28</item>
-        <item>joza 29</item>
-        <item>joza 30</item>
-    </string-array>
-
-
-    <string name="doaKhatemAlquran">
-        اللهم إنا نحمدك، ونستعينك، ونستهديك، ونستغفرك، ونتوب إليك، ونؤمن بك، ونتوكل عليك، ونثني عليك الخير كله، نشكرك ولا نكفرك، ونخلع ونترك من يفجرك.
-
-اللهم إياك نعبد، ولك نصلي ونسجد، وإليك نسعى ونحفِد، نرجو رحمتك ونخشى عذابك، إن عذابك الجد بالكفار ملحق.
-        </string>>
-    <string name="doaKhatemAlquran2">
-اللهم لك الحمد كله، ولك الشكر كله، وإليك يرجع الأمر كله، علانيته وسره، فأهلٌ أنت أن تُحمد، وأهلٌ أنت أن تُعبد، وأنت على كل شيء قدير.
-
-لك الحمد بالإسلام، ولك الحمد بالقرآن، ولك الحمد بالمال والأهل والمعافاة، كبتَّ عدونا، وأظهرت أمننا، وجمعت فرقتنا، ومن كل ما سألناك ربنا أعطيتنا، فلك الحمد والشكر كثيراً كما تعطي كثيراً.
-    </string>
-    <string name="doaKhatemAlquran3">
-
-اللهم لك الحمد حتى ترضى، ولك الحمد إذا رضيت، ولك الحمد بعد الرضا، ولك الحمد على كل حال.
-
-لك الحمد كالذي نقول، وخيراً مما نقول، ولك الحمد كالذي تقول.
-    </string>
-
-    <string name="doaKhatemAlquran4">
-اللهم لك الحمد أنت نور السماوات والأرض ومن فيهن، ولك الحمد أنت قيوم السماوات والأرض ومن فيهن، ولك الحمد أنت الحق، ووعدك حق، ولقاؤك حق، والجنة حق، والنار حق، والنبيون حق، ومحمد صلى الله عليه وسلم حق، والساعةُ آتيه لا ريب فيها.</string>
-
     <string name="playerCurrentSura">Current Sura</string>
     <string name="playerSuraName">ALmutafefeen</string>
     <string name="AyatSelection">Select Ayat</string>
@@ -65,11 +8,11 @@
     <string name="stopSuraPlaying">Stpo Sura</string>
     <string name="repeatTheAyat">Repeat the selected Ayat</string>
     <string name="readingOptions">Reading options</string>
-    <string name="moveToTheNextSura">Move Automaticly to the next page and marck the next aya</string>
+    <string name="moveToTheNextSura">Move Automaticly to the next page and marck the next verses</string>
     <string name="startTheBAsmalah">Play basmalah on start of sura</string>
-    <string name="repeatAyat">Repeat the sura</string>
+    <string name="repeatAyat">Continuous voice between verses</string>
     <string name="pickTheShake">Choose the reader and download audio files</string>
-    <string name="changeTheShake">Changing reader</string>
+    <string name="changeTheShake">Change reader</string>
     <string name="downloadedSura">download Sura</string>
     <string name="flag1">To use no explanation must be provided in contact with the Internet.</string>
     <string name="flag2">Or upload it to be used without an Internet connection.</string>
@@ -91,7 +34,6 @@
     <string name="tafseerName">Al Tafseer Muyasser</string>
     <string name="tafseerDescription">Al Qurtopy</string>>
     <bool name="is_right_to_left">true</bool>
-
     <string name="drawer_open">drawer open</string>
     <string name="drawer_close">drawer close</string>
     <string name="start_download">Start Download</string>
@@ -127,6 +69,16 @@
     <string name="page_of_quran_landscape">Preferred quran page on landScape</string>
     <string name="one_page_at_a_time">One side with colored background image</string>
     <string name="two_page_at_a_time">Double sides with colors only</string>
+    <string name="mos7af_type">mos7af Type : </string>
+    <string name="mos7af_name">mos7af Name :</string>
+    <string name="pleaseWait">Loading. Please wait…</string>
+    <string name="title_activity_player_for_result">PlayerActivityForResult</string>
+    <string name="imagesTitle">Quran Images</string>
+    <string name="no_bookmark">there is no bookmarks</string>
+    <string name="surah">Surah </string>
+    <string name="pageNumber">Page</string>
+    <string name="downladAll">Download All</string>
+
 
     <string-array name="translateTabs">
         <item name="atafseer">Al Tafseer</item>
@@ -146,33 +98,11 @@
         <item name="quranAyat">Quran Ayat</item>
     </string-array>
 
-    <string-array name="ahadethNames">
-        <item>first hadeeth</item>
-        <item>second hadeeth</item>
-        <item>therd hadeeth</item>
-        <item>fourth hadeeth</item>
-    </string-array>
-
     <string-array name="titles">
         <item>by sura</item>
         <item>by Juza</item>
     </string-array>
 
-    <string-array name="ajzaNames">
-        <item>al juza 1</item>
-        <item>al juza 2</item>
-        <item>al juza 3</item>
-        <item>al juza 4</item>
-        <item>al juza 5</item>
-        <item>al juza 6</item>
-        <item>al juza 7</item>
-    </string-array>
-
-    <string-array name="ShakeNames">
-        <item>abdalbaset</item>
-        <item>naser al qatamy</item>
-        <item>yaser al dosary</item>
-    </string-array>
 
     <string-array name="MainList">
         <item>Quran Athkar</item>
@@ -181,17 +111,228 @@
         <item>Bookmarks</item>
         <item>Suras List</item>
         <item>Highlight verses by topics</item>
-        <item>Translation and Tajweed</item>
         <item>Search</item>
         <item>Audio player</item>
-        <item>Notifications</item>
         <item>Prayer Time</item>
         <item>Finishing Quran Doaa</item>
         <item>Forty Nowawya</item>
         <item>Share current page</item>
         <item>Settings</item>
-        <item>Statistics</item>
     </string-array>
 
+    <string-array name="fahrasSuras">
+        <item>Al-Fatihah</item>
+        <item>Al-Baqarah</item>
+        <item>Ali \`Imran</item>
+        <item>An-Nisa\'</item>
+        <item>Al-Ma\'idah</item>
+        <item>Al-\'An\`am</item>
+        <item>Al-\'A\`raf</item>
+        <item>Al-\'Anfal</item>
+        <item>Tawbah</item>
+        <item>Yunus</item>
+        <item>Hud</item>
+        <item>Yusuf</item>
+        <item>Ar-Ra\`d</item>
+        <item>\'Ibrahim</item>
+        <item>Al-Hijr</item>
+        <item>An-Nahl</item>
+        <item>Al-\'Isra\'</item>
+        <item>Al-Kahf</item>
+        <item>Maryam</item>
+        <item>Taha</item>
+        <item>Al-\'Anbya\'</item>
+        <item>Al-Haj</item>
+        <item>Al-Mu\'minun</item>
+        <item>An-Nur</item>
+        <item>Al-Furqan</item>
+        <item>Ash-Shu\`ara\'</item>
+        <item>An-Naml</item>
+        <item>Al-Qasas</item>
+        <item>Al-\`Ankabut</item>
+        <item>Ar-Rum</item>
+        <item>Luqman</item>
+        <item>As-Sajdah</item>
+        <item>Al-\'Ahzab</item>
+        <item>Saba\'</item>
+        <item>Fatir</item>
+        <item>Ya-Sin</item>
+        <item>As-Saffat</item>
+        <item>Sad</item>
+        <item>Az-Zumar</item>
+        <item>Ghafir</item>
+        <item>Fussilat</item>
+        <item>Ash-Shuraa</item>
+        <item>Az-Zukhruf</item>
+        <item>Ad-Dukhan</item>
+        <item>Al-Jathiyah</item>
+        <item>Al-\'Ahqaf</item>
+        <item>Muhammad</item>
+        <item>Al-Fath</item>
+        <item>Al-Hujurat</item>
+        <item>Qaf</item>
+        <item>Adh-Dhariyat</item>
+        <item>At-Tur</item>
+        <item>An-Najm</item>
+        <item>Al-Qamar</item>
+        <item>Ar-Rahman</item>
+        <item>Al-Waqi\`ah</item>
+        <item>Al-Hadid</item>
+        <item>Al-Mujadila</item>
+        <item>Al-Hashr</item>
+        <item>Al-Mumtahanah</item>
+        <item>As-Saf</item>
+        <item>Al-Jumu\`ah</item>
+        <item>Al-Munafiqun</item>
+        <item>At-Taghabun</item>
+        <item>At-Talaq</item>
+        <item>At-Tahrim</item>
+        <item>Al-Mulk</item>
+        <item>Al-Qalam</item>
+        <item>Al-Haqqah</item>
+        <item>Al-Ma\`arij</item>
+        <item>Nuh</item>
+        <item>Al-Jinn</item>
+        <item>Al-Muzzammil</item>
+        <item>Al-Muddaththir</item>
+        <item>Al-Qiyamah</item>
+        <item>Al-\'Insan</item>
+        <item>Al-Mursalat</item>
+        <item>An-Naba\'</item>
+        <item>An-Nazi\`at</item>
+        <item>\`Abasa</item>
+        <item>At-Takwir</item>
+        <item>Al-\'Infitar</item>
+        <item>Al-Mutaffifin</item>
+        <item>Al-\'Inshiqaq</item>
+        <item>Al-Buruj</item>
+        <item>At-Tariq</item>
+        <item>Al-\'A\`la</item>
+        <item>Al-Ghashiyah</item>
+        <item>Al-Fajr</item>
+        <item>Al-Balad</item>
+        <item>Ash-Shams</item>
+        <item>Al-Layl</item>
+        <item>Ad-Duhaa</item>
+        <item>Ash-Sharh</item>
+        <item>At-Tin</item>
+        <item>Al-\`Alaq</item>
+        <item>Al-Qadr</item>
+        <item>Al-Bayyinah</item>
+        <item>Az-Zalzalah</item>
+        <item>Al-\`Adiyat</item>
+        <item>Al-Qari\`ah</item>
+        <item>At-Takathur</item>
+        <item>Al-\`Asr</item>
+        <item>Al-Humazah</item>
+        <item>Al-Fil</item>
+        <item>Quraysh</item>
+        <item>Al-Ma\`un</item>
+        <item>Al-Kawthar</item>
+        <item>Al-Kafirun</item>
+        <item>An-Nasr</item>
+        <item>Al-Masad</item>
+        <item>Al-\'Ikhlas</item>
+        <item>Al-Falaq</item>
+        <item>An-Nas</item>
+
+    </string-array>
+
+    <string-array name="fahrasAjzaa">
+
+        <item>Juz’ 1</item>
+        <item>Juz’ 2</item>
+        <item>Juz’ 3</item>
+        <item>Juz’ 4</item>
+        <item>Juz’ 5</item>
+        <item>Juz’ 6</item>
+        <item>Juz’ 7</item>
+        <item>Juz’ 8</item>
+        <item>Juz’ 9</item>
+        <item>Juz’ 10</item>
+        <item>Juz’ 11</item>
+        <item>Juz’ 12</item>
+        <item>Juz’ 13</item>
+        <item>Juz’ 14</item>
+        <item>Juz’ 15</item>
+        <item>Juz’ 16</item>
+        <item>Juz’ 17</item>
+        <item>Juz’ 18</item>
+        <item>Juz’ 19</item>
+        <item>Juz’ 20</item>
+        <item>Juz’ 21</item>
+        <item>Juz’ 22</item>
+        <item>Juz’ 23</item>
+        <item>Juz’ 24</item>
+        <item>Juz’ 25</item>
+        <item>Juz’ 26</item>
+        <item>Juz’ 27</item>
+        <item>Juz’ 28</item>
+        <item>Juz’ 29</item>
+        <item>Juz’ 30</item>
+
+    </string-array>
+
+    <string-array name="readersNames">
+        <item>Abdul-Basit (Mujawwad)</item>
+        <item>Abdullah Juhaynee</item>
+        <item>Abdullah Basfar</item>
+        <item>Abdullah Matroud</item>
+        <item>Abdu-Rahman As-Sudais</item>
+        <item>Abu-Bakr Ash-Shaatree</item>
+        <item>Ahmed Al-Ajamy</item>
+        <item>Mishary Al-Aafasy</item>
+        <item>Saed Al-Gamidi</item>
+        <item>Hani Refai</item>
+        <item>Al-Hudaify</item>
+        <item>Al-Husary (Mujawwad)</item>
+        <item>Khalid Qahtaanee</item>
+        <item>Maher Al-Muaiqly</item>
+        <item>Mohammad Al-Tablaway</item>
+        <item>Mohammad Abdul-kareem</item>
+        <item>Mohammad Ayyoub</item>
+        <item>Mohammad Jibreel</item>
+        <item>Abul-Muhsin Al-Qasim</item>
+        <item>Salaah Bukhater</item>
+        <item>Saood Al-Shuraym</item>
+        <item>Yaser Al-Dossary</item>
+        <item>Naser Al-Qahtami</item>
+        <item>Khalefah Al-Tiniji</item>
+        <item>Fares Abbad</item>
+        <item>Al-Minshawi (Murattal)</item>
+        <item>Ibrahim Al-Akhdar</item>
+        <item>Ali Jaber</item>
+        <item>Aziz Al-Alili</item>
+        <item>Yassin Al Jazaery (Warsh)</item>
+        <item>Sahl Yassin</item>
+        <item>Ibrahim Al-Dosary (Warsh)</item>
+        <item>Minshawy (Mujawwad)</item>
+        <item>Abdul-Basit (Muratal)</item>
+        <item>Abdullah Basfar (MultiLanguage ar/en)</item>
+        <item>Farhat Hashim (Urdu)</item>
+        <item>Shamshad Ali_khan (Urdu)</item>
+        <item>Makarem Recited by Kabiri (Persian)</item>
+        <!--<item>Fooladvand Recited by Hedayatfar (Persian)</item>-->
+        <item>Sahih International Recited by Ibrahim Walk (English)</item>
+        <item>Yaser Salamah</item>
+    </string-array>
+    <string name="title_activity_change_language_for_result">ChangeLanguageActivityForResult
+    </string>
+    <string name="pickSurah">Pick Surah</string>
+    <string name="word">Word</string>
+    <string name="root">Root</string>
+    <string name="meaning">Meaning</string>
+    <string name="change_hijri_date">Change Hijri date</string>
+    <string name="fajr">fajr</string>
+    <string name="dohur">dohur</string>
+    <string name="aser">aser</string>
+    <string name="maghrib">maghrib</string>
+    <string name="isha">isha</string>
+    <string name="download">Download</string>
+    <string name="downloading">Downloading File</string>
+    <string name="downloaded">Downloaded</string>
+    <string name="file_downloaded">File Downloaded</string>
+    <string name="mb">MB</string>
+    <string name="title_activity_color">ColorActivity</string>
 
 </resources>

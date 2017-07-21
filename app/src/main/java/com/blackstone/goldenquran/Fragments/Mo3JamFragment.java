@@ -42,8 +42,15 @@ public class Mo3JamFragment extends Fragment {
         ArrayList<Mo3jamModel> mo3jamModels = getArguments().getParcelableArrayList("mo3jamWords");
         if (mo3jamModels != null && mo3jamModels.isEmpty()) {
             mo3jamIsEmptyText.setVisibility(View.VISIBLE);
-        } else if (mo3jamModels != null)
+        } else if (mo3jamModels != null) {
+            for (int i = 0; i < mo3jamModels.size(); i++) {
+                if (mo3jamModels.get(i).wordRoot.isEmpty()) {
+                    mo3jamModels.remove(i);
+                    i--;
+                }
+            }
             mo3jamRecycler.setAdapter(new Mo3jamWordsAdapter(getActivity(), mo3jamModels));
+        }
         return view;
     }
 

@@ -19,7 +19,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.blackstone.goldenquran.R;
+import com.blackstone.goldenquran.database.DataBaseManager;
+import com.blackstone.goldenquran.models.QueryMessage;
+import com.blackstone.goldenquran.models.TableOfContents;
 import com.blackstone.goldenquran.ui.DrawerCloser;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +37,13 @@ public class FahrasFragment extends Fragment {
     TabLayout tabLayout;
     @BindView(R.id.suraJuzoaViewPager)
     ViewPager viewPager;
+    DataBaseManager data;
+
+    ArrayList<TableOfContents> tableOfContentses;
+
+    public void setTableOfContentses(ArrayList<TableOfContents> tableOfContentses) {
+        this.tableOfContentses = tableOfContentses;
+    }
 
     public FahrasFragment() {
 
@@ -92,7 +106,29 @@ public class FahrasFragment extends Fragment {
         SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
         searchView.setIconifiedByDefault(true);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                EventBus.getDefault().post(new QueryMessage(query));
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                EventBus.getDefault().post(new QueryMessage(newText));
+
+                return true;
+            }
+        });
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((DrawerCloser) getActivity()).title(2);
     }
 
 
@@ -106,7 +142,7 @@ public class FahrasFragment extends Fragment {
         }
     }
 
-    class AlsuraJuzoaViewPagerAdapter extends FragmentPagerAdapter {
+    private class AlsuraJuzoaViewPagerAdapter extends FragmentPagerAdapter {
         String[] titles = getResources().getStringArray(R.array.titles);
 
         AlsuraJuzoaViewPagerAdapter(FragmentManager fm) {
@@ -115,17 +151,27 @@ public class FahrasFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
+            Fragment fragment = null;
             if (getActivity().getResources().getBoolean(R.bool.is_right_to_left)) {
-                if (position == 0)
-                    return new AlSuraFragment();
-                else
-                    return new AlJuzoaFragment();
+                if (position == 0) {
+                    fragment = new AlSuraFragment();
+                    ((AlSuraFragment) fragment).sendTOCData(tableOfContentses);
+                    return fragment;
+                } else {
+                    fragment = new AlJuzoaFragment();
+                    ((AlSuraFragment) fragment).sendTOCData(tableOfContentses);
+                    return fragment;
+                }
             } else {
-                if (position == 0)
-                    return new AlJuzoaFragment();
-
-                else
-                    return new AlSuraFragment();
+                if (position == 1) {
+                    fragment = new AlSuraFragment();
+                    ((AlSuraFragment) fragment).sendTOCData(tableOfContentses);
+                    return fragment;
+                } else {
+                    fragment = new AlJuzoaFragment();
+                    ((AlJuzoaFragment) fragment).sendTOCData(tableOfContentses);
+                    return fragment;
+                }
             }
         }
 

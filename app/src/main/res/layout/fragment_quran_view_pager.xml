@@ -9,26 +9,25 @@
         android:layout_height="match_parent" />
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
         android:id="@+id/seekBarFrameLayout"
-        >
-
-    <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
-        android:id="@+id/seek_bar_quran"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layoutDirection="rtl"
-        android:layout_gravity="bottom"
-        app:dsb_indicatorColor="@color/colorPrimaryDark"
-        app:dsb_indicatorElevation="0dp"
-        app:dsb_indicatorPopupEnabled="true"
-        app:dsb_max="605"
-        app:dsb_min="1"
-        app:dsb_progressColor="@color/colorPrimary"
-        app:dsb_thumbSize="20dp"
-        app:dsb_trackHeight="5dp"
-        app:dsb_value="1" />
+        android:layout_gravity="bottom">
+
+        <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+            android:id="@+id/seek_bar_quran"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layoutDirection="rtl"
+            app:dsb_indicatorColor="@color/colorPrimaryDark"
+            app:dsb_indicatorElevation="0dp"
+            app:dsb_indicatorPopupEnabled="true"
+            app:dsb_max="605"
+            app:dsb_min="1"
+            app:dsb_progressColor="@color/colorPrimary"
+            app:dsb_thumbSize="20dp"
+            app:dsb_trackHeight="5dp"
+            app:dsb_value="1" />
     </FrameLayout>
 </FrameLayout>

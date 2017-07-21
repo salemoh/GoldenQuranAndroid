@@ -19,7 +19,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.blackstone.goldenquran.R;
+import com.blackstone.goldenquran.models.QueryMessage;
 import com.blackstone.goldenquran.ui.DrawerCloser;
+import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -84,6 +88,7 @@ public class SearchFragment extends Fragment {
         });
 
         viewPager.setAdapter(new SearchViewPagerAdapter(getChildFragmentManager()));
+        viewPager.setOffscreenPageLimit(2);
 
         if (!getActivity().getResources().getBoolean(R.bool.is_right_to_left)) {
             viewPager.setCurrentItem(2);
@@ -98,6 +103,19 @@ public class SearchFragment extends Fragment {
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                EventBus.getDefault().post(new QueryMessage(query));
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                EventBus.getDefault().post(new QueryMessage(newText));
+                return true;
+            }
+        });
         searchView.setIconifiedByDefault(true);
     }
 
@@ -112,6 +130,12 @@ public class SearchFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((DrawerCloser) getActivity()).title(4);
+    }
+
     class SearchViewPagerAdapter extends FragmentPagerAdapter {
 
         String[] titles = getActivity().getResources().getStringArray(R.array.searchTabs);
@@ -122,7 +146,21 @@ public class SearchFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            return new AlSuraFragment();
+            if (SharedPreferencesManager.getBoolean(getActivity(), "isArabic", false)) {
+                if (position == 2)
+                    return new SearchMo3jamFragment();
+                else if (position == 1)
+                    return new SearchMawdoo3Fragment();
+                else
+                    return new SearchAyatAlQuranFragment();
+            } else {
+                if (position == 2)
+                    return new SearchAyatAlQuranFragment();
+                else if (position == 1)
+                    return new SearchMawdoo3Fragment();
+                else
+                    return new SearchMo3jamFragment();
+            }
         }
 
         @Override

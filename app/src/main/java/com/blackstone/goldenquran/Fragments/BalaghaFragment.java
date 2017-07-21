@@ -29,11 +29,17 @@ public class BalaghaFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_nozool_reasons, container, false);
         ButterKnife.bind(this, view);
-        if (getArguments() != null)
-            if (!getArguments().getString("balagha").equalsIgnoreCase("(null)"))
-                nozoolReasonsText.setText(getArguments().getString("balagha"));
-            else
+        if (getArguments() != null) {
+            String s = getArguments().getString("balagha");
+            if (s != null) {
+                if (!getArguments().getString("balagha").equalsIgnoreCase("(null)"))
+                    nozoolReasonsText.setText(getArguments().getString("balagha"));
+                else
+                    nozoolReasonsText.setText("البلاغة غير متوفرة لهذه الاية الكريمه");
+            } else
                 nozoolReasonsText.setText("البلاغة غير متوفرة لهذه الاية الكريمه");
+        } else
+            nozoolReasonsText.setText("البلاغة غير متوفرة لهذه الاية الكريمه");
         return view;
     }
 

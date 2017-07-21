@@ -5,12 +5,11 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 import com.blackstone.goldenquran.R;
 
 
-public class RotatableImageView extends ImageView implements Rotatable {
+public class RotatableImageView extends android.support.v7.widget.AppCompatImageView implements Rotatable {
     private static final String TAG = "CompassView";
     private int extraPadding;
     private float mRotateDegree;

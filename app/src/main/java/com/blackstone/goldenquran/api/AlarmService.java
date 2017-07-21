@@ -1,14 +1,13 @@
 package com.blackstone.goldenquran.api;
 
+import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.MediaPlayer;
-import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
@@ -16,30 +15,22 @@ import android.support.v4.content.LocalBroadcastManager;
 import com.blackstone.goldenquran.R;
 
 
-public class AlarmService extends Service {
+public class AlarmService extends IntentService {
 
     MediaPlayer mediaPlayer;
 
-
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
+    public AlarmService() {
+        super("Alarm Service");
     }
 
-
     @Override
-    public void onCreate() {
+    protected void onHandleIntent(@Nullable Intent intent) {
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, new IntentFilter("AlarmService"));
 
         mediaPlayer = MediaPlayer.create(this, R.raw.athan);
         if (!mediaPlayer.isPlaying())
             mediaPlayer.start();
 
-    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
         NotificationManager alarmNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
         PendingIntent contentIntent = PendingIntent.getBroadcast(this, 0, new Intent("alarm"), PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -52,14 +43,20 @@ public class AlarmService extends Service {
                 .setContentIntent(contentIntent);
 
         alarmNotificationManager.notify(153163264, alarmNotificationBuilder.build());
-        return START_STICKY;
 
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                AlarmService.this.stopSelf();
+            }
+        });
     }
 
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             mediaPlayer.stop();
+            AlarmService.this.stopSelf();
         }
     };
 

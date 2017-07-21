@@ -39,7 +39,7 @@ public class ThreadManager {
 
     public static String initializeThreadManagerPool(ThreadManagerConfiguration threadManagerConfiguration) {
 
-        if (sThreadPoolExecutors.containsKey(threadManagerConfiguration.getId())) {
+        if (isThereThreadPool(threadManagerConfiguration.getId())) {
 
             throw new ThreadsManagerPoolAlreadyExistException();
         }
@@ -84,7 +84,7 @@ public class ThreadManager {
 
     public static String addTaskToThreadManagerPool(String threadManagerPoolId, int priority, Task threadContextRunnable) {
 
-        if (!sThreadPoolExecutors.containsKey(threadManagerPoolId)) {
+        if (!isThereThreadPool(threadManagerPoolId)) {
 
             throw new ThreadsManagerPoolNotFoundException();
         }
@@ -103,9 +103,13 @@ public class ThreadManager {
         return threadContextRunnable.getId();
     }
 
+    public static boolean isThereThreadPool(String threadManagerPoolId) {
+        return sThreadPoolExecutors.containsKey(threadManagerPoolId);
+    }
+
     public static boolean isThreadManagerPoolBusy(String threadManaherPoolId) {
 
-        if (!sThreadPoolExecutors.containsKey(threadManaherPoolId)) {
+        if (!isThereThreadPool(threadManaherPoolId)) {
 
             throw new ThreadsManagerPoolNotFoundException();
         }
@@ -117,7 +121,7 @@ public class ThreadManager {
 
     public static void awaitAndTerminateThreadManagerPool(String threadManagerPoolId) {
 
-        if (!sThreadPoolExecutors.containsKey(threadManagerPoolId)) {
+        if (!isThereThreadPool(threadManagerPoolId)) {
 
             throw new ThreadsManagerPoolNotFoundException();
         }
@@ -129,7 +133,7 @@ public class ThreadManager {
 
     public static List<Runnable> terminateThreadManagerPool(String threadManagerPoolId) {
 
-        if (!sThreadPoolExecutors.containsKey(threadManagerPoolId)) {
+        if (!isThereThreadPool(threadManagerPoolId)) {
 
             throw new ThreadsManagerPoolNotFoundException();
         }

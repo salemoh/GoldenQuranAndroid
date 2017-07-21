@@ -28,82 +28,158 @@
                 android:textColor="#000000"
                 android:textSize="20sp" />
 
-            <ImageView
+            <FrameLayout
                 android:id="@+id/color1"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/pickColorText"
-                android:layout_margin="20dp"
-                android:elevation="5dp"
-                android:padding="2dp"
-                android:src="@color/lightOrange"
-                app:elevation="5dp" />
+                android:layout_margin="20dp">
 
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:padding="2dp"
+                    android:src="@color/Black" />
 
-            <ImageView
+                <ImageView
+                    android:id="@+id/color1Selected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/selected" />
+
+            </FrameLayout>
+
+            <FrameLayout
                 android:id="@+id/color2"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/pickColorText"
                 android:layout_margin="20dp"
                 android:layout_toEndOf="@+id/color1"
-                android:layout_toRightOf="@+id/color1"
-                android:padding="2dp"
-                android:src="@color/lightGreen" />
+                android:layout_toRightOf="@+id/color1">
 
-            <ImageView
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:padding="2dp"
+                    android:src="@color/lightGreen" />
+
+                <ImageView
+                    android:id="@+id/color2Selected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/selected" />
+
+
+            </FrameLayout>
+
+            <FrameLayout
                 android:id="@+id/color3"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/pickColorText"
                 android:layout_margin="20dp"
                 android:layout_toEndOf="@id/color2"
-                android:layout_toRightOf="@+id/color2"
-                android:padding="2dp"
-                android:src="@color/lightBlue" />
+                android:layout_toRightOf="@+id/color2">
 
-            <ImageView
-                android:id="@+id/color4"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:padding="2dp"
+                    android:src="@color/lightBlue" />
+
+                <ImageView
+                    android:id="@+id/color3Selected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/selected" />
+
+            </FrameLayout>
+
+            <!--<FrameLayout-->
+                <!--android:id="@+id/color4"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_below="@+id/color2"-->
+                <!--android:visibility="invisible"-->
+                <!--android:layout_marginStart="20dp">-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="45dp"-->
+                    <!--android:layout_height="45dp"-->
+                    <!--android:padding="2dp"-->
+                    <!--android:src="@color/lightYellow" />-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/color4Selected"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:src="@drawable/selected" />-->
+
+            <!--</FrameLayout>-->
+
+            <FrameLayout
+                android:id="@+id/color5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/pickColorText"
                 android:layout_margin="20dp"
                 android:layout_toEndOf="@id/color3"
-                android:layout_toRightOf="@+id/color3"
-                android:padding="2dp"
-                android:src="@color/lightYellow" />
+                android:layout_toRightOf="@+id/color3">
 
-            <ImageView
-                android:id="@+id/color5"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/color2"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
-                android:padding="2dp"
-                android:src="@color/lightPink" />
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:padding="2dp"
+                    android:src="@color/lightPink" />
 
-            <ImageView
-                android:id="@+id/color6"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_alignLeft="@+id/color2"
-                android:layout_alignStart="@+id/color2"
-                android:layout_below="@+id/color2"
-                android:layout_toEndOf="@+id/color5"
-                android:layout_toRightOf="@+id/color5"
-                android:padding="2dp"
-                android:src="@color/Black" />
+                <ImageView
+                    android:id="@+id/color5Selected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/selected" />
+
+            </FrameLayout>
+
+            <!--<FrameLayout-->
+                <!--android:id="@+id/color6"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignLeft="@+id/color2"-->
+                <!--android:layout_alignStart="@+id/color2"-->
+                <!--android:layout_below="@+id/color2"-->
+                <!--android:layout_toEndOf="@+id/color5"-->
+                <!--android:layout_toRightOf="@+id/color5"-->
+                <!--android:visibility="invisible">-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="45dp"-->
+                    <!--android:layout_height="45dp"-->
+                    <!--android:padding="2dp"-->
+                    <!--android:src="@color/Black" />-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/color6Selected"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:src="@drawable/selected" />-->
+
+            <!--</FrameLayout>-->
 
             <View
                 android:id="@+id/devisor1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@+id/color6"
+                android:layout_below="@+id/color5"
                 android:layout_margin="5dp"
                 android:background="@color/playerBackground" />
 
@@ -235,52 +311,44 @@
                 android:layout_margin="5dp"
                 android:background="@color/playerBackground" />
 
-            <RelativeLayout
-                android:id="@+id/settingsPickTafseerRelative"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_below="@+id/devisor4"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true">
+            <!--<RelativeLayout-->
+            <!--android:id="@+id/settingsPickTafseerRelative"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="48dp"-->
+            <!--android:layout_below="@+id/devisor4"-->
+            <!--android:background="?attr/selectableItemBackground"-->
+            <!--android:clickable="true">-->
 
-                <ImageView
-                    android:id="@+id/settingsPickTafseerImage"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/word_meaning_icon" />
+            <!--<ImageView-->
+            <!--android:id="@+id/settingsPickTafseerImage"-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:src="@drawable/word_meaning_icon" />-->
 
-                <TextView
-                    android:id="@+id/settingsPickTafseerText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@+id/settingsPickTafseerImage"
-                    android:layout_toRightOf="@+id/settingsPickTafseerImage"
-                    android:text="@string/pickTafseer"
-                    android:textColor="#000000"
-                    android:textSize="20sp" />
+            <!--<TextView-->
+            <!--android:id="@+id/settingsPickTafseerText"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginStart="10dp"-->
+            <!--android:layout_toEndOf="@+id/settingsPickTafseerImage"-->
+            <!--android:layout_toRightOf="@+id/settingsPickTafseerImage"-->
+            <!--android:text="@string/pickTafseer"-->
+            <!--android:textColor="#000000"-->
+            <!--android:textSize="20sp" />-->
 
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
 
-
-            <View
-                android:id="@+id/devisor5"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/settingsPickTafseerRelative"
-                android:layout_margin="5dp"
-                android:background="@color/playerBackground" />
 
             <RelativeLayout
                 android:id="@+id/settingsNotificationRelative"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_below="@+id/devisor5"
+                android:layout_below="@+id/devisor4"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true">
 
@@ -309,45 +377,45 @@
             </RelativeLayout>
 
 
-            <View
-                android:id="@+id/devisor6"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/settingsNotificationRelative"
-                android:layout_margin="5dp"
-                android:background="@color/playerBackground" />
+            <!--<View-->
+            <!--android:id="@+id/devisor6"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_below="@+id/settingsNotificationRelative"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:background="@color/playerBackground" />-->
 
-            <RelativeLayout
-                android:id="@+id/settingsDownloadedSuraRelative"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_below="@+id/devisor6"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true">
+            <!--<RelativeLayout-->
+            <!--android:id="@+id/settingsDownloadedSuraRelative"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="48dp"-->
+            <!--android:layout_below="@+id/devisor6"-->
+            <!--android:background="?attr/selectableItemBackground"-->
+            <!--android:clickable="true">-->
 
-                <ImageView
-                    android:id="@+id/settingsDownloadedSuraImage"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/settings_mainaging_downloaded" />
+            <!--<ImageView-->
+            <!--android:id="@+id/settingsDownloadedSuraImage"-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:src="@drawable/settings_mainaging_downloaded" />-->
 
-                <TextView
-                    android:id="@+id/settingsDownloadedSuraText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@+id/settingsDownloadedSuraImage"
-                    android:layout_toRightOf="@+id/settingsDownloadedSuraImage"
-                    android:text="@string/downladedSuraManaging"
-                    android:textColor="#000000"
-                    android:textSize="20sp" />
+            <!--<TextView-->
+            <!--android:id="@+id/settingsDownloadedSuraText"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginStart="10dp"-->
+            <!--android:layout_toEndOf="@+id/settingsDownloadedSuraImage"-->
+            <!--android:layout_toRightOf="@+id/settingsDownloadedSuraImage"-->
+            <!--android:text="@string/downladedSuraManaging"-->
+            <!--android:textColor="#000000"-->
+            <!--android:textSize="20sp" />-->
 
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
 
             <View
                 android:id="@+id/devisor7"
@@ -393,7 +461,7 @@
                 android:id="@+id/devisor8"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@+id/settingsDownloadedSuraRelative"
+                android:layout_below="@+id/settingsNotificationRelative"
                 android:layout_margin="5dp"
                 android:background="@color/playerBackground" />
 
@@ -454,64 +522,64 @@
                 android:background="@color/playerBackground" />
 
 
-            <RelativeLayout
-                android:id="@+id/pageStatusRelative"
-                android:layout_width="wrap_content"
-                android:layout_height="96dp"
-                android:layout_below="@+id/devisor9"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true">
+            <!--<RelativeLayout-->
+            <!--android:id="@+id/pageStatusRelative"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="96dp"-->
+            <!--android:layout_below="@+id/devisor9"-->
+            <!--android:background="?attr/selectableItemBackground"-->
+            <!--android:clickable="true">-->
 
-                <ImageView
-                    android:id="@+id/pageStateImage"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:src="@drawable/word_meaning_icon" />
+            <!--<ImageView-->
+            <!--android:id="@+id/pageStateImage"-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:src="@drawable/word_meaning_icon" />-->
 
-                <TextView
-                    android:id="@+id/pageStateText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@+id/pageStateImage"
-                    android:layout_toRightOf="@+id/pageStateImage"
-                    android:text="@string/page_of_quran_landscape"
-                    android:textColor="#000000"
-                    android:textSize="20sp" />
+            <!--<TextView-->
+            <!--android:id="@+id/pageStateText"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginStart="10dp"-->
+            <!--android:layout_toEndOf="@+id/pageStateImage"-->
+            <!--android:layout_toRightOf="@+id/pageStateImage"-->
+            <!--android:text="@string/page_of_quran_landscape"-->
+            <!--android:textColor="#000000"-->
+            <!--android:textSize="20sp" />-->
 
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/pageStateText"
-                    android:layout_alignStart="@+id/pageStateText"
-                    android:layout_below="@+id/pageStateText"
-                    android:layout_margin="5dp">
+            <!--<RadioGroup-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignLeft="@+id/pageStateText"-->
+            <!--android:layout_alignStart="@+id/pageStateText"-->
+            <!--android:layout_below="@+id/pageStateText"-->
+            <!--android:layout_margin="5dp">-->
 
-                    <RadioButton
-                        android:id="@+id/settingsOnePageRadioButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:layoutDirection="ltr"
-                        android:text="@string/one_page_at_a_time"
-                        android:textAlignment="textStart"
-                        android:textSize="20sp" />
+            <!--<RadioButton-->
+            <!--android:id="@+id/settingsOnePageRadioButton"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="start"-->
+            <!--android:layoutDirection="ltr"-->
+            <!--android:text="@string/one_page_at_a_time"-->
+            <!--android:textAlignment="textStart"-->
+            <!--android:textSize="20sp" />-->
 
-                    <RadioButton
-                        android:id="@+id/settingsTwoPagesRadioButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:layoutDirection="ltr"
-                        android:text="@string/two_page_at_a_time"
-                        android:textAlignment="textStart"
-                        android:textSize="20sp" />
-                </RadioGroup>
+            <!--<RadioButton-->
+            <!--android:id="@+id/settingsTwoPagesRadioButton"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="start"-->
+            <!--android:layoutDirection="ltr"-->
+            <!--android:text="@string/two_page_at_a_time"-->
+            <!--android:textAlignment="textStart"-->
+            <!--android:textSize="20sp" />-->
+            <!--</RadioGroup>-->
 
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
 
 
         </RelativeLayout>

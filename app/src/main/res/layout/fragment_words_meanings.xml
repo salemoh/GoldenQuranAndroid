@@ -1,7 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ECEFF1"
     android:orientation="vertical">
 
     <TextView
@@ -28,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:text="الكلمة"
+            android:text="@string/word"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="30sp" />
@@ -38,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:text="المعنى"
+            android:text="@string/meaning"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="30sp" />
@@ -48,7 +47,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/wordsMeanings"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="1dp"
         android:background="#ECEFF1" />
 </LinearLayout>
 

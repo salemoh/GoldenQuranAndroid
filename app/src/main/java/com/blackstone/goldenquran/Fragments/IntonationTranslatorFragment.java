@@ -100,14 +100,13 @@ public class IntonationTranslatorFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            if (
-                    getActivity().getResources().getBoolean(R.bool.is_right_to_left)) {
+            if (getActivity().getResources().getBoolean(R.bool.is_right_to_left)) {
                 position -= 8;
                 position = Math.abs(position);
             }
             switch (position) {
                 case 0:
-                    TafseerFragment fragment = new TafseerFragment();
+                    TarjamehFragment fragment = new TarjamehFragment();
                     fragment.setArguments(getArguments());
                     return fragment;
                 case 1:
@@ -138,6 +137,10 @@ public class IntonationTranslatorFragment extends Fragment {
                     NozoolReasons nozoolReasons = new NozoolReasons();
                     nozoolReasons.setArguments(getArguments());
                     return nozoolReasons;
+                case 8:
+                    TafseerFragment tafseerFragment = new TafseerFragment();
+                    tafseerFragment.setArguments(getArguments());
+                    return tafseerFragment;
                 default:
                     return new AlSuraFragment();
             }

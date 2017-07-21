@@ -22,8 +22,8 @@ public class NotificationFragment extends Fragment {
     Switch mSwitch;
     @BindView(R.id.SwitchTwo)
     Switch mSwitchTwo;
-    @BindView(R.id.SwitchThree)
-    Switch mSwitchThree;
+//    @BindView(R.id.SwitchThree)
+//    Switch mSwitchThree;
 
 
     public NotificationFragment() {
@@ -52,19 +52,12 @@ public class NotificationFragment extends Fragment {
 
         mSwitch.setChecked(SharedPreferencesManager.getBoolean(getActivity(), "firstSwitch", false));
         mSwitchTwo.setChecked(SharedPreferencesManager.getBoolean(getActivity(), "secondSwitch", false));
-        mSwitchThree.setChecked(SharedPreferencesManager.getBoolean(getActivity(), "ThirdSwitch", false));
+//        mSwitchThree.setChecked(SharedPreferencesManager.getBoolean(getActivity(), "ThirdSwitch", false));
 
         mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 SharedPreferencesManager.putBoolean(getActivity(), "firstSwitch", b);
-            }
-        });
-
-        mSwitchThree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                SharedPreferencesManager.putBoolean(getActivity(), "ThirdSwitch", b);
             }
         });
 
@@ -74,5 +67,13 @@ public class NotificationFragment extends Fragment {
                 SharedPreferencesManager.putBoolean(getActivity(), "secondSwitch", b);
             }
         });
+
+//        mSwitchThree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                SharedPreferencesManager.putBoolean(getActivity(), "ThirdSwitch", b);
+//            }
+//        });
+
     }
 }

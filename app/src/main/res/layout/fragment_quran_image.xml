@@ -1,19 +1,39 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/quranImageCoordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/backgroundQuranImage"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY" />
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/backgroundQuranImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY" />
 
 
-    <com.blackstone.goldenquran.views.DrawView
-        android:id="@+id/quranImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:rotationY="180"
-        android:scaleType="fitXY" />
+        <com.blackstone.goldenquran.ui.DrawView
+            android:id="@+id/quranImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:rotationY="180"
+            android:scaleType="fitXY" />
 
-</FrameLayout>
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fabPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/play"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_colorPressed="@color/colorPrimaryDark"
+            fab:fab_colorRipple="@color/textColorPrimary" />
+
+
+    </FrameLayout>
+</android.support.design.widget.CoordinatorLayout>

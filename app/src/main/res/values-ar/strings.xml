@@ -1,60 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">القران الذهبي</string>
-
-    <string-array name="AlJuzoaArray">
-        <item>الجزء 1</item>
-        <item>الجزء 2</item>
-        <item>الجزء 3</item>
-        <item>الجزء 4</item>
-        <item>الجزء 5</item>
-        <item>الجزء 6</item>
-        <item>الجزء 7</item>
-        <item>الجزء 8</item>
-        <item>الجزء 9</item>
-        <item>الجزء 10</item>
-        <item>الجزء 11</item>
-        <item>الجزء 12</item>
-        <item>الجزء 13</item>
-        <item>الجزء 14</item>
-        <item>الجزء 15</item>
-        <item>الجزء 16</item>
-        <item>الجزء 17</item>
-        <item>الجزء 18</item>
-        <item>الجزء 19</item>
-        <item>الجزء 20</item>
-        <item>الجزء 21</item>
-        <item>الجزء 22</item>
-        <item>الجزء 23</item>
-        <item>الجزء 24</item>
-        <item>الجزء 25</item>
-        <item>الجزء 26</item>
-        <item>الجزء 27</item>
-        <item>الجزء 28</item>
-        <item>الجزء 29</item>
-        <item>الجزء 30</item>
-    </string-array>
-
- <string name="doaKhatemAlquran">
-        اللهم إنا نحمدك، ونستعينك، ونستهديك، ونستغفرك، ونتوب إليك، ونؤمن بك، ونتوكل عليك، ونثني عليك الخير كله، نشكرك ولا نكفرك، ونخلع ونترك من يفجرك.
-
-اللهم إياك نعبد، ولك نصلي ونسجد، وإليك نسعى ونحفِد، نرجو رحمتك ونخشى عذابك، إن عذابك الجد بالكفار ملحق.
-        </string>>
-<string name="doaKhatemAlquran2">
-اللهم لك الحمد كله، ولك الشكر كله، وإليك يرجع الأمر كله، علانيته وسره، فأهلٌ أنت أن تُحمد، وأهلٌ أنت أن تُعبد، وأنت على كل شيء قدير.
-
-لك الحمد بالإسلام، ولك الحمد بالقرآن، ولك الحمد بالمال والأهل والمعافاة، كبتَّ عدونا، وأظهرت أمننا، وجمعت فرقتنا، ومن كل ما سألناك ربنا أعطيتنا، فلك الحمد والشكر كثيراً كما تعطي كثيراً.
-    </string>
-<string name="doaKhatemAlquran3">
-
-اللهم لك الحمد حتى ترضى، ولك الحمد إذا رضيت، ولك الحمد بعد الرضا، ولك الحمد على كل حال.
-
-لك الحمد كالذي نقول، وخيراً مما نقول، ولك الحمد كالذي تقول.
-    </string>
-
-    <string name="doaKhatemAlquran4">
-اللهم لك الحمد أنت نور السماوات والأرض ومن فيهن، ولك الحمد أنت قيوم السماوات والأرض ومن فيهن، ولك الحمد أنت الحق، ووعدك حق، ولقاؤك حق، والجنة حق، والنار حق، والنبيون حق، ومحمد صلى الله عليه وسلم حق، والساعةُ آتيه لا ريب فيها.</string>
-
     <string name="playerCurrentSura">السورة الحالية</string>
     <string name="playerSuraName">المطففين</string>
     <string name="AyatSelection">اختيار الايات</string>
@@ -65,7 +11,7 @@
     <string name="readingOptions">خيارات القراء</string>
     <string name="moveToTheNextSura">الانتقال التلقائي الى الصفحة وتظليل الاية</string>
     <string name="startTheBAsmalah">تشغيل البسمله عند بداية السورة</string>
-    <string name="repeatAyat">تكرار الايات التي تم اختيارها</string>
+    <string name="repeatAyat">صوت متواصل بين الايات</string>
     <string name="pickTheShake">اختيار القارء و تحميل الملفات الصوتية</string>
     <string name="changeTheShake">تغيير القارئ</string>
     <string name="flag1">لاستخدام اي تفسير يجب توفير اتصال مع الانترنت.</string>
@@ -73,7 +19,7 @@
     <string name="downloadAll">تحميل الكل</string>
     <string name="athkarFromQuran">اذكار من القران</string>
     <string name="nightReading">الورد اليلي</string>
-    <string name="downloadedSura">السور المحملة</string>
+    <string name="downloadedSura">تحميل السور</string>
     <string name="fridayReading">ورد يوم الجمعة</string>
     <string name="ramadan_21_1437_ah">رمضان 21, 1437 AH</string>
     <string name="dateMWithTime">2016 Jun 26 10:51 ص</string>
@@ -89,11 +35,10 @@
     <string name="tafseerName">التفسير الميسر</string>
     <string name="tafseerDescription">القرطبي</string>
     <bool name="is_right_to_left">false</bool>
-
     <string name="drawer_open">drawer open</string>
     <string name="drawer_close">drawer close</string>
     <string name="start_download">بدئ التحميل</string>
-    <string name="szdDownload">download</string>
+    <string name="szdDownload">تحميل</string>
     <string name="search">البحث</string>
     <string name="fahras">الفهرس</string>
     <string name="bookmarksTitle">العلامات المرجعية</string>
@@ -146,29 +91,6 @@
         <item>حسب السورة</item>
     </string-array>
 
-    <string-array name="ahadethNames">
-        <item>الحديث الاول الاعمال بالنيات</item>
-        <item>الحديث الثاني مراتب الدين</item>
-        <item>الحديث الثالث اركان الاسلام</item>
-        <item>الحديث الرابع مراحل الخلق</item>
-    </string-array>
-
-    <string-array name="ajzaNames">
-        <item>الجزء 1</item>
-        <item>الجزء 2</item>
-        <item>الجزء 3</item>
-        <item>الجزء 4</item>
-        <item>الجزء 5</item>
-        <item>الجزء 6</item>
-        <item>الجزء 7</item>
-    </string-array>
-
-    <string-array name="ShakeNames">
-        <item>عبد الباسط</item>
-        <item>ناصر القاطامي</item>
-        <item>ياسر الدوسري</item>
-    </string-array>
-
     <string-array name="MainList">
         <item>اذكار من القران</item>
         <item>الورد اليلي</item>
@@ -176,16 +98,232 @@
         <item>العلامات المرجعية</item>
         <item>قائمة السور</item>
         <item>تظليل الايات حسب موضوعها</item>
-        <item>الترجمة و التجويد</item>
         <item>البحث</item>
         <item>مشغل الصوت</item>
-        <item>الاشعارات</item>
         <item>اوقات الصلاة</item>
         <item>دعاء ختم القران</item>
         <item>الاربعون النووية</item>
         <item>مشاركة الصفحة الحالية</item>
         <item>الاعدادات</item>
-        <item>الاحصائيات</item>
+    </string-array>
+
+    <string-array name="fahrasSuras">
+        <item>الفاتحة</item>
+        <item>البقرة</item>
+        <item>آل عمران</item>
+        <item>النساء</item>
+        <item>المائده</item>
+        <item>الأنعام</item>
+        <item>الأعراف</item>
+        <item>الأنفال</item>
+        <item>التوبه</item>
+        <item>يونس</item>
+        <item>هود</item>
+        <item>يوسف</item>
+        <item>الرعد</item>
+        <item>إبراهيم</item>
+        <item>الحجر</item>
+        <item>النحل</item>
+        <item>الإسراء</item>
+        <item>الكهف</item>
+        <item>مريم</item>
+        <item>طه</item>
+        <item>الأنبياء</item>
+        <item>الحج</item>
+        <item>المؤمنون</item>
+        <item>النور</item>
+        <item>الفرقان</item>
+        <item>الشعراء</item>
+        <item>النمل</item>
+        <item>القصص</item>
+        <item>العنكبوت</item>
+        <item>الروم</item>
+        <item>لقمان</item>
+        <item>السجده</item>
+        <item>الأحزاب</item>
+        <item>سبأ</item>
+        <item>فاطر</item>
+        <item>يس</item>
+        <item>الصافات</item>
+        <item>ص</item>
+        <item>الزمر</item>
+        <item>غافر</item>
+        <item>فصلت</item>
+        <item>الشعراء</item>
+        <item>الزخرف</item>
+        <item>الدخان</item>
+        <item>الجاثية</item>
+        <item>الأحقاف</item>
+        <item>محمد</item>
+        <item>الفتح</item>
+        <item>الحجرات</item>
+        <item>ق</item>
+        <item>الذاريات</item>
+        <item>الطور</item>
+        <item>النجم</item>
+        <item>القمر</item>
+        <item>الرحمن</item>
+        <item>الواقعة</item>
+        <item>الحديد</item>
+        <item>المجادلة</item>
+        <item>الحشر</item>
+        <item>الممتحنة</item>
+        <item>الصف</item>
+        <item>الجمعة</item>
+        <item>المنافقون</item>
+        <item>التغابن</item>
+        <item>الطلاق</item>
+        <item>التحريم</item>
+        <item>الملك</item>
+        <item>القلم</item>
+        <item>الحاقة</item>
+        <item>المعارج</item>
+        <item>نوح</item>
+        <item>الجن</item>
+        <item>المزمل</item>
+        <item>المدثر</item>
+        <item>القيامة</item>
+        <item>الإنسان</item>
+        <item>المرسلات</item>
+        <item>النبأ</item>
+        <item>النازعات</item>
+        <item>عبس</item>
+        <item>التكوير</item>
+        <item>الإنفطار</item>
+        <item>المطففين</item>
+        <item>الإنشقاق</item>
+        <item>البروج</item>
+        <item>الطارق</item>
+        <item>الأعلى</item>
+        <item>الغاشية</item>
+        <item>الفجر</item>
+        <item>البلد</item>
+        <item>الشمس</item>
+        <item>الليل</item>
+        <item>الضحى</item>
+        <item>الشرح</item>
+        <item>التين</item>
+        <item>العلق</item>
+        <item>القدر</item>
+        <item>البينة</item>
+        <item>الزلزلة</item>
+        <item>العاديات</item>
+        <item>القارعة</item>
+        <item>التكاثر</item>
+        <item>العصر</item>
+        <item>الهمزة</item>
+        <item>الفيل</item>
+        <item>قريش</item>
+        <item>الماعون</item>
+        <item>الكوثر</item>
+        <item>الكافرون</item>
+        <item>النصر</item>
+        <item>المسد</item>
+        <item>الإخلاص</item>
+        <item>الفلق</item>
+        <item>الناس</item>
+
+    </string-array>
+
+    <string-array name="fahrasAjzaa">
+
+        <item>الجزء الأول</item>
+        <item>الجزء الثاني</item>
+        <item>الجزء الثالث</item>
+        <item>الجزء الرابع</item>
+        <item>الجزء الخامس</item>
+        <item>الجزء السادس</item>
+        <item>الجزء السابع</item>
+        <item>الجزء الثامن</item>
+        <item>الجزء التاسع</item>
+        <item>الجزء العاشر</item>
+        <item>الجزء الحادي عشر</item>
+        <item>الجزء الثاني عشر</item>
+        <item>الجزء الثالث عشر</item>
+        <item>الجزء الرابع عشر</item>
+        <item>الجزء الخامس عشر</item>
+        <item>الجزء السادس عشر</item>
+        <item>الجزء السابع عشر</item>
+        <item>الجزء الثامن عشر</item>
+        <item>الجزء التاسع عشر</item>
+        <item>الجزء العشرون</item>
+        <item>الجزء الحادي والعشرون</item>
+        <item>الجزء الثاني والعشرون</item>
+        <item>الجزء الثالث والعشرون</item>
+        <item>الجزء الرابع والعشرون</item>
+        <item>الجزء الخامس والعشرون</item>
+        <item>الجزء السادس والعشرون</item>
+        <item>الجزء السابع والعشرون</item>
+        <item>الجزء الثامن والعشرون</item>
+        <item>الجزء التاسع والعشرون</item>
+        <item>الجزء الثلاثون</item>
+
+    </string-array>
+
+    <string name="pleaseWait">جاري التحميل</string>
+    <string name="imagesTitle">صفحات القران</string>
+    <string name="no_bookmark">لا يوجد اي علامات مرجعية</string>
+    <string name="surah">سورة </string>
+    <string name="pageNumber"> صفحة</string>
+    <string name="downladAll">تحميل الكل</string>
+    <string name="pickSurah">اختيار السورة</string>
+    <string name="word">الكلمة</string>
+    <string name="root">الجذر</string>
+    <string name="meaning">المعنى</string>
+    <string name="change_hijri_date">عدل التاريخ الهجري</string>
+    <string name="fajr">الفجر</string>
+    <string name="dohur">الظهر</string>
+    <string name="aser">العصر</string>
+    <string name="maghrib">المغرب</string>
+    <string name="isha">العشاء</string>
+    <string name="download">تحميل</string>
+    <string name="downloading">جار تحميل الملفات</string>
+    <string name="downloaded">تم تحميل</string>
+    <string name="file_downloaded">حمل الملف</string>
+    <string name="mb">مغ</string>
+
+    <string-array name="readersNames">
+        <item>عبد الباسط (مجود)</item>
+        <item>عبدالله الجهيني</item>
+        <item>عبدالله بصفر</item>
+        <item>عبدالله مطرو</item>
+        <item>عبد الرحمن السديس</item>
+        <item>أبو بكر الشاطري</item>
+        <item>أحمد العجمي</item>
+        <item>مشاري العفاسي</item>
+        <item>سعد الغامدي</item>
+        <item>هاني الرفاعي</item>
+        <item>الحذيفي</item>
+        <item>الحصري مجود</item>
+        <item>خالد القحطاني</item>
+        <item>ماهر المعيقلي</item>
+        <item>محمد الطبلاوي</item>
+        <item>محمد عبد الكريم</item>
+        <item>محمد ايوب</item>
+        <item>محمد جبريل</item>
+        <item>عبد المحسن القاسم</item>
+        <item>صلاح ابو خاطر</item>
+        <item>سعود الشريم</item>
+        <item>ياسر الدوسري</item>
+        <item>ناصر القطامي</item>
+        <item>خليفة الطنيجي</item>
+        <item>فارس عباد</item>
+        <item>محمد صديق المنشاوي (مرتل)</item>
+        <item>إبراهيم الأخضر</item>
+        <item>علي جابر</item>
+        <item>عزيز العليلي</item>
+        <item>"ياسين الجزائري(برواية ورش)</item>
+        <item>سهل ياسين</item>
+        <item>إبراهيم الدوسري (برواية ورش)</item>
+        <item>محمد صديق المنشاوي (مجود)</item>
+        <item>عبد الباسط (مرتل)</item>
+        <item>عبدالله بصفر (عربي، انجليزي)</item>
+        <item>Farhat Hashim (Urdu)</item>
+        <item>Shamshad Ali_khan (Urdu)</item>
+        <item>Makarem Recited by Kabiri (Persian)</item>
+        <!--<item>Fooladvand Recited by Hedayatfar (Persian)</item>-->
+        <item>Sahih International Recited by Ibrahim Walk (English)</item>
+        <item>ياسر سلامة</item>
     </string-array>
 
 

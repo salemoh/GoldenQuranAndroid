@@ -55,66 +55,64 @@
 
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/akhtearAlAyat"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/alSuraAlHaleahRelative"
-                android:background="@color/playerBackground"
-                android:gravity="bottom"
-                android:text="@string/AyatSelection" />
+            <!--<TextView-->
+            <!--android:id="@+id/akhtearAlAyat"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="48dp"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_below="@+id/alSuraAlHaleahRelative"-->
+            <!--android:background="@color/playerBackground"-->
+            <!--android:gravity="bottom"-->
+            <!--android:text="@string/AyatSelection" />-->
 
-            <RelativeLayout
-                android:id="@+id/akhtearAlAyatRelative"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_below="@+id/akhtearAlAyat"
-                android:background="#FFFFFF">
+            <!--<RelativeLayout-->
+            <!--android:id="@+id/akhtearAlAyatRelative"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="48dp"-->
+            <!--android:layout_below="@+id/akhtearAlAyat"-->
+            <!--android:background="#FFFFFF">-->
 
-                <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
-                    android:id="@+id/rangeSeekbar1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginStart="10dp"
-                    app:bar_color="#7F000000"
-                    app:bar_highlight_color="@color/colorAccent"
-                    app:left_thumb_color="@color/colorAccent"
-                    app:max_value="100"
-                    app:min_value="0"
-                    app:right_thumb_color="@color/colorAccent" />
+            <!--<com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar-->
+            <!--android:id="@+id/rangeSeekbar1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_marginEnd="10dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginStart="10dp"-->
+            <!--app:bar_color="#7F000000"-->
+            <!--app:bar_highlight_color="@color/colorAccent"-->
+            <!--app:left_thumb_color="@color/colorAccent"-->
+            <!--app:right_thumb_color="@color/colorAccent" />-->
 
-                <TextView
-                    android:id="@+id/maxTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@+id/rangeSeekbar1"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginStart="10dp" />
+            <!--<TextView-->
+            <!--android:id="@+id/maxTextView"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_above="@id/rangeSeekbar1"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginEnd="10dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginStart="10dp" />-->
 
-                <TextView
-                    android:id="@+id/minTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@id/rangeSeekbar1"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginStart="10dp" />
+            <!--<TextView-->
+            <!--android:id="@+id/minTextView"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_above="@id/rangeSeekbar1"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_marginEnd="10dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginStart="10dp" />-->
 
 
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
 
 
             <TextView
@@ -123,7 +121,7 @@
                 android:layout_height="48dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/akhtearAlAyatRelative"
+                android:layout_below="@+id/alSuraAlHaleahRelative"
                 android:background="@color/playerBackground"
                 android:gravity="bottom"
 
@@ -161,14 +159,14 @@
                         android:textAlignment="textStart"
                         android:textSize="20sp" />
 
-                    <RadioButton
-                        android:id="@+id/radio_3"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:gravity="start"
-                        android:text="@string/repeatTheAyat"
-                        android:textAlignment="textStart"
-                        android:textSize="20sp" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/radio_3"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="48dp"-->
+                        <!--android:gravity="start"-->
+                        <!--android:text="@string/repeatTheAyat"-->
+                        <!--android:textAlignment="textStart"-->
+                        <!--android:textSize="20sp" />-->
 
                 </RadioGroup>
 
@@ -257,8 +255,6 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/basmalahText"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginStart="5dp"
                     android:layout_toLeftOf="@+id/saoutSwitch"
                     android:layout_toStartOf="@+id/saoutSwitch"
                     android:gravity="center_vertical"

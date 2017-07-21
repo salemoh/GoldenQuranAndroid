@@ -1,7 +1,6 @@
 package com.blackstone.goldenquran.Fragments;
 
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -31,7 +30,11 @@ public class AhadethRecyclerFragment extends Fragment {
     RecyclerView recyclerView;
     int position;
     DataBaseManager data;
-    ArrayList<AhadeethModel> arrayList;
+    static ArrayList<AhadeethModel> arrayList;
+
+    public static void getData(ArrayList<AhadeethModel> list) {
+        arrayList = list;
+    }
 
     public AhadethRecyclerFragment() {
 
@@ -58,7 +61,7 @@ public class AhadethRecyclerFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         ((DrawerCloser) getActivity()).moveToolbarDown();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        new GetAhadith().execute();
+        recyclerView.setAdapter(new AhadethAdapter(getActivity(), arrayList));
 
     }
 
@@ -73,26 +76,11 @@ public class AhadethRecyclerFragment extends Fragment {
 
         return super.onOptionsItemSelected(item);
     }
-    private class GetAhadith extends AsyncTask<Void, Void, ArrayList<AhadeethModel>> {
 
-        @Override
-        protected ArrayList<AhadeethModel> doInBackground(Void... voids) {
-            if (getActivity() != null) {
-                data = new DataBaseManager(getActivity(), "HadithContent.db", true).createDatabase();
-                data.open();
-                arrayList = data.getAhadith();
-                return arrayList;
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<AhadeethModel> ahadeethModels) {
-            super.onPostExecute(ahadeethModels);
-            arrayList = ahadeethModels;
-            recyclerView.setAdapter(new AhadethAdapter(getActivity(), arrayList));
-
-        }
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((DrawerCloser) getActivity()).title(8);
     }
 
 }

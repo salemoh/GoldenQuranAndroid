@@ -1,8 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:paddingRight="16dp"
-    android:paddingLeft="16dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
 
     <ImageView
         android:id="@+id/notipause"
@@ -10,6 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/pb_progress"
+        android:padding="5dp"
         android:src="@drawable/noti_pause" />
 
     <ImageView
@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/pb_progress"
         android:layout_centerHorizontal="true"
+        android:padding="5dp"
         android:src="@drawable/noti_play_arrow" />
 
     <ImageView
@@ -25,6 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/pb_progress"
+        android:padding="5dp"
         android:src="@drawable/noti_stop" />
 
     <ProgressBar
@@ -32,7 +34,8 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/notiSora" />
+        android:layout_below="@+id/notiSora"
+        android:layout_margin="5dp" />
 
     <TextView
         android:id="@+id/notiSora"
@@ -40,8 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:text="sora name"
-        android:textColor="@color/notification_text"
-        />
+        android:textColor="@color/notification_text" />
 
     <TextView
         android:id="@+id/notishake"
@@ -50,7 +52,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="shake name"
-        android:textColor="@color/notification_text"
-        />
+        android:textColor="@color/notification_text" />
 
 </RelativeLayout>

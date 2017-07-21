@@ -17,14 +17,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:largeHeap="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.MainActivity" />
 
         <service
             android:name=".api.DownloadService"
@@ -42,13 +37,42 @@
                 <action android:name="playPauseStop" />
             </intent-filter>
         </receiver>
-
         <receiver android:name=".BroadcastReceivers.AlarmBroadCastReceiver">
             <intent-filter>
                 <action android:name="alarm" />
             </intent-filter>
         </receiver>
 
+        <activity
+            android:name=".ui.PlayerActivityForResult"
+            android:label="@string/title_activity_player_for_result"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.ChangeLanguageActivityForResult"
+            android:label="@string/title_activity_change_language_for_result"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.LanguageActivity"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.SplashScreenActivity" />
+
+        <service
+            android:name=".api.DownloadAllSurahService"
+            android:exported="false" />
+        <service
+            android:name=".api.AlertIntentSarvice"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.ColorActivity"
+            android:label="@string/title_activity_color"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

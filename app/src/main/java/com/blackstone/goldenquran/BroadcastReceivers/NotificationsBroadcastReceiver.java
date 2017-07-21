@@ -19,7 +19,7 @@ public class NotificationsBroadcastReceiver extends BroadcastReceiver {
             String message = intent.getStringExtra("message");
 
             if (message.equalsIgnoreCase("play")) {
-                toService.putExtra("message", "start");
+                toService.putExtra("message", "notiPlay");
                 LocalBroadcastManager.getInstance(context).sendBroadcast(toService);
             } else if (message.equalsIgnoreCase("pause")) {
                 toService.putExtra("message", "pause");

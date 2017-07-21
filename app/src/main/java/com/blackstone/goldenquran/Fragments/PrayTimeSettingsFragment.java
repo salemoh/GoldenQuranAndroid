@@ -52,9 +52,9 @@ public class PrayTimeSettingsFragment extends Fragment {
         arrayList.add(new PrayTimeSettingsItemModel("ام القرى رمضان"));
         arrayList.add(new PrayTimeSettingsItemModel("رابطه العالم الاسلامي"));
         arrayList.add(new PrayTimeSettingsItemModel("ام القرى"));
-        arrayList.add(new PrayTimeSettingsItemModel("تثبيت صلاه العشاء"));
-        arrayList.add(new PrayTimeSettingsItemModel("الهيئهة المصرية الجديدة"));
-        arrayList.add(new PrayTimeSettingsItemModel("لجنه موقع رؤي"));
+//        arrayList.add(new PrayTimeSettingsItemModel("تثبيت صلاه العشاء"));
+//        arrayList.add(new PrayTimeSettingsItemModel("الهيئهة المصرية الجديدة"));
+//        arrayList.add(new PrayTimeSettingsItemModel("لجنه موقع رؤي"));
         arrayList.add(new PrayTimeSettingsTitleModel("المذهب"));
         arrayList.add(new PrayTimeSettingsItemTwoModel("شافعي,مالكي,حنبلي"));
         arrayList.add(new PrayTimeSettingsItemTwoModel("حنفي"));

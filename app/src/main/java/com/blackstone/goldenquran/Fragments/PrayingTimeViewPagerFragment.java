@@ -49,11 +49,17 @@ public class PrayingTimeViewPagerFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        ((DrawerCloser) getActivity()).title(6);
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ((DrawerCloser) getActivity()).moveToolbarDown();
 
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.card_view, new QiblaFragment()).commit();
+        getChildFragmentManager().beginTransaction().replace(R.id.card_view, new QiblaFragment()).commit();
 
         Drawable wrappedDrawable = DrawableCompat.wrap(ContextCompat.getDrawable(getActivity(), R.drawable.pray_time_clock));
         DrawableCompat.setTint(wrappedDrawable, Color.WHITE);
@@ -101,8 +107,29 @@ public class PrayingTimeViewPagerFragment extends Fragment {
             }
         });
 
-        MyViewPagerAdapter myViewPagerAdapter = new MyViewPagerAdapter(getChildFragmentManager());
+        final MyViewPagerAdapter myViewPagerAdapter = new MyViewPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(myViewPagerAdapter);
+//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//                if (position==0 && getActivity().getResources().getBoolean(R.bool.is_right_to_left)){
+//                    myViewPagerAdapter.getPrayTimeFragment().refreshTimes();
+//                }
+//                else if (position==2 && !getActivity().getResources().getBoolean(R.bool.is_right_to_left)){
+//                    myViewPagerAdapter.getPrayTimeFragment().refreshTimes();
+//                }
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
         if (!getActivity().getResources().getBoolean(R.bool.is_right_to_left)) {
             viewPager.setCurrentItem(2);
         }
@@ -111,6 +138,21 @@ public class PrayingTimeViewPagerFragment extends Fragment {
 
     class MyViewPagerAdapter extends FragmentPagerAdapter {
 
+        public PrayTimeFragment getPrayTimeFragment() {
+            return mPrayTimeFragment;
+        }
+
+        public PrayTimeSettingsFragment getPrayTimeSettingsFragment() {
+            return mPrayTimeSettingsFragment;
+        }
+
+        public PrayTimeConfigerFragment getPrayTimeConfigerFragment() {
+            return mPrayTimeConfigerFragment;
+        }
+
+        PrayTimeFragment mPrayTimeFragment=new PrayTimeFragment();
+        PrayTimeSettingsFragment mPrayTimeSettingsFragment=new PrayTimeSettingsFragment();
+        PrayTimeConfigerFragment mPrayTimeConfigerFragment=new PrayTimeConfigerFragment();
         MyViewPagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -120,24 +162,23 @@ public class PrayingTimeViewPagerFragment extends Fragment {
             Fragment fragment = null;
             if (getActivity().getResources().getBoolean(R.bool.is_right_to_left)) {
                 if (position == 0)
-                    fragment = new PrayTimeFragment();
+                    fragment = mPrayTimeFragment;
                 else if (position == 1)
-                    fragment = new PrayTimeSettingsFragment();
+                    fragment =  mPrayTimeSettingsFragment;
                 else if (position == 2)
-                    fragment = new PrayTimeConfigerFragment();
+                    fragment = mPrayTimeConfigerFragment;
             } else {
                 if (position == 0)
-                    fragment = new PrayTimeConfigerFragment();
+                    fragment = mPrayTimeConfigerFragment;
                 else if (position == 1)
-                    fragment = new PrayTimeSettingsFragment();
+                    fragment = mPrayTimeSettingsFragment;
                 else if (position == 2)
-                    fragment = new PrayTimeFragment();
+                    fragment = mPrayTimeFragment;
             }
 
 
             return fragment;
         }
-
         @Override
         public int getCount() {
             return 3;

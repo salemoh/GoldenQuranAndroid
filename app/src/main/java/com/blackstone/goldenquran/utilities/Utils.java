@@ -160,7 +160,7 @@ public class Utils {
             return new String(b);
 
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
 
         return "";

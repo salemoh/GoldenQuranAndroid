@@ -1,5 +1,9 @@
 package com.blackstone.goldenquran.GetTimeClasses;
 
+import android.content.Context;
+
+import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
+
 import java.util.Calendar;
 
 /**
@@ -104,7 +108,7 @@ public class DateHijri {
         return myRes;
     }
 
-    public static String writeIslamicDate() {
+    public static String writeIslamicDate(Context context) {
         String[] wdNames = {"Ahad", "Ithnin", "Thulatha", "Arbaa", "Khams",
                 "Jumuah", "Sabt"};
         String[] iMonthNames = {"Muharram", "Safar", "Rabi'ul Awwal",
@@ -113,7 +117,7 @@ public class DateHijri {
         // This Value is used to give the correct day +- 1 day
         boolean dayTest = true;
         double[] iDate = kuwaiticalendar(dayTest);
-        String outputIslamicDate = (int) iDate[5] + "th " + iMonthNames[(int) iDate[6]] + ", " + (int) iDate[7] + "h ";
+        String outputIslamicDate = SharedPreferencesManager.getInteger(context, "hijriEdit", 0) + (int) iDate[5] + "th " + iMonthNames[(int) iDate[6]] + ", " + (int) iDate[7] + "h ";
 
         return outputIslamicDate;
     }

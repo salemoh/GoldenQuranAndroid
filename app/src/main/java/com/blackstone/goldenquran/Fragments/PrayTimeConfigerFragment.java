@@ -15,7 +15,11 @@ import android.view.ViewGroup;
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.adapters.ConfigureAdapter;
 import com.blackstone.goldenquran.models.PrayModel;
+import com.blackstone.goldenquran.models.PrayTimeEditEvent;
 import com.blackstone.goldenquran.ui.DrawerCloser;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
@@ -27,6 +31,7 @@ public class PrayTimeConfigerFragment extends Fragment {
 
     @BindView(R.id.configRecyclerView)
     RecyclerView recyclerView;
+    ArrayList<PrayModel> arrayList;
 
     public PrayTimeConfigerFragment() {
 
@@ -57,7 +62,7 @@ public class PrayTimeConfigerFragment extends Fragment {
 
         SharedPreferences prefs = getActivity().getSharedPreferences("salah", Context.MODE_PRIVATE);
 
-        ArrayList<PrayModel> arrayList = new ArrayList<>();
+        arrayList = new ArrayList<>();
         arrayList.add(new PrayModel("fajr", prefs.getString("fajr", "00:00")));
         arrayList.add(new PrayModel("duhor", prefs.getString("duhour", "00:00")));
         arrayList.add(new PrayModel("aser", prefs.getString("aser", "00:00")));
@@ -72,5 +77,43 @@ public class PrayTimeConfigerFragment extends Fragment {
 
 
         recyclerView.setAdapter(new ConfigureAdapter(getActivity(), arrayList, counter));
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void prayTimeRefresh(PrayTimeEditEvent prayTimeEditEvent) {
+
+        SharedPreferences prefs = getActivity().getSharedPreferences("salah", Context.MODE_PRIVATE);
+
+        arrayList.clear();
+
+
+        arrayList.add(new PrayModel("fajr", prefs.getString("fajr", "00:00")));
+        arrayList.add(new PrayModel("duhor", prefs.getString("duhour", "00:00")));
+        arrayList.add(new PrayModel("aser", prefs.getString("aser", "00:00")));
+        arrayList.add(new PrayModel("maghrib", prefs.getString("maghrib", "00:00")));
+        arrayList.add(new PrayModel("isha", prefs.getString("isha", "00:00")));
+
+        ArrayList counter = new ArrayList();
+        SharedPreferences count = getActivity().getSharedPreferences("counter", Context.MODE_PRIVATE);
+        for (int i = 0; i < 5; i++) {
+            counter.add(count.getString(i + "", "0"));
+        }
+
+        if (recyclerView.getAdapter() != null)
+            recyclerView.getAdapter().notifyDataSetChanged();
     }
 }

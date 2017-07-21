@@ -10,11 +10,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blackstone.goldenquran.R;
+import com.blackstone.goldenquran.models.PrayTimeRefreshEvent;
 import com.blackstone.goldenquran.models.PrayTimeSettingsItemModel;
 import com.blackstone.goldenquran.models.PrayTimeSettingsItemThreeModel;
 import com.blackstone.goldenquran.models.PrayTimeSettingsItemTwoModel;
 import com.blackstone.goldenquran.models.PrayTimeSettingsTitleModel;
 import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -61,7 +64,7 @@ public class PrayTimeSettingsRecyclerAdapter extends RecyclerView.Adapter<Recycl
         } else if (holder.getItemViewType() == ITEM_ONE) {
 
 
-            for (int i = 1; i < 11; i++) {
+            for (int i = 1; i < 8; i++) {
                 if (i == SharedPreferencesManager.getInteger(mContext, "selected", 20))
                     ((PrayTimeSettingsItemModel) models.get(i)).setSelected(true);
             }
@@ -84,17 +87,18 @@ public class PrayTimeSettingsRecyclerAdapter extends RecyclerView.Adapter<Recycl
                 public void onClick(View view) {
                     thisModel.setSelected(true);
                     SharedPreferencesManager.putInteger(mContext, "selected", position);
-                    for (int i = 1; i < 11; i++) {
+                    for (int i = 1; i < 8; i++) {
                         if (i != position) {
                             ((PrayTimeSettingsItemModel) models.get(i)).setSelected(false);
                         }
                     }
                     notifyDataSetChanged();
+                    EventBus.getDefault().post(new PrayTimeRefreshEvent());
                 }
             });
         } else if (holder.getItemViewType() == ITEM_TWO) {
 
-            for (int i = 12; i < 14; i++) {
+            for (int i = 9; i < 11; i++) {
                 if (i == SharedPreferencesManager.getInteger(mContext, "madhab", 20))
                     ((PrayTimeSettingsItemTwoModel) models.get(i)).setSelected(true);
             }
@@ -117,18 +121,19 @@ public class PrayTimeSettingsRecyclerAdapter extends RecyclerView.Adapter<Recycl
                 public void onClick(View view) {
                     thisModel.setSelected(true);
                     SharedPreferencesManager.putInteger(mContext, "madhab", position);
-                    for (int i = 12; i < 14; i++) {
+                    for (int i = 9; i < 11; i++) {
                         if (i != position) {
                             ((PrayTimeSettingsItemTwoModel) models.get(i)).setSelected(false);
                         }
                     }
                     notifyDataSetChanged();
+                    EventBus.getDefault().post(new PrayTimeRefreshEvent());
                 }
             });
 
         } else if (holder.getItemViewType() == ITEM_THREE) {
 
-            for (int i = 15; i < models.size(); i++) {
+            for (int i = 12; i < models.size(); i++) {
                 if (i == SharedPreferencesManager.getInteger(mContext, "saut", 20))
                     ((PrayTimeSettingsItemThreeModel) models.get(i)).setSelected(true);
             }
@@ -151,7 +156,7 @@ public class PrayTimeSettingsRecyclerAdapter extends RecyclerView.Adapter<Recycl
                 public void onClick(View view) {
                     thisModel.setSelected(true);
                     SharedPreferencesManager.putInteger(mContext, "saut", position);
-                    for (int i = 15; i < models.size(); i++) {
+                    for (int i = 12; i < models.size(); i++) {
                         if (i != position) {
                             ((PrayTimeSettingsItemThreeModel) models.get(i)).setSelected(false);
                         }

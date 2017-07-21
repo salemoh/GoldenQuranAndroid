@@ -1,5 +1,6 @@
 package com.blackstone.goldenquran.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -7,14 +8,20 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.blackstone.goldenquran.models.AhadeethModel;
-import com.blackstone.goldenquran.models.AlsuraModel;
 import com.blackstone.goldenquran.models.Ayah;
+import com.blackstone.goldenquran.models.BookmarkModel;
 import com.blackstone.goldenquran.models.DataMawdo3ColorModel;
 import com.blackstone.goldenquran.models.Mo3jamModel;
+import com.blackstone.goldenquran.models.Mos7afModel;
+import com.blackstone.goldenquran.models.QuranPageTextModel;
+import com.blackstone.goldenquran.models.RecitationModel;
+import com.blackstone.goldenquran.models.SearchMawdoo3Model;
+import com.blackstone.goldenquran.models.TableOfContents;
 import com.blackstone.goldenquran.models.models.WordsMeaningModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DataBaseManager {
 
@@ -22,6 +29,7 @@ public class DataBaseManager {
     private DBHelperFromAssets mDBHelperFromAssets;
     private StorageDBHelper mStorageDBHelper;
     private SQLiteDatabase mDbHelper;
+    private SQLiteDatabase mDbHelper1;
 
 
     public DataBaseManager(Context context, String DBName, boolean isFromAssets) {
@@ -49,6 +57,7 @@ public class DataBaseManager {
                 mDBHelperFromAssets.openDataBase();
                 mDBHelperFromAssets.close();
                 mDbHelper = mDBHelperFromAssets.getReadableDatabase();
+                mDbHelper1 = mDBHelperFromAssets.getWritableDatabase();
             } else {
                 mDbHelper = mStorageDBHelper.getReadableDatabase();
             }
@@ -89,17 +98,83 @@ public class DataBaseManager {
         return ayah;
     }
 
+    public int getSurahFromPageNumber(int pageNumber) {
+        Cursor cursor = mDbHelper.query("page", null, "page_number = ?", new String[]{String.valueOf(pageNumber)}, null, null, null, "1");
+
+        if (cursor.moveToNext()) {
+
+            return cursor.getInt(cursor.getColumnIndex("surah"));
+
+        }
+        return 0;
+    }
+
 
     public String getPageText(ArrayList<Ayah> ayahs) {
 
         StringBuilder stringBuilder = new StringBuilder();
         ArrayList<String> arrayList = new ArrayList<>();
-        for (int i = 0; i < ayahs.size(); i++) {
-            Cursor cursor = mDbHelper.query("arabic_text", null, "sura =? and ayah =? ", new String[]{String.valueOf(ayahs.get(i).surah), String.valueOf(ayahs.get(i).ayah)}, null, null, null);
-            cursor.moveToNext();
+
+        ArrayList<Integer> suras = new ArrayList<>();
+        if (ayahs != null && !ayahs.isEmpty())
+            suras.add((int) ayahs.get(0).surah);
+        for (int i = 1; i < ayahs.size(); i++) {
+            if (!suras.contains((int) ayahs.get(i).surah))
+                suras.add((int) ayahs.get(i).surah);
+        }
+
+        ArrayList<Integer> ayat = new ArrayList<>();
+        for (int i = 0; i < suras.size(); i++) {
+            for (int j = 0; j < ayahs.size(); j++) {
+                if (ayahs.get(j).surah == suras.get(i)) {
+                    ayat.add((int) ayahs.get(j).ayah);
+                }
+            }
+            ayat.add(1000);
+        }
+        ArrayList<Integer> ayat1 = new ArrayList<>(ayat);
+
+        ArrayList<Integer> ayatBySura = new ArrayList<>();
+        int index = 0;
+        for (int i = 0; i < suras.size(); i++) {
+            ayatBySura.add(suras.get(i));
+            if (ayat.contains(1000)) {
+                int toIndex = ayat.indexOf(1000);
+                List subList = ayat.subList(index, toIndex);
+                ayatBySura.addAll(subList);
+                ayat.remove(toIndex);
+                index = toIndex;
+            }
+        }
+
+        String query = "";
+        index = 0;
+        for (int i = 0; i < suras.size(); i++) {
+            if (!query.isEmpty())
+                query += " or ";
+            int numberOfAyat = 1;
+            if (ayat1.contains(1000)) {
+                int toIndex = ayat1.indexOf(1000);
+                List subList = ayat1.subList(index, toIndex);
+                numberOfAyat = subList.size();
+                ayat1.remove(toIndex);
+                index = toIndex;
+            }
+            query += "(sura =? and ayah in(" + makePlaceholders(numberOfAyat) + "))";
+        }
+
+        String[] a = new String[ayatBySura.size()];
+        for (int i = 0; i < ayatBySura.size(); i++) {
+            a[i] = ayatBySura.get(i).toString();
+        }
+
+        Cursor cursor = mDbHelper.query("arabic_text", null, query, a, null, null, null);
+
+        while (cursor.moveToNext()) {
             if (!arrayList.contains(cursor.getString(cursor.getColumnIndex("text")))) {
                 arrayList.add(cursor.getString(cursor.getColumnIndex("text")));
-                stringBuilder.append(cursor.getString(cursor.getColumnIndex("text"))).append("\n");
+                stringBuilder.append(cursor.getString(cursor.getColumnIndex("text"))).append(" \n\n");
+
             }
         }
 
@@ -210,20 +285,98 @@ public class DataBaseManager {
         return words;
     }
 
-    public ArrayList<AlsuraModel> getFahrasData() {
-        ArrayList<AlsuraModel> alsuraModels = new ArrayList<>();
-        Cursor cursor = mDbHelper.query("fahras", null, null, null, null, null, null);
+    public ArrayList<SearchMawdoo3Model> getAllMawdoo3() {
+        ArrayList<SearchMawdoo3Model> arrayList = new ArrayList<>();
+
+        Cursor cursor = mDbHelper.query("data", null, null, null, null, null, null);
+
         while (cursor.moveToNext()) {
-            alsuraModels.add(new AlsuraModel(
-                    cursor.getColumnName(cursor.getColumnIndex("surah")),
-                    cursor.getColumnName(cursor.getColumnIndex("surahNo")),
-                    cursor.getColumnName(cursor.getColumnIndex("verses")),
-                    cursor.getColumnName(cursor.getColumnIndex("place")),
-                    cursor.getColumnName(cursor.getColumnIndex("juz")),
-                    Integer.parseInt(cursor.getColumnName(cursor.getColumnIndex("page")))
+            arrayList.add(new SearchMawdoo3Model(cursor.getString(cursor.getColumnIndex("Description"))));
+        }
+
+        return arrayList;
+    }
+
+    public ArrayList<QuranPageTextModel> getAllQuranAyat() {
+        ArrayList<QuranPageTextModel> arrayList = new ArrayList<>();
+
+        Cursor cursor = mDbHelper.query("verses", null, null, null, null, null, null);
+
+        while (cursor.moveToNext()) {
+            arrayList.add(new QuranPageTextModel(cursor.getInt(cursor.getColumnIndex("sura")), cursor.getInt(cursor.getColumnIndex("ayah")), cursor.getString(cursor.getColumnIndex("text"))));
+        }
+
+        return arrayList;
+    }
+
+    public String getFridayReading() {
+        StringBuilder fridayReadingText = new StringBuilder();
+
+        Cursor cursor = mDbHelper.query("arabic_text", null, "sura = 18", null, null, null, null);
+        while (cursor.moveToNext()) {
+            fridayReadingText.append(cursor.getString(cursor.getColumnIndex("text"))).append("\n\n");
+        }
+
+        return fridayReadingText.toString();
+    }
+
+    public ArrayList<QuranPageTextModel> getNightReading() {
+
+        ArrayList<QuranPageTextModel> arrayList = new ArrayList<>();
+
+        Cursor cursor = mDbHelper.query("arabic_text", null, "(sura = 2 and ayah in(255, 285, 286)) or (sura in(67, 112, 113, 114))", null, null, null, null);
+        while (cursor.moveToNext()) {
+            arrayList.add(new QuranPageTextModel(cursor.getInt(cursor.getColumnIndex("sura")), cursor.getInt(cursor.getColumnIndex("ayah")), cursor.getString(cursor.getColumnIndex("text"))));
+        }
+
+        return arrayList;
+    }
+
+    public void addBookmarck(Ayah ayah) {
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("soraNo", ayah.surah);
+        contentValues.put("page", ayah.pageNumber);
+        contentValues.put("verseNo", ayah.ayah);
+
+        mDbHelper1.insert("Bookmark", null, contentValues);
+
+    }
+
+    public void removeBookmark(Ayah ayah) {
+        mDbHelper1.delete("Bookmark", "page =? ", new String[]{"" + ayah.pageNumber});
+
+    }
+
+    public ArrayList<BookmarkModel> getAllBookmark() {
+        ArrayList<BookmarkModel> arrayList = new ArrayList<>();
+
+        Cursor cursor = mDbHelper.query("Bookmark", null, "soraNo > 0", null, null, null, null);
+
+        while (cursor.moveToNext()) {
+            arrayList.add(new BookmarkModel(
+                    cursor.getDouble(cursor.getColumnIndex("mushafGuid")),
+                    0.0,
+                    0.0,
+                    cursor.getInt(cursor.getColumnIndex("soraNo")),
+                    cursor.getInt(cursor.getColumnIndex("verseNo")),
+                    cursor.getInt(cursor.getColumnIndex("page"))
             ));
         }
-        return alsuraModels;
+
+        return arrayList;
+    }
+
+    public String getTafseerForAyah(int surah, int ayah) {
+        String s = "";
+
+        Cursor cursor = mDbHelper.query("verses", null, "sura =" + surah + " and ayah =" + ayah, null, null, null, null);
+
+        while (cursor.moveToNext()) {
+            s += cursor.getString(cursor.getColumnIndex("text"));
+        }
+
+        return s;
     }
 
     String makePlaceholders(int len) {
@@ -240,31 +393,170 @@ public class DataBaseManager {
         }
     }
 
-    public ArrayList<DataMawdo3ColorModel> getPageColors(ArrayList<String> surah, int ayahStart, int ayahEnd) {
+
+    public ArrayList<RecitationModel> getReaders() {
+        ArrayList<RecitationModel> recitationModels = new ArrayList<>();
+
+        Cursor cursor = mDbHelper.query("recitation", null, null, null, null, null, null);
+
+        while (cursor.moveToNext()) {
+            recitationModels.add(new RecitationModel(
+                    cursor.getInt(cursor.getColumnIndex("id")),
+                    cursor.getString(cursor.getColumnIndex("reader")),
+                    cursor.getString(cursor.getColumnIndex("type")),
+                    cursor.getString(cursor.getColumnIndex("baseUrl")),
+                    cursor.getString(cursor.getColumnIndex("name"))
+            ));
+        }
+
+        return recitationModels;
+    }
+
+    public ArrayList<TableOfContents> getFahrasData() {
+        ArrayList<TableOfContents> contents = new ArrayList<>();
+
+        Cursor cursor = mDbHelper.query("tableOfContents", null, "Sora between 1 and 114", null, null, null, "Juz ASC");
+
+        while (cursor.moveToNext()) {
+            contents.add(new TableOfContents(
+                    cursor.getInt(cursor.getColumnIndex("MushafID")),
+                    cursor.getInt(cursor.getColumnIndex("Page")),
+                    cursor.getInt(cursor.getColumnIndex("Juz")),
+                    cursor.getInt(cursor.getColumnIndex("Sora")),
+                    cursor.getInt(cursor.getColumnIndex("VersesCount")),
+                    cursor.getInt(cursor.getColumnIndex("Verse")),
+                    cursor.getInt(cursor.getColumnIndex("Place")),
+                    cursor.getFloat(cursor.getColumnIndex("Hizb"))
+            ));
+        }
+
+        return contents;
+    }
+
+    public int getVersesCountForSora(int soraNumber) {
+
+
+        Cursor cursor = mDbHelper.query("tableOfContents", null, "Sora between 1 and 114 AND Sora =" + soraNumber, null, null, null, "Juz ASC", "1");
+
+        if (cursor.moveToNext()) {
+            return cursor.getInt(cursor.getColumnIndex("VersesCount"));
+        }
+
+        return 0;
+    }
+
+    public ArrayList<Mo3jamModel> getAllMo3jam() {
+        ArrayList<Mo3jamModel> arrayList = new ArrayList<>();
+
+        Cursor cursor = mDbHelper.query("QuranMo3jm", null, null, null, null, null, null);
+
+        while (cursor.moveToNext()) {
+            arrayList.add(new Mo3jamModel(cursor.getString(cursor.getColumnIndex("Root")), cursor.getString(cursor.getColumnIndex("Word"))));
+        }
+
+        return arrayList;
+    }
+
+
+    public ArrayList<Mos7afModel> getMos7afs() {
+        ArrayList<Mos7afModel> mos7afModels = new ArrayList<>();
+
+        Cursor cursor = mDbHelper.query("Mus7af", null, null, null, null, null, null, null);
+
+        while (cursor.moveToNext()) {
+            mos7afModels.add(new Mos7afModel(
+                    cursor.getInt(cursor.getColumnIndex("id")),
+                    cursor.getInt(cursor.getColumnIndex("numberOfPages")),
+                    cursor.getInt(cursor.getColumnIndex("startOffset")),
+                    cursor.getString(cursor.getColumnIndex("name")),
+                    cursor.getString(cursor.getColumnIndex("type")),
+                    cursor.getString(cursor.getColumnIndex("baseDownloadURL")),
+                    cursor.getString(cursor.getColumnIndex("dbName")),
+                    cursor.getString(cursor.getColumnIndex("imagesNameFormat"))
+            ));
+        }
+
+        return mos7afModels;
+    }
+
+    public ArrayList<DataMawdo3ColorModel> getPageColors(ArrayList<Ayah> ayahs) {
         ArrayList<DataMawdo3ColorModel> colors = new ArrayList<>();
-        ArrayList<String> values = surah;
 
-        values.add(String.valueOf(ayahStart));
-        values.add(String.valueOf(ayahEnd));
-        values.add(String.valueOf(ayahStart));
-        values.add(String.valueOf(ayahEnd));
-        values.add(String.valueOf(ayahStart));
-        values.add(String.valueOf(ayahEnd));
+        ArrayList<Integer> suras = new ArrayList<>();
+        if (ayahs != null && !ayahs.isEmpty())
+            suras.add((int) ayahs.get(0).surah);
+        for (int i = 1; i < ayahs.size(); i++) {
+            if (!suras.contains((int) ayahs.get(i).surah))
+                suras.add((int) ayahs.get(i).surah);
+        }
 
+        ArrayList<Integer> ayat = new ArrayList<>();
+        for (int i = 0; i < suras.size(); i++) {
+            for (int j = 0; j < ayahs.size(); j++) {
+                if (ayahs.get(j).surah == suras.get(i)) {
+                    ayat.add((int) ayahs.get(j).ayah);
+                }
+            }
+            ayat.add(1000);
+        }
+        ArrayList<Integer> ayat1 = new ArrayList<>(ayat);
+        ArrayList<Integer> ayatBySura = new ArrayList<>();
+        int index = 0;
+        for (int i = 0; i < suras.size(); i++) {
+            ayatBySura.add(suras.get(i));
+            if (ayat.contains(1000)) {
+                int toIndex = ayat.indexOf(1000);
+                List subList = ayat.subList(index, toIndex);
+                ayatBySura.add((Integer) subList.get(0));
+                ayatBySura.add((Integer) subList.get(subList.size() - 1));
+                ayatBySura.add((Integer) subList.get(0));
+                ayatBySura.add((Integer) subList.get(subList.size() - 1));
+                ayat.remove(toIndex);
+                index = toIndex;
+            }
+        }
 
-        String[] a = new String[values.size()];
+        String query = "";
+        index = 0;
+        for (int i = 0; i < suras.size(); i++) {
+            if (!query.isEmpty())
+                query += " or ";
+            int numberOfAyat = 1;
+            if (ayat1.contains(1000)) {
+                int toIndex = ayat1.indexOf(1000);
+                List subList = ayat1.subList(index, toIndex);
+                ayat1.remove(toIndex);
+                index = toIndex;
+            }
+            query += "((SoraNo = ? ) and ((FromAyah between ? and ?) or (ToAyah between ? and ?)))";
+        }
 
-        Cursor cursor = mDbHelper.query("data", null, "SoraNo in ( " + makePlaceholders(surah.size() - 2) + " ) and ((FromAyah between ? and ?) OR (ToAyah between ? and ?))", values.toArray(a),
-                null, null, null);
+        String[] a = new String[ayatBySura.size()];
+        for (int i = 0; i < ayatBySura.size(); i++) {
+            a[i] = ayatBySura.get(i).toString();
+        }
+
+        Cursor cursor = mDbHelper.query("data", null, query, a, null, null, null);
 
         while (cursor.moveToNext()) {
             colors.add(new DataMawdo3ColorModel(
                     cursor.getInt(cursor.getColumnIndex("FromAyah")),
                     cursor.getInt(cursor.getColumnIndex("ToAyah")),
-                    cursor.getInt(cursor.getColumnIndex("ColorIndex"))
+                    cursor.getInt(cursor.getColumnIndex("ColorIndex")),
+                    cursor.getInt(cursor.getColumnIndex("SoraNo"))
             ));
         }
 
         return colors;
+    }
+
+    public int getSurahTotalAyaNumber(int currentSurah) {
+
+        Cursor cursor = mDbHelper.query("page", new String[]{"Count(*)"}, "surah = ?", new String[]{String.valueOf(currentSurah)}, null, null, null);
+
+        while (cursor.moveToNext()) {
+            return cursor.getInt(0);
+        }
+        return 0;
     }
 }

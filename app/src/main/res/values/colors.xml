@@ -3,7 +3,7 @@
     <color name="colorPrimary">#c4a360</color>
     <color name="colorPrimaryDark">#9c7626</color>
     <color name="colorAccent">#ae8a41</color>
-    <color name="textColorPrimary">@android:color/white</color>
+    <color name="textColorPrimary">#000</color>
     <color name="colorActionBarToggle">#a3843b</color>
     <color name="mainListBrown">#A0522D</color>
     <color name="playerBackground">#d7ccc8</color>

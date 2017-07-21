@@ -2,10 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#ECEFF1"
+    android:background="#FFFFFF"
     android:clickable="true"
-    >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,11 +19,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:text="@string/ramadan_21_1437_ah"
             android:layout_toEndOf="@+id/editImageView"
             android:layout_toRightOf="@+id/editImageView"
-            android:textAlignment="textEnd"
             android:gravity="end"
+            android:text="@string/ramadan_21_1437_ah"
+            android:textAlignment="center"
             android:textColor="@color/mainListBrown"
             android:textSize="20sp" />
 
@@ -34,24 +33,25 @@
             android:layout_height="wrap_content"
             android:src="@drawable/main_list_edit" />
 
-        <TextView
-            android:id="@+id/salahTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/editImageView"
-            android:layout_marginTop="8dp"
-            android:text="-- : --"
-            android:textColor="#FF00FF"
-            android:textSize="15sp" />
+        <!--<TextView-->
+            <!--android:id="@+id/salahTime"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/editImageView"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:text="&#45;&#45; : &#45;&#45;"-->
+            <!--android:textColor="#FF00FF"-->
+            <!--android:textSize="15sp" />-->
 
         <TextView
             android:id="@+id/dateAndTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/salahTime"
-            android:layout_alignBottom="@+id/salahTime"
             android:layout_alignParentEnd="true"
+            android:layout_alignStart="@+id/hijryDate"
             android:layout_alignParentRight="true"
+            android:textAlignment="center"
+            android:layout_below="@+id/hijryDate"
             android:text="@string/dateMWithTime"
             android:textColor="@color/mainListBrown"
             android:textSize="15sp" />
@@ -61,7 +61,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/mainList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="#ECEFF1" />
 
 </LinearLayout>

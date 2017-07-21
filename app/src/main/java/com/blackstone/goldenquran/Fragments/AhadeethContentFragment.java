@@ -4,6 +4,7 @@ package com.blackstone.goldenquran.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.blackstone.goldenquran.R;
 import com.blackstone.goldenquran.models.AhadeethModel;
+import com.blackstone.goldenquran.utilities.SharedPreferencesManager;
 
 import java.util.ArrayList;
 
@@ -49,5 +51,7 @@ public class AhadeethContentFragment extends Fragment {
         arrayList = getArguments().getParcelableArrayList("data");
         ahadeethText.setText(arrayList.get(position).body);
         ahadeethTitle.setText(arrayList.get(position).title);
+        ahadeethText.setTextSize(TypedValue.COMPLEX_UNIT_PX, SharedPreferencesManager.getInteger(getActivity(), SharedPreferencesManager.TEXT_SIZE, (int) ahadeethText .getTextSize()));
+
     }
 }
